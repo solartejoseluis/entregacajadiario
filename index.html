@@ -3,246 +3,241 @@
 <html lang="es">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Entrega Diaria</title>
-  <!-- CDN boostrap 5.2.2 css -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-  <!-- CDN datatables 1.12.1 css -->
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/zf/dt-1.12.1/datatables.min.css" />
-  <!-- select2 css-->
-  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Entrega Diaria</title>
+    <!-- CDN boostrap 5.2.2 css -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- CDN datatables 1.12.1 css -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/zf/dt-1.12.1/datatables.min.css" />
+    <!-- select2 css-->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 
 <body>
-  <div class="container-fluid mb-3" id="">
-    <div class="row">
-      <div>
-        <h1>ENTREGA DE CAJA DIARIA</h1>
-        <h1>FECHA ACTUAL</h1>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-6">
-        <h1>CUADRO DE VENDEDORES</h1>
-      </div>
-      <div class="col-6">
-        <h1>CUADRO DE TOTALES</h1>
-        <button type="button" class="btn btn-primary" id="btn-Add" data-bs-toggle="modal">NUEVA VENTA <i class="fa-solid fa-circle-plus"></i></button>
-      </div>
-    </div>
-  </div>
-  <div class="container-fluid" id="contenido">
-    <div class="row">
-      <div class="col-12">
-        <table class="table" id="tblVentas">
-          <thead>
-            <tr>
-              <td>ID</td>
-              <td>PRODUCTO</td>
-              <td>PROVEEDOR</td>
-              <td>PRECIO COSTO</td>
-              <td>PRECIO VENTA</td>
-              <td>VENDEDOR</td>
-              <td>UTILIDAD</td>
-              <td></td>
-              <td></td>
-            </tr>
-          </thead>
-        </table>
-      </div>
-    </div>
-  </div>
-  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||| -->
-  <!-- INICIA MODAL NUEVA VENTA-->
-  <div class="modal fade" data-bs-backdrop="static" id="mdlVentas" tabindex="-1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5">NUEVA VENTA</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="container-fluid mb-3" id="">
+        <div class="row">
+            <div>
+                <h1>ENTREGA DE CAJA DIARIA</h1>
+                <h1>FECHA ACTUAL</h1>
+            </div>
         </div>
-        <div class="modal-body">
-          <form id="frmNuevaVenta">
-            <!-- VENTAS_ID -->
-            <div class="row">
-              <input type="hidden" class="form-control" id="npt-venta_id">
+        <div class="row">
+            <div class="col-6">
+                <h1>CUADRO DE VENDEDORES</h1>
             </div>
-            <!-- PRODUCTO -->
-            <div class="row mb-3">
-              <div class="col-md-3 ms-auto">
-                <label for="npt-venta_nombre_producto" class="col-form-label">Producto:</label>
-              </div>
-              <div class="col-md-9 ms-auto">
-                <input type="text" class="form-control" id="npt-venta_nombre_producto" placeholder="Digite Nombre del producto">
-              </div>
+            <div class="col-6">
+                <h1>CUADRO DE TOTALES</h1>
+                <button type="button" class="btn btn-primary" id="btn-Add" data-bs-toggle="modal">NUEVA VENTA <i class="fa-solid fa-circle-plus"></i></button>
             </div>
-            <!-- PROVEEDOR -->
-            <div class="row mb-3">
-              <div class="col-md-3 ms-auto">
-                <label for="npt-venta_nombre_proveedor" class="col-form-label">Proveedor:</label>
-              </div>
-              <div class="col-md-9 ms-auto">
-                <input type="text" class="form-control" id="npt-venta_nombre_proveedor" placeholder="Digite Nombre proveedor">
-              </div>
+        </div>
+    </div>
+    <div class="container-fluid" id="contenido">
+        <div class="row">
+            <div class="col-12">
+                <table class="table" id="tblVentas">
+                    <thead>
+                        <tr>
+                            <td>ID</td>
+                            <td>PRODUCTO</td>
+                            <td>PROVEEDOR</td>
+                            <td>PRECIO COSTO</td>
+                            <td>PRECIO VENTA</td>
+                            <td>VENDEDOR</td>
+                            <td>UTILIDAD</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                </table>
             </div>
-            <!-- COSTO PRODUCTO -->
-            <div class="row mb-3">
-              <div class="col-md-3 ms-auto">
-                <label for="npt-venta_costo_producto" class="col-form-label">Costo Prod:</label>
-              </div>
-              <div class="col-md-9 ms-auto">
-                <input type="text" class="form-control" id="npt-venta_costo_producto" placeholder="Digite Costo de producto">
-              </div>
-            </div>
-            <!-- VALOR VENTA -->
-            <div class="row mb-3">
-              <div class="col-md-3 ms-auto">
-                <label for="npt-venta_valor_venta" class="col-form-label"> Valor Venta:</label>
-              </div>
-              <div class="col-md-9 ms-auto">
-                <input type="text" class="form-control" id="npt-venta_valor_venta" placeholder="Digite valor venta">
-              </div>
-            </div>
-            <!-- VENDEDOR -->
-            <div class="row mb-3">
-              <div class="col-md-3 ms-auto">
-                <label for="slct-user" class="col-form-label">Vendedor:</label>
-              </div>
-              <div class="col-md-9 ms-auto">
-                <input type="hidden" class="form-control" id="npt-user_id">
-                <div class="selectUser">
-                  <select class="form-select" id="slct-user"></select>
+        </div>
+    </div>
+    <!-- |||||||||||||||||||||||||||||||||||||||||||||||||| -->
+    <!-- INICIA MODAL NUEVA VENTA-->
+    <div class="modal fade" data-bs-backdrop="static" id="mdlVentas" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">NUEVA VENTA</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-              </div>
+                <div class="modal-body">
+                    <form id="frmNuevaVenta">
+                        <!-- VENTAS_ID -->
+                        <div class="row">
+                            <input type="hidden" class="form-control" id="npt-venta_id">
+                        </div>
+                        <!-- NUEVO PRODUCTO -->
+                        <div class="row mb-3">
+                            <div class="col-md-3 ms-auto">
+                                <label for="npt-venta_nombre_producto" class="col-form-label">Producto:</label>
+                            </div>
+                            <div class="col-md-9 ms-auto">
+                                <input type="text" class="form-control" id="npt-venta_nombre_producto" placeholder="Digite Nombre del producto">
+                            </div>
+                        </div>
+                        <!-- NUEVO PROVEEDOR -->
+                        <div class="row mb-3">
+                            <div class="col-md-3 ms-auto">
+                                <label for="npt-venta_nombre_proveedor" class="col-form-label">Proveedor:</label>
+                            </div>
+                            <div class="col-md-9 ms-auto">
+                                <input type="text" class="form-control" id="npt-venta_nombre_proveedor" placeholder="Digite Nombre proveedor">
+                            </div>
+                        </div>
+                        <!-- NUEVO COSTO PRODUCTO -->
+                        <div class="row mb-3">
+                            <div class="col-md-3 ms-auto">
+                                <label for="npt-venta_costo_producto" class="col-form-label">Costo Prod:</label>
+                            </div>
+                            <div class="col-md-9 ms-auto">
+                                <input type="text" class="form-control" id="npt-venta_costo_producto" placeholder="Digite Costo de producto">
+                            </div>
+                        </div>
+                        <!-- NUEVO VALOR VENTA -->
+                        <div class="row mb-3">
+                            <div class="col-md-3 ms-auto">
+                                <label for="npt-venta_valor_venta" class="col-form-label"> Valor Venta:</label>
+                            </div>
+                            <div class="col-md-9 ms-auto">
+                                <input type="text" class="form-control" id="npt-venta_valor_venta" placeholder="Digite valor venta">
+                            </div>
+                        </div>
+                        <!--  NUEVO VENDEDOR -->
+                        <div class="row mb-3">
+                            <div class="col-md-3 ms-auto">
+                                <label for="slct-user" class="col-form-label">Vendedor:</label>
+                            </div>
+                            <div class="col-md-9 ms-auto">
+                                <input type="hidden" class="form-control" id="npt-user_id">
+                                <div class="selectUser">
+                                    <select class="form-select" id="slct-user"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- NUEVA UTILIDAD -->
+                        <div class="row mb-3">
+                            <div class="col-md-3 ms-auto">
+                                <label for="npt-venta_utilidad" class="col-form-label">Utilidad:</label>
+                            </div>
+                            <div class="col-md-9 ms-auto">
+                                <input type="text" class="form-control" id="npt-venta_utilidad">
+                            </div>
+                        </div>
+                    </form>
+                    <!-- FIN FORM DEL MODAL -->
+                </div>
+                <!-- FOOTER DEL MODAL -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" id="btnConfirmAdd">Confirma Agregar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" id="btnConfirmEdit">Confirma Modificar</button>
+                </div>
             </div>
-            <!-- UTILIDAD -->
-            <div class="row mb-3">
-              <div class="col-md-3 ms-auto">
-                <label for="npt-venta_utilidad" class="col-form-label">Utilidad:</label>
-              </div>
-              <div class="col-md-9 ms-auto">
-                <input type="text" class="form-control" id="npt-venta_utilidad">
-              </div>
-            </div>
-          </form>
-          <!-- FIN FORMULARIO DEL MODAL -->
         </div>
-        <!-- FOOTER DEL MODAL -->
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary" id="btnConfirmAdd">Confirma Agregar</button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btn btn-primary" id="btnConfirmEdit">Confirma Modificar</button>
-        </div>
-      </div>
     </div>
-  </div>
-  <!-- FIN MODAL NUEVO DOMICILIO -->
-  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||| -->
-  <!-- INICIA MODAL EDITAR REGISTRO-->
-  <div class="modal fade" data-bs-backdrop="static" id="mdlEditDomicilios" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5">EDITAR REGISTRO</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <!-- FIN MODAL NUEVA VENTA -->
+    <!-- |||||||||||||||||||||||||||||||||||||||||||||||||| -->
+    <!-- INICIA MODAL EDITAR VENTA-->
+    <div class="modal fade" data-bs-backdrop="static" id="mdlEditVentas" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <!-- cabecera del modal de edicion -->
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">EDITAR REGISTRO</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <!-- cuerpo del modal de edicion -->
+                <div class="modal-body">
+                    <form id="frmEditVentas">
+
+<!-- EDITAR VENTAS_ID -->
+                        <div class="row">
+                            <input type="hidden" class="form-control" id="npt-ventas_id">
+                        </div>
+
+                        <!-- EDITAR PRODUCTO -->
+                        <div class="row mb-3">
+                            <div class="col-md-3 ms-auto">
+                                <label for="npt-venta_nombre_producto" class="col-form-label">Producto:</label>
+                            </div>
+                            <div class="col-md-9 ms-auto">
+                                <input type="text" class="form-control" id="npt-venta_nombre_producto" placeholder="Digite Nombre del producto">
+                            </div>
+                        </div>
+                        <!-- NUEVO PROVEEDOR -->
+                        <div class="row mb-3">
+                            <div class="col-md-3 ms-auto">
+                                <label for="npt-venta_nombre_proveedor" class="col-form-label">Proveedor:</label>
+                            </div>
+                            <div class="col-md-9 ms-auto">
+                                <input type="text" class="form-control" id="npt-venta_nombre_proveedor" placeholder="Digite Nombre proveedor">
+                            </div>
+                        </div>
+                        <!-- NUEVO COSTO PRODUCTO -->
+                        <div class="row mb-3">
+                            <div class="col-md-3 ms-auto">
+                                <label for="npt-venta_costo_producto" class="col-form-label">Costo Prod:</label>
+                            </div>
+                            <div class="col-md-9 ms-auto">
+                                <input type="text" class="form-control" id="npt-venta_costo_producto" placeholder="Digite Costo de producto">
+                            </div>
+                        </div>
+                        <!-- NUEVO VALOR VENTA -->
+                        <div class="row mb-3">
+                            <div class="col-md-3 ms-auto">
+                                <label for="npt-venta_valor_venta" class="col-form-label"> Valor Venta:</label>
+                            </div>
+                            <div class="col-md-9 ms-auto">
+                                <input type="text" class="form-control" id="npt-venta_valor_venta" placeholder="Digite valor venta">
+                            </div>
+                        </div>
+                        <!--  NUEVO VENDEDOR -->
+                        <div class="row mb-3">
+                            <div class="col-md-3 ms-auto">
+                                <label for="slct-user" class="col-form-label">Vendedor:</label>
+                            </div>
+                            <div class="col-md-9 ms-auto">
+                                <input type="hidden" class="form-control" id="npt-user_id">
+                                <div class="selectUser">
+                                    <select class="form-select" id="slct-user"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- NUEVA UTILIDAD -->
+                        <div class="row mb-3">
+                            <div class="col-md-3 ms-auto">
+                                <label for="npt-venta_utilidad" class="col-form-label">Utilidad:</label>
+                            </div>
+                            <div class="col-md-9 ms-auto">
+                                <input type="text" class="form-control" id="npt-venta_utilidad">
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div> <!-- FIN MODAL-BODY-->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" id="btnConfirmEdit">Confirma Modificar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-          <form id="frmDomicilios">
-            <div class="row">
-              <input type="hidden" class="form-control" id="nptEdit-domi_id">
-            </div>
-            <div class="row mb-1">
-              <div class="col-md-6 ms-auto">
-                <label for="nptEdit-barrio_nombre" class="col-form-label">Barrio:</label>
-                <input type="text" class="form-control" id="nptEdit-barrio_nombre" disabled>
-              </div>
-              <div class="col-md-6 ms-auto">
-                <input type="hidden" class="form-control" id="npt-barrio_id">
-                <label for="slct-barrio" class="col-form-label">Editar Barrio:</label>
-                <div class="selectBarrio">
-                  <select class="form-select" id="slct-barrio_jlso"></select>
-                </div>
-              </div>
-            </div>
-            <div class="row mb-1">
-              <div class="col-md-6 ms-auto">
-                <label for="nptEdit-trans_nombre" class="col-form-label">Transportador:</label>
-                <input type="text" class="form-control" id="nptEdit-trans_nombre" disabled>
-              </div>
-              <div class="col-md-6 ms-auto">
-                <input type="hidden" class="form-control" id="npt-trans_id">
-                <label for="slct-trans" class="col-form-label">Editar Transportador:</label>
-                <div class="selectTransportador">
-                  <select class="form-select" id="slct-trans"></select>
-                </div>
-              </div>
-            </div>
-            <div class="row mb-1">
-              <div class="col-md-6 ms-auto">
-                <label for="nptEdit-domi_valor" class="col-form-label">Valor:</label>
-                <input type="text" class="form-control" id="nptEdit-domi_valor" disabled>
-              </div>
-              <div class="col-md-6 ms-auto">
-                <label for="npt-domi_valor" class="col-form-label">Editar Valor:</label>
-                <input type="text" class="form-control" id="npt-domi_valor" placeholder="Digite el Valor">
-              </div>
-            </div>
-            <div class="row mb-1">
-              <div class="col-md-6 ms-auto">
-                <label for="nptEdit-domi_hora_salida" class="col-form-label">Hora/Salida:</label>
-                <input type="text" class="form-control" id="nptEdit-domi_hora_salida" disabled>
-              </div>
-              <div class="col-md-6 ms-auto">
-                <label for="nptEdit-domi_hora_salida" class="col-form-label"> Editar Hora/Salida:</label>
-                <input type="text" class="form-control" id="nptEdit-domi_hora_salida" placeholder="Digite hora de salida">
-              </div>
-            </div>
-            <div class="row mb-1">
-              <div class="col-md-6 ms-auto">
-                <label for="nptEdit-user_nombre" class="col-form-label">Asigna:</label>
-                <input type="text" class="form-control" id="nptEdit-user_nombre" disabled>
-              </div>
-              <div class="col-md-6 ms-auto">
-                <input type="hidden" class="form-control" id="npt-user_id">
-                <label for="slct-user" class="col-form-label">Editar Asigna:</label>
-                <div class="selectUser">
-                  <select class="form-select" id="slct-user"></select>
-                </div>
-              </div>
-            </div>
-            <div class="row mb-1">
-              <div class="col-md-6 ms-auto">
-                <label for="npt-domi_observacion" class="col-form-label">Observación:</label>
-                <input type="text" class="form-control" id="nptEdit-domi_observacion" disabled>
-              </div>
-              <div class="col-md-6 ms-auto">
-                <label for="npt-domi_observacion" class="col-form-label">Editar Observación:</label>
-                <input type="text" class="form-control" id="npt-domi_observacion" placeholder="Digite Observación">
-              </div>
-            </div>
-          </form>
-        </div> <!-- FIN MODAL-BODY-->
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary" id="btnConfirmEdit">Confirma Modificar</button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        </div>
-      </div>
     </div>
-  </div>
-  <!-- FIN MODAL EDITAR REGISTRO -->
-  <!-- |||||||||||||||||||||||||||||||||||||||||||||||||| -->
-  <!-- CDN jquery 3.6.1 js -->
-  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-  <!-- CDN bootstrap 5.2.2 js -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-  <!-- CDN datatables 1.12.1 js -->
-  <script src="https://cdn.datatables.net/v/zf/dt-1.12.1/datatables.min.js"></script>
-  <!-- Font Awesome -->
-  <script src="https://kit.fontawesome.com/382e1ebb20.js" crossorigin="anonymous"></script>
-  <!-- select2 js-->
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/i18n/es.js"></script>
-  <!-- scripts de la aplicacion -->
-  <script src="scripts.js"></script>
+    <!-- FIN MODAL EDITAR REGISTRO -->
+    <!-- |||||||||||||||||||||||||||||||||||||||||||||||||| -->
+    <!-- CDN jquery 3.6.1 js -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <!-- CDN bootstrap 5.2.2 js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <!-- CDN datatables 1.12.1 js -->
+    <script src="https://cdn.datatables.net/v/zf/dt-1.12.1/datatables.min.js"></script>
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/382e1ebb20.js" crossorigin="anonymous"></script>
+    <!-- select2 js-->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/i18n/es.js"></script>
+    <!-- scripts de la aplicacion -->
+    <script src="scripts.js"></script>
 </body>

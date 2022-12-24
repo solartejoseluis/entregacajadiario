@@ -11,7 +11,7 @@
         { "data": "venta_nombre_proveedor" },
         { "data": "venta_costo_producto" },
         { "data": "venta_valor_venta" },
-        { "data": "user_id" }, //nombre vendedor
+        { "data": "user_nombre" }, //nombre vendedor
         { "data": "venta_utilidad" },
         { "data": null, "orderable": false },
         { "data": null, "orderable": false }
@@ -64,7 +64,7 @@
         minimumInputLength: 2
       });
     });
-    //coloca el valor seleccionado en el select
+    //COLOCA EL VALOR SELECCIONADO EN EL SELECT
     $('#slct-prueba1').on('select2:select', function(e) {
         var data = e.params.data;
         console.log(data);
@@ -72,19 +72,7 @@
       //  FIN CARGA Y CONSULTA SELECT2
 
 
-      //Contenido del Select Barrio
-      $(document).ready(function() {
-        $.ajax({
-          type: "POST",
-          url: "getBarrio.php",
-          success: function(response) {
-            $('.selectBarrio select').html(response).fadeIn();
-          }
-        });
-      });
-
-
-    //Contenido del Select Usuarios
+    //CARGA EL SELECT VENDEDORES
     $(document).ready(function() {
       $.ajax({
         type: "POST",
@@ -94,30 +82,15 @@
         }
       });
     });
-    // Contenido del Select Transportador
-    $(document).ready(function() {
-      $.ajax({
-        type: "POST",
-        url: "getTransportador.php",
-        success: function(response) {
-          $('.selectTransportador select').html(response).fadeIn();
-        }
-      });
-    });
-    //tomar el valor del select y ponerlo en input
-    $("#slct-barrio").change(function() {
-      $('#npt-barrio_id').val($(this).val());
-    });
-    $("#slct-trans").change(function() {
-      $('#npt-trans_id').val($(this).val());
-    });
+
+    //TOMA EL VALOR DEL SELECT Y PONERLO EN INPUT
     $("#slct-user").change(function() {
       $('#npt-user_id').val($(this).val());
     });
     // EVENTOS DE BOTONES
     $('#btn-Add').click(function() {
       $('#btnConfirmAdd').show();
-      //$('#btnConfirmEdit').hide();
+      $('#btnConfirmEdit').hide();
       limpiarFormulario();
       $("#mdlVentas").modal('show');
     });
@@ -130,13 +103,17 @@
 
 
     $('#btnConfirmAdd').click(function() {
-      //validar formulario emergente y enviarlo
+      // REALIZA GUARDAR NUEVO REGISTRO
+
+      //VALIDACION DE DATOS DEL MODAL NUEVO
+      //pasa el valor de campo del formulario a variable
       let valida_nombre_producto = $('#npt-venta_nombre_producto').val();
       let valida_nombre_proveedor = $('#npt-venta_nombre_proveedor').val();
       let valida_venta_costo_producto = $('#npt-venta_costo_producto').val();
       let valida_venta_valor_venta = $('#npt-venta_valor_venta').val();
       let valida_user_id = $('#npt-user_id').val();
       let valida_venta_utilidad = $('#npt-venta_utilidad').val();
+      // compara datos de variables contra vacio y muestra un alert
       if (valida_nombre_producto.trim() == '') {
         alert('revisar nombre producto.');
         $('#npt-venta_nombre_producto').focus();
@@ -153,7 +130,7 @@
         alert('Revisar valor venta');
         $('#npt-venta_valor_venta').focus();
         return false;
-      } else if (valida_user_id.trim() == '') {
+      } else if (valida_user_id.trim() == '0') {
         alert('elija vendedor');
         $('#slct-user').focus();
         return false;
@@ -162,34 +139,40 @@
         $('#npt-venta_utilidad').focus();
         return false;
       } else {
-        //ejecutar con todo validado
+        //ejecutar Si todo fue validado
         $("#mdlVentas").modal('hide');
-        let registro = recuperarDatosFormulario();
-        agregarRegistro(registro);
+        let registro = recolectarDatosFormulario();
+        guardarRegistro(registro);
         //alert("ok Validado");
       }
     });
     // FIN VALIDACION DE FORMULARIO
 
     $('#btnConfirmEdit').click(function() {
+      //GUARDA LOS DATOS MODIFICADOS
       $("#mdlVentas").modal('hide');
-      let registro = recuperarDatosFormulario();
+      let registro = recolectarDatosFormulario();
       modificarRegistro(registro);
     });
 
+
+
     $('#tblVentas tbody').on('click', 'button.btnEdit', function() {
+    //ACCIONA BOTON EDITAR REGISTRO DEL DATATABLES
       //$('#btnConfirmEdit').show();
       let registro = listadoVentas.row($(this).parents('tr')).data();
-      recuperarRegistro(registro.domi_id);
+      recuperarRegistro(registro.venta_id);
     });
 
     $('#tblVentas tbody').on('click', 'button.btnDel', function() {
+      //ACCIONA BOTON BORRAR REGISTRO DEL DATATABLES
       if (confirm("¿Confirma la Eliminación?")) {
         let registro = listadoVentas.row($(this).parents('tr')).data();
-        borrarRegistro(registro.domi_id);
+        borrarRegistro(registro.venta_id);
       }
     });
-    // INTERACTUAR CON EL FORMULARIO MODAL
+
+    // INTERACCIONES CON EL FORMULARIO MODAL
 
     function limpiarFormulario() {
       $('#npt-venta_id').val('');
@@ -197,12 +180,14 @@
       $('#npt-venta_nombre_proveedor').val('');
       $('#npt-venta_costo_producto').val('');
       $('#npt-venta_valor_venta').val('');
-      $('#npt-user_nombre').val('');
+      $('#npt-user_id').val('');
       $('#slct-user').val('0');
       $('#npt-venta_utilidad').val('');
     }
 
-    function recuperarDatosFormulario() {
+    function recolectarDatosFormulario() {
+    // RECOLECTA DATOS DEL FRM Y CREA OBJETO registro
+    // DESTINO DE DATOS: GRABAR NUEVA VENTA / CARGAR FRM EDITAR
       let registro = {
         venta_id: $('#npt-venta_id').val(),
         venta_nombre_producto: $('#npt-venta_nombre_producto').val(),
@@ -224,51 +209,55 @@
     };
 
     // COMUNICARSE CON EL SERVIDOR VIA AJAX
-    function agregarRegistro(registro) {
+
+    function guardarRegistro(registro) {
+      // GUARDA REGISTRO Y ACTUALIZA DATATABLES
       $.ajax({
         type: 'POST',
-        url: 'venta_data.php?accion=agregar_venta',
+        url: 'venta_data.php?accion=guardar_venta',
         data: registro,
         success: function(msg) {
           listadoVentas.ajax.reload();
         },
         error: function() {
-          alert("problema en: agregarRegistro");
+          alert("problema en: guardarRegistro");
         }
       });
     }
 
     function borrarRegistro(domi_id) {
+      // BORRA REGISTRO Y ACTUALIZA DATATABLES
       $.ajax({
         type: 'GET',
-        url: 'venta_data.php?accion=borrar_domicilio&domi_id=' + domi_id,
+        url: 'venta_data.php?accion=borrar_venta&venta_id=' + venta_id,
         data: '',
         success: function(msg) {
           listadoVentas.ajax.reload();
         },
         error: function() {
-          alert("Problema Borrando");
+          alert("Problema en borrarRegistro");
         }
       });
     }
 
     function recuperarRegistro(domi_id) {
+    // EJECUTA CONSULTA CON venta_id Y CARGA FRM EDICION
       $.ajax({
         type: 'GET',
-        url: 'venta_data.php?accion=consultar_domicilio&domi_id=' + domi_id,
+        url: 'venta_data.php?accion=consultar_venta&venta_id=' + venta_id,
         data: '',
         success: function(datos) {
-          $('#nptEdit-domi_id').val(datos[0].domi_id);
-          $('#nptEdit-barrio_nombre').val(datos[0].barrio_nombre);
-          $('#nptEdit-trans_nombre').val(datos[0].trans_nombre);
-          $('#nptEdit-domi_valor').val(datos[0].domi_valor);
-          $('#nptEdit-domi_hora_salida').val(datos[0].domi_hora_salida);
-          $('#nptEdit-user_nombre').val(datos[0].user_nombre);
-          $('#nptEdit-domi_observacion').val(datos[0].domi_observacion);
-          $("#mdlEditDomicilios").modal('show');
+        $('#npt-venta_id').val(datos[0].venta_id);
+        $('#npt-venta_nombre_producto').val(datos[0].venta_nombre_producto);
+        $('#npt-venta_nombre_proveedor').val(datos[0].venta_nombre_proveedor);
+        $('#npt-venta_costo_producto').val(datos[0].venta_costo_producto);
+        $('#npt-venta_valor_venta').val(datos[0].venta_valor_venta);
+        $('#npt-user_id').val(datos[0].user_id);
+        $('#npt-venta_utilidad').val(datos[0].venta_utilidad);
+        $("#mdlEditVentas").modal('show');
         },
         error: function() {
-          alert("Problema recuperando");
+          alert("Problema en recuperarRegistro");
         }
       });
     }
@@ -276,7 +265,7 @@
     function modificarRegistro(registro) {
       $.ajax({
         type: 'POST',
-        url: 'venta_data.php?accion=modificar_domicilio&domi_id=' + registro.domi_id,
+        url: 'venta_data.php?accion=modificar_venta&venta_id=' + registro.venta_id,
         data: registro,
         success: function(msg) {
           listadoVentas.ajax.reload();
