@@ -3,8 +3,8 @@ header('Content-Type: application/json');
 require "pdo.php";
 
 switch ($_GET['accion']) {
-// ENVIA LOS DATOS AL DATATABLES
 case 'listar_ventas':
+// ENVIA LOS DATOS AL DATATABLES
     $sql = "SELECT 
         VENTAS.venta_id,
         VENTAS.venta_nombre_producto,
@@ -23,8 +23,8 @@ case 'listar_ventas':
     $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($result);
     break;
-// GRABA EN LA TABLA EL NUEVO REGISTRO
 case 'guardar_venta':
+// GRABA EN LA TABLA EL NUEVO REGISTRO
     $sql = "INSERT INTO VENTAS(
         venta_nombre_producto,
         venta_nombre_proveedor,
@@ -44,8 +44,8 @@ case 'guardar_venta':
     $response = $pdo->exec($sql);
     echo json_encode($response);
     break;
-// BORRA EL REGISTRO EN LA TABLA
 case 'borrar_venta':
+// BORRA EL REGISTRO ENrecuperarRegistro LA TABLA
     $sql = "DELETE FROM VENTAS where domi_id=$_GET[domi_id]";
     $response = $pdo->exec($sql);
     echo json_encode($response);

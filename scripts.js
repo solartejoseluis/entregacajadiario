@@ -159,10 +159,13 @@
 
     $('#tblVentas tbody').on('click', 'button.btnEdit', function() {
     //ACCIONA BOTON EDITAR REGISTRO DEL DATATABLES
-      //$('#btnConfirmEdit').show();
-      let registro = listadoVentas.row($(this).parents('tr')).data();
-      recuperarRegistro(registro.venta_id);
+      $('#btnConfirmEdit').show();
+      let registroEdit = listadoVentas.row($(this).parents('tr')).data();
+      recuperarRegistro(registroEdit.venta_id);
     });
+
+
+
 
     $('#tblVentas tbody').on('click', 'button.btnDel', function() {
       //ACCIONA BOTON BORRAR REGISTRO DEL DATATABLES
@@ -252,9 +255,9 @@
         $('#npt-venta_nombre_proveedor').val(datos[0].venta_nombre_proveedor);
         $('#npt-venta_costo_producto').val(datos[0].venta_costo_producto);
         $('#npt-venta_valor_venta').val(datos[0].venta_valor_venta);
-        $('#npt-user_id').val(datos[0].user_id);
+        $('#npt-user_nombre').val(datos[0].user_nombre);
         $('#npt-venta_utilidad').val(datos[0].venta_utilidad);
-        $("#mdlEditVentas").modal('show');
+        $("#mdlVentas").modal('show');
         },
         error: function() {
           alert("Problema en recuperarRegistro");

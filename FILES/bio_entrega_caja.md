@@ -76,6 +76,10 @@ Ya he diseñado la plantilla de trabajo:
 [ ] Subir el proyecto a github
 
 
+ANALIZANDO TRAYECTORIA DE BOTON EDIT
+- se pulsa boton editar btnEdit
+- activa el btnconfirmedit y ejecuta la funcion recuperarRegistro(registro.venta_id);); pasándole el valor de venta_id actual.
+-
 
 
 
