@@ -34,41 +34,41 @@
 
     // CARGA Y CONSULTA DEL SELECT2
 
-    $(document).ready(function() {
-      $('#slct-prueba1').select2({
-        languaje: "es",
-        ajax: {
-          type: 'GET',
-          url: "getPrueba1.php",
-          dataType: 'json',
-          delay: 100,
-          data: function(params) {
-            return {
-              //barrio_id: params.term,
-              barrio_nombre: params.term
-            }
-          },
-          processResults: function(data) {
-            var results = [];
-            $.each(data, function(index, item) {
-              results.push({
-                id: item.barrio_id,
-                text: item.barrio_nombre
-              })
-            });
-            return { results };
-          },
-          cache: true,
-        },
-        placeholder: 'Buscar un Barrio',
-        minimumInputLength: 2
-      });
-    });
-    //COLOCA EL VALOR SELECCIONADO EN EL SELECT
-    $('#slct-prueba1').on('select2:select', function(e) {
-        var data = e.params.data;
-        console.log(data);
-      }),
+    // $(document).ready(function() {
+    //   $('#slct-prueba1').select2({
+    //     languaje: "es",
+    //     ajax: {
+    //       type: 'GET',
+    //       url: "getPrueba1.php",
+    //       dataType: 'json',
+    //       delay: 100,
+    //       data: function(params) {
+    //         return {
+    //           //barrio_id: params.term,
+    //           barrio_nombre: params.term
+    //         }
+    //       },
+    //       processResults: function(data) {
+    //         var results = [];
+    //         $.each(data, function(index, item) {
+    //           results.push({
+    //             id: item.barrio_id,
+    //             text: item.barrio_nombre
+    //           })
+    //         });
+    //         return { results };
+    //       },
+    //       cache: true,
+    //     },
+    //     placeholder: 'Buscar un Barrio',
+    //     minimumInputLength: 2
+    //   });
+    // });
+    // //COLOCA EL VALOR SELECCIONADO EN EL SELECT
+    // $('#slct-prueba1').on('select2:select', function(e) {
+    //     var data = e.params.data;
+    //     console.log(data);
+    //   }),
       //  FIN CARGA Y CONSULTA SELECT2
 
 
@@ -89,8 +89,8 @@
     });
     // EVENTOS DE BOTONES
     $('#btn-Add').click(function() {
-      $('#btnConfirmAdd').show();
-      $('#btnConfirmEdit').hide();
+      //$('#btnConfirmAdd').show();
+      //$('#btnConfirmEdit').hide();
       limpiarFormulario();
       $("#mdlVentas").modal('show');
     });
@@ -106,7 +106,7 @@
       // REALIZA GUARDAR NUEVO REGISTRO
 
       //VALIDACION DE DATOS DEL MODAL NUEVO
-      //pasa el valor de campo del formulario a variable
+
       let valida_nombre_producto = $('#npt-venta_nombre_producto').val();
       let valida_nombre_proveedor = $('#npt-venta_nombre_proveedor').val();
       let valida_venta_costo_producto = $('#npt-venta_costo_producto').val();
@@ -140,6 +140,7 @@
         return false;
       } else {
         //ejecutar Si todo fue validado
+        calcularUtilidad();
         $("#mdlVentas").modal('hide');
         let registro = recolectarDatosFormulario();
         guardarRegistro(registro);
@@ -150,7 +151,7 @@
 
     $('#btnConfirmEdit').click(function() {
       //GUARDA LOS DATOS MODIFICADOS
-      $("#mdlVentas").modal('hide');
+      $("#mdlEditVentas").modal('hide');
       let registro = recolectarDatosFormulario();
       modificarRegistro(registro);
     });
@@ -159,7 +160,7 @@
 
     $('#tblVentas tbody').on('click', 'button.btnEdit', function() {
     //ACCIONA BOTON EDITAR REGISTRO DEL DATATABLES
-      $('#btnConfirmEdit').show();
+      //$('#btnConfirmEdit').show();
       let registroEdit = listadoVentas.row($(this).parents('tr')).data();
       recuperarRegistro(registroEdit.venta_id);
     });
@@ -189,16 +190,15 @@
     }
 
     function recolectarDatosFormulario() {
-    // RECOLECTA DATOS DEL FRM Y CREA OBJETO registro
-    // DESTINO DE DATOS: GRABAR NUEVA VENTA / CARGAR FRM EDITAR
       let registro = {
-        venta_id: $('#npt-venta_id').val(),
-        venta_nombre_producto: $('#npt-venta_nombre_producto').val(),
-        venta_nombre_proveedor: $('#npt-venta_nombre_proveedor').val(),
-        venta_costo_producto: $('#npt-venta_costo_producto').val(),
-        venta_valor_venta: $('#npt-venta_valor_venta').val(),
-        user_id: $('#npt-user_id').val(),
-        venta_utilidad: $('#npt-venta_utilidad').val(),
+        venta_id: $('#nptEdit-venta_id').val(),
+        venta_nombre_producto: $('#nptEdit-venta_nombre_producto').val(),
+        venta_nombre_proveedor: $('#nptEdit-venta_nombre_proveedor').val(),
+        venta_costo_producto: $('#nptEdit-venta_costo_producto').val(),
+        venta_valor_venta: $('#nptEdit-venta_valor_venta').val(),
+        user_nombre: $('#nptEdit-user_nombre').val(),
+        user_id: $('#nptEdit-user_id').val(),
+        venta_utilidad: $('#nptEdit-venta_utilidad').val(),
       };
       return registro;
     }
@@ -206,10 +206,21 @@
 
     // MUESTRA LA HORA ACTUAL
     function actualDate() {
-      var dt = new Date();
-      var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+      let dt = new Date();
+      let time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
       return time;
     };
+
+
+// CALCULO DE LA UTILIDAD
+function calcularUtilidad(){
+  var costo_producto = $('#npt-venta_costo_producto').val();
+  var valor_venta = $('#npt-venta_costo_producto').val();
+  var utilidad = parseFloat(costo_producto)+parseFloat(valor_venta);
+  return utilidad;
+  alert(utilidad);
+};
+
 
     // COMUNICARSE CON EL SERVIDOR VIA AJAX
 
@@ -228,7 +239,7 @@
       });
     }
 
-    function borrarRegistro(domi_id) {
+    function borrarRegistro(venta_id) {
       // BORRA REGISTRO Y ACTUALIZA DATATABLES
       $.ajax({
         type: 'GET',
@@ -243,21 +254,22 @@
       });
     }
 
-    function recuperarRegistro(domi_id) {
+    function recuperarRegistro(venta_id) {
     // EJECUTA CONSULTA CON venta_id Y CARGA FRM EDICION
       $.ajax({
         type: 'GET',
         url: 'venta_data.php?accion=consultar_venta&venta_id=' + venta_id,
         data: '',
         success: function(datos) {
-        $('#npt-venta_id').val(datos[0].venta_id);
-        $('#npt-venta_nombre_producto').val(datos[0].venta_nombre_producto);
-        $('#npt-venta_nombre_proveedor').val(datos[0].venta_nombre_proveedor);
-        $('#npt-venta_costo_producto').val(datos[0].venta_costo_producto);
-        $('#npt-venta_valor_venta').val(datos[0].venta_valor_venta);
-        $('#npt-user_nombre').val(datos[0].user_nombre);
-        $('#npt-venta_utilidad').val(datos[0].venta_utilidad);
-        $("#mdlVentas").modal('show');
+        $('#nptEdit-venta_id').val(datos[0].venta_id);
+        $('#nptEdit-venta_nombre_producto').val(datos[0].venta_nombre_producto);
+        $('#nptEdit-venta_nombre_proveedor').val(datos[0].venta_nombre_proveedor);
+        $('#nptEdit-venta_costo_producto').val(datos[0].venta_costo_producto);
+        $('#nptEdit-venta_valor_venta').val(datos[0].venta_valor_venta);
+        $('#nptEdit-user_nombre').val(datos[0].user_nombre);
+        $('#nptEdit-user_id').val(datos[0].user_id);
+        $('#nptEdit-venta_utilidad').val(datos[0].venta_utilidad);
+        $("#mdlEditVentas").modal('show');
         },
         error: function() {
           alert("Problema en recuperarRegistro");

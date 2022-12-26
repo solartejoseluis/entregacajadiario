@@ -44,9 +44,11 @@ case 'guardar_venta':
     $response = $pdo->exec($sql);
     echo json_encode($response);
     break;
+
+
 case 'borrar_venta':
 // BORRA EL REGISTRO ENrecuperarRegistro LA TABLA
-    $sql = "DELETE FROM VENTAS where domi_id=$_GET[domi_id]";
+    $sql = "DELETE FROM VENTAS where venta_id=$_GET[venta_id]";
     $response = $pdo->exec($sql);
     echo json_encode($response);
     break;
@@ -59,6 +61,7 @@ case 'consultar_venta':
         VENTAS.venta_nombre_proveedor,
         VENTAS.venta_costo_producto,
         VENTAS.venta_valor_venta,
+        VENTAS.user_id,
         USERS.user_nombre,
         VENTAS.venta_utilidad,
         VENTAS.turno_id
@@ -77,12 +80,12 @@ case 'consultar_venta':
 case 'modificar_venta':
 //GUARDA REGISTRO EDITADO
     $sql = "UPDATE VENTAS SET
-        '$_POST[venta_nombre_producto]',
-        '$_POST[venta_nombre_proveedor]',
-        $_POST[venta_costo_producto],
-        $_POST[venta_valor_venta],
-        $_POST[user_id],
-        $_POST[venta_utilidad]
+        venta_nombre_producto='$_POST[venta_nombre_producto]',
+        venta_nombre_proveedor='$_POST[venta_nombre_proveedor]',
+        venta_costo_producto=$_POST[venta_costo_producto],
+        venta_valor_venta=$_POST[venta_valor_venta],
+        user_id=$_POST[user_id],
+        venta_utilidad=$_POST[venta_utilidad]
         WHERE venta_id=$_GET[venta_id]";
         $response = $pdo->exec($sql);
         echo json_encode($response);

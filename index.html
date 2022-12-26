@@ -132,7 +132,7 @@
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary" id="btnConfirmAdd">Confirma Agregar</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary" id="btnConfirmEdit">Confirma Modificar</button>
+                    <!-- <button type="submit" class="btn btn-primary" id="btnConfirmEdit">Confirma Modificar</button> -->
                 </div>
             </div>
         </div>
@@ -154,71 +154,71 @@
 
                         <!-- EDITAR VENTAS_ID -->
                         <div class="row">
-                            <input type="hidden" class="form-control" id="npt-ventas_id">
+                            <input type="hidden" class="form-control" id="nptEdit-venta_id">
                         </div>
 
                         <!-- EDITAR PRODUCTO -->
                         <div class="row mb-3">
                             <div class="col-md-3 ms-auto">
-                                <label for="npt-venta_nombre_producto" class="col-form-label">Producto:</label>
+                                <label for="nptEdit-venta_nombre_producto" class="col-form-label">Producto:</label>
                             </div>
                             <div class="col-md-9 ms-auto">
-                                <input type="text" class="form-control" id="npt-venta_nombre_producto" placeholder="Digite Nombre del producto">
+                                <input type="text" class="form-control" id="nptEdit-venta_nombre_producto" placeholder="Digite Nombre del producto">
                             </div>
                         </div>
-                        <!-- NUEVO PROVEEDOR -->
+                        <!--  EDITAR PROVEEDOR -->
                         <div class="row mb-3">
                             <div class="col-md-3 ms-auto">
-                                <label for="npt-venta_nombre_proveedor" class="col-form-label">Proveedor:</label>
+                                <label for="nptEdit-venta_nombre_proveedor" class="col-form-label">Proveedor:</label>
                             </div>
                             <div class="col-md-9 ms-auto">
-                                <input type="text" class="form-control" id="npt-venta_nombre_proveedor" placeholder="Digite Nombre proveedor">
+                                <input type="text" class="form-control" id="nptEdit-venta_nombre_proveedor" placeholder="Digite Nombre proveedor">
                             </div>
                         </div>
-                        <!-- NUEVO COSTO PRODUCTO -->
+                        <!-- EDITAR COSTO PRODUCTO -->
                         <div class="row mb-3">
                             <div class="col-md-3 ms-auto">
-                                <label for="npt-venta_costo_producto" class="col-form-label">Costo Prod:</label>
+                                <label for="nptEdit-venta_costo_producto" class="col-form-label">Costo Prod:</label>
                             </div>
                             <div class="col-md-9 ms-auto">
-                                <input type="text" class="form-control" id="npt-venta_costo_producto" placeholder="Digite Costo de producto">
+                                <input type="text" class="form-control" id="nptEdit-venta_costo_producto" placeholder="Digite Costo de producto">
                             </div>
                         </div>
-                        <!-- NUEVO VALOR VENTA -->
+                        <!-- EDITAR VALOR VENTA -->
                         <div class="row mb-3">
                             <div class="col-md-3 ms-auto">
-                                <label for="npt-venta_valor_venta" class="col-form-label"> Valor Venta:</label>
+                                <label for="nptEdit-venta_valor_venta" class="col-form-label"> Valor Venta:</label>
                             </div>
                             <div class="col-md-9 ms-auto">
-                                <input type="text" class="form-control" id="npt-venta_valor_venta" placeholder="Digite valor venta">
+                                <input type="text" class="form-control" id="nptEdit-venta_valor_venta" placeholder="Digite valor venta">
                             </div>
                         </div>
-                        <!--  NUEVO VENDEDOR -->
+                        <!--  EDITAR VENDEDOR -->
                         <div class="row mb-3">
                             <div class="col-md-3 ms-auto">
-                                <label for="slct-user" class="col-form-label">Vendedor:</label>
+                                <label for="nptEdit-user_nombre" class="col-form-label">Vendedor:</label>
                             </div>
                             <div class="col-md-9 ms-auto">
-                                <!-- <input type="hidden" class="form-control" id="npt-user_id"> -->
-                                <div class="selectUser">
-                                <input class="form-control" id="npt-user_nombre">
+                            <input type="hidden" class="form-control" id="nptEdit-user_id">
+                            <div class="selectUser">
+                                <input class="form-control" id="nptEdit-user_nombre">
                                     <!-- <select class="form-select" id="slct-user"></select> -->
-                                </div>
+                            </div>
                             </div>
                         </div>
-                        <!-- NUEVA UTILIDAD -->
+                        <!-- EDITAR UTILIDAD -->
                         <div class="row mb-3">
                             <div class="col-md-3 ms-auto">
-                                <label for="npt-venta_utilidad" class="col-form-label">Utilidad:</label>
+                                <label for="nptEdit-venta_utilidad" class="col-form-label">Utilidad:</label>
                             </div>
                             <div class="col-md-9 ms-auto">
-                                <input type="text" class="form-control" id="npt-venta_utilidad">
+                                <input type="text" class="form-control" id="nptEdit-venta_utilidad">
                             </div>
                         </div>
 
 
                     </form>
-                </div> <!-- FIN MODAL-BODY-->
+                </div> <!-- final modal body editar-->
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary" id="btnConfirmEdit">Confirma Modificar</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -227,6 +227,7 @@
         </div>
     </div>
     <!-- FIN MODAL EDITAR REGISTRO -->
+
     <!-- |||||||||||||||||||||||||||||||||||||||||||||||||| -->
     <!-- CDN jquery 3.6.1 js -->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>

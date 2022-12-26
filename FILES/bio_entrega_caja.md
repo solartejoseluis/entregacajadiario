@@ -75,11 +75,16 @@ Ya he diseñado la plantilla de trabajo:
 [ 4] Backup de la  base de datos
 [ ] Subir el proyecto a github
 
+2022-12-26
+## PROBLEMA
+el boton edit no desplega el modal.
+he revisado las opciones y resulta que no está pasando la variable venta_id
+## BUSCANDO SOLUCION:
 
-ANALIZANDO TRAYECTORIA DE BOTON EDIT
-- se pulsa boton editar btnEdit
-- activa el btnconfirmedit y ejecuta la funcion recuperarRegistro(registro.venta_id);); pasándole el valor de venta_id actual.
--
+### TRAYECTORIA DE BOTÓN EDIT
+- Se pulsa btnEdit /
+- Activa jQuery = show btn confirm edit,  ejercuta función recuperarRegistro que recoge en una variable los datos del datatables que estan disponibles al momento en la (tr) actual (fila) y saca el valor venta_id y lo pasa
+
 
 
 
