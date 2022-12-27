@@ -32,46 +32,6 @@
     // FIN DATATABLES
 
 
-    // CARGA Y CONSULTA DEL SELECT2
-
-    // $(document).ready(function() {
-    //   $('#slct-prueba1').select2({
-    //     languaje: "es",
-    //     ajax: {
-    //       type: 'GET',
-    //       url: "getPrueba1.php",
-    //       dataType: 'json',
-    //       delay: 100,
-    //       data: function(params) {
-    //         return {
-    //           //barrio_id: params.term,
-    //           barrio_nombre: params.term
-    //         }
-    //       },
-    //       processResults: function(data) {
-    //         var results = [];
-    //         $.each(data, function(index, item) {
-    //           results.push({
-    //             id: item.barrio_id,
-    //             text: item.barrio_nombre
-    //           })
-    //         });
-    //         return { results };
-    //       },
-    //       cache: true,
-    //     },
-    //     placeholder: 'Buscar un Barrio',
-    //     minimumInputLength: 2
-    //   });
-    // });
-    // //COLOCA EL VALOR SELECCIONADO EN EL SELECT
-    // $('#slct-prueba1').on('select2:select', function(e) {
-    //     var data = e.params.data;
-    //     console.log(data);
-    //   }),
-      //  FIN CARGA Y CONSULTA SELECT2
-
-
     //CARGA EL SELECT VENDEDORES
     $(document).ready(function() {
       $.ajax({
@@ -89,8 +49,6 @@
     });
     // EVENTOS DE BOTONES
     $('#btn-Add').click(function() {
-      //$('#btnConfirmAdd').show();
-      //$('#btnConfirmEdit').hide();
       limpiarFormulario();
       $("#mdlVentas").modal('show');
     });
@@ -101,12 +59,24 @@
       $('#npt-domi_hora_salida').val(hour);
     });
 
+//-----------------------------
+//CICLO AGREGAR NUEVA VENTA
+//-----------------------------
+
+    function limpiarFormulario() {
+      $('#npt-venta_id').val('');
+      $('#npt-venta_nombre_producto').val('');
+      $('#npt-venta_nombre_proveedor').val('');
+      $('#npt-venta_costo_producto').val('');
+      $('#npt-venta_valor_venta').val('');
+      $('#npt-user_id').val('');
+      $('#slct-user').val('0');
+      $('#npt-venta_utilidad').val('');
+    }
+
 
     $('#btnConfirmAdd').click(function() {
-      // REALIZA GUARDAR NUEVO REGISTRO
-
       //VALIDACION DE DATOS DEL MODAL NUEVO
-
       let valida_nombre_producto = $('#npt-venta_nombre_producto').val();
       let valida_nombre_proveedor = $('#npt-venta_nombre_proveedor').val();
       let valida_venta_costo_producto = $('#npt-venta_costo_producto').val();
@@ -137,95 +107,32 @@
       } else if (valida_venta_utilidad.trim() == '') {
         alert('Revisar utilidad');
         $('#npt-venta_utilidad').focus();
-        return false;
+        return false; // fin validacion formulario nuevo
       } else {
         //ejecutar Si todo fue validado
-        calcularUtilidad();
         $("#mdlVentas").modal('hide');
-        let registro = recolectarDatosFormulario();
+        let registro = recolectarDatosFormularioNuevo();
         guardarRegistro(registro);
         //alert("ok Validado");
       }
     });
-    // FIN VALIDACION DE FORMULARIO
-
-    $('#btnConfirmEdit').click(function() {
-      //GUARDA LOS DATOS MODIFICADOS
-      $("#mdlEditVentas").modal('hide');
-      let registro = recolectarDatosFormulario();
-      modificarRegistro(registro);
-    });
 
 
-
-    $('#tblVentas tbody').on('click', 'button.btnEdit', function() {
-    //ACCIONA BOTON EDITAR REGISTRO DEL DATATABLES
-      //$('#btnConfirmEdit').show();
-      let registroEdit = listadoVentas.row($(this).parents('tr')).data();
-      recuperarRegistro(registroEdit.venta_id);
-    });
-
-
-
-
-    $('#tblVentas tbody').on('click', 'button.btnDel', function() {
-      //ACCIONA BOTON BORRAR REGISTRO DEL DATATABLES
-      if (confirm("¿Confirma la Eliminación?")) {
-        let registro = listadoVentas.row($(this).parents('tr')).data();
-        borrarRegistro(registro.venta_id);
-      }
-    });
-
-    // INTERACCIONES CON EL FORMULARIO MODAL
-
-    function limpiarFormulario() {
-      $('#npt-venta_id').val('');
-      $('#npt-venta_nombre_producto').val('');
-      $('#npt-venta_nombre_proveedor').val('');
-      $('#npt-venta_costo_producto').val('');
-      $('#npt-venta_valor_venta').val('');
-      $('#npt-user_id').val('');
-      $('#slct-user').val('0');
-      $('#npt-venta_utilidad').val('');
-    }
-
-    function recolectarDatosFormulario() {
+    function recolectarDatosFormularioNuevo() {
       let registro = {
-        venta_id: $('#nptEdit-venta_id').val(),
-        venta_nombre_producto: $('#nptEdit-venta_nombre_producto').val(),
-        venta_nombre_proveedor: $('#nptEdit-venta_nombre_proveedor').val(),
-        venta_costo_producto: $('#nptEdit-venta_costo_producto').val(),
-        venta_valor_venta: $('#nptEdit-venta_valor_venta').val(),
-        user_nombre: $('#nptEdit-user_nombre').val(),
-        user_id: $('#nptEdit-user_id').val(),
-        venta_utilidad: $('#nptEdit-venta_utilidad').val(),
+        venta_id: $('#npt-venta_id').val(),
+        venta_nombre_producto: $('#npt-venta_nombre_producto').val(),
+        venta_nombre_proveedor: $('#npt-venta_nombre_proveedor').val(),
+        venta_costo_producto: $('#npt-venta_costo_producto').val(),
+        venta_valor_venta: $('#npt-venta_valor_venta').val(),
+        user_nombre: $('#npt-user_nombre').val(),
+        user_id: $('#npt-user_id').val(),
+        venta_utilidad: $('#npt-venta_utilidad').val(),
       };
       return registro;
     }
 
-
-    // MUESTRA LA HORA ACTUAL
-    function actualDate() {
-      let dt = new Date();
-      let time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
-      return time;
-    };
-
-
-// CALCULO DE LA UTILIDAD
-function calcularUtilidad(){
-  var costo_producto = $('#npt-venta_costo_producto').val();
-  var valor_venta = $('#npt-venta_costo_producto').val();
-  var utilidad = parseFloat(costo_producto)+parseFloat(valor_venta);
-  return utilidad;
-  alert(utilidad);
-};
-
-
-    // COMUNICARSE CON EL SERVIDOR VIA AJAX
-
-    function guardarRegistro(registro) {
-      // GUARDA REGISTRO Y ACTUALIZA DATATABLES
+   function guardarRegistro(registro) {
       $.ajax({
         type: 'POST',
         url: 'venta_data.php?accion=guardar_venta',
@@ -239,23 +146,17 @@ function calcularUtilidad(){
       });
     }
 
-    function borrarRegistro(venta_id) {
-      // BORRA REGISTRO Y ACTUALIZA DATATABLES
-      $.ajax({
-        type: 'GET',
-        url: 'venta_data.php?accion=borrar_venta&venta_id=' + venta_id,
-        data: '',
-        success: function(msg) {
-          listadoVentas.ajax.reload();
-        },
-        error: function() {
-          alert("Problema en borrarRegistro");
-        }
-      });
-    }
+//------------------------
+//CICLO EDITAR REGISTRO
+//------------------------
+
+    $('#tblVentas tbody').on('click', 'button.btnEdit', function() {
+      let registroEdit = listadoVentas.row($(this).parents('tr')).data();
+      recuperarRegistro(registroEdit.venta_id);
+    });
+
 
     function recuperarRegistro(venta_id) {
-    // EJECUTA CONSULTA CON venta_id Y CARGA FRM EDICION
       $.ajax({
         type: 'GET',
         url: 'venta_data.php?accion=consultar_venta&venta_id=' + venta_id,
@@ -277,6 +178,30 @@ function calcularUtilidad(){
       });
     }
 
+
+    $('#btnConfirmEdit').click(function() {
+      //GUARDA LOS DATOS MODIFICADOS
+      $("#mdlEditVentas").modal('hide');
+      let registro = recolectarDatosFormularioEdit();
+      modificarRegistro(registro);
+    });
+
+
+    function recolectarDatosFormularioEdit() {
+      let registro = {
+        venta_id: $('#nptEdit-venta_id').val(),
+        venta_nombre_producto: $('#nptEdit-venta_nombre_producto').val(),
+        venta_nombre_proveedor: $('#nptEdit-venta_nombre_proveedor').val(),
+        venta_costo_producto: $('#nptEdit-venta_costo_producto').val(),
+        venta_valor_venta: $('#nptEdit-venta_valor_venta').val(),
+        user_nombre: $('#nptEdit-user_nombre').val(),
+        user_id: $('#nptEdit-user_id').val(),
+        venta_utilidad: $('#nptEdit-venta_utilidad').val(),
+      };
+      return registro;
+    }
+
+
     function modificarRegistro(registro) {
       $.ajax({
         type: 'POST',
@@ -290,5 +215,33 @@ function calcularUtilidad(){
         }
       });
     }
+
+//------------------------
+// CICLO BORRAR REGISTRO
+//------------------------
+    $('#tblVentas tbody').on('click', 'button.btnDel', function() {
+      //ACCIONA BOTON BORRAR REGISTRO DEL DATATABLES
+      if (confirm("¿Confirma la Eliminación?")) {
+        let registro = listadoVentas.row($(this).parents('tr')).data();
+        borrarRegistro(registro.venta_id);
+      }
+    });
+
+
+  function borrarRegistro(venta_id) {
+      // BORRA REGISTRO Y ACTUALIZA DATATABLES
+      $.ajax({
+        type: 'GET',
+        url: 'venta_data.php?accion=borrar_venta&venta_id=' + venta_id,
+        data: '',
+        success: function(msg) {
+          listadoVentas.ajax.reload();
+        },
+        error: function() {
+          alert("Problema en borrarRegistro");
+        }
+      });
+    }
+
 
   });
