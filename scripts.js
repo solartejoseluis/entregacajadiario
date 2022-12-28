@@ -244,4 +244,21 @@
     }
 
 
+
+//------------------------
+// OPERACIONES EN EL MODAL
+//------------------------
+
+
+
+
+  //CALCULAR UTILIDAD EN EL MODAL
+  $('#npt-venta_valor_venta').focusout( function calculoUtilidad () {
+  let costo = $('#npt-venta_costo_producto').val();
+  let valor_venta = $('#npt-venta_valor_venta').val();
+  let utilidad = parseInt(valor_venta)-parseInt(costo);
+  $('#npt-venta_utilidad').val(utilidad);
+  });
+
+
   });
