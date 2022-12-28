@@ -1,4 +1,5 @@
 2022-12-21
+
 # PROYECTO ENTREGA DE CAJA DIARIO
 objetivos de la herramienta
 - agilizar la toma de datos para la entrega de caja
@@ -12,6 +13,55 @@ la auxiliar administrativa recibe
 
 Mensualmente se genera un cálculo de las ventas para el pago a vendedores.
 Dentro de un tiempo podremos estandarizar la lista de los proveedores y les podremos hacer un seguimiento.
+
+### ---------------------
+### SECUENCIAS DE TRABAJO
+### ---------------------
+
+
+1.- El responsable del turno ingresa al sistema
+	esto lo hace con su usuario y login, configura la fecha del turno,
+
+el sistema le muestra la hoja principal, vacia.
+### PANTALLA PRINCIPAL
+	- boton NUEVA VENTA
+	- boton CERRAR TURNO
+	- Listado datables de las ventas.
+	- Cuadro de indicadores:
+		- Utilidad acumulada del dia por vendedor
+		- cantidad de
+
+
+2.- ingresa las diferentes gestiones que va haciendo en el turno.
+3.- al final del turno para hacer el cierre necesita:
+	- total vendido en la caja principal.
+	- total de gestiones por turno, estas gestiones quedan almacenadas ya al final de mes se hará un consolidado por vendedor.
+	- total a entregar
+
+
+#### Necesitamos generar un registro del turno en que se se encuentra.
+Estos datos deberían aparecer registrados en cada venta:
+- Hora de registro de la gestión.
+- Encargado de ese turno.
+
+
+### ideas:
+
+
+### boton CIERRE DEL TURNO.
+	abre el modal de DATOS PARA CIERRE
+### modal DATOS PARA CIERRE
+	- [input] SALDO DE CAJA DEL TURNO
+	- [input disabled] TOTAL UTILIDAD DE GESTIONES (sumatoria de las UTILIDADES del dia)
+	- [input disabled] TOTAL A ENTREGAR (sumatoria de SALDOCAJATURNO + UTILIDADES)
+	- [input] TOTAL DESCUADRE
+### boton CERRAR TURNO.
+
+
+
+### -----------------------------------------------------------
+###  DEFINICION DE LOS ELEMENTOS DE CONSTRUCCION DE LA APLICACION
+### -----------------------------------------------------------
 
 Está elaborado en una plantilla de google docs pero voy a organizarlo con un formulario.
 

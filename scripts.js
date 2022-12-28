@@ -28,13 +28,18 @@
           data: null
         }
       ],
+      "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+          },
     });
+
     // FIN DATATABLES
+
 
 
     //CARGA EL SELECT VENDEDORES
     $(document).ready(function() {
-      $.ajax({
+        $.ajax({
         type: "POST",
         url: "getUser.php",
         success: function(response) {
@@ -47,21 +52,23 @@
     $("#slct-user").change(function() {
       $('#npt-user_id').val($(this).val());
     });
-    // EVENTOS DE BOTONES
-    $('#btn-Add').click(function() {
-      limpiarFormulario();
-      $("#mdlVentas").modal('show');
+
+    // CARGA LA FECHA ACTUAL
+    $(document).ready(function() {
+     let hoy = actualDate();
+     document.getElementById('hoy').innerHTML = hoy;
     });
 
-    //MOSTRAR LA FECHA ACTUAL EN EL INPUT
-    $('#horaActual').click(function() {
-      let hour = actualDate();
-      $('#npt-domi_hora_salida').val(hour);
-    });
+
 
 //-----------------------------
 //CICLO AGREGAR NUEVA VENTA
 //-----------------------------
+
+    $('#btn-Add').click(function() {
+      limpiarFormulario();
+      $("#mdlVentas").modal('show');
+    });
 
     function limpiarFormulario() {
       $('#npt-venta_id').val('');
@@ -244,12 +251,20 @@
     }
 
 
-
 //------------------------
 // OPERACIONES EN EL MODAL
 //------------------------
 
-
+//MOSTRAR LA FECHA ACTUAL
+function actualDate(){
+let today = new Date();
+let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+//options.timeZone = 'UTC';
+//options.timeZoneName = 'short';
+let now = today.toLocaleString('es-CO', options);
+//console.log(now);
+return now;
+}
 
 
   //CALCULAR UTILIDAD EN EL MODAL
@@ -259,6 +274,15 @@
   let utilidad = parseInt(valor_venta)-parseInt(costo);
   $('#npt-venta_utilidad').val(utilidad);
   });
+
+
+// PASO A MAYUSCULAS
+  function toUpper() {
+    //var x = document.getElementById("npt-venta_nombre_producto");
+    var x = $('#npt-venta_nombre_producto').val();
+    x.value = x.value.toUpperCase();
+}
+
 
 
   });
