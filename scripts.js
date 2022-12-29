@@ -271,18 +271,30 @@ return now;
   $('#npt-venta_valor_venta').focusout( function calculoUtilidad () {
   let costo = $('#npt-venta_costo_producto').val();
   let valor_venta = $('#npt-venta_valor_venta').val();
-  let utilidad = parseInt(valor_venta)-parseInt(costo);
+  let utilidad = parseFloat(valor_venta.replace(/./g,""))-parseFloat(costo.replace(/./g,""));
   $('#npt-venta_utilidad').val(utilidad);
   });
 
+// APLICACION FORMATO MONEDA
 
-// PASO A MAYUSCULAS
-  function toUpper() {
-    //var x = document.getElementById("npt-venta_nombre_producto");
-    var x = $('#npt-venta_nombre_producto').val();
-    x.value = x.value.toUpperCase();
-}
+$('input.costo').on('blur', function() {
+  const value = this.value.replace(/,/g, '');
+  this.value = parseFloat(value).toLocaleString('es-CO', {
+    style: 'currency',
+    currency:'COP',
+    maximumFractionDigits: 0,
+    minimumFractionDigits: 0
+  });
+});
 
-
+$('input.precioCliente').on('blur', function() {
+  const value = this.value.replace(/,/g, '');
+  this.value = parseFloat(value).toLocaleString('es-CO', {
+    style: 'currency',
+    currency:'COP',
+    maximumFractionDigits: 0,
+    minimumFractionDigits: 0
+  });
+});
 
   });

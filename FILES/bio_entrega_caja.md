@@ -136,7 +136,13 @@ he revisado las opciones y resulta que no está pasando la variable venta_id
 - Activa jQuery = show btn confirm edit,  ejercuta función recuperarRegistro que recoge en una variable los datos del datatables que estan disponibles al momento en la (tr) actual (fila) y saca el valor venta_id y lo pasa
 
 
+## 2022-12-29_jue
+9:.09
+resumen de ajustes pendientes:
 
-
+- conversion de inputs texto a mayusculas automático.
+- conversion de campos numericos a formato de pesos
+- elaborar calculos y consultas para tablas superiores
+-
 
 
