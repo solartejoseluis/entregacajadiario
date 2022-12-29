@@ -90,5 +90,17 @@ case 'modificar_venta':
         $response = $pdo->exec($sql);
         echo json_encode($response);
         break;
+
+
+case 'consultar_utilidad':
+    $sql = "SELECT SUM(venta_utilidad) AS utilidad_yuly FROM VENTAS WHERE user_id = 1";
+    $stmt = $pdo -> prepare($sql);
+    $stmt -> execute();
+    $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($result);
+    break;
+
+
+
 }
 ?>

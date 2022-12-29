@@ -19,10 +19,6 @@
     <div class="row">
       <div class="col-6">
         <h1>ENTREGA DE CAJA DIARIA</h1>
-
-<input id="campo" onchange="
-document.getElementById(this.id).value=document.getElementById(this.id).value.MASK(this,this.value,'-$##,###,##0.00',1);">
-
         <h3 id="hoy"></h3>
       </div>
     </div>
@@ -42,17 +38,25 @@ document.getElementById(this.id).value=document.getElementById(this.id).value.MA
           <tbody class="table-group-divider">
             <tr>
               <th scope="row">Num - Gestiones</th>
-              <td>4</td>
-              <td>10</td>
-              <td>2</td>
-              <td>3</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
             </tr>
             <tr>
               <th scope="row">Utilidad Hoy</th>
-              <td>$6.000</td>
-              <td>$25.000</td>
-              <td>$2.000</td>
-              <td>$6.000</td>
+              <td>
+                <p id="utilidadYuly"></p>
+              </td>
+              <td>
+                <p id="utilidadLorena"></p>
+              </td>
+              <td>
+                <p id="utilidadKarol"></p>
+              </td>
+              <td>
+                <p id="utilidadMarino"></p>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -153,7 +157,7 @@ document.getElementById(this.id).value=document.getElementById(this.id).value.MA
                 <label for="npt-venta_costo_producto" class="col-form-label">Costo Prod:</label>
               </div>
               <div class="col-md-9 ms-auto">
-                <input type="text" class="form-control costo" id="npt-venta_costo_producto" placeholder="Digite Costo de producto" >
+                <input type="text" class="form-control" id="npt-venta_costo_producto" placeholder="Digite Costo de producto" >
               </div>
             </div>
             <!-- NUEVO VALOR VENTA -->
@@ -162,7 +166,7 @@ document.getElementById(this.id).value=document.getElementById(this.id).value.MA
                 <label for="npt-venta_valor_venta" class="col-form-label"> Valor Venta:</label>
               </div>
               <div class="col-md-9 ms-auto">
-                <input type="text" class="form-control precioCliente" id="npt-venta_valor_venta" placeholder="Digite valor venta">
+                <input type="text" class="form-control" id="npt-venta_valor_venta" placeholder="Digite valor venta">
               </div>
             </div>
             <!--  NUEVO VENDEDOR -->

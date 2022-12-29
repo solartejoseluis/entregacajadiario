@@ -35,6 +35,20 @@
 
     // FIN DATATABLES
 
+  //CARGA CUADRO DE VENDEDORES
+    $(document).ready(function() {
+      $.ajax({
+        type: 'GET',
+        url: 'venta_data.php?accion=consultar_utilidad',
+        data: '',
+        success: function(datos) {
+        $('#utilidadYuly').html(datos[0].utilidad_yuly);
+        },
+        error: function() {
+          alert("Problema en consultarUtilidad");
+        }
+      });
+    });
 
 
     //CARGA EL SELECT VENDEDORES
@@ -123,6 +137,13 @@
         //alert("ok Validado");
       }
     });
+
+
+function cargarDatosUtilidad{
+
+};
+
+
 
 
     function recolectarDatosFormularioNuevo() {
@@ -266,19 +287,19 @@ let now = today.toLocaleString('es-CO', options);
 return now;
 }
 
-
   //CALCULAR UTILIDAD EN EL MODAL
   $('#npt-venta_valor_venta').focusout( function calculoUtilidad () {
   let costo = $('#npt-venta_costo_producto').val();
   let valor_venta = $('#npt-venta_valor_venta').val();
-  let utilidad = parseFloat(valor_venta.replace(/./g,""))-parseFloat(costo.replace(/./g,""));
+  let utilidad = parseFloat(valor_venta.replace(/\$|\./g, ""))-parseFloat(costo.replace(/\$|\./g, ""));
   $('#npt-venta_utilidad').val(utilidad);
+
   });
 
 // APLICACION FORMATO MONEDA
 
 $('input.costo').on('blur', function() {
-  const value = this.value.replace(/,/g, '');
+  const value = this.value.replace(/\,/g, '');
   this.value = parseFloat(value).toLocaleString('es-CO', {
     style: 'currency',
     currency:'COP',
@@ -288,7 +309,7 @@ $('input.costo').on('blur', function() {
 });
 
 $('input.precioCliente').on('blur', function() {
-  const value = this.value.replace(/,/g, '');
+  const value = this.value.replace(/\,/g, '');
   this.value = parseFloat(value).toLocaleString('es-CO', {
     style: 'currency',
     currency:'COP',
@@ -296,5 +317,16 @@ $('input.precioCliente').on('blur', function() {
     minimumFractionDigits: 0
   });
 });
+
+$('input.utilidad').on('change', function() {
+  const value = this.value.replace(/\,/g, '');
+  this.value = parseFloat(value).toLocaleString('es-CO', {
+    style: 'currency',
+    currency:'COP',
+    maximumFractionDigits: 0,
+    minimumFractionDigits: 0
+  });
+});
+
 
   });

@@ -145,4 +145,33 @@ resumen de ajustes pendientes:
 - elaborar calculos y consultas para tablas superiores
 -
 
+16:29
+## SOBRE EL FORMATO DE LAS CIFRAS DE DINERO.
+He realizado varias pruebas con la presentacion de los numeros de cifras de dinero, cambiando el formato, poniendo
+
+El signo de pesos al comienzo y cada miles separado por puntos.
+pero ocurre un problema al realizar operaciones con los datos, que hay necesidad de quitarle el signo de pesos y el punto para poder hacer operaciones con ellos.
+
+Por lo que veo en este momento tendre que hacer una operacion de convertirlos para mostrarlos con el formato, convertirlos para hacer operaciones, y luego convertirlos para volverlos a mostrar.
+esta es un tema que tengo pendiente por resolver, cual es la mejor gestion que le voy a dar a estos datos.
+
+
+# --------
+
+continuando con el prouyecto ahora
+necesito ir alorando los calculos de sintesis de los datos del dia. vamos a ver como puedo organizar esto...
+
+
+
+### CONSULTAS
+
+#### Sumar la utilidad del tuno de YULY
+
+SELECT SUM(venta_utilidad) AS utilidad_yuli FROM VENTAS WHERE user_id = 2;
+
+
+ya he puesto un dato a la  tabla de vendedores y necesito ahora recargar el dato cuando se actualiza el listado....
+
+
+
 
