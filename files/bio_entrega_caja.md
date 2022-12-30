@@ -192,10 +192,10 @@ la ventaja que tengo ahora que los separé es eso, poder seguir el proceso de un
 
 ### HACE FALTA:
 
-- crear la relación entre tablas TURNOS y VENTAS
-- cambiar nombres propios de vendedores por palabra vendedor
-- Construir el modal de cerrar turno
-- Construir entrada a la aplicación indicando: responsable del turno, el horario del turno.
+[X] crear la relación entre tablas TURNOS y VENTAS
+[X] cambiar nombres propios de vendedores por palabra vendedor
+[] Construir el modal de cerrar turno
+[] Construir entrada a la aplicación indicando: responsable del turno, el horario del turno.
 
 Voy notando que este proyecto de entrega de caja diaria a futuro se va fusionar con el seguimiento de actividades del del turno, que ya hemos planeado con calidad, lo justifico en el sentido de que el usuario va a tener todas las funciones en la misma pantalla y no se va a saturar con muchas pantallas por llenar.
 
@@ -218,3 +218,35 @@ Ajustes para mostrar datos en pantalla principal
 	- se creó una función que agrupa otras funciones de actualzación de los datos en pantalla principal para los vendedores, esto permite resumir código. se agraga al final de los ciclos de edicion y borrado.
 
 
+# 2022-12-30_vie 14:18
+
+### PARA HACER
+[X] crear la relación entre tabla TURNOS y tabla VENTAS.
+[X] crear la relación entre tabla TURNOS y tabla USERS.
+[75%] construir la ventana de entrada a la aplicacion.
+
+
+
+
+
+### REALIZADO
+
+	- Se creó la relación de la tabla turnos y ventas por el campo turno_id.
+	- Se creó la relación entre la tabla TURNOS y USERS por medio de los campos TURNOS.turno.responsable y USERS.user_id.
+	- se creó la pantalla inicial inicio_home.html y el archivo comandos inicio.js
+	- se creó carpeta js, carpeta img, carpeta css y se ubican los archivos respectivos en cada una.
+
+
+### COMENTARIOS
+
+
+turnos de suricentro:
+
+
+1.- SEMANA 7:00am - 1:00pm
+2.- SEMANA 1:00pm 10:00pm
+
+3.- SÁBADO 7:00am - 2:00pm
+4.- SÁBADO 2:00pm - 10:00pm
+
+5.- DOMINGO 8:00am - 4:00pm
