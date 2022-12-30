@@ -38,8 +38,12 @@
           <tbody class="table-group-divider">
             <tr>
               <th scope="row">Num - Gestiones</th>
-              <td>-</td>
-              <td>-</td>
+              <td>
+                <p id="ventasYuly"></p>
+              </td>
+              <td>
+                  <p id="ventasLorena"></p>
+              </td>
               <td>-</td>
               <td>-</td>
             </tr>
@@ -62,30 +66,38 @@
         </table>
       </div>
       <div class="col-6">
-        <h1>CUADRO DE TOTALES</h1>
+        <h3>CUADRO DE TOTALES</h3>
                 <table class="table table-sm table-bordered table-hover border-primary">
           <thead>
             <tr>
-              <th scope="col">OPCIONES</th>
-              <th scope="col">VALORES</th>
+              <!-- <th scope="col">OPCIONES</th>
+              <th scope="col">VALORES</th> -->
             </tr>
           </thead>
           <tbody class="table-group-divider">
             <tr>
               <th scope="row">SALDO CAJA TURNO</th>
-              <td>4</td>
+              <td>
+                <p id="cajaTurno"></p>
+              </td>
             </tr>
             <tr>
               <th scope="row">TOTAL UTILIDAD</th>
-              <td>$6.000</td>
+              <td>
+                <p id="utilidadTurno"></p>
+              </td>
             </tr>
             <tr>
               <th scope="row">TOTAL A ENTREGAR</th>
-              <td>$6.000</td>
+              <td>
+                <p id="entregaTurno"></p>
+              </td>
             </tr>
             <tr>
               <th scope="row">DESCUADRE TURNO</th>
-              <td>$6.000</td>
+              <td>
+                <p id="descuadreTurno"></p>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -273,8 +285,8 @@
               <div class="col-md-9 ms-auto">
                 <input type="hidden" class="form-control" id="nptEdit-user_id">
                 <div class="selectUser">
-                  <input class="form-control" id="nptEdit-user_nombre">
-                  <!-- <select class="form-select" id="slct-user"></select> -->
+                  <!-- <input class="form-control" id="nptEdit-user_nombre"> -->
+                  <select class="form-select" id="slctEdit-user"></select>
                 </div>
               </div>
             </div>

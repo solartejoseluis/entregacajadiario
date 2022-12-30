@@ -92,8 +92,36 @@ case 'modificar_venta':
         break;
 
 
-case 'consultar_utilidad':
-    $sql = "SELECT SUM(venta_utilidad) AS utilidad_yuly FROM VENTAS WHERE user_id = 1";
+case 'consultar_utilidad_yuly':
+    $sql = "SELECT
+    SUM(venta_utilidad) AS utilidad_yuly,
+    COUNT(venta_utilidad) AS ventas_yuly
+     FROM VENTAS WHERE user_id = 1";
+    $stmt = $pdo -> prepare($sql);
+    $stmt -> execute();
+    $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($result);
+    break;
+
+
+case 'consultar_utilidad_lorena':
+    $sql = "SELECT
+    SUM(venta_utilidad)  AS utilidad_lorena,
+    COUNT(venta_utilidad) AS ventas_lorena
+    FROM VENTAS WHERE
+     user_id = 2";
+    $stmt = $pdo -> prepare($sql);
+    $stmt -> execute();
+    $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($result);
+    break;
+
+
+case 'consultar_utilidad_turno':
+    $sql = "SELECT
+    SUM(venta_utilidad)  AS utilidad_turno,
+    COUNT(venta_utilidad) AS ventas_turno
+    FROM VENTAS";
     $stmt = $pdo -> prepare($sql);
     $stmt -> execute();
     $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);

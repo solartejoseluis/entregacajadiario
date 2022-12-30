@@ -35,44 +35,30 @@
 
     // FIN DATATABLES
 
-  //CARGA CUADRO DE VENDEDORES
-    $(document).ready(function() {
-      $.ajax({
-        type: 'GET',
-        url: 'venta_data.php?accion=consultar_utilidad',
-        data: '',
-        success: function(datos) {
-        $('#utilidadYuly').html(datos[0].utilidad_yuly);
-        },
-        error: function() {
-          alert("Problema en consultarUtilidad");
-        }
-      });
+//-----------------------------
+// CARGAS DE LA PANTALLA PRINCIPAL
+//-----------------------------
+
+
+// CARGA LA FECHA ACTUAL y CUADRO PRINCIPAL DE PAGINA
+$(document).ready(function() {
+let hoy = actualDate();
+document.getElementById('hoy').innerHTML = hoy;
+cargarDatosUtilidadYuly();
+cargarDatosUtilidadLorena();
+cargarDatosUtilidadTurno();
     });
 
-
-    //CARGA EL SELECT VENDEDORES
-    $(document).ready(function() {
-        $.ajax({
-        type: "POST",
-        url: "getUser.php",
-        success: function(response) {
-          $('.selectUser select').html(response).fadeIn();
-        }
-      });
-    });
-
-    //TOMA EL VALOR DEL SELECT Y PONERLO EN INPUT
-    $("#slct-user").change(function() {
-      $('#npt-user_id').val($(this).val());
-    });
-
-    // CARGA LA FECHA ACTUAL
-    $(document).ready(function() {
-     let hoy = actualDate();
-     document.getElementById('hoy').innerHTML = hoy;
-    });
-
+//MOSTRAR LA FECHA ACTUAL
+function actualDate(){
+let today = new Date();
+let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+//options.timeZone = 'UTC';
+//options.timeZoneName = 'short';
+let now = today.toLocaleString('es-CO', options);
+//console.log(now);
+return now;
+}
 
 
 //-----------------------------
@@ -134,16 +120,12 @@
         $("#mdlVentas").modal('hide');
         let registro = recolectarDatosFormularioNuevo();
         guardarRegistro(registro);
+        cargarDatosUtilidadYuly();
+        cargarDatosUtilidadLorena();
+        cargarDatosUtilidadTurno();
         //alert("ok Validado");
       }
     });
-
-
-function cargarDatosUtilidad{
-
-};
-
-
 
 
     function recolectarDatosFormularioNuevo() {
@@ -197,6 +179,9 @@ function cargarDatosUtilidad{
         $('#nptEdit-venta_valor_venta').val(datos[0].venta_valor_venta);
         $('#nptEdit-user_nombre').val(datos[0].user_nombre);
         $('#nptEdit-user_id').val(datos[0].user_id);
+
+        $('#slctEdit-user').val(datos[0].user_id);
+
         $('#nptEdit-venta_utilidad').val(datos[0].venta_utilidad);
         $("#mdlEditVentas").modal('show');
         },
@@ -276,16 +261,24 @@ function cargarDatosUtilidad{
 // OPERACIONES EN EL MODAL
 //------------------------
 
-//MOSTRAR LA FECHA ACTUAL
-function actualDate(){
-let today = new Date();
-let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-//options.timeZone = 'UTC';
-//options.timeZoneName = 'short';
-let now = today.toLocaleString('es-CO', options);
-//console.log(now);
-return now;
-}
+  //CARGA EL SELECT VENDEDORES
+    $(document).ready(function() {
+        $.ajax({
+        type: "POST",
+        url: "getUser.php",
+        success: function(response) {
+          $('.selectUser select').html(response).fadeIn();
+        }
+      });
+    });
+
+    //TOMA EL VALOR DEL SELECT Y PONERLO EN INPUT
+    $("#slct-user").change(function() {
+      $('#npt-user_id').val($(this).val());
+    });
+
+
+
 
   //CALCULAR UTILIDAD EN EL MODAL
   $('#npt-venta_valor_venta').focusout( function calculoUtilidad () {
@@ -327,6 +320,63 @@ $('input.utilidad').on('change', function() {
     minimumFractionDigits: 0
   });
 });
+
+
+//----------------------
+// CALCULOS DE PANTALLA PRINCIPAL
+//----------------------
+
+// CARGA DATOS VENDEDOR 1
+ function cargarDatosUtilidadYuly(){
+      $.ajax({
+        type: 'GET',
+        url: 'venta_data.php?accion=consultar_utilidad_yuly',
+        data: '',
+        success: function(datos) {
+        $('#utilidadYuly').html(datos[0].utilidad_yuly);
+        $('#ventasYuly').html(datos[0].ventas_yuly);
+        },
+        error: function() {
+          alert("Problema en consultarUtilidadYuli");
+        }
+      });
+};
+
+
+
+// CARGA DATOS VENDEDOR 2
+ function cargarDatosUtilidadLorena(){
+      $.ajax({
+        type: 'GET',
+        url: 'venta_data.php?accion=consultar_utilidad_lorena',
+        data: '',
+        success: function(datos) {
+        $('#utilidadLorena').html(datos[0].utilidad_lorena);
+        $('#ventasLorena').html(datos[0].ventas_lorena);
+        },
+        error: function() {
+          alert("Problema en consultarUtilidadlorena");
+        }
+      });
+};
+
+
+// CARGA DATOS UTILIDAD TURNO
+ function cargarDatosUtilidadTurno(){
+      $.ajax({
+        type: 'GET',
+        url: 'venta_data.php?accion=consultar_utilidad_turno',
+        data: '',
+        success: function(datos) {
+        $('#utilidadTurno').html(datos[0].utilidad_turno);
+        $('#ventasTurno').html(datos[0].ventas_turno);
+        },
+        error: function() {
+          alert("Problema en consultarUtilidadTurno");
+        }
+      });
+};
+
 
 
   });

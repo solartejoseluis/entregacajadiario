@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Dec 24, 2022 at 05:50 AM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Servidor: localhost
+-- Tiempo de generación: 30-12-2022 a las 04:35:20
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,30 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `CAJA_DIARIA`
+-- Base de datos: `CAJA_DIARIA`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `USERS`
+-- Estructura de tabla para la tabla `TURNOS`
+--
+
+CREATE TABLE `TURNOS` (
+  `turno_id` int(5) NOT NULL,
+  `turno_fecha` date NOT NULL,
+  `turno_horario` varchar(50) NOT NULL,
+  `turno_responsable` int(5) NOT NULL COMMENT 'user_id',
+  `turno_saldo_caja` int(10) DEFAULT NULL,
+  `turno_total_utilidad` int(10) DEFAULT NULL,
+  `turno_total_a entregar` int(10) DEFAULT NULL,
+  `turno_descuadre` int(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `USERS`
 --
 
 CREATE TABLE `USERS` (
@@ -34,7 +51,7 @@ CREATE TABLE `USERS` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `USERS`
+-- Volcado de datos para la tabla `USERS`
 --
 
 INSERT INTO `USERS` (`user_id`, `user_nombre`, `user_apellido`) VALUES
@@ -44,7 +61,7 @@ INSERT INTO `USERS` (`user_id`, `user_nombre`, `user_apellido`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `VENTAS`
+-- Estructura de tabla para la tabla `VENTAS`
 --
 
 CREATE TABLE `VENTAS` (
@@ -60,53 +77,64 @@ CREATE TABLE `VENTAS` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `VENTAS`
+-- Volcado de datos para la tabla `VENTAS`
 --
 
 INSERT INTO `VENTAS` (`venta_id`, `venta_fecha`, `venta_nombre_producto`, `venta_nombre_proveedor`, `venta_costo_producto`, `venta_valor_venta`, `venta_utilidad`, `user_id`, `turno_id`) VALUES
-(1, '2022-12-22', 'producto 01', 'dromidrogas', 4000, 4500, 500, 2, 1),
-(2, '2022-12-22', 'producto 02', 'freddy', 16000, 20000, 4000, 2, 1),
-(3, '2022-12-22', 'producto 03', 'freddy', 20000, 30000, 10000, 2, 1);
+(6, NULL, 'MEXANA TALCO', 'FREDDY', 4500, 5000, 600, 2, NULL),
+(10, NULL, 'producto', 'jhgghgj', 7000, 9000, 2000, 1, NULL),
+(11, NULL, 'jhkjh', 'jhkjh', 3000, 5000, 2000, 1, NULL),
+(12, NULL, 'jklkljl', 'kjkjl', 2000, 3000, 1000, 1, NULL),
+(13, NULL, 'PRODUCTO', 'AUGUSTO', 2000, 3000, 1000, 1, NULL),
+(14, NULL, 'KLJKLJKL', 'KJKLJKLJ', 3000, 5000, 2000, 2, NULL),
+(15, NULL, 'jkjkjk', 'llll', 4000, 5000, 1000, 2, NULL),
+(16, NULL, 'TERRAMICINA', 'JAVIER', 2000, 3000, 1000, 1, NULL),
+(17, NULL, 'CUALQUIER COSAS', 'CUALQUIERA', 2000, 4000, 2000, 2, NULL),
+(20, NULL, 'OO', 'OO', 56000, 66000, 10000, 1, NULL),
+(21, NULL, 'Q', 'q', 50000, 70000, 20000, 1, NULL),
+(22, NULL, 'KKK', 'KKK', 10000, 20000, 10000, 2, NULL),
+(23, NULL, 'LL', 'LL', 3000, 5000, 2000, 2, NULL),
+(24, NULL, 'XX', 'XX', 3000, 7000, 4000, 1, NULL);
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `USERS`
+-- Indices de la tabla `USERS`
 --
 ALTER TABLE `USERS`
   ADD PRIMARY KEY (`user_id`);
 
 --
--- Indexes for table `VENTAS`
+-- Indices de la tabla `VENTAS`
 --
 ALTER TABLE `VENTAS`
   ADD PRIMARY KEY (`venta_id`),
   ADD KEY `user_id` (`user_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `USERS`
+-- AUTO_INCREMENT de la tabla `USERS`
 --
 ALTER TABLE `USERS`
   MODIFY `user_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `VENTAS`
+-- AUTO_INCREMENT de la tabla `VENTAS`
 --
 ALTER TABLE `VENTAS`
-  MODIFY `venta_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `venta_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `VENTAS`
+-- Filtros para la tabla `VENTAS`
 --
 ALTER TABLE `VENTAS`
   ADD CONSTRAINT `VENTAS_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `USERS` (`user_id`);
