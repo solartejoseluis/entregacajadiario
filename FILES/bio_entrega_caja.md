@@ -161,8 +161,6 @@ esta es un tema que tengo pendiente por resolver, cual es la mejor gestion que l
 continuando con el prouyecto ahora
 necesito ir alorando los calculos de sintesis de los datos del dia. vamos a ver como puedo organizar esto...
 
-
-
 ### CONSULTAS
 
 #### Sumar la utilidad del tuno de YULY
@@ -173,34 +171,50 @@ SELECT SUM(venta_utilidad) AS utilidad_yuly FROM VENTAS WHERE user_id = 2;
 ya he puesto un dato a la  tabla de vendedores y necesito ahora recargar el dato cuando se actualiza el listado....
 
 
-
-22:03
-
+### 22:03
 resumen de los ajustes realizados hoy:
-
-
 - realizada sumatoria de utilidad por vendedores
 - realizadad sumatoria total de utilidad
 - creacion de tabla TURNOS
 
 
 la tabla turnos hace falta crearle la relacion con la tabla de ventas
-en esta tabla coloqué el campo de responsable de turno y en comentarios especifique que tomara los datos de la tabla  USERS esto me da la idea para no usar u nombre de campo que no se adecua a los datos.
+en esta tabla coloqu el campo de responsable de turno y en comentarios especifique que tomara los datos de la tabla  USERS esto me da la idea para no usar u nombre de campo que no se adecua a los datos.
  esto me estaba pasando con los datos de los vendeores que son los mismos user, pero en este contexto asumen otro rokl, deberian llamarse vendedores. esto es un cambio propuesto.
 
 las consultas para los datos de sumatoria de vendedores los puse con los nombres propios de las dos vendedoras, los voy a cambiar a vendedor01, vendedor02.
 
-Definicion de la lógica para almacenar los datos del saldo de caja principal del turno y ello daria para el calculo del total a antregar, y tambien esta el campo  de descuadre del turno.
+Definición de la lógica para almacenar los datos del saldo de caja principal del turno y ello daria para el calculo del total a antregar, y tambien esta el campo  de descuadre del turno.
 estos datos se van a almacenar en la tabla de turnos
 
-he hecho una correccion al select de edicion, queria que se mostrara el select con los datos del nombre vendedor, la solucion fue solo pasarle el dato que recogi de la consulta al select y listo mostro el dato. esto me dejo pensando en que puedo entonces usar el mismo formulario de agregar nuevo, tambien para editar, y asi me ahorraria unas lineas de codigo, lo que tendria que hacer es colocar algunas funciones que cambien el texto del titulo, y los botones. aunque el codigo quedaria mezclado...
-la ventaja que tengo ahora que los separe es eso, poder seguir el proceso de una forma mas clara. vamos a ver como evoluciona esto.
+He hecho una corrección al select del  modal de Edición, el problema que tenia era que no me mostraba los datos del nombre del vendedor solo podir a mostrar el codigo del vendedor, quería que se mostrara el select con los datos del nombre vendedor, la solución fue solo pasarle el dato que recogi de la consulta al select y mostró el dato: nombre del vendedor. esto me dejo pensando en que puedo entonces usar el mismo Modal de VENTA NUEVA tambien para editar, y asi me ahorraria unas líneas de código, lo que tendría que hacer es colocar algunas funciones que cambien el texto del titulo, y los botones. Aunque  veo que asi el codigo quedaria mezclado...
+la ventaja que tengo ahora que los separé es eso, poder seguir el proceso de una forma mas clara. vamos a ver como evoluciona esto.
 
-hace falta:
+### HACE FALTA:
 
-Constrtuir el modal de cerrar turno
-construir la ventana de entrada a la aplicacion para indicar el responsable del turno, el horario del turno,
+- crear la relación entre tablas TURNOS y VENTAS
+- cambiar nombres propios de vendedores por palabra vendedor
+- Construir el modal de cerrar turno
+- Construir entrada a la aplicación indicando: responsable del turno, el horario del turno.
 
-voy notando que esta hoja a futuro se va  fusionar con la hoja del turno, que ya hemos planeado con calidad en la que vienen las actividades.
+Voy notando que este proyecto de entrega de caja diaria a futuro se va fusionar con el seguimiento de actividades del del turno, que ya hemos planeado con calidad, lo justifico en el sentido de que el usuario va a tener todas las funciones en la misma pantalla y no se va a saturar con muchas pantallas por llenar.
 
-hace falta el modulo de observaion del rol administrador en el que hay mas bien estadisticas del comportamiento y calculos con los datos que se van recogiedno
+Hace falta el módulo de observación del rol administrador en el que habrán estadísticas del comportamiento y cálculos con los datos historicos consignados.
+
+voy notando que si tuviera un diagrama de casos de uso a esta momento estaria bnastante complejo, pero nos podria ayudar a ver y a agrupar la funcionalidades que necesita el proyecto.
+
+
+## 2022-12-30
+
+11:27
+## REALIZADO
+Ajustes para mostrar datos en pantalla principal
+
+	- Se cambió "nombres propios" de vendedores por palabra vendedor en el código.
+	- Se reorganizó y agrupó el código adicionando comentarios a manera de etiquetas de inicio y fin de las secciones.
+	- Se creó funciones y procesos de código para los vendedores 3 y 4
+	- se agregó 2 nuevos usuarios a tabla USERS.
+	- se agregó una función en el modal edición que copia el dato del select al input oculto y permite guardar dato actualizado.
+	- se creó una función que agrupa otras funciones de actualzación de los datos en pantalla principal para los vendedores, esto permite resumir código. se agraga al final de los ciclos de edicion y borrado.
+
+

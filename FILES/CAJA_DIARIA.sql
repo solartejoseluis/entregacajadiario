@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 30-12-2022 a las 04:35:20
+-- Tiempo de generación: 30-12-2022 a las 17:35:14
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -56,7 +56,9 @@ CREATE TABLE `USERS` (
 
 INSERT INTO `USERS` (`user_id`, `user_nombre`, `user_apellido`) VALUES
 (1, 'YULY VANESSA', 'DIAZ'),
-(2, 'LORENA', 'BUENO');
+(2, 'LORENA', 'BUENO'),
+(3, 'KAROL', 'PULIDO'),
+(4, 'MARINO', 'PEREZ');
 
 -- --------------------------------------------------------
 
@@ -81,20 +83,19 @@ CREATE TABLE `VENTAS` (
 --
 
 INSERT INTO `VENTAS` (`venta_id`, `venta_fecha`, `venta_nombre_producto`, `venta_nombre_proveedor`, `venta_costo_producto`, `venta_valor_venta`, `venta_utilidad`, `user_id`, `turno_id`) VALUES
-(6, NULL, 'MEXANA TALCO', 'FREDDY', 4500, 5000, 600, 2, NULL),
-(10, NULL, 'producto', 'jhgghgj', 7000, 9000, 2000, 1, NULL),
 (11, NULL, 'jhkjh', 'jhkjh', 3000, 5000, 2000, 1, NULL),
 (12, NULL, 'jklkljl', 'kjkjl', 2000, 3000, 1000, 1, NULL),
-(13, NULL, 'PRODUCTO', 'AUGUSTO', 2000, 3000, 1000, 1, NULL),
 (14, NULL, 'KLJKLJKL', 'KJKLJKLJ', 3000, 5000, 2000, 2, NULL),
 (15, NULL, 'jkjkjk', 'llll', 4000, 5000, 1000, 2, NULL),
-(16, NULL, 'TERRAMICINA', 'JAVIER', 2000, 3000, 1000, 1, NULL),
-(17, NULL, 'CUALQUIER COSAS', 'CUALQUIERA', 2000, 4000, 2000, 2, NULL),
-(20, NULL, 'OO', 'OO', 56000, 66000, 10000, 1, NULL),
+(17, NULL, 'CAMBIO', 'PERSONA', 2000, 10000, 2000, 4, NULL),
+(20, NULL, 'OO', 'OO', 56000, 66000, 10000, 4, NULL),
 (21, NULL, 'Q', 'q', 50000, 70000, 20000, 1, NULL),
 (22, NULL, 'KKK', 'KKK', 10000, 20000, 10000, 2, NULL),
 (23, NULL, 'LL', 'LL', 3000, 5000, 2000, 2, NULL),
-(24, NULL, 'XX', 'XX', 3000, 7000, 4000, 1, NULL);
+(24, NULL, 'XX', 'XX', 3000, 7000, 4000, 1, NULL),
+(25, NULL, 'C', 'C', 2000, 3000, 1000, 3, NULL),
+(26, NULL, 'B', 'B', 5000, 6000, 1000, 4, NULL),
+(27, NULL, 'N', 'N', 6000, 10000, 4000, 3, NULL);
 
 --
 -- Índices para tablas volcadas
@@ -121,13 +122,13 @@ ALTER TABLE `VENTAS`
 -- AUTO_INCREMENT de la tabla `USERS`
 --
 ALTER TABLE `USERS`
-  MODIFY `user_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `VENTAS`
 --
 ALTER TABLE `VENTAS`
-  MODIFY `venta_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `venta_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- Restricciones para tablas volcadas
