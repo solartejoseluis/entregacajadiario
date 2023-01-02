@@ -1,83 +1,102 @@
+// CARGA LA FECHA ACTUAL
+$(document).ready(function() {
+    let hoy = actualDate();
+    document.getElementById('hoy').innerHTML = hoy;
+    let fecha_hoy = new Date();
+    //fecha_hoy.toISOString().split('T')[0];
+    $('#npt_fecha').val(fecha_hoy.toISOString().split('T')[0]);
+});
+
+function actualDate() {
+    let today = new Date();
+    let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    //options.timeZone = 'UTC';
+    //options.timeZoneName = 'short';
+    let now = today.toLocaleString('es-CO', options);
+    //console.log(now);
+    return now;
+}
 
 
-     // CARGA LA FECHA ACTUAL
-     $(document).ready(function() {
-         let hoy = actualDate();
-         document.getElementById('hoy').innerHTML = hoy;
-     });
-
-     function actualDate() {
-         let today = new Date();
-         let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-         //options.timeZone = 'UTC';
-         //options.timeZoneName = 'short';
-         let now = today.toLocaleString('es-CO', options);
-         //console.log(now);
-         return now;
-     }
+//CARGA EL SELECT RESPONSABLE
+$(document).ready(function() {
+    $.ajax({
+        type: "POST",
+        url: "getUser.php",
+        success: function(response) {
+            $('.selectResponsable select').html(response).fadeIn();
+        }
+    });
+});
 
 
-     //CARGA EL SELECT VENDEDORES
-     $(document).ready(function() {
-         $.ajax({
-             type: "POST",
-             url: "getUser.php",
-             success: function(response) {
-                 $('.selectUser select').html(response).fadeIn();
-             }
-         });
-     });
+//CARGA EL SELECT JORNADAS
+$(document).ready(function() {
+    $.ajax({
+        type: "POST",
+        url: "getJornada.php",
+        success: function(response) {
+            $('.selectJornada select').html(response).fadeIn();
+        }
+    });
+});
 
 
-     $('#btn-Add').click(function() {
-         limpiarFormulario();
-         $("#mdlVentas").modal('show');
-     });
-
-     function limpiarFormulario() {
-         $('#npt-venta_id').val('');
-         $('#npt-venta_nombre_producto').val('');
-         $('#npt-venta_nombre_proveedor').val('');
-         $('#npt-venta_costo_producto').val('');
-         $('#npt-venta_valor_venta').val('');
-         $('#npt-user_id').val('');
-         $('#slct-user').val('0');
-         $('#npt-venta_utilidad').val('');
-     }
+//Pasa valor del select al input
+$("#slct_responsable").change(function() {
+    $('#npt_responsable_id').val($(this).val());
+});
+$("#slct_jornada").change(function() {
+    $('#npt_jornada_id').val($(this).val());
+});
 
 
 
-     //TOMA EL VALOR DEL SELECT Y PONERLO EN INPUT
-     $("#slct-user").change(function() {
-         $('#npt-user_id').val($(this).val());
-     });
+$('#btn_ingreso').click(function() {
+    // recoger los datos de los inputs
+let registro = recolectarDatosInicio();
+guardarRegistroInicio(registro);
+abrirVentas();
+alert('final');
+});
+
+function recolectarDatosInicio(){
+    let registro = {
+        fecha_actual: $('#npt_fecha').val(),
+        jornada_id: $('#npt_jornada_id').val(),
+        responsable_id: $('#npt_responsable_id').val(),
+    };
+    return registro;
+};
 
 
-     function recolectarDatosFormularioNuevo() {
-         let registro = {
-             venta_id: $('#npt-venta_id').val(),
-             venta_nombre_producto: $('#npt-venta_nombre_producto').val(),
-             venta_nombre_proveedor: $('#npt-venta_nombre_proveedor').val(),
-             venta_costo_producto: $('#npt-venta_costo_producto').val(),
-             venta_valor_venta: $('#npt-venta_valor_venta').val(),
-             user_nombre: $('#npt-user_nombre').val(),
-             user_id: $('#npt-user_id').val(),
-             venta_utilidad: $('#npt-venta_utilidad').val(),
-         };
-         return registro;
-     }
+// guardar los datos en la tabla TURNOS
+function guardarRegistroInicio(registro) {
+    $.ajax({
+        type: 'POST',
+        url: 'venta_data.php?accion=guardar_inicio',
+        data: registro,
+        success: function(msg) {
+            //abrirVentas();
 
-     function guardarRegistro(registro) {
-         $.ajax({
-             type: 'POST',
-             url: 'venta_data.php?accion=guardar_venta',
-             data: registro,
-             success: function(msg) {
-                 listadoVentas.ajax.reload();
-             },
-             error: function() {
-                 alert("problema en: guardarRegistro");
-             }
-         });
-     }
+        },
+        error: function() {
+            alert("problema en: guardarRegistroInicio");
+        }
+    });
+}
 
+
+function abrirVentas() {
+    //window.open("venta_home.html", "_blank");
+    window.location.href="http://localhost/entregacajadiario/venta_home.html";
+};
+
+
+
+function limpiarInicio() {
+    $('#npt_responsable_id').val('');
+    $('#slct_responsable').val('0');
+    $('#npt_jornada_id').val('');
+    $('#slct_jornada').val('0');
+};

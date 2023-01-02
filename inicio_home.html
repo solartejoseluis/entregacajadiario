@@ -17,33 +17,34 @@
       <img class="mb-4" src="img/logotipo_suricentro.png" alt="">
       <h1 class="h3 mb-3 fw-normal">Cuadre de Caja Diario</h1>
         <h3 id="hoy"></h3>
+        <input type="hidden" class="form-control" id="npt_fecha">
       <!-- select responsable de turno -->
       <div class="row mb-3">
         <div class="col-md-3 ms-auto">
-          <label for="slct-user" class="col-form-label">Responsable:</label>
+          <label for="slct_responsable" class="col-form-label">Responsable:</label>
         </div>
         <div class="col-md-9 ms-auto">
-          <input type="hidden" class="form-control" id="npt-user_id">
-          <div class="selectUser">
-            <select class="form-select" id="slct-user"></select>
+          <input type="hidden" class="form-control" id="npt_responsable_id">
+          <div class="selectResponsable">
+            <select class="form-select" id="slct_responsable"></select>
           </div>
         </div>
       </div>
-      <!-- select turno -->
+      <!-- select jornada -->
       <div class="row mb-3">
         <div class="col-md-3 ms-auto">
-          <label for="slct-user" class="col-form-label">Jornada:</label>
+          <label for="slct_jornada" class="col-form-label">Jornada:</label>
         </div>
         <div class="col-md-9 ms-auto">
-          <input type="hidden" class="form-control" id="npt-user_id">
-          <div class="selectUser">
-            <select class="form-select" id="slct-user"></select>
+          <input type="hidden" class="form-control" id="npt_jornada_id">
+          <div class="selectJornada">
+            <select class="form-select" id="slct_jornada"></select>
           </div>
         </div>
       </div>
       <!-- boton enviar -->
       <div class="row mb-3">
-        <button class="w-100 btn btn-lg btn-success" type="submit">Ingresar</button>
+        <button class="w-100 btn btn-lg btn-success" id="btn_ingreso">Ingresar</button>
       </div>
     </form>
   </main>

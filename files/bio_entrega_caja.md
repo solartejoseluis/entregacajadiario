@@ -250,3 +250,10 @@ turnos de suricentro:
 4.- SÁBADO 2:00pm - 10:00pm
 
 5.- DOMINGO 8:00am - 4:00pm
+
+
+
+
+## 2022-12-31 VIE 23:38
+Cambié el monbre de la base de datos a CONTROLCAJA
+

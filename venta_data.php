@@ -153,6 +153,23 @@ case 'consultar_utilidad_turno':
     break;
 
 
+case 'guardar_inicio':
+    $sql = "INSERT INTO TURNOS(
+        turno_fecha,
+        turno_jornada,
+        turno_responsable
+        )
+    VALUES (
+        '$_POST[fecha_actual]',
+        $_POST[jornada_id],
+        $_POST[responsable_id]
+    )";
+    $response = $pdo->exec($sql);
+    echo json_encode($response);
+    break;
 
 }
+
+
+
 ?>

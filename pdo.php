@@ -1,7 +1,7 @@
 <?php
 //creado el  2022-12-22
 // definición de variables
-$dsn="mysql:host=localhost;port=3306;dbname=CAJA_DIARIA";
+$dsn="mysql:host=localhost;port=3306;dbname=CONTROLCAJA";
 $username="kiron";
 $password="123456";
 $options= array(
