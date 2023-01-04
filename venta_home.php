@@ -11,7 +11,7 @@
   <!-- CDN datatables 1.12.1 css -->
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/zf/dt-1.12.1/datatables.min.css" />
   <!-- select2 css-->
-  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> -->
     <!-- estilos de la pagina -->
   <!-- <link href="css/signin.css" rel="stylesheet"> -->
 </head>
@@ -61,24 +61,28 @@
           <tbody class="table-group-divider">
             <tr>
               <th scope="row">SALDO CAJA TURNO</th>
-              <td><p id="cajaTurno"></p></td>
+              <td><p id="p_saldo_caja_principal"></p></td>
             </tr>
             <tr>
               <th scope="row">TOTAL UTILIDAD</th>
-              <td><p id="utilidadTurno"></p></td>
+              <td><p id="p_utilidad_turno"></p></td>
+            </tr>
+            <tr>
+              <th scope="row">NUMERO DE VENTAS</th>
+              <td><p id="p_turno_numero_ventas"></p></td>
             </tr>
             <tr>
               <th scope="row">TOTAL A ENTREGAR</th>
-              <td><p id="entregaTurno"></p></td>
+              <td><p id="p_total_entrega"></p></td>
             </tr>
             <tr>
               <th scope="row">DESCUADRE TURNO</th>
-              <td><p id="descuadreTurno"></p></td>
+              <td><p id="p_descuadre"></p></td>
             </tr>
           </tbody>
         </table>
-        <button type="button" class="btn btn-primary" id="btn-Add" data-bs-toggle="modal">NUEVA VENTA <i class="fa-solid fa-circle-plus"></i></button>
-        <button type="button" class="btn btn-danger" id="btn-Final" data-bs-toggle="modal">CERRAR TURNO <i class="fa-solid fa-circle-plus"></i></button>
+        <button type="button" class="btn btn-primary" id="btn_add" data-bs-toggle="modal">NUEVA VENTA <i class="fa-solid fa-circle-plus"></i></button>
+        <button type="button" class="btn btn-danger" id="btn_cerrar_turno" data-bs-toggle="modal">CERRAR TURNO <i class="fa-solid fa-circle-plus"></i></button>
       </div>
     </div>
 
@@ -108,68 +112,6 @@
   </div>
 
   </div>
-
-  <!-- -------------------------->
-  <!-- INICIA MODAL INGRESO-->
-  <!-- ------------------------->
-  <div class="modal fade" data-bs-backdrop="static" tabindex="-1" id="mdlIngreso">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content text-center">
-        <div class="modal-body">
-          <form id="frmIngreso">
-
-
-      <!-- imagen -->
-      <img class="mb-4" src="img/logotipo_suricentro.png" alt="">
-      <h1 class="h3 mb-3 fw-normal">Cuadre de Caja Diario</h1>
-      <!-- fecha -->
-        <h3 id="hoy"></h3>
-        <input type="hidden" class="form-control" id="npt_fecha">
-      <!-- select responsable de turno -->
-      <div class="row mb-3">
-        <div class="col-md-3 ms-auto">
-          <label for="slct_responsable" class="col-form-label">Responsable:</label>
-        </div>
-        <div class="col-md-9 ms-auto">
-          <input type="hidden" class="form-control" id="npt_responsable_id">
-          <div class="selectResponsable">
-            <select class="form-select" id="slct_responsable"></select>
-          </div>
-        </div>
-      </div>
-      <!-- select jornada -->
-      <div class="row mb-3">
-        <div class="col-md-3 ms-auto">
-          <label for="slct_jornada" class="col-form-label">Jornada:</label>
-        </div>
-        <div class="col-md-9 ms-auto">
-          <input type="hidden" class="form-control" id="npt_jornada_id">
-          <div class="selectJornada">
-            <select class="form-select" id="slct_jornada"></select>
-          </div>
-        </div>
-      </div>
-      <!-- boton enviar -->
-      <div class="row mb-3">
-        <button class="w-100 btn btn-lg btn-success" id="btn_ingreso">Ingresar</button>
-      </div>
-
-          </form>
-          <!-- FIN FORM DEL MODAL -->
-        </div>
-        <!-- FOOTER DEL MODAL -->
-<!--         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary" id="btnConfirmAdd">Confirma Agregar</button>
-        </div> -->
-      </div>
-    </div>
-  </div>
-  <!-- ********************* -->
-  <!-- FIN MODAL INGRESO -->
-  <!-- ********************* -->
-
-
-
 
   <!-- -------------------------->
   <!-- INICIA MODAL NUEVA VENTA-->
@@ -249,9 +191,9 @@
         </div>
         <!-- FOOTER DEL MODAL -->
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary" id="btnConfirmAdd">Confirma Agregar</button>
+          <button type="submit" class="btn btn-primary" id="btn_confirm_add">Confirma Agregar</button>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <!-- <button type="submit" class="btn btn-primary" id="btnConfirmEdit">Confirma Modificar</button> -->
+          <!-- <button type="submit" class="btn btn-primary" id="btn_confirm_edit">Confirma Modificar</button> -->
         </div>
       </div>
     </div>
@@ -344,7 +286,7 @@
           </form>
         </div> <!-- final modal body editar-->
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary" id="btnConfirmEdit">Confirma Modificar</button>
+          <button type="submit" class="btn btn-primary" id="btn_confirm_edit">Confirma Modificar</button>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
         </div>
       </div>
@@ -354,7 +296,74 @@
   <!-- FIN MODAL EDITAR REGISTRO -->
   <!-- ************************* -->
 
+  <!-- -------------------------->
+  <!-- INICIA MODAL CERRAR TURNO-->
+  <!-- ------------------------->
+  <div class="modal fade" data-bs-backdrop="static"  tabindex="-1" id="mdl_cerrar_turno">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">CERRAR TURNO</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="frmCerrarTurno">
+            <!-- SALDO DE CAJA PRINCIPAL -->
+            <div class="row mb-3">
+              <div class="col-md-3 ms-auto">
+                <label for="npt_turno_saldo_caja" class="col-form-label">Saldo De Caja Principal:</label>
+              </div>
+              <div class="col-md-9 ms-auto">
+                <input type="text" class="form-control" id="npt_turno_saldo_caja" placeholder="Digite saldo de caja">
+              </div>
+            </div>
 
+            <!--  TOTAL UTILIDAD -->
+            <div class="row mb-3">
+              <div class="col-md-3 ms-auto">
+                <label for="npt_turno_total_utilidad" class="col-form-label">Total Utilidad del Turno:</label>
+              </div>
+              <div class="col-md-9 ms-auto">
+                <input type="text" class="form-control" id="npt_turno_total_utilidad" disabled>
+              </div>
+            </div>
+            <!--  TOTAL ENTREGA -->
+            <div class="row mb-3">
+              <div class="col-md-3 ms-auto">
+                <label for="npt_turno_total_entrega" class="col-form-label">Total Entrega:</label>
+              </div>
+              <div class="col-md-9 ms-auto">
+                <input type="text" class="form-control" id="npt_turno_total_entrega" disabled>
+              </div>
+            </div>
+
+            <!-- DESCUADRE -->
+            <div class="row mb-3">
+              <div class="col-md-3 ms-auto">
+                <label for="npt_turno_descuadre" class="col-form-label">Valor de Descuadre:</label>
+              </div>
+              <div class="col-md-9 ms-auto">
+                <input type="text" class="form-control" id="npt_turno_descuadre" placeholder="Digite valor descuadre">
+              </div>
+            </div>
+
+
+
+          </form>
+          <!-- FIN FORM DEL MODAL -->
+        </div>
+        <!-- FOOTER DEL MODAL -->
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-danger" id="btn_confirm_cerrar_turno">Confirma Cerrar Turno</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <!-- <button type="submit" class="btn btn-primary" id="btn_confirm_edit">Confirma Modificar</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ********************* -->
+  <!-- FIN MODAL CERRAR TURNO -->
+  <!-- ********************* -->
 
   <!-- ------- -->
   <!-- SCRIPTS -->
@@ -367,10 +376,10 @@
   <!-- CDN datatables 1.12.1 js -->
   <script src="https://cdn.datatables.net/v/zf/dt-1.12.1/datatables.min.js"></script>
   <!-- Font Awesome -->
-  <script src="https://kit.fontawesome.com/382e1ebb20.js" crossorigin="anonymous"></script>
+  <!-- <script src="https://kit.fontawesome.com/382e1ebb20.js" crossorigin="anonymous"></script> -->
   <!-- select2 js-->
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/i18n/es.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/i18n/es.js"></script> -->
   <!-- scripts de la aplicacion -->
   <script src="js/scripts.js"></script>
 </body>

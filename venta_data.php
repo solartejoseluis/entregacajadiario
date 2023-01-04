@@ -33,8 +33,7 @@ case 'guardar_venta':
         venta_valor_venta,
         user_id,
         venta_utilidad
-        )
-    VALUES (
+      )VALUES (
         '$_POST[venta_nombre_producto]',
         '$_POST[venta_nombre_proveedor]',
         $_POST[venta_costo_producto],
@@ -168,6 +167,24 @@ case 'guardar_inicio':
     $response = $pdo->exec($sql);
     echo json_encode($response);
     break;
+
+
+case 'guardar_cierre_turno':
+  $sql = "INSERT INTO TURNOS(
+    turno_saldo_caja,
+    turno_total_utilidad,
+    turno_total_entrega,
+    turno_descuadre
+  )VALUES(
+    $_POST[npt_turno_saldo_caja],
+    $_POST[npt_turno_total_utilidad],
+    $_POST[npt_turno_total_entrega],
+    $_POST[npt_turno_descuadre],
+  )";
+  $response = $pdo->exec($sql);
+  echo json_encode($response);
+  break;
+
 
 }
 
