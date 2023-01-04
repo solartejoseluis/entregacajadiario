@@ -1,11 +1,4 @@
 
-$(document).ready(function() {
-$("#mdlIngreso").modal('show');
-let ingreso = 0;
-});
-
-
-if (ingreso==1){
  //-----------------------
  // INICIA DATATABLES
  //-----------------------
@@ -447,7 +440,4 @@ if (ingreso==1){
      //*************************
      // FIN OPERACIONES EN EL MODAL
      //*************************
-
  });
-
-};

@@ -16,19 +16,20 @@
   <body class="text-center">
     
 <main class="form-signin w-100 m-auto">
-  <form>
+  <form name="frm_login" method="POST" action="login.php">
     <img class="mb-4" src="img/logotipo_suricentro.png" alt="">
     <h1 class="h3 mb-3 fw-normal">Inicio De Sesión</h1>
-
+<!-- usuario -->
     <div class="form-floating">
-      <input type="text" class="form-control" id="npt_user" placeholder="Digite Usuario">
+      <input type="text" class="form-control" id="npt_user" name="npt_user" placeholder="Digite Usuario">
       <label for="npt_user">Usuario</label>
     </div>
+<!-- contraseña -->
     <div class="form-floating">
-      <input type="password" class="form-control" id="npt_password" placeholder="Digite Contraseña">
+      <input type="password" class="form-control" id="npt_password" name="npt_password" placeholder="Digite Contraseña">
       <label for="npt_password">Contraseña</label>
     </div>
-
+<!-- boton enviar -->
     <button class="w-100 btn btn-lg btn-success" type="submit">Ingresar</button>
   </form>
 </main>
