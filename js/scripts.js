@@ -1,3 +1,11 @@
+
+$(document).ready(function() {
+$("#mdlIngreso").modal('show');
+let ingreso = 0;
+});
+
+
+if (ingreso==1){
  //-----------------------
  // INICIA DATATABLES
  //-----------------------
@@ -34,6 +42,7 @@
              "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
          },
      });
+
 
      // *******************
      // FIN DATATABLES
@@ -440,3 +449,5 @@
      //*************************
 
  });
+
+};

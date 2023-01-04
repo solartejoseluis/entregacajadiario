@@ -23,8 +23,9 @@ case 'listar_ventas':
     $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($result);
     break;
+
+
 case 'guardar_venta':
-// GRABA EN LA TABLA EL NUEVO REGISTRO
     $sql = "INSERT INTO VENTAS(
         venta_nombre_producto,
         venta_nombre_proveedor,

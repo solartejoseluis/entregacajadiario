@@ -12,10 +12,12 @@
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/zf/dt-1.12.1/datatables.min.css" />
   <!-- select2 css-->
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <!-- estilos de la pagina -->
+  <!-- <link href="css/signin.css" rel="stylesheet"> -->
 </head>
 
 <body>
-  <div class="container-fluid mb-3" id="">
+  <div class="container-fluid mb-3" id="contenido">
     <div class="row">
       <div class="col-6">
         <h1>ENTREGA DE CAJA DIARIA</h1>
@@ -79,8 +81,11 @@
         <button type="button" class="btn btn-danger" id="btn-Final" data-bs-toggle="modal">CERRAR TURNO <i class="fa-solid fa-circle-plus"></i></button>
       </div>
     </div>
-  </div>
-  <div class="container-fluid" id="contenido">
+
+
+
+
+  <div class="container-fluid" id="tabla">
     <div class="row">
       <div class="col-12">
         <table class="table" id="tblVentas">
@@ -101,10 +106,75 @@
       </div>
     </div>
   </div>
+
+  </div>
+
+  <!-- -------------------------->
+  <!-- INICIA MODAL INGRESO-->
+  <!-- ------------------------->
+  <div class="modal fade" data-bs-backdrop="static" tabindex="-1" id="mdlIngreso">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content text-center">
+        <div class="modal-body">
+          <form id="frmIngreso">
+
+
+      <!-- imagen -->
+      <img class="mb-4" src="img/logotipo_suricentro.png" alt="">
+      <h1 class="h3 mb-3 fw-normal">Cuadre de Caja Diario</h1>
+      <!-- fecha -->
+        <h3 id="hoy"></h3>
+        <input type="hidden" class="form-control" id="npt_fecha">
+      <!-- select responsable de turno -->
+      <div class="row mb-3">
+        <div class="col-md-3 ms-auto">
+          <label for="slct_responsable" class="col-form-label">Responsable:</label>
+        </div>
+        <div class="col-md-9 ms-auto">
+          <input type="hidden" class="form-control" id="npt_responsable_id">
+          <div class="selectResponsable">
+            <select class="form-select" id="slct_responsable"></select>
+          </div>
+        </div>
+      </div>
+      <!-- select jornada -->
+      <div class="row mb-3">
+        <div class="col-md-3 ms-auto">
+          <label for="slct_jornada" class="col-form-label">Jornada:</label>
+        </div>
+        <div class="col-md-9 ms-auto">
+          <input type="hidden" class="form-control" id="npt_jornada_id">
+          <div class="selectJornada">
+            <select class="form-select" id="slct_jornada"></select>
+          </div>
+        </div>
+      </div>
+      <!-- boton enviar -->
+      <div class="row mb-3">
+        <button class="w-100 btn btn-lg btn-success" id="btn_ingreso">Ingresar</button>
+      </div>
+
+          </form>
+          <!-- FIN FORM DEL MODAL -->
+        </div>
+        <!-- FOOTER DEL MODAL -->
+<!--         <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" id="btnConfirmAdd">Confirma Agregar</button>
+        </div> -->
+      </div>
+    </div>
+  </div>
+  <!-- ********************* -->
+  <!-- FIN MODAL INGRESO -->
+  <!-- ********************* -->
+
+
+
+
   <!-- -------------------------->
   <!-- INICIA MODAL NUEVA VENTA-->
   <!-- ------------------------->
-  <div class="modal fade" data-bs-backdrop="static" id="mdlVentas" tabindex="-1">
+  <div class="modal fade" data-bs-backdrop="static"  tabindex="-1" id="mdlVentas">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">

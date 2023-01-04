@@ -14,6 +14,7 @@
 <body class="text-center">
   <main class="form-signin w-100 m-auto">
     <form>
+      <!-- imagen -->
       <img class="mb-4" src="img/logotipo_suricentro.png" alt="">
       <h1 class="h3 mb-3 fw-normal">Cuadre de Caja Diario</h1>
         <h3 id="hoy"></h3>
