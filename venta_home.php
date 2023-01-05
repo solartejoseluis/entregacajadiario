@@ -60,24 +60,12 @@
                 <table class="table table-sm table-bordered table-hover border-primary">
           <tbody class="table-group-divider">
             <tr>
-              <th scope="row">SALDO CAJA TURNO</th>
-              <td><p id="p_saldo_caja_principal"></p></td>
-            </tr>
-            <tr>
               <th scope="row">TOTAL UTILIDAD</th>
               <td><p id="p_utilidad_turno"></p></td>
             </tr>
             <tr>
               <th scope="row">NUMERO DE VENTAS</th>
               <td><p id="p_turno_numero_ventas"></p></td>
-            </tr>
-            <tr>
-              <th scope="row">TOTAL A ENTREGAR</th>
-              <td><p id="p_total_entrega"></p></td>
-            </tr>
-            <tr>
-              <th scope="row">DESCUADRE TURNO</th>
-              <td><p id="p_descuadre"></p></td>
             </tr>
           </tbody>
         </table>
@@ -116,7 +104,7 @@
   <!-- -------------------------->
   <!-- INICIA MODAL NUEVA VENTA-->
   <!-- ------------------------->
-  <div class="modal fade" data-bs-backdrop="static"  tabindex="-1" id="mdlVentas">
+  <div class="modal fade" data-bs-backdrop="static"  tabindex="-1" id="mdl_ventas">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -124,7 +112,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form id="frmNuevaVenta">
+          <form id="frm_nueva_venta">
             <!-- VENTAS_ID -->
             <div class="row">
               <input type="hidden" class="form-control" id="npt-venta_id">
@@ -132,58 +120,58 @@
             <!-- NUEVO PRODUCTO -->
             <div class="row mb-3">
               <div class="col-md-3 ms-auto">
-                <label for="npt-venta_nombre_producto" class="col-form-label">Producto:</label>
+                <label for="npt_venta_nombre_producto" class="col-form-label">Producto:</label>
               </div>
               <div class="col-md-9 ms-auto">
-                <input type="text" class="form-control" id="npt-venta_nombre_producto" placeholder="Digite Nombre del producto" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
+                <input type="text" class="form-control" id="npt_venta_nombre_producto" placeholder="Digite Nombre del producto" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
               </div>
             </div>
             <!-- NUEVO PROVEEDOR -->
             <div class="row mb-3">
               <div class="col-md-3 ms-auto">
-                <label for="npt-venta_nombre_proveedor" class="col-form-label">Proveedor:</label>
+                <label for="npt_venta_nombre_proveedor" class="col-form-label">Proveedor:</label>
               </div>
               <div class="col-md-9 ms-auto">
-                <input type="text" class="form-control" id="npt-venta_nombre_proveedor" placeholder="Digite Nombre proveedor" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
+                <input type="text" class="form-control" id="npt_venta_nombre_proveedor" placeholder="Digite Nombre proveedor" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
               </div>
             </div>
             <!-- NUEVO COSTO PRODUCTO -->
             <div class="row mb-3">
               <div class="col-md-3 ms-auto">
-                <label for="npt-venta_costo_producto" class="col-form-label">Costo Prod:</label>
+                <label for="npt_venta_costo_producto" class="col-form-label">Costo Prod:</label>
               </div>
               <div class="col-md-9 ms-auto">
-                <input type="text" class="form-control" id="npt-venta_costo_producto" placeholder="Digite Costo de producto" >
+                <input type="text" class="form-control" id="npt_venta_costo_producto" placeholder="Digite Costo de producto" >
               </div>
             </div>
             <!-- NUEVO VALOR VENTA -->
             <div class="row mb-3">
               <div class="col-md-3 ms-auto">
-                <label for="npt-venta_valor_venta" class="col-form-label"> Valor Venta:</label>
+                <label for="npt_venta_valor_venta" class="col-form-label"> Valor Venta:</label>
               </div>
               <div class="col-md-9 ms-auto">
-                <input type="text" class="form-control" id="npt-venta_valor_venta" placeholder="Digite valor venta">
+                <input type="text" class="form-control" id="npt_venta_valor_venta" placeholder="Digite valor venta">
               </div>
             </div>
             <!--  NUEVO VENDEDOR -->
             <div class="row mb-3">
               <div class="col-md-3 ms-auto">
-                <label for="slct-user" class="col-form-label">Vendedor:</label>
+                <label for="slct_user" class="col-form-label">Vendedor:</label>
               </div>
               <div class="col-md-9 ms-auto">
                 <input type="hidden" class="form-control" id="npt-user_id">
                 <div class="selectUser">
-                  <select class="form-select" id="slct-user"></select>
+                  <select class="form-select" id="slct_user"></select>
                 </div>
               </div>
             </div>
             <!-- NUEVA UTILIDAD -->
             <div class="row mb-3">
               <div class="col-md-3 ms-auto">
-                <label for="npt-venta_utilidad" class="col-form-label">Utilidad:</label>
+                <label for="npt_venta_utilidad" class="col-form-label">Utilidad:</label>
               </div>
               <div class="col-md-9 ms-auto">
-                <input type="text" class="form-control" id="npt-venta_utilidad" disabled>
+                <input type="text" class="form-control" id="npt_venta_utilidad" disabled>
               </div>
             </div>
           </form>
@@ -206,7 +194,7 @@
   <!-- ------------------------- -->
   <!-- INICIA MODAL EDITAR VENTA-->
   <!-- ------------------------- -->
-  <div class="modal fade" data-bs-backdrop="static" id="mdlEditVentas" tabindex="-1">
+  <div class="modal fade" data-bs-backdrop="static" id="mdl_edit_ventas" tabindex="-1">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <!-- cabecera del modal de edicion -->
@@ -216,7 +204,7 @@
         </div>
         <!-- cuerpo del modal de edicion -->
         <div class="modal-body">
-          <form id="frmEditVentas">
+          <form id="frm_edit_ventas">
             <!-- EDITAR VENTAS_ID -->
             <div class="row">
               <input type="hidden" class="form-control" id="nptEdit-venta_id">
@@ -229,7 +217,6 @@
               <div class="col-md-9 ms-auto">
                 <!-- <input type="text" class="form-control" id="nptEdit-venta_nombre_producto" placeholder="Digite Nombre del producto"> -->
                 <input type="text" class="form-control" id="nptEdit-venta_nombre_producto" placeholder="Digite Nombre del producto" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
-
               </div>
             </div>
             <!--  EDITAR PROVEEDOR -->
@@ -240,7 +227,6 @@
               <div class="col-md-9 ms-auto">
                 <!-- <input type="text" class="form-control" id="nptEdit-venta_nombre_proveedor" placeholder="Digite Nombre proveedor"> -->
                 <input type="text" class="form-control" id="nptEdit-venta_nombre_proveedor" placeholder="Digite Nombre proveedor" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
-
               </div>
             </div>
             <!-- EDITAR COSTO PRODUCTO -->
@@ -307,7 +293,11 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form id="frmCerrarTurno">
+          <form id="frm_cerrar_turno">
+                        <!-- EDITAR VENTAS_ID -->
+            <div class="row">
+              <input type="hidden" class="form-control" id="npt_turno_id">
+            </div>
             <!-- SALDO DE CAJA PRINCIPAL -->
             <div class="row mb-3">
               <div class="col-md-3 ms-auto">
@@ -323,8 +313,8 @@
               <div class="col-md-3 ms-auto">
                 <label for="npt_turno_total_utilidad" class="col-form-label">Total Utilidad del Turno:</label>
               </div>
-              <div class="col-md-9 ms-auto">
-                <input type="text" class="form-control" id="npt_turno_total_utilidad" disabled>
+              <div class="col-md-9 ms-auto calculoUtilidad">
+                <input type="text" class="form-control utilidad" id="npt_turno_total_utilidad" disabled>
               </div>
             </div>
             <!--  TOTAL ENTREGA -->
@@ -346,9 +336,6 @@
                 <input type="text" class="form-control" id="npt_turno_descuadre" placeholder="Digite valor descuadre">
               </div>
             </div>
-
-
-
           </form>
           <!-- FIN FORM DEL MODAL -->
         </div>

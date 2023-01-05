@@ -23,42 +23,34 @@ while ($fila = mysqli_fetch_array($resultado)){
             $count='1';
     }
 };
-
 echo '<!doctype html>
     <html lang="es">
     <meta charset="utf-8">';
-
-
-//redirige a pagina de inicio segun nivel de usuario
+// REDIRECCION DE PAGINA
 if ($count=='1'){
     switch ($user_perfil){
         case '1':
         $_SESSION['user_bd'] = $user_local;
         $_SESSION['password_bd'] = $password_local;
-        echo '
-        <meta http-equiv="REFRESH"content="0;url=venta_home.php">';
+        echo '<meta http-equiv="REFRESH"content="0;url=venta_home.php">';
         break;
 
         case '2':
         $_SESSION['user_bd'] = $user_local;
         $_SESSION['password_bd'] = $password_local;
-        echo'
-        <meta http-equiv="REFRESH"content="0;url=admin_home.php">';
+        echo'<meta http-equiv="REFRESH"content="0;url=admin_home.php">';
         break;
 
         case '3':
         $_SESSION['user_bd'] = $user_local;
         $_SESSION['password_bd'] = $password_local;
-        echo'
-        <meta http-equiv="REFRESH"content="0;url=usua_home_03.php">';
-        break}
-}else{
-    echo "Usuario y/o contraseña incorrectos";
-    };
+        echo'<meta http-equiv="REFRESH"content="0;url=usua_home_03.php">';
+        break;
+    }
+}else{echo "Usuario y/o contraseña incorrectos";}
 
 echo '</head>
     </html>';
-
-// cerrar la conexión
+// CERRAR LA CONEXIÓN
 mysql_close($conn);
 ?>

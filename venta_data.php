@@ -48,7 +48,7 @@ case 'guardar_venta':
 
 case 'borrar_venta':
 // BORRA EL REGISTRO ENrecuperarRegistro LA TABLA
-    $sql = "DELETE FROM VENTAS where venta_id=$_GET[venta_id]";
+    $sql = "DELETE FROM VENTAS  WHERE venta_id=$_GET[venta_id]";
     $response = $pdo->exec($sql);
     echo json_encode($response);
     break;
@@ -144,8 +144,12 @@ case 'consultar_utilidad_vendedor4':
 case 'consultar_utilidad_turno':
     $sql = "SELECT
     SUM(venta_utilidad)  AS utilidad_turno,
-    COUNT(venta_utilidad) AS ventas_turno
-    FROM VENTAS";
+    COUNT(venta_utilidad) AS ventas_turno,
+    TURNOS.turno_id
+    FROM VENTAS
+    INNER JOIN TURNOS
+    ON VENTAS.turno_id=TURNOS.turno_id
+    ";
     $stmt = $pdo -> prepare($sql);
     $stmt -> execute();
     $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
@@ -170,24 +174,14 @@ case 'guardar_inicio':
 
 
 case 'guardar_cierre_turno':
-  $sql = "INSERT INTO TURNOS(
-    turno_saldo_caja,
-    turno_total_utilidad,
-    turno_total_entrega,
-    turno_descuadre
-  )VALUES(
-    $_POST[npt_turno_saldo_caja],
-    $_POST[npt_turno_total_utilidad],
-    $_POST[npt_turno_total_entrega],
-    $_POST[npt_turno_descuadre],
-  )";
-  $response = $pdo->exec($sql);
-  echo json_encode($response);
-  break;
-
-
-}
-
-
-
+  $sql = "UPDATE TURNOS SET
+    turno_saldo_caja = $_POST[npt_turno_saldo_caja],
+    turno_total_utilidad = $_POST[npt_turno_total_utilidad],
+    turno_total_entrega = $_POST[npt_turno_total_entrega],
+    turno_descuadre = $_POST[npt_turno_descuadre]
+    WHERE turno_id = $_POST[turno_id]";
+    $response = $pdo->exec($sql);
+    echo json_encode($response);
+    break;
+};
 ?>

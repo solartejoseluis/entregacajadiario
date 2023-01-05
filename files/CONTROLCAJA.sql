@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 04-01-2023 a las 03:07:23
--- Versión del servidor: 10.4.25-MariaDB
--- Versión de PHP: 8.1.10
+-- Tiempo de generación: 05-01-2023 a las 17:52:49
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -51,22 +51,23 @@ INSERT INTO `JORNADAS` (`jornada_id`, `jornada_nombre`) VALUES
 
 CREATE TABLE `TURNOS` (
   `turno_id` int(5) NOT NULL,
-  `turno_fecha` date NOT NULL,
-  `turno_jornada` int(5) NOT NULL COMMENT 'jornada_id',
-  `turno_responsable` int(5) NOT NULL COMMENT 'user_id',
+  `turno_fecha_creado` datetime DEFAULT NULL,
+  `turno_jornada` int(5) DEFAULT NULL COMMENT 'jornada_id',
+  `turno_responsable` int(5) DEFAULT NULL COMMENT 'user_id',
   `turno_saldo_caja` int(10) DEFAULT NULL,
   `turno_total_utilidad` int(10) DEFAULT NULL,
-  `turno_total_a entregar` int(10) DEFAULT NULL,
-  `turno_descuadre` int(10) DEFAULT NULL
+  `turno_total_entrega` int(10) DEFAULT NULL,
+  `turno_descuadre` int(10) DEFAULT NULL,
+  `turno_fecha_cierre` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `TURNOS`
 --
 
-INSERT INTO `TURNOS` (`turno_id`, `turno_fecha`, `turno_jornada`, `turno_responsable`, `turno_saldo_caja`, `turno_total_utilidad`, `turno_total_a entregar`, `turno_descuadre`) VALUES
-(1, '2022-12-30', 1, 1, NULL, NULL, NULL, NULL),
-(6, '2023-01-02', 1, 1, NULL, NULL, NULL, NULL);
+INSERT INTO `TURNOS` (`turno_id`, `turno_fecha_creado`, `turno_jornada`, `turno_responsable`, `turno_saldo_caja`, `turno_total_utilidad`, `turno_total_entrega`, `turno_descuadre`, `turno_fecha_cierre`) VALUES
+(1, '2022-12-30 00:00:00', 1, 1, 6000, 5000, 4000, 20000, '0000-00-00 00:00:00'),
+(6, '2023-01-02 00:00:00', 1, 1, 5, 6, 7, 8, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -109,7 +110,7 @@ CREATE TABLE `VENTAS` (
   `venta_costo_producto` int(10) NOT NULL,
   `venta_valor_venta` int(10) NOT NULL,
   `venta_utilidad` int(10) NOT NULL,
-  `user_id` int(5) DEFAULT NULL,
+  `user_id` int(5) DEFAULT NULL COMMENT 'vendedor',
   `turno_id` int(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -123,7 +124,8 @@ INSERT INTO `VENTAS` (`venta_id`, `venta_fecha`, `venta_nombre_producto`, `venta
 (30, NULL, 'PRODUCTO VERDE', 'FULIS', 5000, 7000, 2000, 2, 1),
 (32, NULL, 'TERRAMICINA OJOS', 'HH', 45000, 50000, 5000, 2, 1),
 (33, NULL, 'PRODUCTO CUARENTA', 'PIPI', 30000, 50000, 20000, 1, 1),
-(34, NULL, 'T', 'T', 20000, 30000, 10000, 2, NULL);
+(34, NULL, 'PRODUCTO PRODUCTO', 'HOLA', 20000, 30000, 10000, 2, NULL),
+(36, NULL, 'ALKASELTZER', 'MUNI', 50000, 60000, 10, 4, NULL);
 
 --
 -- Índices para tablas volcadas
@@ -183,7 +185,7 @@ ALTER TABLE `USERS`
 -- AUTO_INCREMENT de la tabla `VENTAS`
 --
 ALTER TABLE `VENTAS`
-  MODIFY `venta_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `venta_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- Restricciones para tablas volcadas
