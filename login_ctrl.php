@@ -23,6 +23,11 @@ while ($fila = mysqli_fetch_array($resultado)){
             $count='1';
     }
 };
+
+
+
+
+
 echo '<!doctype html>
     <html lang="es">
     <meta charset="utf-8">';

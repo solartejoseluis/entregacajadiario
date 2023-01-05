@@ -13,15 +13,14 @@
 
 <body class="text-center">
   <main class="form-signin w-100 m-auto">
-    <form>
+    <form name="frm_turno">
 
 <!-- IMAGEN -->
 <img class="mb-4" src="img/logotipo_suricentro.png" alt="">
 <h5 class="mb-3 fw-normal">Elija para crear el turno</h5>
 
-<!-- FECHA DE HOY -->
+<!-- FECHA DE HOY FORMATO LARGO -->
   <h3 id="hoy"></h3>
-  <input type="hidden" class="form-control" id="npt_fecha">
 
 <!-- SELECT RESPONSABLE TURNO -->
 <div class="row mb-3">
@@ -31,13 +30,11 @@
   </div>
   <!-- contenido select responsable -->
   <div class="col-md-9 ms-auto">
-    <input type="hidden" class="form-control" id="  npt_responsable_id">
     <div class="selectResponsable">
       <select class="form-select" id="slct_responsable"></select>
     </div>
   </div>
 </div>
-
 
 <!-- SELECT JORNADA -->
 <div class="row mb-3">
@@ -47,7 +44,6 @@
   </div>
 <!-- contenido select jornada -->
   <div class="col-md-9 ms-auto">
-    <input type="hidden" class="form-control" id="npt_jornada_id">
     <div class="selectJornada">
       <select class="form-select" id="slct_jornada"></select>
     </div>
@@ -55,9 +51,15 @@
 </div>
 
 
+<!-- INPUTS QUE RECOGEN DATOS DEL FORMULARIO -->
+  <input type="" class="form-control" id="npt_fecha">
+  <input type="" class="form-control" id="npt_jornada_id">
+  <input type="" class="form-control" id="npt_responsable_id">
+
+
 <!-- BOTON ENVIAR -->
 <div class="row mb-3">
-  <button class="w-100 btn btn-lg btn-success" id="btn_ingreso">Crear Turno</button>
+  <button class="w-100 btn btn-lg btn-success" id="btn_crear_turno">Crear Turno</button>
 </div>
 
 </form>

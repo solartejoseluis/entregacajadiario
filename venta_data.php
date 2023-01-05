@@ -183,5 +183,22 @@ case 'guardar_cierre_turno':
     $response = $pdo->exec($sql);
     echo json_encode($response);
     break;
+
+
+
+case 'guardar_turno':
+$sql = "INSERT INTO TURNOS(
+  turno_fecha_creado,
+  turno_jornada,
+  turno_responsable)
+VALUES(
+'$_POST[turno_fecha_creado]',
+$_POST[turno_jornada],
+$_POST[turno_responsable]
+)";
+$response = $pdo->exec($sql);
+echo json_encode($response);
+break;
+
 };
 ?>
