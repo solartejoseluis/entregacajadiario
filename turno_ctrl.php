@@ -1,40 +1,31 @@
-<?php
-session_start();
+<!DOCTYPE html>
 
-// Cargar las funciones
-require("funciones.php");
+<head>
+  <title>turno_ctrl</title>
+</head>
 
-//obtener variables
-$turno_fecha_creado = $_POST['npt_fecha'];
-$turno_jornada = $_POST['npt_jornada_id'];
-$turno_responsable = $_POST['npt_responsable_id'];
+<body>
+  <?php
+  $conexion = mysqli_connect("localhost", "kiron", "123456", "CONTROLCAJA") or
+    die("Problemas con la conexión");
 
-// conectar la base de datos
-$conn=conectarBD();
+// CAPTURO LOS DATOS
+$turno_fecha_creado = '_$POST["npt_fecha"]';
+$turno_jornada = $_POST["npt_jornada_id"];
+$turno_responsable = $POST_["npt_responsable_id"];
 
-// sql de agregar datos a tabla turnos
-$sql = "INSERT INTO TURNOS(
+
+  mysqli_query(
+  $conexion, "INSERT INTO TURNOS(
   turno_fecha_creado,
-  turno_jornada,
-  turno_responsable)
-VALUES(
-'$turno_fecha_creado',
-turno_jornada,
-turno_responsable)";
-//$resultado = ejecutar_sql($conn,$sql);
-$resultado = ejecutarSQL($sql);
-
-// echo "
-// <html>
-// <head>
-//   <meta http-equiv='REFRESH' content='0;url=venta_home.php'>
-// </head>
-// </html>
-// ";
-
-echo "llego al final del turno_ctrl.php"
-
-
-// CERRAR LA CONEXIÓN
-mysql_close($conn);
-?>
+  turno_responsable,
+  turno_jornada)
+  VALUES(
+    $turno_fecha_creado,
+    $turno_responsable,
+    $turno_jornada)");
+  or die("Problemas en el select" . mysqli_error($conexion));
+  mysqli_close($conexion);
+  echo "El turno fue creado";
+  ?>
+</body>

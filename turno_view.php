@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -13,7 +13,7 @@
 
 <body class="text-center">
   <main class="form-signin w-100 m-auto">
-<form>
+<form name="frm_turno" method="POST" action="turno_ctrl.php">
 
 <!-- IMAGEN -->
 <img class="mb-4" src="img/logotipo_suricentro.png" alt="">
@@ -51,15 +51,16 @@
 </div>
 
 <!-- INPUTS QUE RECOGEN DATOS DEL FORMULARIO -->
-  <input type="hidden" class="form-control" id="npt_fecha">
-  <input type="hidden" class="form-control" id="npt_jornada_id">
-  <input type="hidden" class="form-control" id="npt_responsable_id">
+  <input type="" class="form-control" name="npt_fecha" id="npt_fecha">
+  <input type="" class="form-control" name="npt_responsable_id" id="npt_responsable_id">
+  <input type="" class="form-control" name="npt_jornada_id" id="npt_jornada_id">
 
 
 <!-- BOTON ENVIAR -->
 <div class="row mb-3">
-  <button class="w-100 btn btn-lg btn-success" id="btn_crear_turno">Crear Turno</button>
+  <button class="w-100 btn btn-lg btn-success" id="btn_crear_turno" type="submit">Crear Turno</button>
 </div>
+
 
 </form>
 </main>

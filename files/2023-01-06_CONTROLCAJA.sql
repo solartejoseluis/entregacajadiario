@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 05-01-2023 a las 17:52:49
--- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 8.1.6
+-- Host: localhost
+-- Generation Time: Jan 06, 2023 at 09:43 PM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `CONTROLCAJA`
+-- Database: `CONTROLCAJA`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `JORNADAS`
+-- Table structure for table `JORNADAS`
 --
 
 CREATE TABLE `JORNADAS` (
@@ -33,7 +33,7 @@ CREATE TABLE `JORNADAS` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `JORNADAS`
+-- Dumping data for table `JORNADAS`
 --
 
 INSERT INTO `JORNADAS` (`jornada_id`, `jornada_nombre`) VALUES
@@ -46,33 +46,32 @@ INSERT INTO `JORNADAS` (`jornada_id`, `jornada_nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `TURNOS`
+-- Table structure for table `TURNOS`
 --
 
 CREATE TABLE `TURNOS` (
   `turno_id` int(5) NOT NULL,
-  `turno_fecha_creado` datetime DEFAULT NULL,
-  `turno_jornada` int(5) DEFAULT NULL COMMENT 'jornada_id',
-  `turno_responsable` int(5) DEFAULT NULL COMMENT 'user_id',
+  `turno_fecha_creado` date NOT NULL,
+  `turno_jornada` int(5) NOT NULL COMMENT 'jornada_id',
+  `turno_responsable` int(5) NOT NULL COMMENT 'user_id',
   `turno_saldo_caja` int(10) DEFAULT NULL,
   `turno_total_utilidad` int(10) DEFAULT NULL,
   `turno_total_entrega` int(10) DEFAULT NULL,
   `turno_descuadre` int(10) DEFAULT NULL,
-  `turno_fecha_cierre` datetime DEFAULT NULL
+  `turno_fecha_cierre` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `TURNOS`
+-- Dumping data for table `TURNOS`
 --
 
 INSERT INTO `TURNOS` (`turno_id`, `turno_fecha_creado`, `turno_jornada`, `turno_responsable`, `turno_saldo_caja`, `turno_total_utilidad`, `turno_total_entrega`, `turno_descuadre`, `turno_fecha_cierre`) VALUES
-(1, '2022-12-30 00:00:00', 1, 1, 6000, 5000, 4000, 20000, '0000-00-00 00:00:00'),
-(6, '2023-01-02 00:00:00', 1, 1, 5, 6, 7, 8, '0000-00-00 00:00:00');
+(1, '2022-12-30', 1, 1, 6000, 5000, 4000, 20000, '0000-00-00');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `USERS`
+-- Table structure for table `USERS`
 --
 
 CREATE TABLE `USERS` (
@@ -85,7 +84,7 @@ CREATE TABLE `USERS` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `USERS`
+-- Dumping data for table `USERS`
 --
 
 INSERT INTO `USERS` (`user_id`, `user_nombre`, `user_apellido`, `user_user`, `user_password`, `user_perfil`) VALUES
@@ -99,7 +98,7 @@ INSERT INTO `USERS` (`user_id`, `user_nombre`, `user_apellido`, `user_user`, `us
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `VENTAS`
+-- Table structure for table `VENTAS`
 --
 
 CREATE TABLE `VENTAS` (
@@ -115,7 +114,7 @@ CREATE TABLE `VENTAS` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `VENTAS`
+-- Dumping data for table `VENTAS`
 --
 
 INSERT INTO `VENTAS` (`venta_id`, `venta_fecha`, `venta_nombre_producto`, `venta_nombre_proveedor`, `venta_costo_producto`, `venta_valor_venta`, `venta_utilidad`, `user_id`, `turno_id`) VALUES
@@ -124,21 +123,21 @@ INSERT INTO `VENTAS` (`venta_id`, `venta_fecha`, `venta_nombre_producto`, `venta
 (30, NULL, 'PRODUCTO VERDE', 'FULIS', 5000, 7000, 2000, 2, 1),
 (32, NULL, 'TERRAMICINA OJOS', 'HH', 45000, 50000, 5000, 2, 1),
 (33, NULL, 'PRODUCTO CUARENTA', 'PIPI', 30000, 50000, 20000, 1, 1),
-(34, NULL, 'PRODUCTO PRODUCTO', 'HOLA', 20000, 30000, 10000, 2, NULL),
-(36, NULL, 'ALKASELTZER', 'MUNI', 50000, 60000, 10, 4, NULL);
+(34, NULL, 'PRODUCTO PRODUCTO', 'HOLA', 20000, 30000, 10000, 2, 1),
+(36, NULL, 'ALKASELTZER', 'MUNI', 50000, 60000, 10, 4, 1);
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `JORNADAS`
+-- Indexes for table `JORNADAS`
 --
 ALTER TABLE `JORNADAS`
   ADD PRIMARY KEY (`jornada_id`);
 
 --
--- Indices de la tabla `TURNOS`
+-- Indexes for table `TURNOS`
 --
 ALTER TABLE `TURNOS`
   ADD PRIMARY KEY (`turno_id`),
@@ -146,13 +145,13 @@ ALTER TABLE `TURNOS`
   ADD KEY `turno_jornada` (`turno_jornada`);
 
 --
--- Indices de la tabla `USERS`
+-- Indexes for table `USERS`
 --
 ALTER TABLE `USERS`
   ADD PRIMARY KEY (`user_id`);
 
 --
--- Indices de la tabla `VENTAS`
+-- Indexes for table `VENTAS`
 --
 ALTER TABLE `VENTAS`
   ADD PRIMARY KEY (`venta_id`),
@@ -160,46 +159,46 @@ ALTER TABLE `VENTAS`
   ADD KEY `turno_id` (`turno_id`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `JORNADAS`
+-- AUTO_INCREMENT for table `JORNADAS`
 --
 ALTER TABLE `JORNADAS`
   MODIFY `jornada_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT de la tabla `TURNOS`
+-- AUTO_INCREMENT for table `TURNOS`
 --
 ALTER TABLE `TURNOS`
-  MODIFY `turno_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `turno_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT de la tabla `USERS`
+-- AUTO_INCREMENT for table `USERS`
 --
 ALTER TABLE `USERS`
   MODIFY `user_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT de la tabla `VENTAS`
+-- AUTO_INCREMENT for table `VENTAS`
 --
 ALTER TABLE `VENTAS`
   MODIFY `venta_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `TURNOS`
+-- Constraints for table `TURNOS`
 --
 ALTER TABLE `TURNOS`
   ADD CONSTRAINT `TURNOS_ibfk_1` FOREIGN KEY (`turno_responsable`) REFERENCES `USERS` (`user_id`),
   ADD CONSTRAINT `TURNOS_ibfk_2` FOREIGN KEY (`turno_jornada`) REFERENCES `JORNADAS` (`jornada_id`);
 
 --
--- Filtros para la tabla `VENTAS`
+-- Constraints for table `VENTAS`
 --
 ALTER TABLE `VENTAS`
   ADD CONSTRAINT `VENTAS_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `USERS` (`user_id`),

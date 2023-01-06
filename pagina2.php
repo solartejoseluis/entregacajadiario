@@ -6,7 +6,7 @@
 
 <body>
   <?php
-  $conexion = mysqli_connect("localhost", "kiron", "123456", "BDPRUEBAS") or
+  $conexion = mysqli_connect("localhost", "kiron", "123456", "BDPRUEBA") or
     die("Problemas con la conexión");
 
   mysqli_query(
