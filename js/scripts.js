@@ -1,3 +1,4 @@
+
 //-----------------------
 // INICIA DATATABLES
 //-----------------------
@@ -35,11 +36,9 @@ document.addEventListener("DOMContentLoaded", function() {
     },
   });
 
-
   // *******************
   // FIN DATATABLES
   // *******************
-
 
 
   //-----------------------------
@@ -543,4 +542,9 @@ document.addEventListener("DOMContentLoaded", function() {
   //*************************
   // FIN OPERACIONES EN EL MODAL
   //*************************
-});
+
+
+}); // CIERRE ABIERTO EN EL DATATABLES
+
+
+

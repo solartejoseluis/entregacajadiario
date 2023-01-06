@@ -194,8 +194,7 @@ $sql = "INSERT INTO TURNOS(
 VALUES(
 '$_POST[turno_fecha_creado]',
 $_POST[turno_jornada],
-$_POST[turno_responsable]
-)";
+$_POST[turno_responsable])";
 $response = $pdo->exec($sql);
 echo json_encode($response);
 break;

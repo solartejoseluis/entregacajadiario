@@ -37,7 +37,7 @@ if ($count=='1'){
         case '1':
         $_SESSION['user_bd'] = $user_local;
         $_SESSION['password_bd'] = $password_local;
-        echo '<meta http-equiv="REFRESH"content="0;url=venta_home.php">';
+        echo '<meta http-equiv="REFRESH"content="0;url=turno_view.php">';
         break;
 
         case '2':
