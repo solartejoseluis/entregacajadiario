@@ -428,7 +428,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
 
-  $('#btn_confirm_cerrar_turno').click(function() {
+  $('#btn_confirm_cerrar_turno').click(function(){
     //VALIDACION DE DATOS DEL MODAL
     let valida_saldo_caja = $('#npt_turno_saldo_caja').val();
     let valida_descuadre = $('#npt_turno_descuadre').val();

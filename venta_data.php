@@ -119,10 +119,10 @@ case 'consultar_utilidad_vendedor2':
 
 case 'consultar_utilidad_vendedor3':
     $sql = "SELECT
-    SUM(venta_utilidad)  AS utilidad_vendedor3,
-    COUNT(venta_utilidad) AS ventas_vendedor3
-    FROM VENTAS WHERE
-     user_id = 3";
+      SUM(venta_utilidad)  AS utilidad_vendedor3,
+      COUNT(venta_utilidad) AS ventas_vendedor3
+      FROM VENTAS WHERE
+      user_id = 3";
     $stmt = $pdo -> prepare($sql);
     $stmt -> execute();
     $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
@@ -198,6 +198,33 @@ $_POST[turno_responsable])";
 $response = $pdo->exec($sql);
 echo json_encode($response);
 break;
+
+
+// nueva consulta para el turno actual este datos hay que agregarlo a  inputs.. para poder tomar los datos.
+case 'consultarDatosTurnoActual':
+    $sql = "SELECT
+    TURNOS.turno_id,
+    TURNOS.turno_jornada,
+    TURNOS.turno_responsable,
+    USERS.user_nombre,
+    USERS.user_apellido
+    JORNADAS.jornada_nombre
+    FROM TURNOS
+    INNER JOIN USERS
+    ON USERS.user_id=TURNOS.turno_responsable
+    INNER JOIN JORNADAS
+    ON JORNADAS.jornada_id=TURNOS.turno_jornada
+    WHERE
+    turno_fecha_creado = $_SESSION['turno_fecha_creado'] ,
+    turno_jornada = $_SESSION['turno_responsable_id'],
+    turno_responsable = $_SESSION['turno_jornada_id']
+    ";
+    $stmt = $pdo -> prepare($sql);
+    $stmt -> execute();
+    $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($result);
+    break;
+
 
 };
 ?>
