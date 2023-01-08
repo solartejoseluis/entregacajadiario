@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jan 06, 2023 at 09:43 PM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Servidor: localhost
+-- Tiempo de generación: 08-01-2023 a las 09:29:49
+-- Versión del servidor: 10.4.27-MariaDB
+-- Versión de PHP: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,22 +18,22 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `CONTROLCAJA`
+-- Base de datos: `CONTROLCAJA`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `JORNADAS`
+-- Estructura de tabla para la tabla `JORNADAS`
 --
 
 CREATE TABLE `JORNADAS` (
   `jornada_id` int(5) NOT NULL,
   `jornada_nombre` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `JORNADAS`
+-- Volcado de datos para la tabla `JORNADAS`
 --
 
 INSERT INTO `JORNADAS` (`jornada_id`, `jornada_nombre`) VALUES
@@ -46,32 +46,51 @@ INSERT INTO `JORNADAS` (`jornada_id`, `jornada_nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `TURNOS`
+-- Estructura de tabla para la tabla `PRUEBAS`
+--
+
+CREATE TABLE `PRUEBAS` (
+  `prueba_id` int(5) NOT NULL,
+  `prueba_fecha_creado` varchar(50) NOT NULL,
+  `prueba_jornada` int(5) NOT NULL,
+  `prueba_responsable` int(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `TURNOS`
 --
 
 CREATE TABLE `TURNOS` (
   `turno_id` int(5) NOT NULL,
-  `turno_fecha_creado` date NOT NULL,
+  `turno_fecha_creado` varchar(50) DEFAULT NULL,
   `turno_jornada` int(5) NOT NULL COMMENT 'jornada_id',
   `turno_responsable` int(5) NOT NULL COMMENT 'user_id',
   `turno_saldo_caja` int(10) DEFAULT NULL,
   `turno_total_utilidad` int(10) DEFAULT NULL,
   `turno_total_entrega` int(10) DEFAULT NULL,
   `turno_descuadre` int(10) DEFAULT NULL,
-  `turno_fecha_cierre` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `turno_creacion_timestamp` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `TURNOS`
+-- Volcado de datos para la tabla `TURNOS`
 --
 
-INSERT INTO `TURNOS` (`turno_id`, `turno_fecha_creado`, `turno_jornada`, `turno_responsable`, `turno_saldo_caja`, `turno_total_utilidad`, `turno_total_entrega`, `turno_descuadre`, `turno_fecha_cierre`) VALUES
-(1, '2022-12-30', 1, 1, 6000, 5000, 4000, 20000, '0000-00-00');
+INSERT INTO `TURNOS` (`turno_id`, `turno_fecha_creado`, `turno_jornada`, `turno_responsable`, `turno_saldo_caja`, `turno_total_utilidad`, `turno_total_entrega`, `turno_descuadre`, `turno_creacion_timestamp`) VALUES
+(1, '2022-12-30', 1, 1, 6000, 5000, 4000, 20000, '2023-01-08 08:19:18'),
+(6, '2023-01-02', 1, 1, 5, 6, 7, 8, '2023-01-08 08:19:18'),
+(7, '2023-01-07', 1, 1, 600000, 161919, 761919, 10000, '2023-01-08 08:19:18'),
+(89, '2023-01-08', 2, 2, 50000, 71000, 121000, 1000, '2023-01-08 08:19:18'),
+(90, '2023-01-08', 5, 1, 200000, 59000, 259000, 2000, '2023-01-08 08:19:18'),
+(91, '2023-01-08', 5, 2, 45000, 10000, 55000, 0, '2023-01-08 08:20:39'),
+(92, '2023-01-08', 3, 3, 45000, 10, 45010, 0, '2023-01-08 08:24:44');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `USERS`
+-- Estructura de tabla para la tabla `USERS`
 --
 
 CREATE TABLE `USERS` (
@@ -81,10 +100,10 @@ CREATE TABLE `USERS` (
   `user_user` varchar(20) NOT NULL,
   `user_password` varchar(10) NOT NULL,
   `user_perfil` int(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `USERS`
+-- Volcado de datos para la tabla `USERS`
 --
 
 INSERT INTO `USERS` (`user_id`, `user_nombre`, `user_apellido`, `user_user`, `user_password`, `user_perfil`) VALUES
@@ -98,46 +117,53 @@ INSERT INTO `USERS` (`user_id`, `user_nombre`, `user_apellido`, `user_user`, `us
 -- --------------------------------------------------------
 
 --
--- Table structure for table `VENTAS`
+-- Estructura de tabla para la tabla `VENTAS`
 --
 
 CREATE TABLE `VENTAS` (
   `venta_id` int(5) NOT NULL,
-  `venta_fecha` date DEFAULT NULL,
+  `venta_fecha` timestamp NULL DEFAULT current_timestamp(),
   `venta_nombre_producto` varchar(50) NOT NULL,
   `venta_nombre_proveedor` varchar(50) NOT NULL,
   `venta_costo_producto` int(10) NOT NULL,
   `venta_valor_venta` int(10) NOT NULL,
   `venta_utilidad` int(10) NOT NULL,
   `user_id` int(5) DEFAULT NULL COMMENT 'vendedor',
-  `turno_id` int(5) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `turno_id` int(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `VENTAS`
+-- Volcado de datos para la tabla `VENTAS`
 --
 
 INSERT INTO `VENTAS` (`venta_id`, `venta_fecha`, `venta_nombre_producto`, `venta_nombre_proveedor`, `venta_costo_producto`, `venta_valor_venta`, `venta_utilidad`, `user_id`, `turno_id`) VALUES
-(28, NULL, 'PRODUCTO ROJO', 'LA FAVORITA', 5000, 6000, 5000, 3, 1),
-(29, NULL, 'PRODUCTO AZUL', 'JORGE', 34000, 50000, 16000, 1, 1),
-(30, NULL, 'PRODUCTO VERDE', 'FULIS', 5000, 7000, 2000, 2, 1),
-(32, NULL, 'TERRAMICINA OJOS', 'HH', 45000, 50000, 5000, 2, 1),
-(33, NULL, 'PRODUCTO CUARENTA', 'PIPI', 30000, 50000, 20000, 1, 1),
-(34, NULL, 'PRODUCTO PRODUCTO', 'HOLA', 20000, 30000, 10000, 2, 1),
-(36, NULL, 'ALKASELTZER', 'MUNI', 50000, 60000, 10, 4, 1);
+(28, NULL, 'PRODUCTO CAMBIADO HOY', 'LA FAVORITA', 5000, 6000, 5000, 3, 1),
+(43, NULL, 'JARABE DE PALO', 'PETRI', 10000, 20000, 10000, 2, 7),
+(44, NULL, 'ROSAS DEL CAMPO', 'VIKY', 40000, 60000, 20000, 4, 7),
+(45, NULL, 'PIEDRA DE MOLER', 'PULOL', 45000, 90000, 45000, 2, 7),
+(46, NULL, 'RR', 'RR', 3000, 40000, 37000, 2, 89),
+(47, NULL, 'TT', 'TT', 6000, 10000, 4000, 1, 89),
+(48, NULL, 'GG', 'GG', 20000, 50000, 30000, 4, 89),
+(49, NULL, 'PRODUCTO 5', 'JOJO', 15000, 50000, 35000, 1, 90),
+(50, NULL, 'UU', 'UU', 50000, 70000, 20000, 1, 90),
+(51, NULL, 'UU', 'UU', 6000, 10000, 4000, 4, 90),
+(52, '2023-01-08 08:12:42', 'BB', 'BB', 30000, 45000, 15000, 3, 90),
+(53, '2023-01-08 08:20:56', 'YY', 'YY', 45000, 50000, 5000, 2, 91),
+(54, '2023-01-08 08:21:21', 'FF', 'FF', 5000, 10000, 5000, 3, 91),
+(55, '2023-01-08 08:25:59', '77', '77', 10, 20, 10, 1, 92);
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `JORNADAS`
+-- Indices de la tabla `JORNADAS`
 --
 ALTER TABLE `JORNADAS`
   ADD PRIMARY KEY (`jornada_id`);
 
 --
--- Indexes for table `TURNOS`
+-- Indices de la tabla `TURNOS`
 --
 ALTER TABLE `TURNOS`
   ADD PRIMARY KEY (`turno_id`),
@@ -145,13 +171,13 @@ ALTER TABLE `TURNOS`
   ADD KEY `turno_jornada` (`turno_jornada`);
 
 --
--- Indexes for table `USERS`
+-- Indices de la tabla `USERS`
 --
 ALTER TABLE `USERS`
   ADD PRIMARY KEY (`user_id`);
 
 --
--- Indexes for table `VENTAS`
+-- Indices de la tabla `VENTAS`
 --
 ALTER TABLE `VENTAS`
   ADD PRIMARY KEY (`venta_id`),
@@ -159,46 +185,46 @@ ALTER TABLE `VENTAS`
   ADD KEY `turno_id` (`turno_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `JORNADAS`
+-- AUTO_INCREMENT de la tabla `JORNADAS`
 --
 ALTER TABLE `JORNADAS`
   MODIFY `jornada_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `TURNOS`
+-- AUTO_INCREMENT de la tabla `TURNOS`
 --
 ALTER TABLE `TURNOS`
-  MODIFY `turno_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `turno_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
--- AUTO_INCREMENT for table `USERS`
+-- AUTO_INCREMENT de la tabla `USERS`
 --
 ALTER TABLE `USERS`
   MODIFY `user_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `VENTAS`
+-- AUTO_INCREMENT de la tabla `VENTAS`
 --
 ALTER TABLE `VENTAS`
-  MODIFY `venta_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `venta_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `TURNOS`
+-- Filtros para la tabla `TURNOS`
 --
 ALTER TABLE `TURNOS`
   ADD CONSTRAINT `TURNOS_ibfk_1` FOREIGN KEY (`turno_responsable`) REFERENCES `USERS` (`user_id`),
   ADD CONSTRAINT `TURNOS_ibfk_2` FOREIGN KEY (`turno_jornada`) REFERENCES `JORNADAS` (`jornada_id`);
 
 --
--- Constraints for table `VENTAS`
+-- Filtros para la tabla `VENTAS`
 --
 ALTER TABLE `VENTAS`
   ADD CONSTRAINT `VENTAS_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `USERS` (`user_id`),

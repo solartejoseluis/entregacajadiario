@@ -46,6 +46,7 @@ document.addEventListener("DOMContentLoaded", function() {
   //-----------------------------
 
   function cargaPantallaPrincipal() {
+    consultarDatosTurnoActual();
     cargarDatosUtilidadVendedor1();
     cargarDatosUtilidadVendedor2();
     cargarDatosUtilidadVendedor3();
@@ -71,6 +72,28 @@ document.addEventListener("DOMContentLoaded", function() {
     //console.log(now);
     return now;
   }
+
+
+  function consultarDatosTurnoActual() {
+    $.ajax({
+      type: 'POST',
+      url: 'venta_data.php?accion=consultarDatosTurnoActual',
+      data: '',
+      success: function(datos) {
+        $('#npt_turno_id_actual').val(datos[0].turno_id_actual);
+        $('#npt_user_nombre').html(datos[0].user_nombre);
+        $('#npt_user_apellido').html(datos[0].user_apellido);
+        $('#npt_jornada_nombre').html(datos[0].jornada_nombre);
+
+
+        //$('#utilidadVendedor1').html(datos[0].utilidad_vendedor1);
+      },
+      error: function() {
+        alert("Problema en consultar datos turno actual");
+      }
+    });
+  };
+
 
   // CARGA DATOS VENDEDOR 1
   function cargarDatosUtilidadVendedor1() {
@@ -150,7 +173,7 @@ document.addEventListener("DOMContentLoaded", function() {
       success: function(datos) {
         $('#p_utilidad_turno').html(datos[0].utilidad_turno);
         $('#p_turno_numero_ventas').html(datos[0].ventas_turno);
-        $('#npt_turno_id').val(datos[0].turno_id);
+        //$('#npt_turno_id').val(datos[0].turno_id);
       },
       error: function() {
         alert("Problema en cargar datos utilidad turno");
@@ -243,6 +266,8 @@ document.addEventListener("DOMContentLoaded", function() {
       user_nombre: $('#npt-user_nombre').val(),
       user_id: $('#npt-user_id').val(),
       venta_utilidad: $('#npt_venta_utilidad').val(),
+      // el sgte valor salio por consulta:
+      turno_id_actual: $('#npt_turno_id_actual').val(),
     };
     return registro;
   }
@@ -282,16 +307,16 @@ document.addEventListener("DOMContentLoaded", function() {
       data: '',
       success: function(datos) {
         $('#nptEdit-venta_id').val(datos[0].venta_id);
-        $('#nptEdit-venta_nombre_producto').val(datos[0].venta_nombre_producto);
-        $('#nptEdit-venta_nombre_proveedor').val(datos[0].venta_nombre_proveedor);
-        $('#nptEdit-venta_costo_producto').val(datos[0].venta_costo_producto);
-        $('#nptEdit-venta_valor_venta').val(datos[0].venta_valor_venta);
-        $('#nptEdit-user_nombre').val(datos[0].user_nombre);
+        $('#nptEdit_venta_nombre_producto').val(datos[0].venta_nombre_producto);
+        $('#nptEdit_venta_nombre_proveedor').val(datos[0].venta_nombre_proveedor);
+        $('#nptEdit_venta_costo_producto').val(datos[0].venta_costo_producto);
+        $('#nptEdit_venta_valor_venta').val(datos[0].venta_valor_venta);
+        $('#nptEdit_user_nombre').val(datos[0].user_nombre);
         $('#nptEdit-user_id').val(datos[0].user_id);
 
         $('#slctEdit-user').val(datos[0].user_id);
 
-        $('#nptEdit-venta_utilidad').val(datos[0].venta_utilidad);
+        $('#nptEdit_venta_utilidad').val(datos[0].venta_utilidad);
         $("#mdl_edit_ventas").modal('show');
       },
       error: function() {
@@ -318,13 +343,13 @@ document.addEventListener("DOMContentLoaded", function() {
   function recolectarDatosFormularioEdit() {
     let registro = {
       venta_id: $('#nptEdit-venta_id').val(),
-      venta_nombre_producto: $('#nptEdit-venta_nombre_producto').val(),
-      venta_nombre_proveedor: $('#nptEdit-venta_nombre_proveedor').val(),
-      venta_costo_producto: $('#nptEdit-venta_costo_producto').val(),
-      venta_valor_venta: $('#nptEdit-venta_valor_venta').val(),
-      user_nombre: $('#nptEdit-user_nombre').val(),
+      venta_nombre_producto: $('#nptEdit_venta_nombre_producto').val(),
+      venta_nombre_proveedor: $('#nptEdit_venta_nombre_proveedor').val(),
+      venta_costo_producto: $('#nptEdit_venta_costo_producto').val(),
+      venta_valor_venta: $('#nptEdit_venta_valor_venta').val(),
+      user_nombre: $('#nptEdit_user_nombre').val(),
       user_id: $('#nptEdit-user_id').val(),
-      venta_utilidad: $('#nptEdit-venta_utilidad').val(),
+      venta_utilidad: $('#nptEdit_venta_utilidad').val(),
     };
     return registro;
   }
@@ -390,12 +415,12 @@ document.addEventListener("DOMContentLoaded", function() {
   //-----------------------------
 
   $('#btn_cerrar_turno').click(function() {
-    cargarDatosFormularioCerrar();
+    limpiarDatosFormularioCerrar();
     $("#mdl_cerrar_turno").modal('show');
   });
 
-  function cargarDatosFormularioCerrar() {
-    $('#npt_turno_id').val('');
+  function limpiarDatosFormularioCerrar() {
+    //$('#npt_turno_id').val('');
     $('#npt_turno_saldo_caja').val('');
     $('#npt_turno_total_utilidad').val('');
     $('#npt_turno_total_entrega').val('');
@@ -411,7 +436,7 @@ document.addEventListener("DOMContentLoaded", function() {
       data: '',
       success: function(datos) {
         $('#npt_turno_total_utilidad').val(datos[0].utilidad_turno);
-        $('#npt_turno_id').val(datos[0].turno_id);
+        //$('#npt_turno_id').val(datos[0].turno_id);
         //alert('prueba de funcionamiento');
         //$('#p_turno_numero_ventas').html(datos[0].ventas_turno);
 
@@ -454,7 +479,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   function recolectarDatosFormularioCerrar() {
     let registro = {
-      turno_id: $('#npt_turno_id').val(),
+      turno_id_actual:$('#npt_turno_id_actual').val(),
       turno_saldo_caja: $('#npt_turno_saldo_caja').val(),
       turno_total_utilidad: $('#npt_turno_total_utilidad').val(),
       turno_total_entrega: $('#npt_turno_total_entrega').val(),
@@ -466,7 +491,7 @@ document.addEventListener("DOMContentLoaded", function() {
   function guardarRegistroCerrar(registro) {
     $.ajax({
       type: 'POST',
-      url: 'venta_data.php?accion=guardar_cierre_turno',
+      url: 'venta_data.php?accion=guardar_cierre_turno&turno_id_actual='+ registro.turno_id_actual,
       data: registro,
       success: function(msg) {
         //listadoVentas.ajax.reload();
@@ -477,6 +502,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
   }
+
 
 
   // ***************************
@@ -499,7 +525,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
-  //CALCULAR UTILIDAD EN EL MODAL
+  //CALCULAR UTILIDAD EN EL MODAL NUEVA VENTA
   $('#npt_venta_valor_venta').focusout(function calculoUtilidad() {
     let costo = $('#npt_venta_costo_producto').val();
     let valor_venta = $('#npt_venta_valor_venta').val();
@@ -507,6 +533,27 @@ document.addEventListener("DOMContentLoaded", function() {
     $('#npt_venta_utilidad').val(utilidad);
 
   });
+
+
+  //CALCULAR UTILIDAD EN EL MODAL DE EDITAR
+  $('#nptEdit_venta_valor_venta').focusout(function calculoUtilidad() {
+    let costo = $('#nptEdit_venta_costo_producto').val();
+    let valor_venta = $('#nptEdit_venta_valor_venta').val();
+    let utilidad = parseFloat(valor_venta.replace(/\$|\./g, "")) - parseFloat(costo.replace(/\$|\./g, ""));
+    $('#nptEdit_venta_utilidad').val(utilidad);
+
+  });
+
+ $('#nptEdit_venta_costo_producto').focusout(function calculoUtilidad() {
+    let costo = $('#nptEdit_venta_costo_producto').val();
+    let valor_venta = $('#nptEdit_venta_valor_venta').val();
+    let utilidad = parseFloat(valor_venta.replace(/\$|\./g, "")) - parseFloat(costo.replace(/\$|\./g, ""));
+    $('#nptEdit_venta_utilidad').val(utilidad);
+
+  });
+
+
+
 
   // CAMBIAR AL FORMATO MONEDA
   $('#input.nombre').on('blur', function() {

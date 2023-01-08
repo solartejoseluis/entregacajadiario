@@ -18,6 +18,16 @@
       <div class="col-6">
         <h1>ENTREGA DE CAJA DIARIA</h1>
         <h3 id="hoy"></h3>
+<!-- carga turno_id_actual viene de variable de sesion, este esta usado para varias consultas. -->
+<input type="hidden" class="" id="npt_turno_id_actual">
+
+<!-- estos dos datos los cargo pero no los estoy usando -->
+<span>RESPONSABLE DE TURNO: </span>
+<span id="npt_user_nombre"></span>
+<span id="npt_user_apellido"></span><br>
+<span>JORNADA: </span>
+<span id="npt_jornada_nombre"></span>
+
       </div>
     </div>
     <div class="row">
@@ -208,50 +218,50 @@
             <!-- EDITAR PRODUCTO -->
             <div class="row mb-3">
               <div class="col-md-3 ms-auto">
-                <label for="nptEdit-venta_nombre_producto" class="col-form-label">Producto:</label>
+                <label for="nptEdit_venta_nombre_producto" class="col-form-label">Producto:</label>
               </div>
               <div class="col-md-9 ms-auto">
-                <!-- <input type="text" class="form-control" id="nptEdit-venta_nombre_producto" placeholder="Digite Nombre del producto"> -->
-                <input type="text" class="form-control" id="nptEdit-venta_nombre_producto" placeholder="Digite Nombre del producto" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
+                <!-- <input type="text" class="form-control" id="nptEdit_venta_nombre_producto" placeholder="Digite Nombre del producto"> -->
+                <input type="text" class="form-control" id="nptEdit_venta_nombre_producto" placeholder="Digite Nombre del producto" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
               </div>
             </div>
             <!--  EDITAR PROVEEDOR -->
             <div class="row mb-3">
               <div class="col-md-3 ms-auto">
-                <label for="nptEdit-venta_nombre_proveedor" class="col-form-label">Proveedor:</label>
+                <label for="nptEdit_venta_nombre_proveedor" class="col-form-label">Proveedor:</label>
               </div>
               <div class="col-md-9 ms-auto">
-                <!-- <input type="text" class="form-control" id="nptEdit-venta_nombre_proveedor" placeholder="Digite Nombre proveedor"> -->
-                <input type="text" class="form-control" id="nptEdit-venta_nombre_proveedor" placeholder="Digite Nombre proveedor" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
+                <!-- <input type="text" class="form-control" id="nptEdit_venta_nombre_proveedor" placeholder="Digite Nombre proveedor"> -->
+                <input type="text" class="form-control" id="nptEdit_venta_nombre_proveedor" placeholder="Digite Nombre proveedor" onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()">
               </div>
             </div>
             <!-- EDITAR COSTO PRODUCTO -->
             <div class="row mb-3">
               <div class="col-md-3 ms-auto">
-                <label for="nptEdit-venta_costo_producto" class="col-form-label">Costo Prod:</label>
+                <label for="nptEdit_venta_costo_producto" class="col-form-label">Costo Prod:</label>
               </div>
               <div class="col-md-9 ms-auto">
-                <input type="text" class="form-control" id="nptEdit-venta_costo_producto" placeholder="Digite Costo de producto">
+                <input type="text" class="form-control" id="nptEdit_venta_costo_producto" placeholder="Digite Costo de producto">
               </div>
             </div>
             <!-- EDITAR VALOR VENTA -->
             <div class="row mb-3">
               <div class="col-md-3 ms-auto">
-                <label for="nptEdit-venta_valor_venta" class="col-form-label"> Valor Venta:</label>
+                <label for="nptEdit_venta_valor_venta" class="col-form-label"> Valor Venta:</label>
               </div>
               <div class="col-md-9 ms-auto">
-                <input type="text" class="form-control" id="nptEdit-venta_valor_venta" placeholder="Digite valor venta">
+                <input type="text" class="form-control" id="nptEdit_venta_valor_venta" placeholder="Digite valor venta">
               </div>
             </div>
             <!--  EDITAR VENDEDOR -->
             <div class="row mb-3">
               <div class="col-md-3 ms-auto">
-                <label for="nptEdit-user_nombre" class="col-form-label">Vendedor:</label>
+                <label for="nptEdit_user_nombre" class="col-form-label">Vendedor:</label>
               </div>
               <div class="col-md-9 ms-auto">
                 <input type="hidden" class="form-control" id="nptEdit-user_id">
                 <div class="selectUser">
-                  <!-- <input class="form-control" id="nptEdit-user_nombre"> -->
+                  <!-- <input class="form-control" id="nptEdit_user_nombre"> -->
                   <select class="form-select" id="slctEdit-user"></select>
                 </div>
               </div>
@@ -259,10 +269,10 @@
             <!-- EDITAR UTILIDAD -->
             <div class="row mb-3">
               <div class="col-md-3 ms-auto">
-                <label for="nptEdit-venta_utilidad" class="col-form-label">Utilidad:</label>
+                <label for="nptEdit_venta_utilidad" class="col-form-label">Utilidad:</label>
               </div>
               <div class="col-md-9 ms-auto">
-                <input type="text" class="form-control" id="nptEdit-venta_utilidad" disabled>
+                <input type="text" class="form-control" id="nptEdit_venta_utilidad" disabled>
               </div>
             </div>
           </form>

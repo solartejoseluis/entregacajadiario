@@ -7,7 +7,7 @@ session_start();
 //obtener variables
 $user_local = $_POST['npt_user'];
 $password_local = $_POST['npt_password'];
-$_SESSION['nombre_sesion']=$user_local;
+//$_SESSION['nombre_sesion']=$user_local;
 
 //$conn=conectarBD();
 
