@@ -1,4 +1,3 @@
-
 // CARGA  HORA ACTUAL
 $(document).ready(function() {
     limpiarFormularioTurno();
