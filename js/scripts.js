@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
   // CARGAS EN PANTALLA PRINCIPAL
   //-----------------------------
 
-  function cargaPantallaPrincipal() {
+  function cargaPantallaPrincipal(){
     consultarDatosTurnoActual();
     cargarDatosUtilidadVendedor1();
     cargarDatosUtilidadVendedor2();
@@ -502,9 +502,6 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
   }
-
-
-
   // ***************************
   // FIN CICLO CERRAR TURNO
   // ***************************
@@ -553,8 +550,6 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
 
-
-
   // CAMBIAR AL FORMATO MONEDA
   $('#input.nombre').on('blur', function() {
     const value = this.value.replace(/\,/g, '');
@@ -591,7 +586,7 @@ document.addEventListener("DOMContentLoaded", function() {
   //*************************
 
 
-}); // CIERRE ABIERTO EN EL DATATABLES
+}); // CIERRE  DEL DATATABLES
 
 
 

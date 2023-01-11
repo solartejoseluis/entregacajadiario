@@ -28,21 +28,7 @@ require "pdo.php";
 $_SESSION['turno_id_actual'] = $arr['turno_id_actual'];
  };
 
-
 //echo "la variable de sesion es . $_SESSION[turno_id_actual]";
-
-
 echo'<meta http-equiv="REFRESH"content="0;url=venta_home.html">';
 
 ?>
-
-
-
-
-
-
-
-
-
-
-

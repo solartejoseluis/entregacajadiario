@@ -26,7 +26,72 @@ switch ($_GET['accion']) {
     $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($result);
     break;
+
+
+
+case 'consultar_utilidad_vendedor1':
+    $sql = "SELECT
+    SUM(venta_utilidad) AS utilidad_vendedor1,
+    COUNT(venta_utilidad) AS ventas_vendedor1
+     FROM VENTAS WHERE (user_id = 1)
+     AND (turno_id=$_GET[turno_id])";
+     $stmt = $pdo -> prepare($sql);
+    $stmt -> execute();
+    $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($result);
+    break;
+
+
+case 'consultar_utilidad_vendedor2':
+    $sql = "SELECT
+    SUM(venta_utilidad)  AS utilidad_vendedor2,
+    COUNT(venta_utilidad) AS ventas_vendedor2
+    FROM VENTAS WHERE
+     (user_id = 2)
+     AND (turno_id=$_GET[turno_id])";
+    $stmt = $pdo -> prepare($sql);
+    $stmt -> execute();
+    $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($result);
+    break;
+
+
+case 'consultar_utilidad_vendedor3':
+    $sql = "SELECT
+      SUM(venta_utilidad)  AS utilidad_vendedor3,
+      COUNT(venta_utilidad) AS ventas_vendedor3
+      FROM VENTAS WHERE
+      (user_id = 3)
+     AND (turno_id=$_GET[turno_id])";
+    $stmt = $pdo -> prepare($sql);
+    $stmt -> execute();
+    $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($result);
+    break;
+
+case 'consultar_utilidad_vendedor4':
+    $sql = "SELECT
+    SUM(venta_utilidad)  AS utilidad_vendedor4,
+    COUNT(venta_utilidad) AS ventas_vendedor4
+    FROM VENTAS WHERE
+     (user_id = 4)
+     AND (turno_id=$_GET[turno_id])";
+    $stmt = $pdo -> prepare($sql);
+    $stmt -> execute();
+    $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($result);
+    break;
+
+case 'consultar_utilidad_turno':
+    $sql = "SELECT
+    SUM(venta_utilidad)  AS utilidad_turno,
+    COUNT(venta_utilidad) AS ventas_turno
+    FROM VENTAS
+    WHERE turno_id=$_GET[turno_id]";
+    $stmt = $pdo -> prepare($sql);
+    $stmt -> execute();
+    $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($result);
+    break;
   };
-
-
 ?>
