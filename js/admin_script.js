@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
       dataSrc: ""
     },
     "columns": [
-      {"data":"turno_id"},
+      //{"data":"turno_id"},
       {"data":"turno_fecha_creado"},
       {"data":"jornada_nombre"},
       {"data":"user_nombre"},
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
       {"data":null,"orderable":false}
     ],
     "columnDefs": [{
-        targets: 8,
+        targets: 7,
         "defaultContent": "<button class='btn btn-primary btn-sm btnVer'>/<i class='fa-solid fa-pen'></i></button>",
         data: null
     }],
@@ -31,27 +31,29 @@ document.addEventListener("DOMContentLoaded", function() {
   // FIN DATATABLES
   // *******************
 
-
-
  $('#tbl_admin tbody').on('click','button.btnVer',function(){
     let registro = resumen.row($(this).parents('tr')).data();
+
   $("#mdl_ver_venta").modal('show');
-    //consultarDatosTurnoActual();
     cargarDatosUtilidadVendedor1(registro.turno_id);
     cargarDatosUtilidadVendedor2(registro.turno_id);
     cargarDatosUtilidadVendedor3(registro.turno_id);
     cargarDatosUtilidadVendedor4(registro.turno_id);
     utilidadTurno(registro.turno_id);
-    //recuperarRegistroVER(registroVer.turno_id);
+    resumen.ajax.reload();
+    //datatableslistarVentasDia();
+    //resumen.ajax.reload();
   });
 
+ $('#btnCerrar').on('click',function(){
+  //let registro = resumen.row($(this).parents('tr')).data();
+  //resumen.ajax.reload();
+  $("#mdl_ver_venta").modal('hide');
+  });
 
   //-----------------------------
   // CARGAS EN PANTALLA PRINCIPAL
   //-----------------------------
-
-
-
 
   // CARGA LA FECHA ACTUAL y CUADRO PRINCIPAL DE PAGINA
   $(document).ready(function() {
@@ -69,8 +71,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let now = today.toLocaleString('es-CO', options);
     //console.log(now);
     return now;
-  }
-
+  };
 
   function consultarDatosTurnoActual(turno_id) {
     $.ajax({
@@ -89,7 +90,6 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
   };
-
 
   // CARGA DATOS VENDEDOR 1
   function cargarDatosUtilidadVendedor1(turno_id){
@@ -181,6 +181,37 @@ document.addEventListener("DOMContentLoaded", function() {
   //  FIN CARGA EN PANTALLA PRINCIPAL
   //***************************************
 
+
+
+// inicia Datatables del Modal
+
+  function datatableslistarVentasDia(){
+  let listadoVentasDia = $("#tblVentasDia").DataTable({
+    "ajax": {
+      url: "admin_ctrl.php?accion=listar_ventas_dia",
+      dataSrc: ""
+    },
+    "columns": [
+      { "data": "venta_id" },
+      { "data": "venta_nombre_producto" },
+      { "data": "venta_nombre_proveedor" },
+      { "data": "venta_costo_producto" },
+      { "data": "venta_valor_venta" },
+      { "data": "user_nombre" }, //nombre vendedor
+      { "data": "venta_utilidad" },
+      //{ "data": null, "orderable": false },
+      //{ "data": null, "orderable": false }
+    ],
+
+    "columnDefs": [
+    ],
+    "language": {
+      "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+    },
+  });
+};
+
+// Fin datatables del modal
 
 
 }); // CIERRE DEL DATATABLES
