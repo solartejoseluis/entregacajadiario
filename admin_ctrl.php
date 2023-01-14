@@ -95,7 +95,7 @@ case 'consultar_utilidad_turno':
     break;
 
 
-case 'listar_ventas_dia':
+case 'listar_venta_seleccionada':
 // ENVIA LOS DATOS AL DATATABLES
     $sql = "SELECT
         VENTAS.venta_id,
@@ -109,6 +109,7 @@ case 'listar_ventas_dia':
         FROM VENTAS
         INNER JOIN USERS
         ON VENTAS.user_id=USERS.user_id
+
         ";
     $stmt = $pdo -> prepare($sql);
     $stmt -> execute();

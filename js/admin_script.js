@@ -40,8 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
     cargarDatosUtilidadVendedor3(registro.turno_id);
     cargarDatosUtilidadVendedor4(registro.turno_id);
     utilidadTurno(registro.turno_id);
-    resumen.ajax.reload();
-    //datatableslistarVentasDia();
+    datatableslistarVentasDia();
     //resumen.ajax.reload();
   });
 
@@ -52,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   //-----------------------------
-  // CARGAS EN PANTALLA PRINCIPAL
+  // CARGAS EN EL MODAL
   //-----------------------------
 
   // CARGA LA FECHA ACTUAL y CUADRO PRINCIPAL DE PAGINA
@@ -73,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function() {
     return now;
   };
 
-  function consultarDatosTurnoActual(turno_id) {
+function consultarDatosTurnoActual(turno_id) {
     $.ajax({
       type: 'POST',
       url: 'admin_ctrl.php?accion=consultarDatosTurnoActual&turno_id=' + turno_id,
@@ -157,9 +156,6 @@ document.addEventListener("DOMContentLoaded", function() {
   };
 
 
-  // PRUEBAS CON UTILIDAD
-
-
   // CARGA DATOS TOTAL UTILIDAD TURNO
   function utilidadTurno(turno_id) {
     $.ajax({
@@ -177,41 +173,67 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   };
 
+
+
+  // CARGA DATOS VENDEDOR 4
+  function datatableslistarVentasDia(turno_id) {
+    $.ajax({
+      type: 'GET',
+      url: 'admin_ctrl.php?accion=consultar_utilidad_vendedor4&turno_id=' + turno_id,
+      data: '',
+      success: function(datos) {
+        //$('#utilidadVendedor4').html(datos[0].utilidad_vendedor4);
+        //$('#ventasVendedor4').html(datos[0].ventas_vendedor4);
+        // aqui debo colocar el codigo que carga la tabla.
+      },
+      error: function() {
+        alert(" problema e listar ventas dia");
+      }
+    });
+  };
+
+
+
+
+
+
   //***************************************
-  //  FIN CARGA EN PANTALLA PRINCIPAL
+  //  FIN CARGA EN EL MODAL
   //***************************************
 
 
-
+// ----------------------------
 // inicia Datatables del Modal
+// ----------------------------
+//   function datatableslistarVentasDia(){
+//   let listadoVentasDia = $("#tblVentasDia").DataTable({
+//     "ajax": {
+//       url: "admin_ctrl.php?accion=listar_venta_seleccionada",
+//       dataSrc: ""
+//     },
+//     "columns": [
+//       { "data": "venta_id" },
+//       { "data": "venta_nombre_producto" },
+//       { "data": "venta_nombre_proveedor" },
+//       { "data": "venta_costo_producto" },
+//       { "data": "venta_valor_venta" },
+//       { "data": "user_nombre" }, //nombre vendedor
+//       { "data": "venta_utilidad" },
+//       //{ "data": null, "orderable": false },
+//       //{ "data": null, "orderable": false }
+//     ],
 
-  function datatableslistarVentasDia(){
-  let listadoVentasDia = $("#tblVentasDia").DataTable({
-    "ajax": {
-      url: "admin_ctrl.php?accion=listar_ventas_dia",
-      dataSrc: ""
-    },
-    "columns": [
-      { "data": "venta_id" },
-      { "data": "venta_nombre_producto" },
-      { "data": "venta_nombre_proveedor" },
-      { "data": "venta_costo_producto" },
-      { "data": "venta_valor_venta" },
-      { "data": "user_nombre" }, //nombre vendedor
-      { "data": "venta_utilidad" },
-      //{ "data": null, "orderable": false },
-      //{ "data": null, "orderable": false }
-    ],
+//     "columnDefs": [
+//     ],
+//     "language": {
+//       "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+//     },
+//   });
+// };
 
-    "columnDefs": [
-    ],
-    "language": {
-      "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
-    },
-  });
-};
 
+//*************************
 // Fin datatables del modal
-
+// ***********************
 
 }); // CIERRE DEL DATATABLES
