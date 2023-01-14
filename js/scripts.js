@@ -94,7 +94,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   };
 
-
   // CARGA DATOS VENDEDOR 1
   function cargarDatosUtilidadVendedor1() {
     $.ajax({
@@ -159,10 +158,6 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
   };
-
-
-  // PRUEBAS CON UTILIDAD
-
 
   // CARGA DATOS TOTAL UTILIDAD TURNO
   function utilidadTurno() {
@@ -250,7 +245,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
-
   //TOMA EL VALOR DEL SELECT Y PONERLO EN INPUT
   $("#slct_user").change(function() {
     $('#npt-user_id').val($(this).val());
@@ -279,6 +273,7 @@ document.addEventListener("DOMContentLoaded", function() {
       data: registro,
       success: function(msg) {
         listadoVentas.ajax.reload();
+        cargaPantallaPrincipal();
       },
       error: function() {
         alert("problema en: guardarRegistro");
@@ -467,15 +462,11 @@ document.addEventListener("DOMContentLoaded", function() {
       $('#npt_turno_descuadre').focus();
       return false;
     } else {
-      //ejecutar Si todo fue validado
       $("#mdl_cerrar_turno").modal('hide');
       let registro = recolectarDatosFormularioCerrar();
       guardarRegistroCerrar(registro);
-      //cargaPantallaPrincipal();
-      //alert("ok Validado");
     }
   });
-
 
   function recolectarDatosFormularioCerrar() {
     let registro = {
@@ -585,8 +576,4 @@ document.addEventListener("DOMContentLoaded", function() {
   // FIN OPERACIONES EN EL MODAL
   //*************************
 
-
 }); // CIERRE  DEL DATATABLES
-
-
-

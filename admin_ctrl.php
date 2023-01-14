@@ -46,8 +46,7 @@ case 'consultar_utilidad_vendedor2':
     $sql = "SELECT
     SUM(venta_utilidad)  AS utilidad_vendedor2,
     COUNT(venta_utilidad) AS ventas_vendedor2
-    FROM VENTAS WHERE
-     (user_id = 2)
+    FROM VENTAS WHERE(user_id = 2)
      AND (turno_id=$_GET[turno_id])";
     $stmt = $pdo -> prepare($sql);
     $stmt -> execute();
@@ -60,8 +59,7 @@ case 'consultar_utilidad_vendedor3':
     $sql = "SELECT
       SUM(venta_utilidad)  AS utilidad_vendedor3,
       COUNT(venta_utilidad) AS ventas_vendedor3
-      FROM VENTAS WHERE
-      (user_id = 3)
+      FROM VENTAS WHERE(user_id = 3)
      AND (turno_id=$_GET[turno_id])";
     $stmt = $pdo -> prepare($sql);
     $stmt -> execute();
@@ -73,8 +71,7 @@ case 'consultar_utilidad_vendedor4':
     $sql = "SELECT
     SUM(venta_utilidad)  AS utilidad_vendedor4,
     COUNT(venta_utilidad) AS ventas_vendedor4
-    FROM VENTAS WHERE
-     (user_id = 4)
+    FROM VENTAS WHERE(user_id = 4)
      AND (turno_id=$_GET[turno_id])";
     $stmt = $pdo -> prepare($sql);
     $stmt -> execute();
@@ -95,6 +92,33 @@ case 'consultar_utilidad_turno':
     break;
 
 
+case 'consultarDatosTurnoActual':
+    $sql = "SELECT
+    TURNOS.turno_id AS turno_id_actual,
+    TURNOS.turno_fecha_creado,
+    TURNOS.turno_jornada,
+    TURNOS.turno_responsable,
+    TURNOS.turno_saldo_caja,
+    TURNOS.turno_total_utilidad,
+    TURNOS.turno_total_entrega,
+    TURNOS.turno_descuadre,
+    USERS.user_nombre,
+    USERS.user_apellido,
+    JORNADAS.jornada_nombre
+    FROM TURNOS
+    INNER JOIN USERS
+    ON USERS.user_id=TURNOS.turno_responsable
+    INNER JOIN JORNADAS
+    ON JORNADAS.jornada_id=TURNOS.turno_jornada
+    WHERE turno_id=$_GET[turno_id]";
+    $stmt = $pdo -> prepare($sql);
+    $stmt -> execute();
+    $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($result);
+  break;
+
+
+
 case 'listar_venta_seleccionada':
 // ENVIA LOS DATOS AL DATATABLES
     $sql = "SELECT
@@ -109,12 +133,14 @@ case 'listar_venta_seleccionada':
         FROM VENTAS
         INNER JOIN USERS
         ON VENTAS.user_id=USERS.user_id
-
+        WHERE turno_id=$_GET[turno_id]
         ";
     $stmt = $pdo -> prepare($sql);
     $stmt -> execute();
     $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($result);
     break;
+
+
   };
 ?>

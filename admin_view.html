@@ -17,17 +17,16 @@
       <div class="col-6">
         <h1>RESUMEN DE CAJA</h1>
         <h3 id="hoy"></h3>
-        <!-- carga turno_id_actual viene de variable de sesion, este esta usado para varias consultas. -->
-        <input type="hidden" class="" id="npt_turno_id_actual">
       </div>
     </div>
     <!-- inicia DATATABLES de resumen -->
     <div class="container-fluid" id="admin_tabla">
       <div class="row">
-        <div class="col-12">
-          <table class="table" id="tbl_admin">
+
+          <table class="table table-sm table-bordered table-hover border-primary" id="tbl_admin">
             <thead>
-              <tr>
+              <tr class="table-danger">
+                <td>ID</td>
                 <td>FECHA</td>
                 <td>JORNADA</td>
                 <td>RESPONSABLE</td>
@@ -39,7 +38,7 @@
               </tr>
             </thead>
           </table>
-        </div>
+
       </div>
     </div>
     <!-- fin DATATABLES de resumen -->
@@ -61,8 +60,8 @@
           <div class="row">
             <div class="col-6">
               <h3 id="hoy"></h3>
-              <!-- carga turno_id_actual viene de variable de sesion, este esta usado para varias consultas. -->
-              <input type="hidden" class="" id="npt_turno_id_actual">
+              <span>FECHA DEL TURNO: </span>
+              <span id="npt_turno_fecha_creado"></span><br>
               <!-- estos dos datos los cargo pero no los estoy usando -->
               <span>RESPONSABLE DE TURNO: </span>
               <span id="npt_user_nombre"></span>
@@ -74,11 +73,11 @@
           <!-- inicio columna 1 -->
           <div class="row">
             <div class="col-md-6">
-              <h3>CUADRO DE VENDEDORES</h3>
+              <h3>VENDEDORES</h3>
               <table class="table table-sm table-bordered table-hover border-primary">
                 <thead>
-                  <tr>
-                    <th scope="col">CUADRO VENDEDORES</th>
+                  <tr class="table-primary">
+                    <th scope="col"></th>
                     <th scope="col">YULY</th>
                     <th scope="col">LORENA</th>
                     <th scope="col">KAROL</th>
@@ -87,15 +86,15 @@
                 </thead>
                 <tbody class="table-group-divider">
                   <tr>
-                    <th scope="row">Num - Gestiones</th>
+                    <th class="table-primary" scope="row">Numero de Gestiones</th>
                     <td><p id="ventasVendedor1"></p></td>
                     <td><p id="ventasVendedor2"></p></td>
                     <td><p id="ventasVendedor3"></p></td>
                     <td><p id="ventasVendedor4"></p></td>
                   </tr>
                   <tr>
-                    <th scope="row">Utilidad Hoy</th>
-                    <td><p id="utilidadVendedor1" class="moneda"></p></td>
+                    <th class="table-primary" scope="row">Utilidad de Gestiones</th>
+                    <td><p id="utilidadVendedor1"></p></td>
                     <td><p id="utilidadVendedor2"></p></td>
                     <td><p id="utilidadVendedor3"></p></td>
                     <td><p id="utilidadVendedor4"></p></td>
@@ -106,20 +105,28 @@
 
           <!-- inicio columna 2 -->
           <div class="col-md-6">
-            <h3>CUADRO DE TOTALES</h3>
+            <h3>TOTALES</h3>
             <table class="table table-sm table-bordered table-hover border-primary">
               <tbody class="table-group-divider">
                 <tr>
-                  <th scope="row">TOTAL UTILIDAD</th>
-                  <td>
-                    <p id="p_utilidad_turno"></p>
-                  </td>
+                  <th class="table-primary" scope="row">CAJA GENERAL</th>
+                  <td><p id="p_turno_saldo_caja"></p></td>
                 </tr>
                 <tr>
-                  <th scope="row">NUMERO DE VENTAS</th>
-                  <td>
-                    <p id="p_turno_numero_ventas"></p>
-                  </td>
+                  <th class="table-primary" scope="row" style="width:40%">UTILIDAD GESTIONES</th>
+                  <td><p id="p_utilidad_turno"></p></td>
+                </tr>
+                <tr>
+                  <th class="table-primary" scope="row">ENTREGA</th>
+                  <td><p id="p_turno_total_entrega"></p></td>
+                </tr>
+                <tr>
+                  <th class="table-primary" scope="row">DESCUADRE</th>
+                  <td><p id="p_turno_descuadre"></p></td>
+                </tr>
+                <tr>
+                  <th class="table-primary" scope="row">NUMERO DE VENTAS</th>
+                  <td><p id="p_turno_numero_ventas"></p></td>
                 </tr>
               </tbody>
             </table>
@@ -128,28 +135,22 @@
          </div> <!-- final del primer row-->
 
 <div class="row">
-  <div class="container-fluid" id="tablaDia">
-    <div class="row">
-      <div class="col-12">
-        <table class="table" id="tblVentasDia">
-          <thead>
-            <tr>
-              <td>ID</td>
-              <td>PRODUCTO</td>
-              <td>PROVEEDOR</td>
-              <td>PRECIO COSTO</td>
-              <td>PRECIO VENTA</td>
-              <td>VENDEDOR</td>
-              <td>UTILIDAD</td>
-
+<h3>VENTAS DEL DIA</h3>
+          <table class="table table-sm table-bordered table-hover border-primary" id="myTable">
+          <thead >
+            <tr class="table-primary">
+              <td scope="col">ID</td>
+              <td scope="col">PRODUCTO</td>
+              <td scope="col">PROVEEDOR</td>
+              <td scope="col">PRECIO COSTO</td>
+              <td scope="col">PRECIO VENTA</td>
+              <td scope="col">VENDEDOR</td>
+              <td scope="col">UTILIDAD</td>
             </tr>
           </thead>
-        </table>
-      </div>
-    </div>
-  </div>
-
-
+<tbody class="table-group-divider">
+</tbody>
+</table>
 
 </div>
 
