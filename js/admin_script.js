@@ -1,14 +1,14 @@
 //-----------------------
-// INICIA DATATABLES
+// INICIA DATATABLES ADMIN
 //-----------------------
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     let resumen = $("#tbl_admin").DataTable({
         "ajax": {
             url: "admin_ctrl.php?accion=listar_resumen",
             dataSrc: ""
         },
         "columns": [
-            {"data":"turno_id"},
+            { "data": "turno_id" },
             { "data": "turno_fecha_creado" },
             { "data": "jornada_nombre" },
             { "data": "user_nombre" },
@@ -31,10 +31,8 @@ document.addEventListener("DOMContentLoaded", function() {
     // FIN DATATABLES
     // *******************
 
-    $('#tbl_admin tbody').on('click', 'button.btnVer', function() {
+    $('#tbl_admin tbody').on('click', 'button.btnVer', function () {
         let registro = resumen.row($(this).parents('tr')).data();
-
-        $("#mdl_ver_venta").modal('show');
         consultarDatosTurnoActual(registro.turno_id);
         cargarDatosUtilidadVendedor1(registro.turno_id);
         cargarDatosUtilidadVendedor2(registro.turno_id);
@@ -42,21 +40,18 @@ document.addEventListener("DOMContentLoaded", function() {
         cargarDatosUtilidadVendedor4(registro.turno_id);
         utilidadTurno(registro.turno_id);
         listarVentasDia(registro.turno_id);
+        $("#mdl_ver_venta").modal('show');
         //resumen.ajax.reload();
     });
 
-    $('#btnCerrar').on('click', function() {
-        //let registro = resumen.row($(this).parents('tr')).data();
-        //resumen.ajax.reload();
-        $("#mdl_ver_venta").modal('hide');
-    });
+
 
     //-----------------------------
     // CARGAS EN EL MODAL
     //-----------------------------
 
     // CARGA LA FECHA ACTUAL y CUADRO PRINCIPAL DE PAGINA
-    $(document).ready(function() {
+    $(document).ready(function () {
         let hoy = actualDate();
         document.getElementById('hoy').innerHTML = hoy;
         //cargaPantallaPrincipal();
@@ -78,20 +73,20 @@ document.addEventListener("DOMContentLoaded", function() {
             type: 'POST',
             url: 'admin_ctrl.php?accion=consultarDatosTurnoActual&turno_id=' + turno_id,
             data: '',
-            success: function(datos) {
+            success: function (datos) {
                 //$('#npt_turno_id_actual').val(datos[0].turno_id_actual);
                 $('#npt_user_nombre').html(datos[0].user_nombre);
                 $('#npt_user_apellido').html(datos[0].user_apellido);
                 $('#npt_turno_fecha_creado').html(datos[0].turno_fecha_creado);
-                $('#npt_jornada_nombre').html(datos[0].jornada_nombre);
+                $('#npt_jornada_nombre').html(datos[1].jornada_nombre);
 
-  $('#p_turno_saldo_caja').html(datos[0].turno_saldo_caja.toLocaleString('es-CO',{style: 'currency',currency: 'COP',maximumFractionDigits: 0,minimumFractionDigits: 0}));
+                $('#p_turno_saldo_caja').html(datos[0].turno_saldo_caja.toLocaleString('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0, minimumFractionDigits: 0 }));
 
-  $('#p_turno_total_entrega').html(datos[0].turno_total_entrega.toLocaleString('es-CO',{style: 'currency',currency: 'COP',maximumFractionDigits: 0,minimumFractionDigits: 0}));
+                $('#p_turno_total_entrega').html(datos[0].turno_total_entrega.toLocaleString('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0, minimumFractionDigits: 0 }));
 
-  $('#p_turno_descuadre').html(datos[0].turno_descuadre.toLocaleString('es-CO',{style: 'currency',currency: 'COP',maximumFractionDigits: 0,minimumFractionDigits: 0}));
+                $('#p_turno_descuadre').html(datos[0].turno_descuadre.toLocaleString('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0, minimumFractionDigits: 0 }));
             },
-            error: function() {
+            error: function () {
                 alert("Problema en consultar datos turno actual");
             }
         });
@@ -103,12 +98,12 @@ document.addEventListener("DOMContentLoaded", function() {
             type: 'GET',
             url: 'admin_ctrl.php?accion=consultar_utilidad_vendedor1&turno_id=' + turno_id,
             data: '',
-            success: function(datos) {
-    $('#utilidadVendedor1').html(datos[0].utilidad_vendedor1.toLocaleString('es-CO',{style: 'currency',currency: 'COP',maximumFractionDigits: 0,minimumFractionDigits: 0}));
+            success: function (datos) {
+                $('#utilidadVendedor1').html(datos[0].utilidad_vendedor1.toLocaleString('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0, minimumFractionDigits: 0 }));
 
-    $('#ventasVendedor1').html(datos[0].ventas_vendedor1);
+                $('#ventasVendedor1').html(datos[0].ventas_vendedor1);
             },
-            error: function() {
+            error: function () {
                 alert("Problema en consultarUtilidadVendedor1");
             }
         });
@@ -121,12 +116,12 @@ document.addEventListener("DOMContentLoaded", function() {
             type: 'GET',
             url: 'admin_ctrl.php?accion=consultar_utilidad_vendedor2&turno_id=' + turno_id,
             data: '',
-            success: function(datos) {
-                $('#utilidadVendedor2').html(datos[0].utilidad_vendedor2.toLocaleString('es-CO',{style: 'currency',currency: 'COP',maximumFractionDigits: 0,minimumFractionDigits: 0}));
+            success: function (datos) {
+                $('#utilidadVendedor2').html(datos[0].utilidad_vendedor2.toLocaleString('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0, minimumFractionDigits: 0 }));
 
                 $('#ventasVendedor2').html(datos[0].ventas_vendedor2);
             },
-            error: function() {
+            error: function () {
                 alert("Problema en consultarUtilidadVendedor2");
             }
         });
@@ -138,12 +133,12 @@ document.addEventListener("DOMContentLoaded", function() {
             type: 'GET',
             url: 'admin_ctrl.php?accion=consultar_utilidad_vendedor3&turno_id=' + turno_id,
             data: '',
-            success: function(datos) {
-                $('#utilidadVendedor3').html(datos[0].utilidad_vendedor3.toLocaleString('es-CO',{style: 'currency',currency: 'COP',maximumFractionDigits: 0,minimumFractionDigits: 0}));
+            success: function (datos) {
+                $('#utilidadVendedor3').html(datos[0].utilidad_vendedor3.toLocaleString('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0, minimumFractionDigits: 0 }));
 
                 $('#ventasVendedor3').html(datos[0].ventas_vendedor3);
             },
-            error: function() {
+            error: function () {
                 alert("Problema en consultarUtilidadVendedor3");
             }
         });
@@ -155,12 +150,12 @@ document.addEventListener("DOMContentLoaded", function() {
             type: 'GET',
             url: 'admin_ctrl.php?accion=consultar_utilidad_vendedor4&turno_id=' + turno_id,
             data: '',
-            success: function(datos) {
-                $('#utilidadVendedor4').html(datos[0].utilidad_vendedor4.toLocaleString('es-CO',{style: 'currency',currency: 'COP',maximumFractionDigits: 0,minimumFractionDigits: 0}));
+            success: function (datos) {
+                $('#utilidadVendedor4').html(datos[0].utilidad_vendedor4.toLocaleString('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0, minimumFractionDigits: 0 }));
 
                 $('#ventasVendedor4').html(datos[0].ventas_vendedor4);
             },
-            error: function() {
+            error: function () {
                 alert("Problema en consultarUtilidadVendedor4");
             }
         });
@@ -173,13 +168,13 @@ document.addEventListener("DOMContentLoaded", function() {
             type: 'GET',
             url: 'admin_ctrl.php?accion=consultar_utilidad_turno&turno_id=' + turno_id,
             data: '',
-            success: function(datos) {
-                $('#p_utilidad_turno').html(datos[0].utilidad_turno.toLocaleString('es-CO',{style:'currency',currency:'COP',maximumFractionDigits:0,minimumFractionDigits:0}));
+            success: function (datos) {
+                $('#p_utilidad_turno').html(datos[0].utilidad_turno.toLocaleString('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0, minimumFractionDigits: 0 }));
 
                 $('#p_turno_numero_ventas').html(datos[0].ventas_turno);
                 //$('#npt_turno_id').val(datos[0].turno_id);
             },
-            error: function() {
+            error: function () {
                 alert("Problema en cargar datos utilidad turno");
             }
         });
@@ -191,30 +186,42 @@ document.addEventListener("DOMContentLoaded", function() {
             type: 'GET',
             url: 'admin_ctrl.php?accion=listar_venta_seleccionada&turno_id=' + turno_id,
             data: '',
-            success: function(datos) {
-                $.each(datos, function() {
+            success: function (datos) {
+                $.each(datos, function () {
                     $('#myTable > tbody').append(
                         '<tr>' +
                         '<td>' + this.venta_id + '</td>' +
                         '<td>' + this.venta_nombre_producto + '</td>' +
                         '<td>' + this.venta_nombre_proveedor + '</td>' +
-                        '<td>' + this.venta_costo_producto.toLocaleString('es-CO',{style: 'currency',currency: 'COP',maximumFractionDigits: 0,minimumFractionDigits: 0}) + '</td>' +
-                        '<td>' + this.venta_valor_venta.toLocaleString('es-CO',{style: 'currency',currency: 'COP',maximumFractionDigits: 0,minimumFractionDigits: 0}) + '</td>' +
+                        '<td>' + this.venta_costo_producto.toLocaleString('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0, minimumFractionDigits: 0 }) + '</td>' +
+                        '<td>' + this.venta_valor_venta.toLocaleString('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0, minimumFractionDigits: 0 }) + '</td>' +
                         '<td>' + this.user_nombre + '</td>' +
-                        '<td>' + this.venta_utilidad.toLocaleString('es-CO',{style: 'currency',currency: 'COP',maximumFractionDigits: 0,minimumFractionDigits: 0}) + '</td>' +
+                        '<td>' + this.venta_utilidad.toLocaleString('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0, minimumFractionDigits: 0 }) + '</td>' +
                         '</tr>'
                     );
                 });
+        //$("#mdl_ver_venta").modal('show');
             },
-            error: function() {
+            error: function () {
                 alert(" problema e listar ventas dia");
             }
         });
     };
+
+
+// BOTON CERRAR
+    $('#btnCerrar').on('click', function () {
+        //let registro = resumen.row($(this).parents('tr')).data();
+        //resumen.ajax.reload();
+        location.reload();
+        $("#mdl_ver_venta").modal('hide');
+    });
+// FIN BOTON CERRAR
+
+
 
     //***************************************
     //  FIN CARGA EN EL MODAL
     //***************************************
 
 }); // CIERRE DEL DATATABLES
-
