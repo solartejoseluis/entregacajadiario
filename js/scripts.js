@@ -462,9 +462,10 @@ document.addEventListener("DOMContentLoaded", function() {
       $('#npt_turno_descuadre').focus();
       return false;
     } else {
-      $("#mdl_cerrar_turno").modal('hide');
       let registro = recolectarDatosFormularioCerrar();
       guardarRegistroCerrar(registro);
+      $("#mdl_cerrar_turno").modal('hide');
+      $(location).attr('href','login_view.html');
     }
   });
 
@@ -486,7 +487,7 @@ document.addEventListener("DOMContentLoaded", function() {
       data: registro,
       success: function(msg) {
         //listadoVentas.ajax.reload();
-        //alert('Cierre de caja completado');
+        alert('Cierre de caja completado');
       },
       error: function() {
         alert("problema en: guardar Cierre turno");
