@@ -13,10 +13,10 @@
 
 <body class="text-center">
   <main class="form-signin w-100 m-auto">
-<form name="frm_turno" method="POST" action="turno_ctrl.php">
+<form name="frm_turno_anterior" method="POST" action="turno_anterior_ctrl.php">
 <h1>CONSULTA TURNOS ANTERIORES</h1>
 
-<!-- SELECT FECHA TURNO -->
+<!-- SELECT TURNO FECHA -->
 <div class="row mb-3">
   <!-- titulo select responsable -->
   <div class="col-md-3 ms-auto">
@@ -45,14 +45,13 @@
 </div>
 
 <!-- INPUTS QUE RECOGEN DATOS DEL FORMULARIO -->
-  <input type="hidden" class="form-control" name="npt_fecha" id="npt_fecha">
-  <input type="hidden" class="form-control" name="npt_responsable_id" id="npt_responsable_id">
-  <input type="hidden" class="form-control" name="npt_jornada_id" id="npt_jornada_id">
+  <input type="hidden" class="form-control" name="npt_fecha_anterior" id="npt_fecha_anterior">
+  <input type="hidden" class="form-control" name="npt_jornada_id_anterior" id="npt_jornada_id_anterior">
 
 
 <!-- BOTON ENVIAR -->
 <div class="row mb-3">
-  <button class="w-100 btn btn-lg btn-primary" id="btn_crear_turno" type="submit">Buscar Turno</button>
+  <button class="w-100 btn btn-lg btn-primary" id="btn_turno_anterior" type="submit">Buscar Turno</button>
 </div>
 
 </form>

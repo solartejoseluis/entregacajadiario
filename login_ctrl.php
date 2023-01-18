@@ -53,5 +53,5 @@ if ($count=='1'){
   };
 
 // CERRAR LA CONEXIÓN
-mysql_close($conn);
+mysqli_close($conn);
 ?>

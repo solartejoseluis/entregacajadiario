@@ -17,8 +17,8 @@
 
 
 //TOMA EL VALOR DEL SELECT TURNO FECHA Y PONERLO EN INPUT
-    $("#slct_responsable").change(function() {
-        $('#npt_responsable_id').val($(this).val());
+    $("#slct_turno_fecha").change(function() {
+        $('#npt_fecha_anterior').val($(this).val());
     });
 
 
@@ -36,7 +36,7 @@
 
 //TOMA EL VALOR DEL SELECT JORNADA Y PONERLO EN INPUT
     $("#slct_jornada").change(function() {
-        $('#npt_jornada_id').val($(this).val());
+        $('#npt_jornada_id_anterior').val($(this).val());
     });
 
 // ***************************

@@ -15,10 +15,12 @@
 <body>
   <div class="container-fluid mb-3" id="contenido">
 
+
+
     <div class="row">
       <div class="col-6">
         <h1>ENTREGA DE CAJA DIARIA</h1>
-        <h3 id="hoy"></h3>
+        <h3 id="fecha_del_turno"></h3>
 <!-- carga turno_id_actual viene de variable de sesion, este esta usado para varias consultas. -->
 <input type="hidden" class="" id="npt_turno_id_actual">
 
@@ -80,6 +82,9 @@
         <button type="button" class="btn btn-danger" id="btn_cerrar_turno" data-bs-toggle="modal">CERRAR TURNO <i class="fa-solid fa-circle-plus"></i></button>
       </div>
     </div>
+
+
+
 
   <div class="container-fluid" id="tabla">
     <div class="row">
@@ -371,5 +376,5 @@
   <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
   <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/i18n/es.js"></script> -->
   <!-- scripts de la aplicacion -->
-  <script src="js/scripts.js"></script>
+  <script src="js/venta_anterior_script.js"></script>
 </body>
