@@ -74,17 +74,13 @@ document.addEventListener("DOMContentLoaded", function () {
             url: 'admin_ctrl.php?accion=consultarDatosTurnoActual&turno_id=' + turno_id,
             data: '',
             success: function (datos) {
-                //$('#npt_turno_id_actual').val(datos[0].turno_id_actual);
                 $('#npt_user_nombre').html(datos[0].user_nombre);
                 $('#npt_user_apellido').html(datos[0].user_apellido);
                 $('#npt_turno_fecha_creado').html(datos[0].turno_fecha_creado);
-                $('#npt_jornada_nombre').html(datos[1].jornada_nombre);
-
-                $('#p_turno_saldo_caja').html(datos[0].turno_saldo_caja.toLocaleString('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0, minimumFractionDigits: 0 }));
-
-                $('#p_turno_total_entrega').html(datos[0].turno_total_entrega.toLocaleString('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0, minimumFractionDigits: 0 }));
-
-                $('#p_turno_descuadre').html(datos[0].turno_descuadre.toLocaleString('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0, minimumFractionDigits: 0 }));
+                $('#npt_jornada_nombre').html(datos[0].jornada_nombre);
+                $('#p_turno_saldo_caja').html(datos[0].turno_saldo_caja);
+                $('#p_turno_total_entrega').html(datos[0].turno_total_entrega);
+                $('#p_turno_descuadre').html(datos[0].turno_descuadre);
             },
             error: function () {
                 alert("Problema en consultar datos turno actual");
@@ -200,7 +196,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         '</tr>'
                     );
                 });
-        //$("#mdl_ver_venta").modal('show');
+                //$("#mdl_ver_venta").modal('show');
             },
             error: function () {
                 alert(" problema e listar ventas dia");
@@ -209,14 +205,14 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
 
-// BOTON CERRAR
+    // BOTON CERRAR
     $('#btnCerrar').on('click', function () {
         //let registro = resumen.row($(this).parents('tr')).data();
         //resumen.ajax.reload();
         location.reload();
         $("#mdl_ver_venta").modal('hide');
     });
-// FIN BOTON CERRAR
+    // FIN BOTON CERRAR
 
 
 
