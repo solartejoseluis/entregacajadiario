@@ -124,6 +124,7 @@ case 'listar_venta_seleccionada':
     $sql = "SELECT
         VENTAS.venta_id,
         VENTAS.venta_nombre_producto,
+        VENTAS.venta_fecha,
         VENTAS.venta_nombre_proveedor,
         VENTAS.venta_costo_producto,
         VENTAS.venta_valor_venta,

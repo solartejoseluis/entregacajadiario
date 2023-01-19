@@ -51,11 +51,20 @@ document.addEventListener("DOMContentLoaded", function () {
     //-----------------------------
 
     // CARGA LA FECHA ACTUAL y CUADRO PRINCIPAL DE PAGINA
+    // $(document).ready(function () {
+    //     let hoy = actualDate();
+    //     document.getElementById('hoy').innerHTML = hoy;
+    //     //cargaPantallaPrincipal();
+    // });
+
+    // CARGA LA FECHA ACTUAL y CUADRO PRINCIPAL DE PAGINA
     $(document).ready(function () {
-        let hoy = actualDate();
-        document.getElementById('hoy').innerHTML = hoy;
+        let hoy = moment().format('LLL');
+        //let hoy = moment.locale();
+        document.getElementById('hoy_moment').innerHTML = hoy;
         //cargaPantallaPrincipal();
     });
+
 
     //MOSTRAR LA FECHA ACTUAL
     function actualDate() {
@@ -187,6 +196,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     $('#myTable > tbody').append(
                         '<tr>' +
                         '<td>' + this.venta_id + '</td>' +
+                        '<td>' + this.venta_fecha + '</td>' +
                         '<td>' + this.venta_nombre_producto + '</td>' +
                         '<td>' + this.venta_nombre_proveedor + '</td>' +
                         '<td>' + this.venta_costo_producto.toLocaleString('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0, minimumFractionDigits: 0 }) + '</td>' +
