@@ -59,9 +59,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // CARGA LA FECHA ACTUAL y CUADRO PRINCIPAL DE PAGINA
     $(document).ready(function () {
-        let hoy = moment().format('LLL');
+        let hoy = moment().toISOString().split('T')[0]; // en formato iso YYYY-MM-DD
+        let ayer = moment().subtract(1, 'd').toISOString().split('T')[0]; // Ayer en formato iso YYYY-MM-DD
+        // let hoy = moment().format('LLL');
+        //let hoy = moment().subtract(1, 'd').format('LLL');
         //let hoy = moment.locale();
         document.getElementById('hoy_moment').innerHTML = hoy;
+        document.getElementById('ayer').innerHTML = ayer;
         //cargaPantallaPrincipal();
     });
 
