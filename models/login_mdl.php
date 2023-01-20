@@ -33,23 +33,23 @@ if ($count=='1'){
     case '1':
       $_SESSION['user_bd'] = $user_local;
       $_SESSION['password_bd'] = $password_local;
-      echo '<meta http-equiv="REFRESH"content="0;url=turno_opcion_view.html">';
+      echo '<meta http-equiv="REFRESH"content="0;url=views/turno_opcion_view.html">';
       break;
 
     case '2':
       $_SESSION['user_bd'] = $user_local;
       $_SESSION['password_bd'] = $password_local;
-      echo'<meta http-equiv="REFRESH"content="0;url=admin_view.html">';
+      echo'<meta http-equiv="REFRESH"content="0;url=views/admin_view.html">';
       break;
 
     case '3':
       $_SESSION['user_bd'] = $user_local;
       $_SESSION['password_bd'] = $password_local;
-      echo'<meta http-equiv="REFRESH"content="0;url=usua_home_03.html">';
+      echo'<meta http-equiv="REFRESH"content="0;url=views/">';
       break;
   }
 }else{
-  echo'<meta http-equiv="REFRESH"content="0;url=login_error.html">';
+  echo'<meta http-equiv="REFRESH"content="0;url=login_error_view.html">';
   };
 
 // CERRAR LA CONEXIÓN

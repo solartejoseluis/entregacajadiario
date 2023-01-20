@@ -24,6 +24,6 @@ $conexion = mysqli_connect("localhost", "kiron", "123456", "CONTROLCAJA") or
 
 //echo 'turno guardado!';
 
-echo'<meta http-equiv="REFRESH"content="0;url=turno2_ctrl.php">';
+echo'<meta http-equiv="REFRESH"content="0;url=turno_crear2_mdl.php">';
 
 ?>

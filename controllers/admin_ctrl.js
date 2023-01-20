@@ -4,7 +4,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     let resumen = $("#tbl_admin").DataTable({
         "ajax": {
-            url: "admin_ctrl.php?accion=listar_resumen",
+            url: "../models/admin_mdl.php?accion=listar_resumen",
             dataSrc: ""
         },
         "columns": [
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function consultarDatosTurnoActual(turno_id) {
         $.ajax({
             type: 'POST',
-            url: 'admin_ctrl.php?accion=consultarDatosTurnoActual&turno_id=' + turno_id,
+            url: '../models/admin_mdl.php?accion=consultarDatosTurnoActual&turno_id=' + turno_id,
             data: '',
             success: function (datos) {
                 $('#npt_user_nombre').html(datos[0].user_nombre);
@@ -105,10 +105,10 @@ document.addEventListener("DOMContentLoaded", function () {
     function cargarDatosUtilidadVendedor1(turno_id) {
         $.ajax({
             type: 'GET',
-            url: 'admin_ctrl.php?accion=consultar_utilidad_vendedor1&turno_id=' + turno_id,
+            url: '../models/admin_mdl.php?accion=consultar_utilidad_vendedor1&turno_id=' + turno_id,
             data: '',
             success: function (datos) {
-                $('#utilidadVendedor1').html(datos[0].utilidad_vendedor1.toLocaleString('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0, minimumFractionDigits: 0 }));
+                $('#utilidadVendedor1').html(datos[0].utilidad_vendedor1);
 
                 $('#ventasVendedor1').html(datos[0].ventas_vendedor1);
             },
@@ -123,10 +123,10 @@ document.addEventListener("DOMContentLoaded", function () {
     function cargarDatosUtilidadVendedor2(turno_id) {
         $.ajax({
             type: 'GET',
-            url: 'admin_ctrl.php?accion=consultar_utilidad_vendedor2&turno_id=' + turno_id,
+            url: '../models/admin_mdl.php?accion=consultar_utilidad_vendedor2&turno_id=' + turno_id,
             data: '',
             success: function (datos) {
-                $('#utilidadVendedor2').html(datos[0].utilidad_vendedor2.toLocaleString('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0, minimumFractionDigits: 0 }));
+                $('#utilidadVendedor2').html(datos[0].utilidad_vendedor2);
 
                 $('#ventasVendedor2').html(datos[0].ventas_vendedor2);
             },
@@ -140,10 +140,10 @@ document.addEventListener("DOMContentLoaded", function () {
     function cargarDatosUtilidadVendedor3(turno_id) {
         $.ajax({
             type: 'GET',
-            url: 'admin_ctrl.php?accion=consultar_utilidad_vendedor3&turno_id=' + turno_id,
+            url: '../models/admin_mdl.php?accion=consultar_utilidad_vendedor3&turno_id=' + turno_id,
             data: '',
             success: function (datos) {
-                $('#utilidadVendedor3').html(datos[0].utilidad_vendedor3.toLocaleString('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0, minimumFractionDigits: 0 }));
+                $('#utilidadVendedor3').html(datos[0].utilidad_vendedor3);
 
                 $('#ventasVendedor3').html(datos[0].ventas_vendedor3);
             },
@@ -157,10 +157,10 @@ document.addEventListener("DOMContentLoaded", function () {
     function cargarDatosUtilidadVendedor4(turno_id) {
         $.ajax({
             type: 'GET',
-            url: 'admin_ctrl.php?accion=consultar_utilidad_vendedor4&turno_id=' + turno_id,
+            url: '../models/admin_mdl.php?accion=consultar_utilidad_vendedor4&turno_id=' + turno_id,
             data: '',
             success: function (datos) {
-                $('#utilidadVendedor4').html(datos[0].utilidad_vendedor4.toLocaleString('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0, minimumFractionDigits: 0 }));
+                $('#utilidadVendedor4').html(datos[0].utilidad_vendedor4);
 
                 $('#ventasVendedor4').html(datos[0].ventas_vendedor4);
             },
@@ -175,10 +175,10 @@ document.addEventListener("DOMContentLoaded", function () {
     function utilidadTurno(turno_id) {
         $.ajax({
             type: 'GET',
-            url: 'admin_ctrl.php?accion=consultar_utilidad_turno&turno_id=' + turno_id,
+            url: '../models/admin_mdl.php?accion=consultar_utilidad_turno&turno_id=' + turno_id,
             data: '',
             success: function (datos) {
-                $('#p_utilidad_turno').html(datos[0].utilidad_turno.toLocaleString('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0, minimumFractionDigits: 0 }));
+                $('#p_utilidad_turno').html(datos[0].utilidad_turno);
 
                 $('#p_turno_numero_ventas').html(datos[0].ventas_turno);
                 //$('#npt_turno_id').val(datos[0].turno_id);
@@ -193,7 +193,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function listarVentasDia(turno_id) {
         $.ajax({
             type: 'GET',
-            url: 'admin_ctrl.php?accion=listar_venta_seleccionada&turno_id=' + turno_id,
+            url: '../models/admin_mdl.php?accion=listar_venta_seleccionada&turno_id=' + turno_id,
             data: '',
             success: function (datos) {
                 $.each(datos, function () {
@@ -203,10 +203,10 @@ document.addEventListener("DOMContentLoaded", function () {
                         '<td>' + this.venta_fecha + '</td>' +
                         '<td>' + this.venta_nombre_producto + '</td>' +
                         '<td>' + this.venta_nombre_proveedor + '</td>' +
-                        '<td>' + this.venta_costo_producto.toLocaleString('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0, minimumFractionDigits: 0 }) + '</td>' +
-                        '<td>' + this.venta_valor_venta.toLocaleString('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0, minimumFractionDigits: 0 }) + '</td>' +
+                        '<td>' + this.venta_costo_producto + '</td>' +
+                        '<td>' + this.venta_valor_venta + '</td>' +
                         '<td>' + this.user_nombre + '</td>' +
-                        '<td>' + this.venta_utilidad.toLocaleString('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0, minimumFractionDigits: 0 }) + '</td>' +
+                        '<td>' + this.venta_utilidad + '</td>' +
                         '</tr>'
                     );
                 });
