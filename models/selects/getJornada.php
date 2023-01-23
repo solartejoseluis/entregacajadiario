@@ -1,6 +1,6 @@
 <?php
 //header('Content-Type: application/json');
-require "pdo.php";
+require "../models/pdo.php";
 $sql="SELECT jornada_id,jornada_nombre FROM JORNADAS";
 $stmt = $pdo-> prepare($sql);
 $stmt -> execute();

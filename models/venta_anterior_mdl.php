@@ -1,5 +1,5 @@
 <?php
-session_name("turno_anterior");
+//session_name("turno_anterior");
 session_start();
 //Recojo los datos de sesion en variables
 $turno_fecha_creado= $_SESSION['fecha_creado_anterior'];
@@ -8,7 +8,7 @@ $turno_id_anterior=$_SESSION['turno_id_anterior'];
 
 
 header('Content-Type: application/json');
-require "pdo.php";
+require "../models/pdo.php";
 
 switch ($_GET['accion']) {
 case 'listar_ventas':

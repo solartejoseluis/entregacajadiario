@@ -1,6 +1,6 @@
 <?php
 //header('Content-Type: application/json');
-require "pdo.php";
+require "../models/pdo.php";
 
 // $sql="SELECT distinct turno_fecha_creado FROM TURNOS";
 // $stmt = $pdo-> prepare($sql);

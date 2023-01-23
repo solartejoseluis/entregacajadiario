@@ -195,10 +195,6 @@ case 'guardar_cierre_turno':
     break;
 
 
-
-
-
-
 case 'guardar_turno':
 $sql = "INSERT INTO TURNOS(
   turno_fecha_creado,

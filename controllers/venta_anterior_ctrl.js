@@ -4,7 +4,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   let listadoVentas = $("#tblVentas").DataTable({
     ajax: {
-      url: "venta_anterior_mdl.php?accion=listar_ventas",
+      url: "../models/venta_anterior_mdl.php?accion=listar_ventas",
       dataSrc: "",
     },
     columns: [
@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function consultarDatosTurnoActual() {
     $.ajax({
       type: "POST",
-      url: "venta_anterior_mdl.php?accion=consultarDatosTurnoActual",
+      url: "../models/venta_anterior_mdl.php?accion=consultarDatosTurnoActual",
       data: "",
       success: function (datos) {
         $("#npt_turno_id_anterior").val(datos[0].turno_id_anterior);
@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function cargarDatosUtilidadVendedor1() {
     $.ajax({
       type: "GET",
-      url: "venta_anterior_mdl.php?accion=consultar_utilidad_vendedor1",
+      url: "../models/venta_anterior_mdl.php?accion=consultar_utilidad_vendedor1",
       data: "",
       success: function (datos) {
         $("#utilidadVendedor1").html(datos[0].utilidad_vendedor1);
@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function cargarDatosUtilidadVendedor2() {
     $.ajax({
       type: "GET",
-      url: "venta_anterior_mdl.php?accion=consultar_utilidad_vendedor2",
+      url: "../models/venta_anterior_mdl.php?accion=consultar_utilidad_vendedor2",
       data: "",
       success: function (datos) {
         $("#utilidadVendedor2").html(datos[0].utilidad_vendedor2);
@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function cargarDatosUtilidadVendedor3() {
     $.ajax({
       type: "GET",
-      url: "venta_anterior_mdl.php?accion=consultar_utilidad_vendedor3",
+      url: "../models/venta_anterior_mdl.php?accion=consultar_utilidad_vendedor3",
       data: "",
       success: function (datos) {
         $("#utilidadVendedor3").html(datos[0].utilidad_vendedor3);
@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function cargarDatosUtilidadVendedor4() {
     $.ajax({
       type: "GET",
-      url: "venta_anterior_mdl.php?accion=consultar_utilidad_vendedor4",
+      url: "../models/venta_anterior_mdl.php?accion=consultar_utilidad_vendedor4",
       data: "",
       success: function (datos) {
         $("#utilidadVendedor4").html(datos[0].utilidad_vendedor4);
@@ -161,7 +161,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function utilidadTurno() {
     $.ajax({
       type: "GET",
-      url: "venta_anterior_mdl.php?accion=consultar_utilidad_turno",
+      url: "../models/venta_anterior_mdl.php?accion=consultar_utilidad_turno",
       data: "",
       success: function (datos) {
         $("#p_utilidad_turno").html(datos[0].utilidad_turno);
@@ -265,7 +265,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function guardarRegistro(registro) {
     $.ajax({
       type: "POST",
-      url: "venta_anterior_mdl.php?accion=guardar_venta",
+      url: "../models/venta_anterior_mdl.php?accion=guardar_venta",
       data: registro,
       success: function (msg) {
         listadoVentas.ajax.reload();
@@ -294,7 +294,7 @@ document.addEventListener("DOMContentLoaded", function () {
     $.ajax({
       type: "GET",
       url:
-        "venta_anterior_mdl.php?accion=consultar_venta&venta_id=" + venta_id,
+        "../models/venta_anterior_mdl.php?accion=consultar_venta&venta_id=" + venta_id,
       data: "",
       success: function (datos) {
         $("#nptEdit-venta_id").val(datos[0].venta_id);
@@ -348,7 +348,7 @@ document.addEventListener("DOMContentLoaded", function () {
     $.ajax({
       type: "POST",
       url:
-        "venta_anterior_mdl.php?accion=modificar_venta&venta_id=" +
+        "../models/venta_anterior_mdl.php?accion=modificar_venta&venta_id=" +
         registro.venta_id,
       data: registro,
       success: function (msg) {
@@ -380,7 +380,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // BORRA REGISTRO Y ACTUALIZA DATATABLES
     $.ajax({
       type: "GET",
-      url: "venta_anterior_mdl.php?accion=borrar_venta&venta_id=" + venta_id,
+      url: "../models/venta_anterior_mdl.php?accion=borrar_venta&venta_id=" + venta_id,
       data: "",
       success: function (msg) {
         listadoVentas.ajax.reload();
@@ -417,7 +417,7 @@ document.addEventListener("DOMContentLoaded", function () {
   $("#npt_turno_saldo_caja").focusout(function calculoUtilidadCierre() {
     $.ajax({
       type: "GET",
-      url: "venta_anterior_mdl.php?accion=consultar_utilidad_turno",
+      url: "../models/venta_anterior_mdl.php?accion=consultar_utilidad_turno",
       data: "",
       success: function (datos) {
         $("#npt_turno_total_utilidad").val(datos[0].utilidad_turno);
@@ -473,7 +473,7 @@ document.addEventListener("DOMContentLoaded", function () {
     $.ajax({
       type: "POST",
       url:
-        "venta_anterior_mdl.php?accion=guardar_cierre_turno&turno_id_anterior=" +
+        "../models/venta_anterior_mdl.php?accion=guardar_cierre_turno&turno_id_anterior=" +
         registro.turno_id_anterior,
       data: registro,
       success: function (msg) {
@@ -497,7 +497,7 @@ document.addEventListener("DOMContentLoaded", function () {
   $(document).ready(function () {
     $.ajax({
       type: "POST",
-      url: "getUser.php",
+      url: "../models/selects/getUser.php",
       success: function (response) {
         $(".selectUser select").html(response).fadeIn();
       },

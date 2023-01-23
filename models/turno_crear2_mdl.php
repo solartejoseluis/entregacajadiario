@@ -7,7 +7,7 @@ $turno_jornada_id=$_SESSION['jornada_id'];
 
 
 //header('Content-Type: application/json');
-require "pdo.php";
+require "../models/pdo.php";
 
     $sql = "SELECT
     TURNOS.turno_id AS turno_id_actual
@@ -17,10 +17,6 @@ require "pdo.php";
     AND (turno_responsable = '$turno_responsable_id')";
     $stmt = $pdo -> prepare($sql);
     $stmt -> execute();
-    //$result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
-    //echo json_encode($result);
-    //echo $result[turno_id_actual];
-//print_r($result);
 
 // seleccion del dato y grabarlo en variable de sesion
  while ($arr = $stmt->fetch(PDO::FETCH_ASSOC)) {

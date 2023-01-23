@@ -24,6 +24,8 @@ while ($fila = mysqli_fetch_array($resultado)){
 
   if($user_local == $user_bd & $password_local == $password_bd){
     $user_perfil= $fila['user_perfil'];
+    $user_id= $fila['user_id'];
+
     $count='1';
   }
 };
@@ -33,23 +35,26 @@ if ($count=='1'){
     case '1':
       $_SESSION['user_bd'] = $user_local;
       $_SESSION['password_bd'] = $password_local;
-      echo '<meta http-equiv="REFRESH"content="0;url=views/turno_opcion_view.html">';
+      $_SESSION['user_id'] = $user_id;
+      echo '<meta http-equiv="REFRESH"content="0;url=../views/turno_opcion_view.html">';
       break;
 
     case '2':
       $_SESSION['user_bd'] = $user_local;
       $_SESSION['password_bd'] = $password_local;
-      echo'<meta http-equiv="REFRESH"content="0;url=views/admin_view.html">';
+      $_SESSION['user perfil'] = $user_perfil;
+      echo'<meta http-equiv="REFRESH"content="0;url=../views/admin_view.html">';
       break;
 
     case '3':
       $_SESSION['user_bd'] = $user_local;
       $_SESSION['password_bd'] = $password_local;
-      echo'<meta http-equiv="REFRESH"content="0;url=views/">';
+      $_SESSION['user perfil'] = $user_perfil;
+      echo'<meta http-equiv="REFRESH"content="0;url=../views/">';
       break;
   }
 }else{
-  echo'<meta http-equiv="REFRESH"content="0;url=login_error_view.html">';
+  echo'<meta http-equiv="REFRESH"content="0;url=../views/login_error_view.html">';
   };
 
 // CERRAR LA CONEXIÓN
