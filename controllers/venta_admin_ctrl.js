@@ -476,7 +476,7 @@ setInterval (function() {
       let registro = recolectarDatosFormularioCerrar();
       guardarRegistroCerrar(registro);
       $("#mdl_cerrar_turno").modal('hide');
-      $(location).attr('href', 'login_view.html');
+      //$(location).attr('href', 'login_view.html');
     }
   });
 

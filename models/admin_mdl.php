@@ -2,7 +2,7 @@
 session_start();
 
 header('Content-Type: application/json');
-require "../models/pdo.php";
+require "pdo.php";
 
 switch ($_GET['accion']) {
   case 'listar_resumen':

@@ -8,7 +8,7 @@ $turno_id_anterior=$_SESSION['turno_id_anterior'];
 
 
 header('Content-Type: application/json');
-require "../models/pdo.php";
+require "pdo.php";
 
 switch ($_GET['accion']) {
 case 'listar_ventas':
@@ -49,7 +49,7 @@ case 'guardar_venta':
         $_POST[venta_valor_venta],
         $_POST[user_id],
         $_POST[venta_utilidad],
-        $_POST[turno_id_anterior]
+        '$turno_id_anterior'
     )";
     $response = $pdo->exec($sql);
     echo json_encode($response);
@@ -190,7 +190,7 @@ case 'guardar_cierre_turno':
     turno_total_utilidad = $_POST[turno_total_utilidad],
     turno_total_entrega = $_POST[turno_total_entrega],
     turno_descuadre = $_POST[turno_descuadre]
-    WHERE turno_id = $_GET[turno_id_anterior]";
+    WHERE turno_id = '$turno_id_anterior'";
     $response = $pdo->exec($sql);
     echo json_encode($response);
     break;
@@ -228,7 +228,6 @@ case 'consultarDatosTurnoActual':
     $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($result);
   break;
-
 
 };
 ?>

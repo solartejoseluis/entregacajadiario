@@ -1,21 +1,5 @@
 <?php
-//session_name("turno_anterior");
 session_start();
-
-// Recojo los datos que vienen del formulario y los pongo en variable de sesion para que esten disponibles en la hoja venta_anterior.html:
-//$_SESSION["fecha_creado_anterior"] = $_POST['npt_fecha_anterior'];
-//$_SESSION["jornada_id_anterior"] = $_POST['npt_jornada_id_anterior'];
-//$_SESSION["turno_id_anterior"] = 0;
-
-// muestro las variables del session
-
-// echo "$_SESSION[user_bd]";
-// echo "$_SESSION[password_bd]";
-// echo "$_SESSION[user_id]";
-$user_id = "$_SESSION[user_id]";
-// echo "este es el id:";
-// echo "$user_id";
-
 
 header('Content-Type: application/json');
 require "pdo.php";
@@ -38,10 +22,6 @@ switch ($_GET['accion']) {
         ON TURNOS.turno_jornada=JORNADAS.jornada_id
         INNER JOIN USERS
         ON TURNOS.turno_responsable=USERS.user_id
-        WHERE TURNOS.turno_fecha_creado
-        BETWEEN DATE_SUB(CURDATE(),INTERVAL 1 DAY)
-        AND CURDATE()
-        AND TURNOS.turno_responsable ='$user_id';
         ";
     $stmt = $pdo -> prepare($sql);
     $stmt -> execute();

@@ -7,7 +7,7 @@ $turno_jornada_id=$_SESSION['jornada_id'];
 
 
 //header('Content-Type: application/json');
-require "../models/pdo.php";
+require "pdo.php";
 
     $sql = "SELECT
     TURNOS.turno_id AS turno_id_actual
@@ -25,6 +25,6 @@ $_SESSION['turno_id_actual'] = $arr['turno_id_actual'];
  };
 
 //echo "la variable de sesion es . $_SESSION[turno_id_actual]";
-echo'<meta http-equiv="REFRESH"content="0;url=venta_home_view.html">';
+echo'<meta http-equiv="REFRESH"content="0;url=../views/venta_home_view.html">';
 
 ?>

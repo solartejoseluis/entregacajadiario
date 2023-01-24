@@ -1,6 +1,6 @@
 <?php
 //header('Content-Type: application/json');
-require "../models/pdo.php";
+require "../pdo.php";
 $sql="SELECT trans_id,trans_nombre FROM transportadores";
 $stmt = $pdo-> prepare($sql);
 $stmt -> execute();
