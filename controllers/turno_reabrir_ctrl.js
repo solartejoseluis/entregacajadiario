@@ -41,23 +41,37 @@ document.addEventListener("DOMContentLoaded", function () {
   $('#tabla_reabrir tbody').on('click', 'button.boton_ver', function () {
     let registro = resumen.row($(this).parents('tr')).data();
     // alert(registro.turno_id);
-    crearVariableSesionDelTurno(registro.turno_id);
+    pasarTurno_id(registro.turno_id);
+    //crearVariableSesionDelTurno(registro.turno_id);
     //$(location).attr("href", "../views/venta_anterior_view.html");
   });
 
-  function crearVariableSesionDelTurno(turno_id) {
+  function pasarTurno_id(turno_id) {
     $.ajax({
       type: 'GET',
-      url: '../models/turno_reabrir_mdl.php?accion=cargar_turno_id_anterior&turno_id=' + turno_id,
+      url: '../models/venta_anterior_mdl.php?accion=recibeVariable&turno_id='+turno_id,
       data: '',
-      success: function (msg) {
-      $(location).attr("href", "../views/venta_anterior_view.html");
+      done: function (msg) {
+      $(location).attr("href", "venta_anterior_view.html");
         },
-      error: function () {
-        alert("Problema en crear variable sesion turno");
-      }
+       error: function () {
+         alert("Problema pasando la variable turno_id");
+     }
     });
   }
+  // function crearVariableSesionDelTurno(turno_id) {
+  //   $.ajax({
+  //     type: 'GET',
+  //     url: '../models/turno_reabrir_mdl.php?accion=cargar_turno_id_anterior&turno_id=' + turno_id,
+  //     data: '',
+  //     success: function (msg) {
+  //     $(location).attr("href", "../views/venta_anterior_view.html");
+  //       },
+  //     error: function () {
+  //       alert("Problema en crear variable sesion turno");
+  //     }
+  //   });
+  // }
 
 
 }); // cierre del datatables

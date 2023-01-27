@@ -5,7 +5,7 @@ session_start();
 //$turno_fecha_creado= $_SESSION['fecha_creado_anterior']; // viene de turno_crear_mdl.php
 //$turno_jornada_id=$_SESSION['jornada_id_anterior']; // viene de turno_crear_mdl.php
 
-$turno_id_anterior=$_SESSION['turno_id_anterior']; //viene de turno_reabrir_mdl.php
+//$turno_id_anterior=$_SESSION['turno_id_anterior']; //viene de turno_reabrir_mdl.php
 
 header('Content-Type: application/json');
 require "pdo.php";
@@ -228,6 +228,11 @@ case 'consultarDatosTurnoActual':
     $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($result);
   break;
+
+case 'recibeVariable':
+$turno_id_anterior=$_GET['turno_id']; //viene desde el get
+[turno_id,109]
+break;
 
 };
 ?>

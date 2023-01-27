@@ -49,23 +49,23 @@ switch ($_GET['accion']) {
 
 
 
-  case 'cargar_turno_id_anterior':
-   // consulta para crear la variable de sesion turno_id_anterior
-    $sql = "SELECT
-    TURNOS.turno_id AS turno_id_anterior
-    FROM TURNOS
-    WHERE turno_id = $_GET[turno_id]
-    ";
-    //$response = $pdo->exec($sql);
-    $stmt = $pdo -> prepare($sql);
-    $stmt -> execute();
-    echo json_encode($stmt); 
-    // seleccion del dato y grabarlo en variable de sesion
-    while ($arr = $stmt->fetch(PDO::FETCH_ASSOC)) {
-      //echo $arr['turno_id_anterior'];
-    $_SESSION['turno_id_anterior'] = $arr['turno_id_anterior'];
- };
-break;
+//   case 'cargar_turno_id_anterior':
+//    // consulta para crear la variable de sesion turno_id_anterior
+//     $sql = "SELECT
+//     TURNOS.turno_id AS turno_id_anterior
+//     FROM TURNOS
+//     WHERE turno_id = $_GET[turno_id]
+//     ";
+//     //$response = $pdo->exec($sql);
+//     $stmt = $pdo -> prepare($sql);
+//     $stmt -> execute();
+//     echo json_encode($stmt); 
+//     // seleccion del dato y grabarlo en variable de sesion
+//     while ($arr = $stmt->fetch(PDO::FETCH_ASSOC)) {
+//       //echo $arr['turno_id_anterior'];
+//     $_SESSION['turno_id_anterior'] = $arr['turno_id_anterior'];
+//  };
+// break;
 
 
 
