@@ -1,4 +1,5 @@
 <?php
+//session_set_cookie_params(0);
 session_start();
 //RECOGER LOS DATOS DE SECION EN VARIABLES
 $turno_fecha_creado= $_SESSION['fecha_creado'];

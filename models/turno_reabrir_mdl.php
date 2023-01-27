@@ -1,14 +1,11 @@
 <?php
 //session_name("turno_anterior");
 session_start();
-
 // Recojo los datos que vienen del formulario y los pongo en variable de sesion para que esten disponibles en la hoja venta_anterior.html:
 //$_SESSION["fecha_creado_anterior"] = $_POST['npt_fecha_anterior'];
 //$_SESSION["jornada_id_anterior"] = $_POST['npt_jornada_id_anterior'];
 //$_SESSION["turno_id_anterior"] = 0;
-
 // muestro las variables del session
-
 // echo "$_SESSION[user_bd]";
 // echo "$_SESSION[password_bd]";
 // echo "$_SESSION[user_id]";
@@ -17,11 +14,12 @@ $user_id = "$_SESSION[user_id]";
 // echo "$user_id";
 
 
+
 header('Content-Type: application/json');
 require "pdo.php";
-
 switch ($_GET['accion']) {
 
+  
   case 'listar_resumen':
    // consulta para cargar el datatables 
     $sql = "SELECT 
@@ -48,7 +46,8 @@ switch ($_GET['accion']) {
     $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($result);
     break;
-  
+
+
 
   case 'cargar_turno_id_anterior':
    // consulta para crear la variable de sesion turno_id_anterior
@@ -71,4 +70,3 @@ break;
 
 
   }
-?>

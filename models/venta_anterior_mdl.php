@@ -2,10 +2,10 @@
 //session_name("turno_anterior");
 session_start();
 //Recojo los datos de sesion en variables
-$turno_fecha_creado= $_SESSION['fecha_creado_anterior'];
-$turno_jornada_id=$_SESSION['jornada_id_anterior'];
-$turno_id_anterior=$_SESSION['turno_id_anterior'];
+//$turno_fecha_creado= $_SESSION['fecha_creado_anterior']; // viene de turno_crear_mdl.php
+//$turno_jornada_id=$_SESSION['jornada_id_anterior']; // viene de turno_crear_mdl.php
 
+$turno_id_anterior=$_SESSION['turno_id_anterior']; //viene de turno_reabrir_mdl.php
 
 header('Content-Type: application/json');
 require "pdo.php";
