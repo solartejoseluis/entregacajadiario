@@ -1,5 +1,4 @@
 <?php
-//session_set_cookie_params(0);
 session_start();
 header('Content-Type: application/json');
 require "pdo.php";
@@ -7,10 +6,15 @@ require "pdo.php";
 switch ($_GET['accion']) {
 
     case 'consultar_acceso':
+        // se ordenan descendente por turno_id y solo se muestra el primer registro
         $sql = "SELECT 
-        MAX(acceso_id) AS acceso_id,
-        MAX(turno_id) AS turno_id
-        FROM ACCESOS";
+        acceso_id, 
+        turno_id, 
+        user_id 
+        FROM ACCESOS 
+        ORDER BY turno_id 
+        DESC LIMIT 1
+        ";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -64,14 +68,12 @@ switch ($_GET['accion']) {
 
 
     case 'borrar_venta':
-        // BORRA EL REGISTRO ENrecuperarRegistro LA TABLA
         $sql = "DELETE FROM VENTAS  WHERE venta_id=$_GET[venta_id]";
         $response = $pdo->exec($sql);
         echo json_encode($response);
         break;
 
     case 'consultar_venta':
-        // VIENE DEL BOTON EDITAR REGISTRO
         $sql = "SELECT
         VENTAS.venta_id,
         VENTAS.venta_nombre_producto,
@@ -95,7 +97,6 @@ switch ($_GET['accion']) {
 
 
     case 'modificar_venta':
-        //GUARDA REGISTRO EDITADO
         $sql = "UPDATE VENTAS SET
         venta_nombre_producto='$_POST[venta_nombre_producto]',
         venta_nombre_proveedor='$_POST[venta_nombre_proveedor]',
@@ -108,13 +109,12 @@ switch ($_GET['accion']) {
         echo json_encode($response);
         break;
 
-
     case 'consultar_utilidad_vendedor1':
         $sql = "SELECT
-    SUM(venta_utilidad) AS utilidad_vendedor1,
-    COUNT(venta_utilidad) AS ventas_vendedor1
-     FROM VENTAS WHERE (user_id = 1)
-     AND (turno_id='$turno_id_actual')";
+            SUM(venta_utilidad) AS utilidad_vendedor1,
+            COUNT(venta_utilidad) AS ventas_vendedor1
+            FROM VENTAS WHERE (user_id = 1)
+            AND (turno_id=$_GET[turno_id])";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -124,11 +124,10 @@ switch ($_GET['accion']) {
 
     case 'consultar_utilidad_vendedor2':
         $sql = "SELECT
-    SUM(venta_utilidad)  AS utilidad_vendedor2,
-    COUNT(venta_utilidad) AS ventas_vendedor2
-    FROM VENTAS WHERE
-     (user_id = 2)
-     AND (turno_id='$turno_id_actual')";
+            SUM(venta_utilidad)  AS utilidad_vendedor2,
+            COUNT(venta_utilidad) AS ventas_vendedor2
+            FROM VENTAS WHERE (user_id = 2)
+            AND (turno_id=$_GET[turno_id])";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -138,11 +137,10 @@ switch ($_GET['accion']) {
 
     case 'consultar_utilidad_vendedor3':
         $sql = "SELECT
-      SUM(venta_utilidad)  AS utilidad_vendedor3,
-      COUNT(venta_utilidad) AS ventas_vendedor3
-      FROM VENTAS WHERE
-      (user_id = 3)
-     AND (turno_id='$turno_id_actual')";
+            SUM(venta_utilidad)  AS utilidad_vendedor3,
+            COUNT(venta_utilidad) AS ventas_vendedor3
+            FROM VENTAS WHERE (user_id = 3)
+            AND (turno_id=$_GET[turno_id])";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -151,11 +149,10 @@ switch ($_GET['accion']) {
 
     case 'consultar_utilidad_vendedor4':
         $sql = "SELECT
-    SUM(venta_utilidad)  AS utilidad_vendedor4,
-    COUNT(venta_utilidad) AS ventas_vendedor4
-    FROM VENTAS WHERE
-     (user_id = 4)
-      AND (turno_id='$turno_id_actual')";
+            SUM(venta_utilidad)  AS utilidad_vendedor4,
+            COUNT(venta_utilidad) AS ventas_vendedor4
+            FROM VENTAS WHERE (user_id = 4)
+            AND (turno_id=$_GET[turno_id])";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -164,10 +161,10 @@ switch ($_GET['accion']) {
 
     case 'consultar_utilidad_turno':
         $sql = "SELECT
-    SUM(venta_utilidad)  AS utilidad_turno,
-    COUNT(venta_utilidad) AS ventas_turno
-    FROM VENTAS
-    WHERE turno_id='$turno_id_actual'";
+            SUM(venta_utilidad)  AS utilidad_turno,
+            COUNT(venta_utilidad) AS ventas_turno
+            FROM VENTAS
+            WHERE turno_id=$_GET[turno_id]";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -205,13 +202,13 @@ switch ($_GET['accion']) {
 
     case 'guardar_turno':
         $sql = "INSERT INTO TURNOS(
-  turno_fecha_creado,
-  turno_jornada,
-  turno_responsable)
-VALUES(
-'$_POST[turno_fecha_creado]',
-$_POST[turno_jornada],
-$_POST[turno_responsable])";
+        turno_fecha_creado,
+        turno_jornada,
+        turno_responsable)
+        VALUES(
+        '$_POST[turno_fecha_creado]',
+        $_POST[turno_jornada],
+        $_POST[turno_responsable])";
         $response = $pdo->exec($sql);
         echo json_encode($response);
         break;
@@ -235,4 +232,21 @@ $_POST[turno_responsable])";
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($result);
     break;
+
+    case 'consultar_acumulado':
+        $sql = "SELECT
+            MONTH(venta_fecha) AS mes_actual,
+            SUM(venta_utilidad) AS acumulado_utilidad,
+            COUNT(venta_utilidad) AS cuenta_num_gestiones,
+            ROUND(SUM(venta_utilidad)/2,0) AS acumulado_ganancia
+            FROM VENTAS
+            WHERE (MONTH(venta_fecha) = (MONTH(CURRENT_DATE())))
+            AND (user_id=$_GET[user_id])
+            ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+    break;
+    
 };

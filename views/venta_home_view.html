@@ -18,13 +18,13 @@
 <body>
   <div class="container-fluid" id="contenido">
 
-
     <div class="row">
         <div class="col-md-2">
           <div id="hoy_moment"></div>
         </div>
       <div class="col-md-4">
         <input type="" class="" id="npt_turno_id_actual">
+        <input type="" class="" id="npt_user_id_actual">
         <h1>ENTREGA DE CAJA DIARIA</h1>
         <span>RESPONSABLE DE TURNO: </span>
         <span id="npt_user_nombre"></span>
@@ -41,24 +41,24 @@
               <thead>
                 <tr>
                   <th scope="col">Mes</th>
-                  <th scope="col">Gestion</th>
-                  <th scope="col">Ventas</th>
+                  <th scope="col"># Gestiones</th>
+                  <th scope="col">Utilidades</th>
                   <th scope="col">Gananc</th>
                 </tr>
               </thead>
               <tbody class="table-group-divider">
                 <tr>
                   <td>
-                    <p id="ventasVendedor1"></p>
+                    <p id="mes_actual"></p>
                   </td>
                   <td>
-                    <p id="ventasVendedor2"></p>
+                    <p id="cuenta_num_gestiones"></p>
                   </td>
                   <td>
-                    <p id="ventasVendedor3"></p>
+                    <p id="acumulado_utilidad"></p>
                   </td>
                   <td>
-                    <p id="ventasVendedor4"></p>
+                    <p id="acumulado_ganancia"></p>
                   </td>
                 </tr>
               </tbody>
@@ -67,7 +67,6 @@
         </div>
 <!-- FINAL CUADRO DE ACUMULADOS -->
     </div>
-
 
     <div class="row">
       <div class="col-md-6">
@@ -102,7 +101,7 @@
               <tr>
                 <th scope="row">Utilidad Hoy</th>
                 <td>
-                  <p id="utilidadVendedor1" class="moneda"></p>
+                  <p id="utilidadVendedor1"></p>
                 </td>
                 <td>
                   <p id="utilidadVendedor2"></p>
@@ -119,7 +118,6 @@
         </div>
       </div>
 
-
       <div class="col-md-6">
         <h3>CUADRO DE TOTALES</h3>
         <table class="table table-sm table-bordered table-hover border-primary">
@@ -131,7 +129,7 @@
               </td>
             </tr>
             <tr>
-              <th scope="row">NUMERO DE VENTAS</th>
+              <th scope="row">NUMERO DE GESTIONES</th>
               <td>
                 <p id="p_turno_numero_ventas"></p>
               </td>
@@ -139,7 +137,6 @@
           </tbody>
         </table>
       </div>
-
     </div>
 
 
@@ -148,7 +145,7 @@
       <!-- div vacio para crear espacio a la izquierda, no borrar -->
       <div class="col-md-6"></div>
       <div class="col-md-6">
-        <button type="button" class="btn btn-primary" id="btn_add" data-bs-toggle="modal">NUEVA VENTA <i
+        <button type="button" class="btn btn-primary" id="btn_add" data-bs-toggle="modal">NUEVA GESTION <i
             class="fa-solid fa-circle-plus"></i></button>
         <button type="button" class="btn btn-danger" id="btn_cerrar_turno" data-bs-toggle="modal">CERRAR TURNO <i
             class="fa-solid fa-circle-plus"></i></button>
@@ -187,12 +184,11 @@
   <!-- -------------------------->
   <!-- INICIA MODAL NUEVA VENTA-->
   <!-- ------------------------->
-  <div class="modal fade" data-bs-backdrop="static" tabindex="-1" id="mdl_ventas">
+  <div class="modal fade" data-bs-backdrop="static" tabindex="1" id="mdl_ventas">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5">NUEVA VENTA</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <h1 class="modal-title fs-5">NUEVA GESTION</h1>
         </div>
         <div class="modal-body">
           <form id="frm_nueva_venta">
