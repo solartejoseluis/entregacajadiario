@@ -321,13 +321,12 @@ document.addEventListener("DOMContentLoaded", function () {
       },
     });
   }
-
   // FIN CICLO AGREGAR NUEVA VENTA
 
-  //------------------------
-  //CICLO EDITAR REGISTRO
-  //------------------------
 
+  //----------------------------------
+  //CICLO EDITAR REGISTRO
+//----------------------------------
   function recuperarRegistro(venta_id) {
     $.ajax({
       type: "GET",
@@ -400,15 +399,9 @@ document.addEventListener("DOMContentLoaded", function () {
       },
     });
   }
-
-  // ***************************
   // FIN CICLO EDITAR REGISTRO
-  //****************************
 
-  //------------------------
   // CICLO BORRAR REGISTRO
-  //------------------------
-
   function borrarRegistro(venta_id) {
     // BORRA REGISTRO Y ACTUALIZA DATATABLES
     $.ajax({
@@ -426,15 +419,11 @@ document.addEventListener("DOMContentLoaded", function () {
       },
     });
   }
-
-  // ***************************
   // FIN CICLO BORRAR REGISTRO
-  // ***************************
 
-  //-----------------------------
+//-------------------------------
   //CICLO CERRAR TURNO
-  //-----------------------------
-
+//-------------------------------
   $("#btn_cerrar_turno").click(function () {
     limpiarDatosFormularioCerrar();
     $("#mdl_cerrar_turno").modal("show");
@@ -453,13 +442,9 @@ document.addEventListener("DOMContentLoaded", function () {
     $.ajax({
       type: "GET",
       url: "../models/venta_home_mdl.php?accion=consultar_utilidad_turno",
-      data: "",
+      data: { turno_id: turno_id },
       success: function (datos) {
         $("#npt_turno_total_utilidad").val(datos[0].utilidad_turno);
-        //$('#npt_turno_id').val(datos[0].turno_id);
-        //alert('prueba de funcionamiento');
-        //$('#p_turno_numero_ventas').html(datos[0].ventas_turno);
-
         let totalSaldo = $("#npt_turno_saldo_caja").val();
         let totalUtilidad = $("#npt_turno_total_utilidad").val();
         let entrega =
@@ -473,7 +458,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  $("#btn_confirm_cerrar_turno").click(function () {
+  $("#btn_confirma_cerrar_turno").click(function () {
     //VALIDACION DE DATOS DEL MODAL
     let valida_saldo_caja = $("#npt_turno_saldo_caja").val();
     let valida_descuadre = $("#npt_turno_descuadre").val();
@@ -490,13 +475,16 @@ document.addEventListener("DOMContentLoaded", function () {
       let registro = recolectarDatosFormularioCerrar();
       guardarRegistroCerrar(registro);
       $("#mdl_cerrar_turno").modal("hide");
-      $(location).attr("href", "login_view.html");
+      comprobarCierreDelTurno();
+      $("#mdl_cerrar_final").modal("show");
+      //$(location).attr("href", "login_view.html");
+
     }
   });
 
   function recolectarDatosFormularioCerrar() {
     let registro = {
-      turno_id_actual: $("#npt_turno_id_actual").val(),
+      //turno_id_actual: $("#npt_turno_id_actual").val(),
       turno_saldo_caja: $("#npt_turno_saldo_caja").val(),
       turno_total_utilidad: $("#npt_turno_total_utilidad").val(),
       turno_total_entrega: $("#npt_turno_total_entrega").val(),
@@ -509,8 +497,7 @@ document.addEventListener("DOMContentLoaded", function () {
     $.ajax({
       type: "POST",
       url:
-        "../models/venta_home_mdl.php?accion=guardar_cierre_turno&turno_id_actual=" +
-        registro.turno_id_actual,
+        "../models/venta_home_mdl.php?accion=guardar_cierre_turno&turno_id=" + turno_id,
       data: registro,
       success: function (msg) {
         //listadoVentas.ajax.reload();
@@ -521,9 +508,40 @@ document.addEventListener("DOMContentLoaded", function () {
       },
     });
   }
-  // ***************************
   // FIN CICLO CERRAR TURNO
-  // ***************************
+
+
+  //-------------------------------
+  //CICLO FINALIZA CERRAR
+//-------------------------------
+  $("#btn_final_turno").click(function () {
+      $("#mdl_cerrar_final").modal("hide");
+      alert('El Turno Ha sido Cerrado')
+      $(location).attr("href", "login_view.html");
+    });
+
+  function comprobarCierreDelTurno() {
+    $.ajax({
+      type: "GET",
+      url:
+        "../models/venta_home_mdl.php?accion=consultar_turno_cerrado",
+      data: { turno_id: turno_id },
+      success: function (datos) {
+        $("#npt_final_saldo_caja").val(datos[0].turno_saldo_caja);
+        $("#npt_final_total_utilidad").val(datos[0].turno_total_utilidad);
+        $("#npt_final_total_entrega").val(datos[0].turno_total_entrega);
+        $("#npt_final_descuadre").val(datos[0].turno_descuadre);
+      },
+      error: function () {
+        alert("problema en: guardar Cierre turno");
+      },
+    });
+  }
+  // FIN CICLO FINALIZAR CERRAR
+
+
+
+
 
   //------------------------
   // OPERACIONES EN EL MODAL

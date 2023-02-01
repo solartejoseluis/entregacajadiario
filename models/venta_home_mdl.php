@@ -2,6 +2,7 @@
 session_start();
 header('Content-Type: application/json');
 require "pdo.php";
+//$usuario_de_sesion = $_SESSION['user_id'];
 
 switch ($_GET['accion']) {
 
@@ -12,6 +13,7 @@ switch ($_GET['accion']) {
         turno_id, 
         user_id 
         FROM ACCESOS 
+        WHERE user_id = $_SESSION[user_id]
         ORDER BY turno_id 
         DESC LIMIT 1
         ";
@@ -194,7 +196,7 @@ switch ($_GET['accion']) {
     turno_total_utilidad = $_POST[turno_total_utilidad],
     turno_total_entrega = $_POST[turno_total_entrega],
     turno_descuadre = $_POST[turno_descuadre]
-    WHERE turno_id = $_GET[turno_id_actual]";
+    WHERE turno_id = $_GET[turno_id]";
         $response = $pdo->exec($sql);
         echo json_encode($response);
         break;
@@ -248,5 +250,25 @@ switch ($_GET['accion']) {
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($result);
     break;
+
+    case 'consultar_turno_cerrado':
+        $sql = "SELECT
+            turno_saldo_caja,
+            turno_total_utilidad,
+            turno_total_entrega,
+            turno_descuadre
+            FROM TURNOS
+            WHERE turno_id=$_GET[turno_id]
+            ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+    break;
+
+
+
+
+
     
 };
