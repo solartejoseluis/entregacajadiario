@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Entrega Diaria</title>
+    <title>Resumen Gestiones</title>
     <!-- CDN boostrap 5.2.2 css -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
@@ -22,7 +22,7 @@
       href="https://cdn.datatables.net/1.13.1/css/dataTables.jqueryui.min.css"
     />
     <!-- estilos personalizados -->
-    <link rel="stylesheet" href="../css/venta_home.css">
+    <link rel="stylesheet" href="../css/resumen_gestiones.css">
   </head>
 
   <body>
@@ -34,12 +34,10 @@
         <div class="col-md-4">
           <input type="hidden" class="" id="npt_turno_id_actual" />
           <input type="hidden" class="" id="npt_user_id_actual" />
-          <h1>GESTIONES DEL TURNO</h1>
-          <span>RESPONSABLE DE TURNO: </span>
+          <h1>Resumen de Gestiones</h1>
+          <span>VENDEDOR(A): </span>
           <span id="npt_user_nombre"></span>
           <span id="npt_user_apellido"></span><br />
-          <span>JORNADA: </span>
-          <span id="npt_jornada_nombre"></span>
         </div>
 
         <!-- INICIA CUADRO DE ACUMULADOS -->
@@ -50,7 +48,6 @@
             para:
             <span id="npt_user_nombre1"></span>
             <span id="npt_user_apellido1"></span>
-            <a href="resumen_gestiones_view.html" target="_blank">Ver Gestiones</a>
           </h6>
 
           <div class="table-responsive">
@@ -81,8 +78,8 @@
         </div>
         <!-- FINAL CUADRO DE ACUMULADOS -->
       </div>
-
-      <div class="row">
+<!-- inicia seccion de tablas de resumen -->
+      <!-- <div class="row">
         <div class="col-md-6">
           <h3>CUADRO DE VENDEDORES</h3>
           <div class="table-responsive">
@@ -157,11 +154,13 @@
             </tbody>
           </table>
         </div>
-      </div>
+      </div> -->
 
-      <div class="row mb-3">
-        <!-- div vacio para crear espacio a la izquierda, no borrar -->
-        <div class="col-md-6"></div>
+<!-- final seccion de tablas de resumen -->
+
+<!-- seccion boton nueva gestion -->
+      <!-- <div class="row mb-3">
+        <div class="col-md-6 div_vacio_espacio"></div>
         <div class="col-md-6">
           <button
             type="button"
@@ -172,8 +171,10 @@
             NUEVA GESTION <i class="fa-solid fa-circle-plus"></i>
           </button>
         </div>
-      </div>
+      </div> -->
+<!-- finaliza seccion boton nueva gestion -->
 
+<!-- inicia datatables       -->
       <div class="row">
         <div class="container" id="tabla">
           <div class="row">
@@ -182,14 +183,12 @@
                 <thead>
                   <tr>
                     <td>ID</td>
+                    <td>FECHA/HORA</td>
                     <td>PRODUCTO</td>
                     <td>PROVEEDOR</td>
                     <td>PRECIO COSTO</td>
                     <td>PRECIO VENTA</td>
-                    <td>VENDEDOR</td>
                     <td>UTILIDAD</td>
-                    <td></td>
-                    <td></td>
                   </tr>
                 </thead>
               </table>
@@ -197,9 +196,11 @@
           </div>
         </div>
       </div>
-<div class="row">
-        <!-- div vacio para crear espacio a la izquierda, no borrar -->
-        <div class="col-md-6"></div>
+      <!-- finaliza datatables -->
+ 
+      <!-- inicia seccion boton inferior -->
+<!-- <div class="row">
+        <div class="col-md-6 div_vacio_espacio"></div>
         <div class="col-md-6">
           <button
             type="button"
@@ -210,7 +211,8 @@
             CERRAR TURNO <i class="fa-solid fa-circle-plus"></i>
           </button>
         </div>
-</div>
+</div> -->
+<!-- finaliza seccion boton inferior -->
 
     </div>
 
@@ -660,6 +662,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/es-us.min.js"></script>
     <!-- scripts de la aplicacion -->
-    <script src="../controllers/venta_home_ctrl.js"></script>
+    <script src="../controllers/resumen_gestiones_ctrl.js"></script>
   </body>
 </html>

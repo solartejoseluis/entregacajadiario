@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     $.ajax({
       type: "POST",
       async: false, // hacer que sea asincronico para sarle tiempo a ajax para cargar variable
-      url: "../models/venta_home_mdl.php?accion=consultar_acceso",
+      url: "../models/resumen_gestiones_mdl.php?accion=consultar_acceso",
       data: "",
       success: function (datos) {
         $("#npt_turno_id_actual").val(datos[0].turno_id);
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
     $.ajax({
       type: "GET",
       async: false, //necesario
-      url: "../models/venta_home_mdl.php?accion=consultarDatosTurnoActual",
+      url: "../models/resumen_gestiones_mdl.php?accion=consultarDatosTurnoActual",
       data: { turno_id: turno_id },
       success: function (datos) {
         //$("#npt_turno_id_actual").val(datos[0].turno_id_actual);
@@ -71,36 +71,20 @@ document.addEventListener("DOMContentLoaded", function () {
     // INICIA DATATABLES
     var listadoVentas = $("#tblVentas").DataTable({
       ajax: {
-        url: "../models/venta_home_mdl.php?accion=listar_ventas",
+        url: "../models/resumen_gestiones_mdl.php?accion=listar_ventas",
         dataSrc: "",
-        data: { turno_id: turno_id },
+        data: { turno_id: turno_id, user_id:user_id },
       },
       columns: [
         { data: "venta_id" },
+        { data: "venta_fecha" },
         { data: "venta_nombre_producto" },
         { data: "venta_nombre_proveedor" },
         { data: "venta_costo_producto" },
         { data: "venta_valor_venta" },
-        { data: "user_nombre" }, //nombre vendedor
         { data: "venta_utilidad" },
-        { data: null, orderable: false },
-        { data: null, orderable: false },
       ],
-      columnDefs: [
-        {
-          targets: 7,
-          defaultContent:
-            "<button class='btn btn-primary btn-sm btnEdit' id='btn_edit'>/<i class='fa-solid fa-pen'></i></button>",
-          data: null,
-        },
-
-        {
-          targets: 8,
-          defaultContent:
-            "<button  class='btn btn-danger btn-sm btnDel'>X<i class='fa fa-trash-o fa-lg'></i></button>",
-          data: null,
-        },
-      ],
+      columnDefs: [],
       language: {
         url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
       },
@@ -130,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function cargarDatosUtilidadVendedor1() {
     $.ajax({
       type: "GET",
-      url: "../models/venta_home_mdl.php?accion=consultar_utilidad_vendedor1",
+      url: "../models/resumen_gestiones_mdl.php?accion=consultar_utilidad_vendedor1",
       data: { turno_id: turno_id },
       success: function (datos) {
         $("#utilidadVendedor1").html(datos[0].utilidad_vendedor1);
@@ -146,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function cargarDatosUtilidadVendedor2() {
     $.ajax({
       type: "GET",
-      url: "../models/venta_home_mdl.php?accion=consultar_utilidad_vendedor2",
+      url: "../models/resumen_gestiones_mdl.php?accion=consultar_utilidad_vendedor2",
       data: { turno_id: turno_id },
       success: function (datos) {
         $("#utilidadVendedor2").html(datos[0].utilidad_vendedor2);
@@ -162,7 +146,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function cargarDatosUtilidadVendedor3() {
     $.ajax({
       type: "GET",
-      url: "../models/venta_home_mdl.php?accion=consultar_utilidad_vendedor3",
+      url: "../models/resumen_gestiones_mdl.php?accion=consultar_utilidad_vendedor3",
       data: { turno_id: turno_id },
       success: function (datos) {
         $("#utilidadVendedor3").html(datos[0].utilidad_vendedor3);
@@ -178,7 +162,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function cargarDatosUtilidadVendedor4() {
     $.ajax({
       type: "GET",
-      url: "../models/venta_home_mdl.php?accion=consultar_utilidad_vendedor4",
+      url: "../models/resumen_gestiones_mdl.php?accion=consultar_utilidad_vendedor4",
       data: { turno_id: turno_id },
       success: function (datos) {
         $("#utilidadVendedor4").html(datos[0].utilidad_vendedor4);
@@ -194,7 +178,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function utilidadTurno() {
     $.ajax({
       type: "GET",
-      url: "../models/venta_home_mdl.php?accion=consultar_utilidad_turno",
+      url: "../models/resumen_gestiones_mdl.php?accion=consultar_utilidad_turno",
       data: { turno_id: turno_id },
       success: function (datos) {
         $("#p_utilidad_turno").html(datos[0].utilidad_turno);
@@ -209,7 +193,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function cargarAcumuladoMes() {
     $.ajax({
       type: "GET",
-      url: "../models/venta_home_mdl.php?accion=consultar_acumulado",
+      url: "../models/resumen_gestiones_mdl.php?accion=consultar_acumulado",
       data: { user_id: user_id },
       success: function (datos) {
         $("#mes_actual").html(datos[0].mes_actual);

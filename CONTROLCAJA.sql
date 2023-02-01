@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 31-01-2023 a las 01:18:02
+-- Tiempo de generación: 01-02-2023 a las 07:04:14
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -142,7 +142,11 @@ INSERT INTO `ACCESOS` (`acceso_id`, `turno_id`, `user_id`) VALUES
 (105, 215, 2),
 (106, 216, 2),
 (107, 217, 2),
-(108, 218, 1);
+(108, 218, 1),
+(109, 219, 2),
+(110, 220, 2),
+(111, 221, 1),
+(112, 222, 1);
 
 -- --------------------------------------------------------
 
@@ -300,7 +304,11 @@ INSERT INTO `TURNOS` (`turno_id`, `turno_fecha_creado`, `turno_jornada`, `turno_
 (215, '2023-01-30', 1, 2, NULL, NULL, NULL, NULL, '2023-01-30 22:34:15'),
 (216, '2023-01-30', 1, 2, NULL, NULL, NULL, NULL, '2023-01-30 22:58:22'),
 (217, '2023-01-30', 1, 2, NULL, NULL, NULL, NULL, '2023-01-30 23:02:52'),
-(218, '2023-01-31', 1, 1, NULL, NULL, NULL, NULL, '2023-01-31 00:15:37');
+(218, '2023-01-31', 1, 1, NULL, NULL, NULL, NULL, '2023-01-31 00:15:37'),
+(219, '2023-01-31', 1, 2, NULL, NULL, NULL, NULL, '2023-01-31 18:35:46'),
+(220, '2023-01-31', 1, 2, NULL, NULL, NULL, NULL, '2023-01-31 20:11:37'),
+(221, '2023-02-01', 1, 1, NULL, NULL, NULL, NULL, '2023-02-01 05:04:23'),
+(222, '2023-02-01', 1, 1, NULL, NULL, NULL, NULL, '2023-02-01 05:13:20');
 
 -- --------------------------------------------------------
 
@@ -394,7 +402,16 @@ INSERT INTO `VENTAS` (`venta_id`, `venta_fecha`, `venta_nombre_producto`, `venta
 (148, '2023-01-30 22:39:49', 'PRO4', 'P456', 6000, 10000, 4000, 2, 215),
 (149, '2023-01-30 23:05:27', 'PRODUCTO', 'PRO 88', 20000, 40000, 20000, 2, 217),
 (150, '2023-01-31 00:16:24', 'PRETRR ', 'PRO 567', 20000, 30000, 10000, 1, 218),
-(151, '2023-01-31 00:16:57', 'PR 4', 'D', 10000, 30000, 20000, 1, 218);
+(151, '2023-01-31 00:16:57', 'PR 4', 'D', 10000, 30000, 20000, 1, 218),
+(152, '2023-01-31 18:36:39', '8', '8', 40000, 60000, 20000, 2, 219),
+(154, '2023-01-31 20:22:46', '8', '8', 50000, 100000, 50000, 2, 220),
+(155, '2023-01-31 21:17:12', '8', '8', 40000, 100000, 60000, 2, 220),
+(156, '2023-02-01 00:59:50', '7', '7', 50000, 70000, 20000, 2, 220),
+(157, '2023-02-01 01:00:45', '9', '9', 60000, 150000, 90000, 1, 220),
+(158, '2023-02-01 05:04:44', 'PRODUCTO VERDE', 'PV 8', 10000, 20000, 10000, 1, 221),
+(159, '2023-02-01 05:06:20', 'P2', 'PRO4', 50000, 100000, 50000, 1, 221),
+(160, '2023-02-01 05:19:43', '5', '5', 5, 5, 0, 1, 222),
+(161, '2023-02-01 05:24:04', '9', '9', 10000, 20000, 10000, 1, 222);
 
 --
 -- Índices para tablas volcadas
@@ -442,7 +459,7 @@ ALTER TABLE `VENTAS`
 -- AUTO_INCREMENT de la tabla `ACCESOS`
 --
 ALTER TABLE `ACCESOS`
-  MODIFY `acceso_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
+  MODIFY `acceso_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
 
 --
 -- AUTO_INCREMENT de la tabla `JORNADAS`
@@ -454,7 +471,7 @@ ALTER TABLE `JORNADAS`
 -- AUTO_INCREMENT de la tabla `TURNOS`
 --
 ALTER TABLE `TURNOS`
-  MODIFY `turno_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=219;
+  MODIFY `turno_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=223;
 
 --
 -- AUTO_INCREMENT de la tabla `USERS`
@@ -466,7 +483,7 @@ ALTER TABLE `USERS`
 -- AUTO_INCREMENT de la tabla `VENTAS`
 --
 ALTER TABLE `VENTAS`
-  MODIFY `venta_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
+  MODIFY `venta_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=162;
 
 --
 -- Restricciones para tablas volcadas
