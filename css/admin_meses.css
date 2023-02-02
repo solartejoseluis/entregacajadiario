@@ -1,0 +1,39 @@
+
+.colors {
+color:#1A56B0;
+color:#FC3F26;
+color:#0D6EFD; /* color de referencia para la paleta*/
+color:#CAFC26;
+color:#86B000;
+color:#06367D; /* fondo */
+}
+
+body {
+  background-color:#06367D;
+}
+
+#tblVentas{
+  background-color:whitesmoke;
+}
+
+#tabla_acumulados {
+  background-color:#1A56B0;
+  color: white ;
+}
+
+#tabla_totales {
+  background-color:#86B000;
+  color: white ;
+}
+
+#tabla_vendedores {
+  background-color:#CAFC26;
+}
+#btn_cerrar_turno, #btn_confirm_cerrar_turno,.btnDel {
+  background-color:#FC3F26;
+}
+
+
+#btn_cerrar_turno{
+  float: right;
+}

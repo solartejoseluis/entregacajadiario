@@ -2,6 +2,7 @@
 session_start();
 header('Content-Type: application/json');
 require "pdo.php";
+//$usuario_de_sesion = $_SESSION['user_id'];
 
 switch ($_GET['accion']) {
 
@@ -24,21 +25,12 @@ switch ($_GET['accion']) {
 
     case 'listar_ventas':
         // ENVIA LOS DATOS AL DATATABLES
-        $sql = "SELECT 
-        VENTAS.venta_id,
-        VENTAS.venta_fecha,
-        VENTAS.venta_nombre_producto,
-        VENTAS.venta_nombre_proveedor,
-        VENTAS.venta_costo_producto,
-        VENTAS.venta_valor_venta,
-        VENTAS.venta_utilidad,
-        VENTAS.turno_id
-        FROM VENTAS
-        INNER JOIN USERS
-        ON VENTAS.user_id=USERS.user_id
-        WHERE (MONTH(venta_fecha) = (MONTH(CURRENT_DATE())))
-        AND (VENTAS.user_id = $_GET[user_id])
-        ";
+        $sql = "SELECT
+            MONTH(venta_fecha) AS mes,
+            YEAR(venta_fecha) AS año,
+            SUM(venta_utilidad) AS acumulado_utilidad,
+            COUNT(venta_utilidad) AS cuenta_num_gestiones
+            FROM VENTAS GROUP BY mes";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -196,7 +188,7 @@ switch ($_GET['accion']) {
     turno_total_utilidad = $_POST[turno_total_utilidad],
     turno_total_entrega = $_POST[turno_total_entrega],
     turno_descuadre = $_POST[turno_descuadre]
-    WHERE turno_id = $_GET[turno_id_actual]";
+    WHERE turno_id = $_GET[turno_id]";
         $response = $pdo->exec($sql);
         echo json_encode($response);
         break;
@@ -233,7 +225,7 @@ switch ($_GET['accion']) {
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($result);
-    break;
+        break;
 
     case 'consultar_acumulado':
         $sql = "SELECT
@@ -249,6 +241,20 @@ switch ($_GET['accion']) {
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($result);
-    break;
-    
+        break;
+
+    case 'consultar_turno_cerrado':
+        $sql = "SELECT
+            turno_saldo_caja,
+            turno_total_utilidad,
+            turno_total_entrega,
+            turno_descuadre
+            FROM TURNOS
+            WHERE turno_id=$_GET[turno_id]
+            ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
 };
