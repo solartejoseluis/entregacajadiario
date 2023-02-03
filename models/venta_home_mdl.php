@@ -68,7 +68,6 @@ switch ($_GET['accion']) {
         echo json_encode($response);
         break;
 
-
     case 'borrar_venta':
         $sql = "DELETE FROM VENTAS  WHERE venta_id=$_GET[venta_id]";
         $response = $pdo->exec($sql);
