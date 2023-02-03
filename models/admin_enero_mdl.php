@@ -20,7 +20,9 @@ switch ($_GET['accion']) {
         INNER JOIN JORNADAS
         ON TURNOS.turno_jornada=JORNADAS.jornada_id
         INNER JOIN USERS
-        ON TURNOS.turno_responsable=USERS.user_id";
+        ON TURNOS.turno_responsable=USERS.user_id
+        WHERE MONTH(turno_fecha_creado) = 1
+        ";
     $stmt = $pdo -> prepare($sql);
     $stmt -> execute();
     $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);

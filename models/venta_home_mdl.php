@@ -191,10 +191,11 @@ switch ($_GET['accion']) {
 
     case 'guardar_cierre_turno':
         $sql = "UPDATE TURNOS SET
-    turno_saldo_caja = $_POST[turno_saldo_caja],
-    turno_total_utilidad = $_POST[turno_total_utilidad],
-    turno_total_entrega = $_POST[turno_total_entrega],
-    turno_descuadre = $_POST[turno_descuadre]
+            turno_saldo_caja = $_POST[turno_saldo_caja],
+            turno_total_utilidad = $_POST[turno_total_utilidad],
+            turno_total_entrega = $_POST[turno_total_entrega],
+            turno_descuadre = $_POST[turno_descuadre],
+            turno_fechahora_cierre = now()
     WHERE turno_id = $_GET[turno_id]";
         $response = $pdo->exec($sql);
         echo json_encode($response);

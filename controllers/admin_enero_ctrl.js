@@ -4,7 +4,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     let resumen = $("#tbl_admin").DataTable({
         "ajax": {
-            url: "../models/admin_mdl.php?accion=listar_resumen",
+            url: "../models/admin_enero_mdl.php?accion=listar_resumen",
             dataSrc: ""
         },
         "columns": [

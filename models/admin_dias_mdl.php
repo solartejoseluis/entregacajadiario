@@ -5,20 +5,20 @@ require "pdo.php";
 
 switch ($_GET['accion']) {
 
-    case 'consultar_acceso':
-        // aqui se convierte la variable de sesion mes en una local con una consulta
-        $sql = "SELECT 
-        MONTH(turno_fecha_creado) AS mes 
-        FROM TURNOS 
-        WHERE MONTH(turno_fecha_creado) = $_SESSION[mes]
-        LIMIT 1
-        ";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($result);
-        //unset($_SESSION['mes']);
-        break;
+    // case 'consultar_acceso':
+    //     // aqui se convierte la variable de sesion mes en una local con una consulta
+    //     $sql = "SELECT 
+    //     MONTH(turno_fecha_creado) AS mes 
+    //     FROM TURNOS 
+    //     WHERE MONTH(turno_fecha_creado) = $_SESSION[mes]
+    //     LIMIT 1
+    //     ";
+    //     $stmt = $pdo->prepare($sql);
+    //     $stmt->execute();
+    //     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    //     echo json_encode($result);
+    //     //unset($_SESSION['mes']);
+    //     break;
 
 
     case 'listar_ventas':

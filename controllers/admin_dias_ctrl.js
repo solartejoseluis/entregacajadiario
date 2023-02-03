@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
-  var mes = "";
+  var mes = 1;
 
   $(document).ready(function () {
-    cargarAcceso();
+    //cargarAcceso();
     ejecutarDatatables();
     // cargaPantallaPrincipal();
   });

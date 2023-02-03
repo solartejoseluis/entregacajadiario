@@ -438,19 +438,25 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   //CALCULAR UTILIDAD EN EL MODAL
-  $("#npt_turno_saldo_caja").focusout(function calculoUtilidadCierre() {
+  $("#npt_turno_saldo_caja").focusout(function() {
     $.ajax({
       type: "GET",
       url: "../models/venta_home_mdl.php?accion=consultar_utilidad_turno",
       data: { turno_id: turno_id },
       success: function (datos) {
+        let valorCero = 0;
         $("#npt_turno_total_utilidad").val(datos[0].utilidad_turno);
+        if($("#npt_turno_total_utilidad").val()===""){
+          alert('la utilidad del turno esta vacia');
+          $("#npt_turno_total_utilidad").val(valorCero);
+        }else{
         let totalSaldo = $("#npt_turno_saldo_caja").val();
         let totalUtilidad = $("#npt_turno_total_utilidad").val();
-        let entrega =
+        let entrega = 
           parseFloat(totalSaldo.replace(/\$|\./g, "")) +
           parseFloat(totalUtilidad.replace(/\$|\./g, ""));
         $("#npt_turno_total_entrega").val(entrega);
+        };
       },
       error: function () {
         alert("Problema en cargar datos utilidad turno");
