@@ -3,6 +3,7 @@ session_start();
 header('Content-Type: application/json');
 require "pdo.php";
 
+
 switch ($_GET['accion']) {
 
     case 'crear_variable_de_paso':
@@ -15,17 +16,9 @@ switch ($_GET['accion']) {
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($result); 
-        
-        $_SESSION['mes'] = json_decode($result.mes);
-             
-        
-        
-        // seleccion del dato y grabarlo en variable de sesion
-        //while ($arr = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        //echo $arr['mes'];
-        //$_SESSION['mes'] = $arr['mes'];
-       // };
+        //voy a aintentar extraer el datos desde el fetch all..
+        $_SESSION['mes'] = $result[0]->mes;
+        echo json_encode($result);
         break;
 
    

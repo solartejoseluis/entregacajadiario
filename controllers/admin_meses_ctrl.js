@@ -40,18 +40,19 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#tblVentas tbody").on("click", "button.boton_ir", function () {
       let registro = listado.row($(this).parents("tr")).data();
       crearVariableDePaso(registro.mes);
-      alert(JSON.stringify(registro.mes));
-      //$(location).attr("href", "admin_dias_view.html");
+      //alert(JSON.stringify(registro.mes));
     });
 
   function crearVariableDePaso(mes) {
     $.ajax({
       type: "GET",
+      async: false, // hacer que sea asincronico para sarle tiempo a ajax para cargar variable
       url: "../models/admin_meses_mdl.php?accion=crear_variable_de_paso&mes="+mes,
       data:"",
       success: function (datos) {
-      alert('variable de paso creada');
-      alert(datos[0].mes);
+      //alert('variable de paso creada');
+      //alert(datos[0].mes);
+      $(location).attr("href", "../views/admin_dias_view.html");
       },
       error: function () {
         alert("Problema en crear variable de paso");

@@ -1,14 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
   var mes = "";
-  var user_id = "";
-
-  // alert ('primera version de turno id');
-  // alert (turno_id);
 
   $(document).ready(function () {
-    // alert('se va a ajecutar la funcion cargar acceso');
     cargarAcceso();
-    // alert('se va a ajecutar la funcion ejecutar datatables');
     ejecutarDatatables();
     // cargaPantallaPrincipal();
   });
@@ -17,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     $.ajax({
       type: "POST",
       async: false, // hacer que sea asincronico para sarle tiempo a ajax para cargar variable
-      url: "../models/venta_home_mdl.php?accion=consultar_acceso",
+      url: "../models/admin_dias_mdl.php?accion=consultar_acceso",
       data: "",
       success: function (datos) {
         $("#npt_mes").val(datos[0].mes);
@@ -31,6 +25,52 @@ document.addEventListener("DOMContentLoaded", function () {
       },
     });
   }
+
+  function ejecutarDatatables() {
+    // INICIA DATATABLES
+    var listadoVentas = $("#tblVentas").DataTable({
+      ajax: {
+        url: "../models/admin_dias_mdl.php?accion=listar_ventas",
+        dataSrc: "",
+        data: {mes: mes},
+      },
+      columns: [
+        { data: "dia" },
+        { data: "utilidad" },
+        { data: "num_gestiones" },
+        { data: null, orderable: false },
+      ],
+      columnDefs: [
+        {
+          targets: 3,
+          defaultContent:
+            "<button class='btn btn-primary btn-sm btnEdit' id='btn_edit'>/<i class='fa-solid fa-pen'></i></button>",
+          data: null,
+        },
+
+      ],
+      language: {
+        url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+      },
+      paging: false,
+    });
+
+    //boton Editar
+    $("#tblVentas tbody").on("click", "button.btnEdit", function () {
+      let registroEdit = listadoVentas.row($(this).parents("tr")).data();
+      recuperarRegistro(registroEdit.venta_id);
+    });
+
+    //boton borrar
+    $("#tblVentas tbody").on("click", "button.btnDel", function () {
+      //ACCIONA BOTON BORRAR REGISTRO DEL DATATABLES
+      if (confirm("¿Confirma la Eliminación?")) {
+        let registro = listadoVentas.row($(this).parents("tr")).data();
+        borrarRegistro(registro.venta_id);
+      }
+    });
+  } // final del datatables
+
 
   function cargaPantallaPrincipal() {
     // alert('se va a ajecutar la funcion consultar datos turno actual');
@@ -62,52 +102,6 @@ document.addEventListener("DOMContentLoaded", function () {
       error: function () {
         alert("Problema en consultar datos turno actual");
       },
-    });
-  }
-
-  function ejecutarDatatables() {
-    // INICIA DATATABLES
-    var listadoVentas = $("#tblVentas").DataTable({
-      ajax: {
-        url: "../models/admin_meses_mdl.php?accion=listar_ventas",
-        dataSrc: "",
-        data: "",
-      },
-      columns: [
-        { data: "dia" },
-        { data: "utilidad" },
-        { data: "num_gestiones" },
-        { data: null, orderable: false },
-      ],
-      columnDefs: [
-        {
-          targets: 4,
-          defaultContent:
-            "<button class='btn btn-primary btn-sm btnEdit' id='btn_edit'>/<i class='fa-solid fa-pen'></i></button>",
-          data: null,
-        },
-
-      ],
-      language: {
-        url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
-      },
-      paging: false,
-    });
-    // FIN DATATABLES
-
-    //boton Editar
-    $("#tblVentas tbody").on("click", "button.btnEdit", function () {
-      let registroEdit = listadoVentas.row($(this).parents("tr")).data();
-      recuperarRegistro(registroEdit.venta_id);
-    });
-
-    //boton borrar
-    $("#tblVentas tbody").on("click", "button.btnDel", function () {
-      //ACCIONA BOTON BORRAR REGISTRO DEL DATATABLES
-      if (confirm("¿Confirma la Eliminación?")) {
-        let registro = listadoVentas.row($(this).parents("tr")).data();
-        borrarRegistro(registro.venta_id);
-      }
     });
   }
 
@@ -526,24 +520,10 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   // FIN CICLO FINALIZAR CERRAR
 
-
-
-
-
   //------------------------
   // OPERACIONES EN EL MODAL
   //------------------------
 
-  //CARGA EL SELECT VENDEDORES
-  $(document).ready(function () {
-    $.ajax({
-      type: "POST",
-      url: "../models/selects/getVendedor.php",
-      success: function (response) {
-        $(".selectUser select").html(response).fadeIn();
-      },
-    });
-  });
 
   //CALCULAR UTILIDAD EN EL MODAL NUEVA VENTA
   $("#npt_venta_valor_venta").focusout(function calculoUtilidad() {

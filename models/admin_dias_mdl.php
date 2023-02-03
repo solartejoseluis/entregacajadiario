@@ -2,21 +2,22 @@
 session_start();
 header('Content-Type: application/json');
 require "pdo.php";
-//$usuario_de_sesion = $_SESSION['user_id'];
 
 switch ($_GET['accion']) {
 
     case 'consultar_acceso':
         // aqui se convierte la variable de sesion mes en una local con una consulta
         $sql = "SELECT 
-        MONTH(turno_fecha_creado) AS mes_local, 
+        MONTH(turno_fecha_creado) AS mes 
         FROM TURNOS 
-        WHERE mes_local = $_SESSION[mes]
+        WHERE MONTH(turno_fecha_creado) = $_SESSION[mes]
+        LIMIT 1
         ";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($result);
+        //unset($_SESSION['mes']);
         break;
 
 
@@ -27,7 +28,7 @@ switch ($_GET['accion']) {
         SUM(venta_utilidad) AS utilidad,
         COUNT(venta_id) AS num_gestiones
         FROM VENTAS
-        WHERE MONTH(venta_fecha) = 1
+        WHERE MONTH(venta_fecha) = $_GET[mes]
         GROUP BY dia
         ORDER BY dia ASC
         ";
