@@ -2,9 +2,10 @@
 document.addEventListener("DOMContentLoaded", function () {
   let resumen = $("#tabla_reabrir").DataTable({
     ajax: {
-      url: "../models/turno_admin_mdl.php?accion=listar_resumen",
+      url: "../models/turno_todos_mdl.php?accion=listar_resumen",
       dataSrc: "",
     },
+    order: [[1, 'desc']],
     columns: [
       { data: "turno_id" },
       { data: "turno_fecha_creado" },
@@ -41,22 +42,26 @@ document.addEventListener("DOMContentLoaded", function () {
   $('#tabla_reabrir tbody').on('click', 'button.boton_ver', function () {
     let registro = resumen.row($(this).parents('tr')).data();
     // alert(registro.turno_id);
-    crearVariableSesionDelTurno(registro.turno_id);
-  });
-
-  function crearVariableSesionDelTurno(turno_id) {
-    $.ajax({
-      type: 'GET',
-      url: '../models/turno_admin_mdl.php?accion=cargar_turno_id_anterior&turno_id=' + turno_id,
-      data: '',
-      success: function (msg) {
-      $(location).attr("href", "../views/venta_admin_view.html");
-        },
-      error: function () {
-        alert("Problema en crear variable sesion turno");
-      }
+    //crearVariableSesionDelTurno(registro.turno_id);
+    //envio de la  variable por get
+    $(location).attr("href", "../views/venta_todos_view.html?turno_id="+ registro.turno_id+"&user_id="+registro.user_id);
+    //$(location).attr("href", "../views/venta_todos_view.html");
     });
-  }
+
+  // function crearVariableSesionDelTurno(turno_id) {
+  //   $.ajax({
+  //     type: 'GET',
+  //     async: false, // hacer que sea asincronico para sarle tiempo a ajax para cargar variable
+  //     url: '../models/turno_todos_mdl.php?accion=cargar_turno_id_anterior&turno_id=' + turno_id,
+  //     data: '',
+  //     success: function (msg) {
+  //     //$(location).attr("href", "../views/venta_todos_view.html");
+  //       },
+  //     error: function () {
+  //       alert("Problema en crear variable sesion turno");
+  //     }
+  //   });
+  // }
 
 
 }); // cierre del datatables

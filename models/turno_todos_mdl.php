@@ -13,6 +13,7 @@ switch ($_GET['accion']) {
         TURNOS.turno_fecha_creado,
         JORNADAS.jornada_nombre,
         USERS.user_nombre,
+        USERS.user_id,
         TURNOS.turno_saldo_caja,
         TURNOS.turno_total_utilidad,
         TURNOS.turno_total_entrega,
@@ -30,10 +31,10 @@ switch ($_GET['accion']) {
     break;
   
 
-  case 'cargar_turno_id_anterior':
+  case 'cargar_turno_id':
    // consulta para crear la variable de sesion turno_id_anterior
     $sql = "SELECT
-    TURNOS.turno_id AS turno_id_anterior
+    TURNOS.turno_id AS turno_id
     FROM TURNOS
     WHERE turno_id = $_GET[turno_id]
     ";
@@ -44,7 +45,7 @@ switch ($_GET['accion']) {
     // seleccion del dato y grabarlo en variable de sesion
     while ($arr = $stmt->fetch(PDO::FETCH_ASSOC)) {
       //echo $arr['turno_id_anterior'];
-    $_SESSION['turno_id_anterior'] = $arr['turno_id_anterior'];
+    $_SESSION['turno_id'] = $arr['turno_id'];
  };
 break;
 

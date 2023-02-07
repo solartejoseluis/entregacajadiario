@@ -4,7 +4,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     let resumen = $("#tbl_admin").DataTable({
         "ajax": {
-            url: "../models/admin_enero_mdl.php?accion=listar_resumen",
+            url: "../models/admin_febrero_mdl.php?accion=listar_resumen",
             dataSrc: ""
         },
         "columns": [
@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function consultarDatosTurnoActual(turno_id) {
         $.ajax({
             type: 'POST',
-            url: '../models/admin_enero_mdl.php?accion=consultarDatosTurnoActual&turno_id=' + turno_id,
+            url: '../models/admin_febrero_mdl.php?accion=consultarDatosTurnoActual&turno_id=' + turno_id,
             data: '',
             success: function (datos) {
                 $('#npt_user_nombre').html(datos[0].user_nombre);
@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function cargarDatosUtilidadVendedor1(turno_id) {
         $.ajax({
             type: 'GET',
-            url: '../models/admin_enero_mdl.php?accion=consultar_utilidad_vendedor1&turno_id=' + turno_id,
+            url: '../models/admin_febrero_mdl.php?accion=consultar_utilidad_vendedor1&turno_id=' + turno_id,
             data: '',
             success: function (datos) {
                 $('#utilidadVendedor1').html(datos[0].utilidad_vendedor1);
@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function cargarDatosUtilidadVendedor2(turno_id) {
         $.ajax({
             type: 'GET',
-            url: '../models/admin_enero_mdl.php?accion=consultar_utilidad_vendedor2&turno_id=' + turno_id,
+            url: '../models/admin_febrero_mdl.php?accion=consultar_utilidad_vendedor2&turno_id=' + turno_id,
             data: '',
             success: function (datos) {
                 $('#utilidadVendedor2').html(datos[0].utilidad_vendedor2);
@@ -146,7 +146,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function cargarDatosUtilidadVendedor3(turno_id) {
         $.ajax({
             type: 'GET',
-            url: '../models/admin_enero_mdl.php?accion=consultar_utilidad_vendedor3&turno_id=' + turno_id,
+            url: '../models/admin_febrero_mdl.php?accion=consultar_utilidad_vendedor3&turno_id=' + turno_id,
             data: '',
             success: function (datos) {
                 $('#utilidadVendedor3').html(datos[0].utilidad_vendedor3);
@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function cargarDatosUtilidadVendedor4(turno_id) {
         $.ajax({
             type: 'GET',
-            url: '../models/admin_enero_mdl.php?accion=consultar_utilidad_vendedor4&turno_id=' + turno_id,
+            url: '../models/admin_febrero_mdl.php?accion=consultar_utilidad_vendedor4&turno_id=' + turno_id,
             data: '',
             success: function (datos) {
                 $('#utilidadVendedor4').html(datos[0].utilidad_vendedor4);
@@ -181,7 +181,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function utilidadTurno(turno_id) {
         $.ajax({
             type: 'GET',
-            url: '../models/admin_enero_mdl.php?accion=consultar_utilidad_turno&turno_id=' + turno_id,
+            url: '../models/admin_febrero_mdl.php?accion=consultar_utilidad_turno&turno_id=' + turno_id,
             data: '',
             success: function (datos) {
                 $('#p_utilidad_turno').html(datos[0].utilidad_turno);
@@ -199,7 +199,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function listarVentasDia(turno_id) {
         $.ajax({
             type: 'GET',
-            url: '../models/admin_enero_mdl.php?accion=listar_venta_seleccionada&turno_id=' + turno_id,
+            url: '../models/admin_febrero_mdl.php?accion=listar_venta_seleccionada&turno_id=' + turno_id,
             data: '',
             success: function (datos) {
                 $.each(datos, function () {
