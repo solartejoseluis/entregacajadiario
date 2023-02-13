@@ -16,20 +16,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function cargar_variable_get(){
 let querystring = window.location.search;
-alert(querystring) // '?q=pisos+en+barcelona&ciudad=Barcelona'
+//alert(querystring) // '?q=pisos+en+barcelona&ciudad=Barcelona'
 // usando el querystring, creamos un objeto del tipo URLSearchParams
 let params = new URLSearchParams(querystring);
-alert(params.get('turno_id'));
-alert(params.get('user_id'));
-//turno_id =params.get('turno_id');
+//alert(params.get('turno_id'));
+//alert(params.get('user_id'));
 // agrego el valor a un input
 $("#npt_turno_id_actual").val(params.get('turno_id'));
 turno_id = $("#npt_turno_id_actual").val();
 $("#npt_user_id_actual").val(params.get('user_id'));
 user_id = $("#npt_user_id_actual").val();
 }
-
-
 
   function cargarAcceso() {
     $.ajax({
@@ -463,18 +460,21 @@ user_id = $("#npt_user_id_actual").val();
       data: { turno_id: turno_id },
       success: function (datos) {
         let valorCero = 0;
+        let totalUtilidad = 0;
         $("#npt_turno_total_utilidad").val(datos[0].utilidad_turno);
         if($("#npt_turno_total_utilidad").val()===""){
-          alert('la utilidad del turno esta vacia');
+          alert('Aviso: la utilidad de Este turno es CERO');
           $("#npt_turno_total_utilidad").val(valorCero);
-        }else{
+          totalUtilidad = valorCero;
+          }else{
+           totalUtilidad = $("#npt_turno_total_utilidad").val();
+          };
         let totalSaldo = $("#npt_turno_saldo_caja").val();
-        let totalUtilidad = $("#npt_turno_total_utilidad").val();
-        let entrega = 
-          parseFloat(totalSaldo.replace(/\$|\./g, "")) +
-          parseFloat(totalUtilidad.replace(/\$|\./g, ""));
+        //let entrega = 
+          //parseFloat(totalSaldo.replace(/\$|\./g, "")) +
+          //parseFloat(totalUtilidad.replace(/\$|\./g, ""));
+        let entrega = parseFloat(totalSaldo) +parseFloat(totalUtilidad); 
         $("#npt_turno_total_entrega").val(entrega);
-        };
       },
       error: function () {
         alert("Problema en cargar datos utilidad turno");
@@ -535,13 +535,16 @@ user_id = $("#npt_user_id_actual").val();
   // FIN CICLO CERRAR TURNO
 
 
+  $("#btn_salir").click(function () {
+      $(location).attr("href", "turno_todos_view.html");
+  });
   //-------------------------------
   //CICLO FINALIZA CERRAR
 //-------------------------------
   $("#btn_final_turno").click(function () {
       $("#mdl_cerrar_final").modal("hide");
-      alert('El Turno Ha sido Cerrado')
-      $(location).attr("href", "login_view.html");
+      alert('El Turno Ha sido Cerrado');
+      $(location).attr("href", "turno_todos_view.html");
     });
 
   function comprobarCierreDelTurno() {

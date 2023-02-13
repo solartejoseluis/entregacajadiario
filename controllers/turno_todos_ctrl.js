@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
       url: "../models/turno_todos_mdl.php?accion=listar_resumen",
       dataSrc: "",
     },
-    order: [[1, 'desc']],
+    order: [[1, 'desc'],[2,'desc']],
     columns: [
       { data: "turno_id" },
       { data: "turno_fecha_creado" },

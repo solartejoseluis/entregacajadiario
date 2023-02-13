@@ -445,18 +445,21 @@ document.addEventListener("DOMContentLoaded", function () {
       data: { turno_id: turno_id },
       success: function (datos) {
         let valorCero = 0;
+        let totalUtilidad = 0;
         $("#npt_turno_total_utilidad").val(datos[0].utilidad_turno);
         if($("#npt_turno_total_utilidad").val()===""){
-          alert('la utilidad del turno esta vacia');
+          alert('Aviso:la utilidad de este turno es CERO');
           $("#npt_turno_total_utilidad").val(valorCero);
-        }else{
+          totalUtilidad = valorCero;
+          }else{
+           totalUtilidad = $("#npt_turno_total_utilidad").val();
+          };
         let totalSaldo = $("#npt_turno_saldo_caja").val();
-        let totalUtilidad = $("#npt_turno_total_utilidad").val();
-        let entrega = 
-          parseFloat(totalSaldo.replace(/\$|\./g, "")) +
-          parseFloat(totalUtilidad.replace(/\$|\./g, ""));
+        //let entrega = 
+          //parseFloat(totalSaldo.replace(/\$|\./g, "")) +
+          //parseFloat(totalUtilidad.replace(/\$|\./g, ""));
+        let entrega = parseFloat(totalSaldo) +parseFloat(totalUtilidad); 
         $("#npt_turno_total_entrega").val(entrega);
-        };
       },
       error: function () {
         alert("Problema en cargar datos utilidad turno");
