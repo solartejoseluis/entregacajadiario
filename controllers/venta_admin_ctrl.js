@@ -91,10 +91,6 @@ setInterval (function() {
   getTime();
 }, 1000);
 
-
-
-
-
   function consultarDatosTurnoActual() {
     $.ajax({
       type: "POST",

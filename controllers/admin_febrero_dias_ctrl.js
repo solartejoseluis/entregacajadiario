@@ -19,8 +19,8 @@ document.addEventListener("DOMContentLoaded", function () {
         { data: "utilidad" },
         { data: "num_gestiones" },
       ],
-      columnDefs: [
-      ],
+      order: [[0, 'asc']],
+      columnDefs: [ ],
       language: {
         url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
       },
