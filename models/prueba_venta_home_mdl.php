@@ -265,5 +265,80 @@ switch ($_GET['accion']) {
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($result);
     break;
-    
+
+    case 'listar_ventas_mes_vendedor':
+        // ENVIA LOS DATOS AL DATATABLES
+        $sql = "SELECT 
+        VENTAS.venta_id,
+        VENTAS.venta_fecha,
+        DATE_FORMAT(venta_fecha,'%Y-%m-%d') AS FECHA,
+        CONCAT(ELT(WEEKDAY(venta_fecha)+ 1, 
+        'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom')) AS DIA,
+        DATE_FORMAT(venta_fecha,'%H-%i') AS HORA,
+        VENTAS.venta_nombre_producto,
+        VENTAS.venta_nombre_proveedor,
+        VENTAS.venta_costo_producto,
+        VENTAS.venta_valor_venta,
+        VENTAS.venta_utilidad,
+        VENTAS.turno_id
+        FROM VENTAS
+        INNER JOIN USERS
+        ON VENTAS.user_id=USERS.user_id
+        WHERE (MONTH(venta_fecha) = (MONTH(CURRENT_DATE())))
+        AND (VENTAS.user_id = $_GET[user_id])
+        ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
+
+    case 'listar_ventas_agrupadas_por_dia_vendedor':
+        $sql ="SELECT 
+        DATE_FORMAT(venta_fecha,'%Y-%m-%d') AS FECHA,
+        CONCAT(ELT(WEEKDAY(venta_fecha)+ 1, 
+    'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom')) AS DIA,
+		SUM(venta_utilidad) AS UTILIDAD,
+		COUNT(venta_id) AS NUM_GESTIONES
+        FROM VENTAS
+        INNER JOIN USERS
+        ON VENTAS.user_id=USERS.user_id
+        WHERE (MONTH(venta_fecha) = (MONTH(CURRENT_DATE())))
+        AND (VENTAS.user_id = $_GET[user_id])
+        GROUP BY DIA
+		ORDER BY DIA ASC;
+        ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
+
+    case 'listar_ventas_mes_todos':
+        // ENVIA LOS DATOS AL DATATABLES
+        $sql = "SELECT 
+        VENTAS.venta_id,
+        VENTAS.venta_fecha,
+        DATE_FORMAT(venta_fecha,'%Y-%m-%d') AS FECHA,
+        CONCAT(ELT(WEEKDAY(venta_fecha)+ 1, 
+    'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom')) AS DIA,
+        DATE_FORMAT(venta_fecha,'%H-%i') AS HORA,
+        VENTAS.venta_nombre_producto,
+        VENTAS.venta_nombre_proveedor,
+        VENTAS.venta_costo_producto,
+        VENTAS.venta_valor_venta,
+        VENTAS.venta_utilidad,
+        VENTAS.turno_id,
+        USERS.user_nombre,
+        USERS.user_apellido
+        FROM VENTAS
+        INNER JOIN USERS
+        ON VENTAS.user_id=USERS.user_id
+        WHERE (MONTH(venta_fecha) = (MONTH(CURRENT_DATE())))
+        ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
 };

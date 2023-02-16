@@ -45,23 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //crearVariableSesionDelTurno(registro.turno_id);
     //envio de la  variable por get
     $(location).attr("href", "../views/venta_todos_view.html?turno_id="+ registro.turno_id+"&user_id="+registro.user_id);
-    //$(location).attr("href", "../views/venta_todos_view.html");
     });
-
-  // function crearVariableSesionDelTurno(turno_id) {
-  //   $.ajax({
-  //     type: 'GET',
-  //     async: false, // hacer que sea asincronico para sarle tiempo a ajax para cargar variable
-  //     url: '../models/turno_todos_mdl.php?accion=cargar_turno_id_anterior&turno_id=' + turno_id,
-  //     data: '',
-  //     success: function (msg) {
-  //     //$(location).attr("href", "../views/venta_todos_view.html");
-  //       },
-  //     error: function () {
-  //       alert("Problema en crear variable sesion turno");
-  //     }
-  //   });
-  // }
 
 
 }); // cierre del datatables

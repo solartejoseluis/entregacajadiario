@@ -13,6 +13,6 @@ require "pdo.php";
       $turno_responsable_id)";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
-echo '<meta http-equiv="REFRESH"content="0;url=../views/venta_home_view.html">';
+echo '<meta http-equiv="REFRESH"content="0;url=../views/prueba_venta_home_view.html">';
 //echo '<meta http-equiv="REFRESH"content="0;url=../models/turno_consultar_acceso_mdl.php">';
 ?>
