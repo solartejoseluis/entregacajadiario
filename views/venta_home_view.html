@@ -18,6 +18,61 @@
 
 <body>
   <div class="container-fluid bg-light" id="contenido">
+    <!-- inicia menu principal -->
+    <div class="row">
+      <nav class="navbar navbar-expand-md navbar-dark bg-primary mb-4">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">GESTIONES DEL TURNO</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+              <li class="nav-item dropdown">
+                <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  Mis Gestiones
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" id="menu_gestiones_agrupadas_por_dia" href="#">Agrupadas Por Dia...</a>
+                  </li>
+                  <li><a class="dropdown-item" id="menu_gestiones_mes_vendedor" href="#">Detalle De Productos...</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  Productos
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" id="menu_gestiones_mes_todos" href="#">Todas las gestiones Del mes...</a></li>
+                  <!-- <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  Turno
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" id="menu_cerrar_turno" href="#">Cerrar Turno...</a></li>
+                  <!-- <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <!-- fin menu principal -->
     <div class="row">
       <div class="col-md-2">
         <div id="hoy_moment"></div>
@@ -25,7 +80,7 @@
       <div class="col-md-4">
         <input type="hidden" class="" id="npt_turno_id_actual" />
         <input type="hidden" class="" id="npt_user_id_actual" />
-        <h1>GESTIONES DEL TURNO</h1>
+        <!-- <h1>GESTIONES DEL TURNO</h1> -->
         <span>RESPONSABLE DE TURNO: </span>
         <span id="npt_user_nombre"></span>
         <span id="npt_user_apellido"></span><br />
@@ -41,7 +96,7 @@
           para:
           <span id="npt_user_nombre1"></span>
           <span id="npt_user_apellido1"></span>
-          <a href="resumen_gestiones_view.html" target="_blank">Ver Gestiones</a>
+          <!-- <a href="resumen_gestiones_view.html" target="_blank">Ver Gestiones</a> -->
         </h6>
 
         <div class="table-responsive">
@@ -178,9 +233,9 @@
     <div class="row">
       <div class="col-md-6 div_vacio_espacio"></div>
       <div class="col-md-6">
-        <button type="button" class="btn btn-danger" id="btn_cerrar_turno" data-bs-toggle="modal">
-          CERRAR TURNO <i class="fa-solid fa-circle-plus"></i>
-        </button>
+        <!-- <button type="button" class="btn btn-danger" id="btn_cerrar_turno" data-bs-toggle="modal">
+          CERRAR EL TURNO <i class="fa-solid fa-circle-plus"></i>
+        </button> -->
       </div>
     </div>
 
@@ -463,7 +518,7 @@
           <form id="frm_cerrar_final">
             <!-- EDITAR VENTAS_ID -->
             <div class="row">
-              <input type="hidden" class="form-control" id="npt_turno_id"  disabled/>
+              <input type="hidden" class="form-control" id="npt_turno_id" disabled />
             </div>
             <!-- SALDO DE CAJA PRINCIPAL -->
             <div class="row mb-3">
@@ -500,7 +555,7 @@
                 <label for="npt_final_descuadre" class="col-form-label">Valor de Descuadre:</label>
               </div>
               <div class="col-md-9 ms-auto">
-                <input type="text" class="form-control" id="npt_final_descuadre" disabled/>
+                <input type="text" class="form-control" id="npt_final_descuadre" disabled />
               </div>
             </div>
           </form>
@@ -520,6 +575,143 @@
   </div>
   <!-- FINALIZA MODAL CERRAR FINAL -->
 
+
+
+  <!-- -------------------------->
+  <!-- INICIA MODAL Mis gestiones/Detalle de productos...-->
+  <!-- ------------------------->
+
+  <div class="modal fade" tabindex="1" id="mdl_gestiones_mes_vendedor">
+    <div class="modal-dialog modal-xl modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">MIS GESTIONES DEL MES</h1>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <!-- inicia datatables del modal  -->
+            <div class="row">
+              <div class="col-md-12">
+                <table class="table" id="tbl_gestiones_mes_vendedor">
+                  <thead>
+                    <tr>
+                      <td>ID</td>
+                      <td>FECHA</td>
+                      <td>DIA</td>
+                      <td>HORA</td>
+                      <td>PRODUCTO</td>
+                      <td>PROVEEDOR</td>
+                      <td>PRECIO COSTO</td>
+                      <td>PRECIO VENTA</td>
+                      <td>UTILIDAD</td>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+            </div>
+            <!-- finaliza datatables del modal -->
+          </div>
+        </div>
+
+        <!-- inicia footer modal -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- FIN MODAL mis gestiones / detalle de productos -->
+
+  <!-- -------------------------->
+  <!-- INICIA MODAL Mis gestiones/Agrupadas por dia...-->
+  <!-- ------------------------->
+
+  <div class="modal fade" tabindex="1" id="mdl_gestiones_agrupadas_por_dia">
+    <div class="modal-dialog modal-xl modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5"> GESTIONES AGRUPADAS POR DIA</h1>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <!-- inicia datatables del modal  -->
+            <div class="row">
+              <div class="col-md-12">
+                <table class="table" id="tbl_gestiones_agrupadas_por_dia">
+                  <thead>
+                    <tr>
+                      <td>FECHA</td>
+                      <td>DIA</td>
+                      <td>UTILIDAD</td>
+                      <td>NUM GESTIONES</td>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+            </div>
+            <!-- finaliza datatables del modal -->
+          </div>
+        </div>
+
+        <!-- inicia footer modal nueva venta -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- FIN MODAL mis gestiones / detalle de productos -->
+
+
+  <!-- -------------------------->
+  <!-- INICIA MODAL productos/gestiones del mes...-->
+  <!-- ------------------------->
+
+  <div class="modal fade" tabindex="1" id="mdl_gestiones_mes_todos">
+    <div class="modal-dialog modal-xl modal-dialog modal-fullscreen">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">TODAS LAS GESTIONES DEL MES</h1>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <!-- inicia datatables del modal  -->
+            <div class="row">
+              <div class="col-md-12">
+                <table class="table" id="tbl_gestiones_mes_todos">
+                  <thead>
+                    <tr>
+                      <td>ID</td>
+                      <td>FECHA</td>
+                      <td>DIA</td>
+                      <td>HORA</td>
+                      <td>PRODUCTO</td>
+                      <td>PROVEEDOR</td>
+                      <td>PRECIO COSTO</td>
+                      <td>PRECIO VENTA</td>
+                      <td>VENDEDOR</td>
+                      <td>UTILIDAD</td>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+            </div>
+            <!-- finaliza datatables del modal -->
+          </div>
+        </div>
+        <!-- inicia el footer  -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- ------- -->
   <!-- SCRIPTS -->
