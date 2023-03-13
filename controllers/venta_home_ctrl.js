@@ -727,8 +727,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // FIN DATATABLES DEL MODAL
   }
 
-
-
   // CARGA LA FECHA ACTUAL y CUADRO PRINCIPAL DE PAGINA
   function getTime() {
     var today = moment();
