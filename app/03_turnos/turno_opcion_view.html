@@ -8,13 +8,13 @@
   <!-- CDN boostrap 5.2.2 css -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   <!-- estilos de la pagina -->
-  <link href="../css/login.css" rel="stylesheet">
+  <link href="turnos.css" rel="stylesheet">
 </head>
 
 <body class="text-center">
   <main class="form-signin w-100 m-auto">
 <h1>ELIJA UNA OPCION</h1>
-<form name="frm_turno" method="POST" action="../models/turno_opcion1_mdl.php">
+<form name="frm_turno" method="POST" action="turno_opcion_crear_mdl.php">
 <!-- CREAR TURNO -->
 <div class="row mb-3">
   <button class="w-100 btn btn-lg btn-primary" id="btn_crear_turno" type="submit">Crear Nuevo Turno para Hoy</button>
@@ -22,7 +22,7 @@
 </form>
 
 <!-- BUSCAR TURNOS ANTERIORES -->
-<form name="frm_turno" method="POST" action="../models/turno_opcion2_mdl.php">
+<form name="frm_turno" method="POST" action="turno_opcion_ver_mdl.php">
 <!-- BOTON ENVIAR -->
 <div class="row mb-3">
   <button class="w-100 btn btn-lg btn-secondary" id="btn_turno_anterior" type="submit">Ir Al Último Turno Creado</button>

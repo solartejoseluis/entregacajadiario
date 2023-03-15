@@ -36,25 +36,25 @@ if ($count=='1'){
       $_SESSION['user_bd'] = $user_local;
       $_SESSION['password_bd'] = $password_local;
       $_SESSION['user_id'] = $user_id;
-      echo '<meta http-equiv="REFRESH"content="0;url=../views/turno_opcion_view.html">';
+      echo '<meta http-equiv="REFRESH"content="0;url=../03_turnos/turno_opcion_view.html">';
       break;
 
     case '2':
       $_SESSION['user_bd'] = $user_local;
       $_SESSION['password_bd'] = $password_local;
       $_SESSION['user perfil'] = $user_perfil;
-      echo'<meta http-equiv="REFRESH"content="0;url=../views/admin_home_view.html">';
+      echo'<meta http-equiv="REFRESH"content="0;url=../04_admin/admin_home_view.html">';
       break;
 
     case '3':
       $_SESSION['user_bd'] = $user_local;
       $_SESSION['password_bd'] = $password_local;
       $_SESSION['user perfil'] = $user_perfil;
-      echo'<meta http-equiv="REFRESH"content="0;url=../views/turno_todos_view.html">';
+      echo'<meta http-equiv="REFRESH"content="0;url=../03_turnos/turno_todos_view.html">';
       break;
   }
 }else{
-  echo'<meta http-equiv="REFRESH"content="0;url=../views/login_error_view.html">';
+  echo'<meta http-equiv="REFRESH"content="0;url=login_error_view.html">';
   };
 
 // CERRAR LA CONEXIÓN

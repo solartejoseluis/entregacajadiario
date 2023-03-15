@@ -1,7 +1,7 @@
 <?php
 session_start();
 header('Content-Type: application/json');
-require "pdo.php";
+require "../00_connect/pdo.php";
 //$usuario_de_sesion = $_SESSION['user_id'];
 
 switch ($_GET['accion']) {

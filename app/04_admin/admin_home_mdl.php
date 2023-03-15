@@ -1,14 +1,15 @@
 <?php
 session_start();
 header('Content-Type: application/json');
-require "pdo.php";
+require "../00_connect/pdo.php";
 
 switch ($_GET['accion']) {
-   
+
     case 'listar_ventas':
         // ENVIA LOS DATOS AL DATATABLES
         $sql = "SELECT
             ELT(MONTH(venta_fecha), 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre') AS mes,
+            MONTH(venta_fecha) AS mes_actual,
             YEAR(venta_fecha) AS año,
             SUM(venta_utilidad) AS acumulado_utilidad,
             COUNT(venta_utilidad) AS cuenta_num_gestiones
@@ -20,13 +21,13 @@ switch ($_GET['accion']) {
         break;
 
     case 'listar_ventas_mes_vendedor':
-        // ENVIA LOS DATOS AL DATATABLES
-        $sql = "SELECT 
+        $sql = "SELECT
         VENTAS.venta_id,
         VENTAS.venta_fecha,
+        MONTH(venta_fecha) AS mes_actual,
         DATE_FORMAT(venta_fecha,'%Y-%m-%d') AS FECHA,
-        CONCAT(ELT(WEEKDAY(venta_fecha)+ 1, 
-        'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom')) AS DIA,
+        ELT(WEEKDAY(venta_fecha)+ 1,
+        'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom') AS DIA,
         DATE_FORMAT(venta_fecha,'%H-%i') AS HORA,
         VENTAS.venta_nombre_producto,
         VENTAS.venta_nombre_proveedor,
@@ -37,7 +38,7 @@ switch ($_GET['accion']) {
         FROM VENTAS
         INNER JOIN USERS
         ON VENTAS.user_id=USERS.user_id
-        WHERE (MONTH(venta_fecha) = 2
+        WHERE (MONTH(venta_fecha) = 2)
         AND (VENTAS.user_id = $_GET[user_id])
         ";
         $stmt = $pdo->prepare($sql);
@@ -46,4 +47,27 @@ switch ($_GET['accion']) {
         echo json_encode($result);
         break;
 
+    case 'listar_turnos_mes':
+    $sql = "SELECT
+    turno_id,
+    JORNADAS.jornada_nombre,
+    USERS.user_nombre,
+    turno_saldo_caja,
+    turno_total_utilidad,
+    turno_total_entrega,
+    turno_descuadre,
+    TIME(turno_creacion_timestamp) AS hora_creado,
+    TIME(turno_fechahora_cierre) AS hora_cierre
+    FROM TURNOS
+    INNER JOIN USERS
+    ON TURNOS.turno_responsable=USERS.user_id
+    INNER JOIN JORNADAS
+    ON TURNOS.turno_jornada=JORNADAS.jornada_id
+    WHERE MONTH(turno_creacion_timestamp) =$_GET[mes_actual]
+    ";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($result);
+    break;
 };

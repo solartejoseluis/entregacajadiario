@@ -1,7 +1,10 @@
 <?php
 //header('Content-Type: application/json');
-require "../pdo.php";
-$sql="SELECT user_id,user_nombre FROM USERS";
+require "../00_connect/pdo.php";
+$sql="SELECT user_id,user_nombre
+FROM USERS
+WHERE user_vendedor = 1
+";
 $stmt = $pdo-> prepare($sql);
 $stmt -> execute();
 $users_result = $stmt -> fetchAll(PDO::FETCH_ASSOC);

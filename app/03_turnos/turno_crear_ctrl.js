@@ -34,7 +34,7 @@ function actualDate() {
   $(document).ready(function() {
       $.ajax({
           type: "POST",
-          url: "../models/selects/getUser.php",
+          url: "../00_selects/getUser.php",
           success: function(response) {
               $('.selectResponsable select').html(response).fadeIn();
           }
@@ -52,7 +52,7 @@ function actualDate() {
   $(document).ready(function() {
       $.ajax({
           type: "POST",
-          url: "../models/selects/getJornada.php",
+          url: "../00_selects/getJornada.php",
           success: function(response) {
               $('.selectJornada select').html(response).fadeIn();
           }
