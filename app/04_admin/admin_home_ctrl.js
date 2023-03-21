@@ -22,17 +22,22 @@ document.addEventListener("DOMContentLoaded", function () {
         { data: null, orderable: false },
       ],
       columnDefs: [
+      {
+        targets: 2,
+        render: $.fn.dataTable.render.number('.', ',', 0, '$')
+        //DataTable.render.number(null,null,2,$), // Thousands and decimal specified
+      },
         {
           targets: 4,
           defaultContent:
-            "<button class='btn btn-primary btn-sm btn_ver_turnos' id='btn_ver_turnos' name='btn_ver_turnos'>Turnos</button>",
+            "<button class='btn btn-primary btn-sm btn_ver_turnos' id='btn_ver_turnos'>Turnos</button>",
           data: null,
         },
 
         {
           targets: 5,
           defaultContent:
-            "<button  class='btn btn-success btn-sm btn_ver_dias'>Dias</button>",
+            "<button  class='btn btn-success btn-sm btn_ver_dias' id='btn_ver_dias'>Dias</button>",
           data: null,
         },
         {
@@ -56,10 +61,16 @@ document.addEventListener("DOMContentLoaded", function () {
       datatables_todos_turnos(registroEdit.mes_actual);
     });
 
+    // boton ver dias
+    $("#tblVentas tbody").on("click", "button.btn_ver_dias", function () {
+      let registroEdit = listado.row($(this).parents("tr")).data();
+      $("#mdl_ver_dias").modal("show");
+      datatables_todos_dias(registroEdit.mes_actual);
+    });
 
-  }  // FIN FUNCION DATATABLES
+};  // final funcion ejecutar datatables
 
-}); // CIERRE  DEL DATATABLES
+
 
 
   function datatables_todos_turnos(mes_actual) {
@@ -83,6 +94,22 @@ document.addEventListener("DOMContentLoaded", function () {
         { data: null, orderable: false },
       ],
       columnDefs: [
+      {
+        targets: 3,
+        render: $.fn.dataTable.render.number('.', ',', 0, '$')
+      },
+      {
+        targets: 4,
+        render: $.fn.dataTable.render.number('.', ',', 0, '$')
+      },
+      {
+        targets: 5,
+        render: $.fn.dataTable.render.number('.', ',', 0, '$')
+      },
+      {
+        targets: 6,
+        render: $.fn.dataTable.render.number('.', ',', 0, '$')
+      },
         {
           targets: 9,
           defaultContent:
@@ -102,4 +129,47 @@ document.addEventListener("DOMContentLoaded", function () {
       destroy: true,
     });
 
-  }  // FIN FUNCION DATATABLES
+  }  // fin funcion datatables todos los turnos
+
+
+  function datatables_todos_dias(mes_actual) {
+    // INICIA DATATABLES
+    var listado = $("#tbl_turnos").DataTable({
+      ajax: {
+        url: "admin_home_mdl.php?accion=listar_dias_mes&mes_actual="+mes_actual,
+        dataSrc: "",
+        data: "",
+      },
+      columns: [
+        { data: "dia" },
+        { data: "utilidad" },
+        { data: "num_gestiones" },
+        { data: null, orderable: false },
+      ],
+      columnDefs: [
+      {
+        targets: 1,
+        render: $.fn.dataTable.render.number('.', ',', 0, '$')
+      },
+        {
+          targets: 3,
+          defaultContent:
+            "<button class='btn btn-primary btn-sm btn_ver_turnos' id='btn_ver_turnos' name='btn_ver_turnos'>Turnos</button>",
+          data: null,
+        },
+      ],
+      order: [[0, 'asc']],
+      language: {
+        url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+      },
+      searching: false,
+      paging: false,
+      fixedHeader: true,
+      scrollY: "400px",
+      scrollCollapse: true,
+      destroy: true,
+    });
+  } // fin función datatables todos dias
+
+
+  }); //  final del addEventListener de inicio

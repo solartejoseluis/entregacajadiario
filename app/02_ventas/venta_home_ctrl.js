@@ -730,4 +730,5 @@ document.addEventListener("DOMContentLoaded", function () {
     let mes_actual = moment().format('MMMM-YYYY');
     $("#mes_actual1").html(mes_actual);
   }
-}); // CIERRE  DEL DATATABLES
+
+}); // cierre del addEventListener del inicio de pagina

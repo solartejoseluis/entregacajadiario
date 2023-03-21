@@ -112,10 +112,11 @@
       </div>
     </div>
   </div> <!-- final del body-->
+
   <!-- -------------------------->
   <!-- Inicia modal Ver Turnos-->
   <!-- ------------------------->
-  <div class="modal fade" tabindex="1" id="mdl_ver_turnos">
+  <div class="modal fade mdl_ver_turnos" tabindex="1" id="mdl_ver_turnos" name="mdl_ver_turnos">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header">
@@ -152,14 +153,16 @@
     </div>
   </div>
   <!-- finaliza modal ver turnos -->
+
   <!-- -------------------------->
   <!-- Inicia modal Ver dias-->
   <!-- ------------------------->
   <div class="modal fade" tabindex="1" id="mdl_ver_dias">
-    <div class="modal-dialog modal-xl modal-dialog modal-fullscreen">
+    <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5"> GESTIONES POR DIA</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <div class="container-fluid">
@@ -169,16 +172,9 @@
                 <table class="table" id="tbl_gestiones_mes_todos">
                   <thead>
                     <tr>
-                      <td>ID</td>
-                      <td>FECHA</td>
                       <td>DIA</td>
-                      <td>HORA</td>
-                      <td>PRODUCTO</td>
-                      <td>PROVEEDOR</td>
-                      <td>PRECIO COSTO</td>
-                      <td>PRECIO VENTA</td>
-                      <td>VENDEDOR</td>
                       <td>UTILIDAD</td>
+                      <td>GESTIONES</td>
                     </tr>
                   </thead>
                 </table>
@@ -187,21 +183,16 @@
             <!-- finaliza datatables del modal -->
           </div>
         </div>
-        <!-- inicia el footer  -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-            Cerrar
-          </button>
-        </div>
       </div>
     </div>
   </div>
   <!-- finaliza modal ver dias -->
+
   <!-- -------------------------->
   <!-- Inicia modal Ver gestiones-->
   <!-- ------------------------->
   <div class="modal fade" tabindex="1" id="mdl_ver_gestiones">
-    <div class="modal-dialog modal-xl modal-dialog modal-fullscreen">
+    <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5"> GESTIONES DEL MES</h1>
