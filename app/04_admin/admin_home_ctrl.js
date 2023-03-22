@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function ejecutarDatatables() {
     // INICIA DATATABLES
-    var listado = $("#tblVentas").DataTable({
+    var listado = $("#tbl_ventas").DataTable({
       ajax: {
         url: "admin_home_mdl.php?accion=listar_ventas",
         dataSrc: "",
@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", function () {
       {
         targets: 2,
         render: $.fn.dataTable.render.number('.', ',', 0, '$')
-        //DataTable.render.number(null,null,2,$), // Thousands and decimal specified
       },
         {
           targets: 4,
@@ -55,22 +54,26 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // boton ver turnos
-    $("#tblVentas tbody").on("click", "button.btn_ver_turnos", function () {
-      let registroEdit = listado.row($(this).parents("tr")).data();
+    $("#tbl_ventas tbody").on("click", "button.btn_ver_turnos", function () {
+      let registro = listado.row($(this).parents("tr")).data();
       $("#mdl_ver_turnos").modal("show");
-      datatables_todos_turnos(registroEdit.mes_actual);
+      datatables_todos_turnos(registro.mes_actual);
     });
 
     // boton ver dias
-    $("#tblVentas tbody").on("click", "button.btn_ver_dias", function () {
-      let registroEdit = listado.row($(this).parents("tr")).data();
+    $("#tbl_ventas tbody").on("click", "button.btn_ver_dias", function () {
+      let registro = listado.row($(this).parents("tr")).data();
       $("#mdl_ver_dias").modal("show");
-      datatables_todos_dias(registroEdit.mes_actual);
+      datatables_todos_dias(registro.mes_actual);
     });
 
+    // boton ver gestiones
+    $("#tbl_ventas tbody").on("click", "button.btn_ver_gestiones", function () {
+      let registro = listado.row($(this).parents("tr")).data();
+      $("#mdl_ver_gestiones").modal("show");
+      datatables_todos_gestiones(registro.mes_actual);
+    });
 };  // final funcion ejecutar datatables
-
-
 
 
   function datatables_todos_turnos(mes_actual) {
@@ -134,42 +137,88 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function datatables_todos_dias(mes_actual) {
     // INICIA DATATABLES
-    var listado = $("#tbl_turnos").DataTable({
+    var listado = $("#tbl_dias").DataTable({
       ajax: {
         url: "admin_home_mdl.php?accion=listar_dias_mes&mes_actual="+mes_actual,
         dataSrc: "",
         data: "",
       },
+
       columns: [
         { data: "dia" },
+        { data: "nombre_dia" },
         { data: "utilidad" },
         { data: "num_gestiones" },
-        { data: null, orderable: false },
       ],
       columnDefs: [
       {
-        targets: 1,
+        targets: 2,
         render: $.fn.dataTable.render.number('.', ',', 0, '$')
       },
-        {
-          targets: 3,
-          defaultContent:
-            "<button class='btn btn-primary btn-sm btn_ver_turnos' id='btn_ver_turnos' name='btn_ver_turnos'>Turnos</button>",
-          data: null,
-        },
       ],
-      order: [[0, 'asc']],
       language: {
         url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
       },
       searching: false,
       paging: false,
-      fixedHeader: true,
-      scrollY: "400px",
-      scrollCollapse: true,
+      order: [[0, 'asc']],
+      //scrollY: "360px",
+      //fixedHeader: true,
+      //scrollCollapse: true,
       destroy: true,
     });
   } // fin función datatables todos dias
 
+
+  function datatables_todos_gestiones(mes_actual) {
+    // INICIA DATATABLES
+    var listado = $("#tbl_gestiones").DataTable({
+      searching: true,
+      paging: false,
+      //fixedHeader: true,
+      scrollY: "360px",
+      scrollCollapse: true,
+      responsive: true,
+      destroy: true,
+
+      ajax: {
+        url: "admin_home_mdl.php?accion=listar_gestiones_mes&mes_actual="+mes_actual,
+        dataSrc: "",
+        data: "",
+      },
+      columns: [
+        { data: "venta_id" },
+        { data: "FECHA" },
+        { data: "DIA" },
+        { data: "HORA" },
+        { data: "venta_nombre_producto" },
+        { data: "venta_nombre_proveedor" },
+        { data: "venta_costo_producto" },
+        { data: "venta_valor_venta" },
+        { data: "user_nombre" },
+        { data: "venta_utilidad" },
+      ],
+      columnDefs: [
+      {
+        targets: 6,
+        render: $.fn.dataTable.render.number('.', ',', 0, '$')
+      },
+      {
+        targets: 7,
+        render: $.fn.dataTable.render.number('.', ',', 0, '$')
+      },
+      {
+        targets: 9,
+        render: $.fn.dataTable.render.number('.', ',', 0, '$')
+      },
+      ],
+      order: [[1, 'asc']],
+      language: {
+        url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+      },
+
+    });
+
+  };  // fin funcion datatables todos las gestiones
 
   }); //  final del addEventListener de inicio
