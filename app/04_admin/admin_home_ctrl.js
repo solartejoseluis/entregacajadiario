@@ -86,6 +86,8 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       columns: [
         { data: "turno_id" },
+        { data: "turno_fecha_creado" },
+        { data: "dia_semana" },
         { data: "jornada_nombre" },
         { data: "user_nombre" },
         { data: "turno_saldo_caja" },
@@ -98,14 +100,6 @@ document.addEventListener("DOMContentLoaded", function () {
       ],
       columnDefs: [
       {
-        targets: 3,
-        render: $.fn.dataTable.render.number('.', ',', 0, '$')
-      },
-      {
-        targets: 4,
-        render: $.fn.dataTable.render.number('.', ',', 0, '$')
-      },
-      {
         targets: 5,
         render: $.fn.dataTable.render.number('.', ',', 0, '$')
       },
@@ -113,8 +107,16 @@ document.addEventListener("DOMContentLoaded", function () {
         targets: 6,
         render: $.fn.dataTable.render.number('.', ',', 0, '$')
       },
+      {
+        targets:7,
+        render: $.fn.dataTable.render.number('.', ',', 0, '$')
+      },
+      {
+        targets: 8,
+        render: $.fn.dataTable.render.number('.', ',', 0, '$')
+      },
         {
-          targets: 9,
+          targets: 12,
           defaultContent:
             "<button class='btn btn-primary btn-sm btn_ver_turnos' id='btn_ver_turnos' name='btn_ver_turnos'>Turnos</button>",
           data: null,
@@ -145,26 +147,59 @@ document.addEventListener("DOMContentLoaded", function () {
       },
 
       columns: [
-        { data: "dia" },
-        { data: "nombre_dia" },
-        { data: "utilidad" },
-        { data: "num_gestiones" },
+        { data: "turno_fecha" },
+        { data: "dia_semana" },
+        { data: "suma_caja" },
+        { data: "suma_total_utilidad" },
+        { data: "acumulado_utilidad_gestiones" },
+        { data: "suma_total_entrega" },
+        { data: "suma_total_descuadre" },
+        { data: "acumulado_descuadre" },
       ],
       columnDefs: [
       {
         targets: 2,
         render: $.fn.dataTable.render.number('.', ',', 0, '$')
       },
+      {
+        targets: 3,
+        createdCell: function (td) {
+        $(td).css('background-color', "#CAFC26");
+        },
+        render: $.fn.dataTable.render.number('.', ',', 0, '$')
+      },
+      {
+        targets: 4,
+        createdCell: function (td) {
+        $(td).css('background-color', "#CAFC26");
+        },
+        render: $.fn.dataTable.render.number('.', ',', 0, '$')
+      },
+      {
+        targets: 5,
+        render: $.fn.dataTable.render.number('.', ',', 0, '$')
+      },
+      {
+        targets: 6,
+        createdCell: function (td) {
+        $(td).css('background-color', "#FCDE19");
+        },
+        render: $.fn.dataTable.render.number('.', ',', 0, '$')
+      },
+      {
+        targets: 7,
+        createdCell: function (td) {
+        $(td).css('background-color', "#FCDE19");
+        },
+        render: $.fn.dataTable.render.number('.', ',', 0, '$')
+      },
       ],
       language: {
         url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
       },
-      searching: false,
+      searching: true,
       paging: false,
       order: [[0, 'asc']],
-      //scrollY: "360px",
-      //fixedHeader: true,
-      //scrollCollapse: true,
       destroy: true,
     });
   } // fin función datatables todos dias
@@ -173,13 +208,6 @@ document.addEventListener("DOMContentLoaded", function () {
   function datatables_todos_gestiones(mes_actual) {
     // INICIA DATATABLES
     var listado = $("#tbl_gestiones").DataTable({
-      searching: true,
-      paging: false,
-      //fixedHeader: true,
-      scrollY: "360px",
-      scrollCollapse: true,
-      responsive: true,
-      destroy: true,
 
       ajax: {
         url: "admin_home_mdl.php?accion=listar_gestiones_mes&mes_actual="+mes_actual,
@@ -215,6 +243,14 @@ document.addEventListener("DOMContentLoaded", function () {
       order: [[1, 'asc']],
       language: {
         url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+      searching: true,
+      paging: false,
+      //fixedHeader: true,
+      scrollY: "360px",
+      scrollCollapse: true,
+      responsive: true,
+      destroy: true,
+
       },
 
     });
