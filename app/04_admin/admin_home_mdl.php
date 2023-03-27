@@ -73,16 +73,15 @@ case 'listar_gestiones_mes':
         VENTAS.venta_fecha,
         DATE_FORMAT(venta_fecha,'%Y-%m-%d') AS FECHA,
         ELT(WEEKDAY(venta_fecha)+ 1,
-    'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom')) AS DIA,
+    'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom') AS DIA,
         DATE_FORMAT(venta_fecha,'%H-%i') AS HORA,
         VENTAS.venta_nombre_producto,
         VENTAS.venta_nombre_proveedor,
         VENTAS.venta_costo_producto,
         VENTAS.venta_valor_venta,
-        VENTAS.venta_utilidad,
-        VENTAS.turno_id,
         USERS.user_nombre,
-        USERS.user_apellido
+        VENTAS.venta_utilidad,
+        VENTAS.turno_id
         FROM VENTAS
         INNER JOIN USERS
         ON VENTAS.user_id=USERS.user_id
@@ -93,6 +92,26 @@ case 'listar_gestiones_mes':
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($result);
 break;
+
+
+case 'informe_mes':
+        $sql = "SELECT
+          USERS.user_nombre,
+          SUM(venta_utilidad) AS acumulado_utilidad,
+          COUNT(venta_utilidad) AS cuenta_num_gestiones
+          FROM VENTAS
+          INNER JOIN USERS ON USERS.user_id = VENTAS.user_id
+          WHERE MONTH(venta_fecha)=2
+          GROUP BY USERS.user_nombre;
+        ";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($result);
+break;
+
+
+
 
 
 };

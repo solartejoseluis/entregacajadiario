@@ -104,6 +104,7 @@
                   <td></td>
                   <td></td>
                   <td></td>
+                  <td></td>
                 </tr>
               </thead>
             </table>
@@ -127,7 +128,7 @@
           <div class="container-fluid">
             <!-- inicia datatables del modal  -->
             <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-12 table-responsive">
                 <table class="table" id="tbl_turnos">
                   <thead>
                     <tr>
@@ -145,6 +146,22 @@
                       <td>Ver TURNO</td>
                     </tr>
                   </thead>
+                  <tfoot>
+                    <tr>
+                      <td>ID</td>
+                      <td>FECHA</td>
+                      <td>DIA</td>
+                      <td>JORNADA</td>
+                      <td>RESPONSABLE</td>
+                      <td>CAJA GENERAL</td>
+                      <td>UTILIDAD GESTIONES</td>
+                      <td>TOTAL ENTREGA</td>
+                      <td>DESCUADRE</td>
+                      <td>Hora CREADO</td>
+                      <td>Hora CIERRE</td>
+                      <td>Ver TURNO</td>
+                    </tr>
+                    </tfoot>
                 </table>
               </div>
             </div>
@@ -236,6 +253,45 @@
     </div>
   </div>
   <!-- finaliza modal ver gestiones -->
+
+  <!-- -------------------------->
+  <!-- Inicia modal informe mes-->
+  <!-- ------------------------->
+  <div class="modal fade" tabindex="1" id="mdl_informe_mes">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5"> INFORME DEL MES</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <!-- inicia datatables del modal  -->
+            <div class="row">
+              <div class="col-md-12">
+                <table class="table" id="tbl_informe_mes">
+                  <thead>
+                    <tr>
+                      <td>NOMBRE</td>
+                      <td>UTILIDAD GLOBAL</td>
+                      <td>NUM GEST</td>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+            </div>
+            <!-- finaliza datatables del modal -->
+          </div>
+        </div>
+        <!-- inicia el footer  -->
+      </div>
+    </div>
+  </div>
+  <!-- finaliza modal ver gestiones -->
+
+
+
+
   <!-- ------- -->
   <!-- SCRIPTS -->
   <!-- ------- -->

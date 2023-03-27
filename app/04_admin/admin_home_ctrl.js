@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
         { data: null, orderable: false },
         { data: null, orderable: false },
         { data: null, orderable: false },
+        { data: null, orderable: false },
       ],
       columnDefs: [
       {
@@ -43,6 +44,12 @@ document.addEventListener("DOMContentLoaded", function () {
           targets: 6,
           defaultContent:
             "<button  class='btn btn-warning btn-sm btn_ver_gestiones'>Gestiones</button>",
+          data: null,
+        },
+        {
+          targets: 7,
+          defaultContent:
+            "<button  class='btn btn-danger btn-sm btn_informe_mes'>Informe</button>",
           data: null,
         },
       ],
@@ -73,11 +80,17 @@ document.addEventListener("DOMContentLoaded", function () {
       $("#mdl_ver_gestiones").modal("show");
       datatables_todos_gestiones(registro.mes_actual);
     });
+
+    // boton informe mes
+    $("#tbl_ventas tbody").on("click", "button.btn_informe_mes", function () {
+      let registro = listado.row($(this).parents("tr")).data();
+      $("#mdl_informe_mes").modal("show");
+      datatables_informe_mes(registro.mes_actual);
+    });
 };  // final funcion ejecutar datatables
 
 
   function datatables_todos_turnos(mes_actual) {
-    // INICIA DATATABLES
     var listado = $("#tbl_turnos").DataTable({
       ajax: {
         url: "admin_home_mdl.php?accion=listar_turnos_mes&mes_actual="+mes_actual,
@@ -101,10 +114,16 @@ document.addEventListener("DOMContentLoaded", function () {
       columnDefs: [
       {
         targets: 5,
+        createdCell: function (td) {
+        $(td).css('background-color', "#CAFC26");
+        },
         render: $.fn.dataTable.render.number('.', ',', 0, '$')
       },
       {
         targets: 6,
+        createdCell: function (td) {
+        $(td).css('background-color', "#CAFC26");
+        },
         render: $.fn.dataTable.render.number('.', ',', 0, '$')
       },
       {
@@ -113,10 +132,13 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       {
         targets: 8,
+        createdCell: function (td) {
+        $(td).css('background-color', "#CAFC26");
+        },
         render: $.fn.dataTable.render.number('.', ',', 0, '$')
       },
         {
-          targets: 12,
+          targets: 11,
           defaultContent:
             "<button class='btn btn-primary btn-sm btn_ver_turnos' id='btn_ver_turnos' name='btn_ver_turnos'>Turnos</button>",
           data: null,
@@ -126,11 +148,15 @@ document.addEventListener("DOMContentLoaded", function () {
       language: {
         url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
       },
-      searching: false,
+      fixedHeader: {
+        header: true,
+        footer: true
+        },
+      searching: true,
       paging: false,
-      fixedHeader: true,
-      scrollY: "400px",
-      scrollCollapse: true,
+      //fixedHeader: true,
+      //scrollY: "400px",
+      //scrollCollapse: true,
       destroy: true,
     });
 
@@ -206,9 +232,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   function datatables_todos_gestiones(mes_actual) {
-    // INICIA DATATABLES
     var listado = $("#tbl_gestiones").DataTable({
-
       ajax: {
         url: "admin_home_mdl.php?accion=listar_gestiones_mes&mes_actual="+mes_actual,
         dataSrc: "",
@@ -240,21 +264,60 @@ document.addEventListener("DOMContentLoaded", function () {
         render: $.fn.dataTable.render.number('.', ',', 0, '$')
       },
       ],
-      order: [[1, 'asc']],
+      order: [[0, 'asc']],
       language: {
         url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+      },
+      fixedHeader: {
+        header: true,
+        footer: true,
+        },
       searching: true,
       paging: false,
       //fixedHeader: true,
-      scrollY: "360px",
-      scrollCollapse: true,
-      responsive: true,
+      //scrollY: "400px",
+      //scrollCollapse: true,
       destroy: true,
+      });
+  };  // fin funcion datatables todos las gestiones
 
+
+ function datatables_informe_mes(mes_actual) {
+    var listado = $("#tbl_informe_mes").DataTable({
+      ajax: {
+        url: "admin_home_mdl.php?accion=informe_mes&mes_actual="+mes_actual,
+        dataSrc: "",
+        data: "",
       },
 
+      columns: [
+        { data: "user_nombre" },
+        { data: "acumulado_utilidad" },
+        { data: "cuenta_num_gestiones" },
+      ],
+      columnDefs: [
+      {
+        targets: 1,
+        render: $.fn.dataTable.render.number('.', ',', 0, '$')
+      },
+      {
+        targets:1,
+        createdCell: function (td) {
+        $(td).css('background-color', "#CAFC26");
+        },
+        render: $.fn.dataTable.render.number('.', ',', 0, '$')
+      },
+      ],
+      language: {
+        url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+      },
+      searching: false,
+      paging: false,
+      order: [[1, 'desc']],
+      destroy: true,
     });
+  } // fin función datatables todos dias
 
-  };  // fin funcion datatables todos las gestiones
+
 
   }); //  final del addEventListener de inicio
