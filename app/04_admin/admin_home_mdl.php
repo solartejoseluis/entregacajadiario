@@ -98,7 +98,8 @@ case 'informe_mes':
         $sql = "SELECT
           USERS.user_nombre,
           SUM(venta_utilidad) AS acumulado_utilidad,
-          COUNT(venta_utilidad) AS cuenta_num_gestiones
+          COUNT(venta_utilidad) AS cuenta_num_gestiones,
+          SUM(venta_utilidad)  DIV 2 AS valor_a_pagar
           FROM VENTAS
           INNER JOIN USERS ON USERS.user_id = VENTAS.user_id
           WHERE MONTH(venta_fecha)=2
@@ -109,9 +110,5 @@ case 'informe_mes':
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($result);
 break;
-
-
-
-
 
 };
