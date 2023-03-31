@@ -1,0 +1,376 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: localhost
+-- Tiempo de generación: 31-03-2023 a las 04:15:03
+-- Versión del servidor: 10.4.27-MariaDB
+-- Versión de PHP: 8.2.0
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `CONTROLCAJA`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ACCESOS`
+--
+
+CREATE TABLE `ACCESOS` (
+  `acceso_id` int(5) NOT NULL,
+  `turno_id` int(5) NOT NULL,
+  `user_id` int(5) NOT NULL,
+  `fecha_hora_creado` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `ACCESOS`
+--
+
+INSERT INTO `ACCESOS` (`acceso_id`, `turno_id`, `user_id`, `fecha_hora_creado`) VALUES
+(119, 229, 2, '2023-02-09 21:16:20'),
+(120, 243, 2, '2023-02-09 21:16:20'),
+(121, 244, 1, '2023-02-09 21:16:20'),
+(122, 246, 1, '2023-02-10 12:08:56'),
+(123, 247, 2, '2023-02-10 17:48:24'),
+(124, 248, 2, '2023-02-11 12:14:07'),
+(125, 249, 1, '2023-02-11 18:59:29'),
+(126, 250, 1, '2023-02-12 13:07:37'),
+(127, 251, 1, '2023-02-13 12:01:47'),
+(128, 252, 2, '2023-02-13 17:48:25'),
+(129, 253, 2, '2023-02-14 11:57:00'),
+(130, 254, 1, '2023-02-14 18:02:25'),
+(131, 258, 1, '2023-03-13 20:27:33'),
+(132, 259, 1, '2023-03-13 20:29:51'),
+(133, 260, 2, '2023-03-13 20:31:02'),
+(134, 261, 2, '2023-03-13 20:36:53'),
+(135, 262, 1, '2023-03-13 20:37:30'),
+(136, 263, 1, '2023-03-13 20:41:20'),
+(137, 264, 1, '2023-03-14 12:20:59'),
+(138, 265, 1, '2023-03-17 22:50:59'),
+(139, 266, 1, '2023-03-21 21:51:11'),
+(140, 267, 2, '2023-03-21 21:51:54'),
+(141, 268, 2, '2023-03-21 21:52:15'),
+(142, 269, 2, '2023-03-21 21:54:52');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `JORNADAS`
+--
+
+CREATE TABLE `JORNADAS` (
+  `jornada_id` int(5) NOT NULL,
+  `jornada_nombre` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `JORNADAS`
+--
+
+INSERT INTO `JORNADAS` (`jornada_id`, `jornada_nombre`) VALUES
+(1, 'sem 7am-1pm'),
+(2, 'sem 1pm-10pm'),
+(3, 'sab 7am-2pm'),
+(4, 'sab 2pm-10pm'),
+(5, 'dom/fes 8am-10pm');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `TURNOS`
+--
+
+CREATE TABLE `TURNOS` (
+  `turno_id` int(5) NOT NULL,
+  `turno_fecha_creado` date DEFAULT NULL,
+  `turno_jornada` int(5) NOT NULL COMMENT 'jornada_id',
+  `turno_responsable` int(5) NOT NULL COMMENT 'user_id',
+  `turno_saldo_caja` int(10) DEFAULT NULL,
+  `turno_total_utilidad` int(10) DEFAULT NULL,
+  `turno_total_entrega` int(10) DEFAULT NULL,
+  `turno_descuadre` int(10) DEFAULT NULL,
+  `turno_creacion_timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
+  `turno_fechahora_cierre` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `TURNOS`
+--
+
+INSERT INTO `TURNOS` (`turno_id`, `turno_fecha_creado`, `turno_jornada`, `turno_responsable`, `turno_saldo_caja`, `turno_total_utilidad`, `turno_total_entrega`, `turno_descuadre`, `turno_creacion_timestamp`, `turno_fechahora_cierre`) VALUES
+(229, '2023-02-08', 2, 2, 899000, 92000, 991000, 0, '2023-02-08 20:45:43', '2023-02-09 19:17:52'),
+(230, '2023-02-08', 1, 1, 556200, 7900, 564100, 0, '2023-02-08 20:57:13', '2023-02-08 21:01:20'),
+(231, '2023-02-07', 1, 2, 388600, 36800, 425400, 0, '2023-02-08 21:03:24', '2023-02-08 21:25:18'),
+(232, '2023-02-07', 2, 1, 913600, 33000, 946600, 0, '2023-02-08 21:27:01', '2023-03-24 19:43:06'),
+(233, '2023-02-06', 1, 1, 221900, 27000, 248900, 0, '2023-02-08 21:32:03', '2023-02-08 21:41:37'),
+(234, '2023-02-06', 2, 2, 809500, 34000, 843500, 0, '2023-02-08 21:42:35', '2023-02-08 21:45:15'),
+(235, '2023-02-05', 5, 2, 1139200, 52000, 1191200, 0, '2023-02-08 21:46:05', '2023-02-08 21:49:50'),
+(236, '2023-02-04', 3, 1, 647100, 15000, 662100, 0, '2023-02-08 21:51:07', '2023-02-08 21:53:00'),
+(237, '2023-02-04', 4, 2, 747600, 23900, 771500, 0, '2023-02-08 21:53:51', '2023-02-08 21:55:31'),
+(238, '2023-02-03', 1, 1, 403600, 92000, 495600, 0, '2023-02-08 21:56:21', '2023-02-08 21:59:19'),
+(239, '2023-02-02', 1, 2, 412700, 28000, 440700, 300, '2023-02-08 22:00:00', '2023-03-24 20:03:16'),
+(240, '2023-02-02', 2, 1, 735500, 6300, 741800, 1000, '2023-02-08 22:02:41', '2023-03-24 20:03:04'),
+(241, '2023-02-01', 1, 1, 481700, 175200, 656900, 0, '2023-02-08 22:06:56', '2023-03-24 20:02:29'),
+(242, '2023-02-01', 2, 2, 698200, 40300, 738500, 0, '2023-02-08 22:12:52', '2023-03-24 20:02:11'),
+(243, '2023-02-09', 1, 2, 358800, 85000, 443800, 0, '2023-02-09 12:00:00', '2023-02-09 19:36:15'),
+(244, '2023-02-09', 2, 1, 778800, 105400, 884200, 0, '2023-02-09 19:31:18', '2023-02-10 03:13:55'),
+(245, '2023-02-03', 2, 2, 951800, 9000, 960800, 0, '2023-02-09 20:02:10', '2023-02-09 20:03:45'),
+(246, '2023-02-10', 1, 1, 221600, 0, 221600, 1000, '2023-02-10 12:08:56', '2023-03-24 21:52:33'),
+(247, '2023-02-10', 2, 2, 669600, 30100, 699700, 0, '2023-02-10 17:48:24', '2023-02-11 03:02:14'),
+(248, '2023-02-11', 3, 2, 323900, 24000, 347900, 0, '2023-02-11 12:14:07', '2023-02-11 18:52:36'),
+(249, '2023-02-11', 4, 1, 777700, 18400, 796100, 0, '2023-02-11 18:59:28', '2023-02-12 03:07:12'),
+(250, '2023-02-12', 5, 1, 958300, 17000, 975300, 0, '2023-02-12 13:07:37', '2023-02-13 03:01:54'),
+(251, '2023-02-13', 1, 1, 391400, 17000, 408400, 0, '2023-02-13 12:01:47', '2023-02-13 17:45:40'),
+(252, '2023-02-13', 2, 2, 1115200, 55000, 1170200, 0, '2023-02-13 17:48:25', '2023-03-24 19:42:17'),
+(253, '2023-02-14', 1, 2, 409900, 291200, 701100, 0, '2023-02-14 11:57:00', '2023-02-14 17:52:18'),
+(254, '2023-02-14', 2, 1, 700000, 6500, 706500, 0, '2023-02-14 18:02:25', '2023-02-16 19:26:50'),
+(255, '2023-03-13', 1, 1, NULL, NULL, NULL, 0, '2023-03-13 20:21:38', '2023-03-24 19:42:28'),
+(256, '2023-03-13', 1, 1, NULL, NULL, NULL, 0, '2023-03-13 20:23:00', '2023-03-24 19:42:30'),
+(257, '2023-03-13', 1, 1, NULL, NULL, NULL, 0, '2023-03-13 20:23:20', '2023-03-24 19:42:33'),
+(258, '2023-03-13', 1, 1, NULL, NULL, NULL, 0, '2023-03-13 20:27:32', '2023-03-24 19:42:35'),
+(259, '2023-03-13', 2, 1, NULL, NULL, NULL, 0, '2023-03-13 20:29:51', '2023-03-24 19:42:37'),
+(260, '2023-03-13', 5, 2, NULL, NULL, NULL, 0, '2023-03-13 20:31:01', '2023-03-24 19:42:39'),
+(261, '2023-03-13', 1, 2, NULL, NULL, NULL, 0, '2023-03-13 20:36:53', '2023-03-24 19:42:41'),
+(262, '2023-03-13', 1, 1, NULL, NULL, NULL, 0, '2023-03-13 20:37:30', '2023-03-24 19:42:43'),
+(263, '2023-03-13', 1, 1, NULL, NULL, NULL, 0, '2023-03-13 20:41:19', '2023-03-24 19:42:47'),
+(264, '2023-03-14', 1, 1, 1000000, 2000, 1000000, 1000, '2023-03-14 12:20:59', '2023-03-24 21:52:45'),
+(265, '2023-03-17', 1, 1, NULL, NULL, NULL, 0, '2023-03-17 22:50:58', '2023-03-24 19:42:49'),
+(266, '2023-03-21', 1, 1, NULL, NULL, NULL, 0, '2023-03-21 21:51:11', '2023-03-24 19:42:51'),
+(267, '2023-03-21', 1, 2, NULL, NULL, NULL, 0, '2023-03-21 21:51:54', '2023-03-24 19:42:54'),
+(268, '2023-03-21', 1, 2, NULL, NULL, NULL, 0, '2023-03-21 21:52:14', '2023-03-24 19:42:57'),
+(269, '2023-03-21', 1, 2, NULL, NULL, NULL, 0, '2023-03-21 21:54:51', '2023-03-24 19:42:59');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `USERS`
+--
+
+CREATE TABLE `USERS` (
+  `user_id` int(5) NOT NULL,
+  `user_nombre` varchar(50) NOT NULL,
+  `user_apellido` varchar(50) NOT NULL,
+  `user_user` varchar(20) NOT NULL,
+  `user_password` varchar(10) NOT NULL,
+  `user_perfil` int(5) NOT NULL,
+  `user_vendedor` int(5) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `USERS`
+--
+
+INSERT INTO `USERS` (`user_id`, `user_nombre`, `user_apellido`, `user_user`, `user_password`, `user_perfil`, `user_vendedor`) VALUES
+(1, 'YULY VANESSA', 'DIAZ', 'yudiaz', 'yudiaz', 1, 1),
+(2, 'LORENA', 'BUENO', 'lobueno', 'lobueno', 1, 1),
+(3, 'KAROL', 'PULIDO', 'kapulido', 'kapulido', 2, 1),
+(4, 'MARINO', 'PEREZ', 'mavictoria', 'mavictoria', 0, 1),
+(7, 'CRISTIAN', 'MONSALVE', 'crimonsalve', 'etica2020', 2, 0),
+(8, 'SYSTEM', 'ADMIN_DEL_SISTEMA', 'system', 'system2020', 3, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `VENTAS`
+--
+
+CREATE TABLE `VENTAS` (
+  `venta_id` int(5) NOT NULL,
+  `venta_fecha` timestamp NULL DEFAULT current_timestamp(),
+  `venta_nombre_producto` varchar(50) NOT NULL,
+  `venta_nombre_proveedor` varchar(50) NOT NULL,
+  `venta_costo_producto` int(10) NOT NULL,
+  `venta_valor_venta` int(10) NOT NULL,
+  `venta_utilidad` int(10) NOT NULL,
+  `user_id` int(5) DEFAULT NULL COMMENT 'vendedor',
+  `turno_id` int(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `VENTAS`
+--
+
+INSERT INTO `VENTAS` (`venta_id`, `venta_fecha`, `venta_nombre_producto`, `venta_nombre_proveedor`, `venta_costo_producto`, `venta_valor_venta`, `venta_utilidad`, `user_id`, `turno_id`) VALUES
+(169, '2023-02-08 20:50:43', 'TERBINAFINA CREMA', 'FARMAUNIDOS', 11500, 16500, 5000, 2, 229),
+(170, '2023-02-08 14:00:33', 'INMOX 60MG', 'FAVORITA', 30000, 37900, 7900, 1, 230),
+(171, '2023-02-07 14:05:34', 'LACTULAX', 'DROGUERIA CESPEDES', 4500, 10000, 5500, 2, 231),
+(172, '2023-02-07 14:06:15', 'ANEMIDOX', 'RENE', 60000, 70000, 10000, 1, 231),
+(173, '2023-02-07 19:41:35', 'TRASS', 'BUENOS AIRES JULIAN', 16000, 28000, 12000, 2, 231),
+(174, '2023-02-07 14:09:12', 'DIHIDROCODEINA', 'DROGUIFARMA', 26700, 36000, 9300, 2, 231),
+(175, '2023-02-07 21:28:12', 'BETADUO', 'RENE', 28000, 42000, 14000, 1, 232),
+(176, '2023-02-07 21:28:48', 'BROMURO', 'FELIPE', 10000, 20000, 10000, 1, 232),
+(177, '2023-02-07 21:29:31', 'CILOSTAL', 'FELIPE', 15000, 20000, 5000, 1, 232),
+(178, '2023-02-07 21:30:12', 'ACIDO VALPROICO', 'MULTISERVICIOS', 6000, 10000, 4000, 1, 232),
+(179, '2023-02-06 14:40:11', 'METOPROLOL SUCCINATO 100 MG', 'YOLANDA', 10000, 20000, 10000, 1, 233),
+(180, '2023-02-06 14:40:43', 'SUCRALFATO', 'YOLANDA', 5000, 20000, 15000, 1, 233),
+(181, '2023-02-06 14:41:16', 'PARCHE LEON', 'FAVORITA', 10000, 12000, 2000, 1, 233),
+(182, '2023-02-06 21:43:25', 'FLUZETRIN', 'FAVORITA', 28000, 35000, 7000, 2, 234),
+(183, '2023-02-06 21:44:03', 'DISTENTIA', 'YESS', 53000, 75000, 22000, 2, 234),
+(184, '2023-02-06 21:44:53', 'DAFLON 500', 'DIEGO PALMAR', 20000, 25000, 5000, 1, 234),
+(185, '2023-02-05 21:46:53', 'CARPROL 100 MG', 'FARMAUNIDOS', 33000, 40000, 7000, 2, 235),
+(186, '2023-02-05 21:47:33', 'PIPOTIAZINA', 'COSMOCENTRO', 10000, 20000, 10000, 1, 235),
+(187, '2023-02-05 21:48:13', 'ENTRESTO', 'DIEGO PALMAR', 80000, 115000, 35000, 2, 235),
+(188, '2023-02-04 14:51:56', 'CONTEC TALLA L', 'MULTISERVICIOS', 35000, 45000, 10000, 1, 236),
+(189, '2023-02-04 14:52:37', 'SULFATO DE ZINC TAB', 'SALUD DESCUENTOS', 10500, 15500, 5000, 1, 236),
+(190, '2023-02-04 21:54:35', 'FENALGEX', 'FERNANDO', 29000, 45900, 16900, 1, 237),
+(191, '2023-02-04 21:55:10', 'DORIXINA RELAX', 'CHIMINANGOS', 15000, 22000, 7000, 2, 237),
+(192, '2023-02-03 14:57:01', 'CLEAROVAC', 'FARMACENTRO', 40000, 70000, 30000, 1, 238),
+(193, '2023-02-03 14:57:26', 'NIFEDIPINO', 'FELIPE', 6000, 10000, 4000, 1, 238),
+(194, '2023-02-03 14:57:52', 'ACIDO VALPROICO', 'ALBEIRO', 6000, 10000, 4000, 1, 238),
+(195, '2023-02-03 14:58:28', 'CURAM 1G', 'COLOMBO', 11500, 45500, 34000, 1, 238),
+(196, '2023-02-03 14:58:54', 'SYSTANE', 'FELIPE', 20000, 40000, 20000, 1, 238),
+(197, '2023-02-02 15:53:48', 'TRASS', 'JULIAN', 16000, 26000, 10000, 2, 239),
+(198, '2023-02-02 15:53:56', 'NOFERTYL', 'COLOMBO', 16000, 34000, 18000, 2, 239),
+(199, '2023-02-02 22:05:54', 'PAROXETINA', 'SANTA RITA', 13700, 20000, 6300, 2, 240),
+(200, '2023-02-01 14:07:33', 'CLENOX', 'MANUEL', 27000, 45000, 18000, 2, 241),
+(201, '2023-02-01 14:57:33', 'PLENIV', 'FARFAN HERMANOS', 10800, 15000, 4200, 1, 241),
+(202, '2023-02-01 14:08:37', 'NOFERTYL', 'COLOMBO', 8000, 17000, 9000, 1, 241),
+(203, '2023-02-01 14:09:10', 'SINALGEN 2', 'RENE', 156000, 280000, 124000, 1, 241),
+(204, '2023-02-01 14:10:08', 'MOMETASONA CREMA', 'JHON DEIVI', 14000, 24000, 10000, 3, 241),
+(205, '2023-02-01 14:10:50', 'CROMOGLICATO OFTALMICO', 'PHARMACEUTICA', 6000, 16000, 10000, 1, 241),
+(206, '2023-02-01 22:13:39', 'NOFERTYL', 'COLOMBO', 8000, 17000, 9000, 2, 242),
+(207, '2023-02-01 22:14:12', 'WINADEINE F', 'DAVID', 15000, 35000, 20000, 2, 242),
+(208, '2023-02-01 22:14:58', 'FVERONIQ MINI', 'SALUD DESCUENTOS', 24800, 27800, 3000, 1, 242),
+(209, '2023-02-01 19:54:03', 'FEMELLE 20CD', 'FARFAN HERMANOS', 23900, 28000, 4100, 1, 242),
+(210, '2023-02-01 22:16:21', 'PLENIV', 'FARFAN HERMANOS', 10800, 15000, 4200, 2, 242),
+(211, '2023-02-08 22:17:49', 'BECLOMETASONA', 'FELIPE', 10000, 35000, 25000, 2, 229),
+(212, '2023-02-08 22:18:38', 'MIELTERTOS JARABE', 'LA FAVORITA', 22000, 28000, 6000, 1, 229),
+(214, '2023-02-08 19:16:03', 'EZETIMIBE', 'DIEGO PALMAR', 50000, 75000, 25000, 2, 229),
+(215, '2023-02-08 19:16:34', 'NOFERTYL', 'COLOMBO', 16000, 34000, 18000, 1, 229),
+(216, '2023-02-08 19:17:11', 'OMEGA 3', 'FARMACENTER', 22000, 35000, 13000, 1, 229),
+(219, '2023-02-09 19:35:21', 'TRAYENTA 50 MG', 'MANUEL', 25000, 110000, 85000, 1, 243),
+(220, '2023-02-03 20:03:14', 'NOFERTYL', 'COLOMBO', 8000, 17000, 9000, 2, 245),
+(223, '2023-02-09 21:28:14', 'TRAYENTA 5 MG', 'FARMA UNIDOS', 40000, 110000, 70000, 2, 244),
+(224, '2023-02-09 21:59:10', 'FENEXIM', 'SALUD DESCUENTO', 20000, 35000, 15000, 1, 244),
+(225, '2023-02-09 22:05:41', 'PLENIV', 'FARFAN HERMANOS', 21600, 32000, 10400, 1, 244),
+(226, '2023-02-09 23:49:04', 'VALSARTAN 80 MG', 'SALUD DESCUENTO', 44000, 54000, 10000, 1, 244),
+(227, '2023-02-10 18:35:40', 'PROPANOLOL 80 MG', 'FARMAPRECIOS', 22000, 27000, 5000, 2, 247),
+(228, '2023-02-10 19:41:36', 'DIHIDROCODEINA', 'DROGUIFARMA', 8900, 12000, 3100, 2, 247),
+(229, '2023-02-10 22:26:27', 'MOMETASONA CREMA', 'YESS', 12000, 25000, 13000, 2, 247),
+(230, '2023-02-11 01:58:44', 'MESIGYNA', 'FARMAUNIDOS', 39000, 48000, 9000, 2, 247),
+(231, '2023-02-11 15:58:18', 'QLAIRA', 'SALUD DESCUENTO', 30000, 33000, 3000, 1, 248),
+(232, '2023-02-11 16:07:31', 'EFEXOR', 'FAVORITA', 50000, 52000, 2000, 2, 248),
+(234, '2023-02-11 18:48:53', 'PAROXETINA', 'ECOFARMA', 16000, 20000, 4000, 2, 248),
+(235, '2023-02-11 18:49:22', 'NITROFURAZONA', 'FAVORITA', 15000, 30000, 15000, 2, 248),
+(236, '2023-02-11 20:18:30', 'OBLAISER 2', 'ANDINA', 46000, 52000, 6000, 1, 249),
+(237, '2023-02-11 20:33:44', 'FEMMELLE 20 CD', 'FARFAN HERMANOS', 96000, 102400, 6400, 1, 249),
+(238, '2023-02-12 01:49:52', 'PLENIV', 'FARFAN HERMANOS', 10800, 16800, 6000, 3, 249),
+(239, '2023-02-12 14:08:37', 'PREDNISONA 50 MG', 'FARMACENTE', 4000, 7000, 3000, 4, 250),
+(240, '2023-02-12 20:12:27', 'CLARITROMICINA', 'DAVID', 26000, 30000, 4000, 1, 250),
+(241, '2023-02-12 20:14:14', 'TRIFOLIUM', 'CARLOS LUIS PUEBLO', 98000, 108000, 10000, 1, 250),
+(242, '2023-02-13 12:03:50', 'WARFARINA 5 MG', 'FELIPE', 20000, 37000, 17000, 1, 251),
+(243, '2023-02-13 18:53:58', 'VALSATAN', 'YOLANDA', 14000, 25000, 11000, 1, 252),
+(244, '2023-02-13 18:54:22', 'MATFORMINA 500MG', 'FELIPE', 6000, 40000, 34000, 2, 252),
+(245, '2023-02-13 22:43:52', 'FREGEEN', 'FELIPE', 20000, 30000, 10000, 2, 252),
+(246, '2023-02-14 16:20:47', 'NOFERTYL', 'SUPERGENERICO', 7000, 15000, 8000, 2, 253),
+(247, '2023-02-14 16:21:19', 'RECOLECTOR ORINA 24 HORAS', 'COLOMBO', 7300, 12500, 5200, 2, 253),
+(248, '2023-02-14 16:38:59', 'AMPICILINA', 'COLOMBO', 118000, 396000, 278000, 2, 253),
+(249, '2023-02-14 18:29:59', 'DUCHA IMTIMA', 'FARMACENTER', 10500, 17000, 6500, 1, 254),
+(250, '2023-03-14 16:14:34', 'PRODUCTO EDITADO', 'PROVEEDOR EDITADO', 8000, 10000, 2000, 4, 264);
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `ACCESOS`
+--
+ALTER TABLE `ACCESOS`
+  ADD PRIMARY KEY (`acceso_id`);
+
+--
+-- Indices de la tabla `JORNADAS`
+--
+ALTER TABLE `JORNADAS`
+  ADD PRIMARY KEY (`jornada_id`);
+
+--
+-- Indices de la tabla `TURNOS`
+--
+ALTER TABLE `TURNOS`
+  ADD PRIMARY KEY (`turno_id`),
+  ADD KEY `turno_responsable` (`turno_responsable`),
+  ADD KEY `turno_jornada` (`turno_jornada`);
+
+--
+-- Indices de la tabla `USERS`
+--
+ALTER TABLE `USERS`
+  ADD PRIMARY KEY (`user_id`);
+
+--
+-- Indices de la tabla `VENTAS`
+--
+ALTER TABLE `VENTAS`
+  ADD PRIMARY KEY (`venta_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `turno_id` (`turno_id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `ACCESOS`
+--
+ALTER TABLE `ACCESOS`
+  MODIFY `acceso_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
+
+--
+-- AUTO_INCREMENT de la tabla `JORNADAS`
+--
+ALTER TABLE `JORNADAS`
+  MODIFY `jornada_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `TURNOS`
+--
+ALTER TABLE `TURNOS`
+  MODIFY `turno_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=270;
+
+--
+-- AUTO_INCREMENT de la tabla `USERS`
+--
+ALTER TABLE `USERS`
+  MODIFY `user_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT de la tabla `VENTAS`
+--
+ALTER TABLE `VENTAS`
+  MODIFY `venta_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=251;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `TURNOS`
+--
+ALTER TABLE `TURNOS`
+  ADD CONSTRAINT `TURNOS_ibfk_1` FOREIGN KEY (`turno_responsable`) REFERENCES `USERS` (`user_id`),
+  ADD CONSTRAINT `TURNOS_ibfk_2` FOREIGN KEY (`turno_jornada`) REFERENCES `JORNADAS` (`jornada_id`);
+
+--
+-- Filtros para la tabla `VENTAS`
+--
+ALTER TABLE `VENTAS`
+  ADD CONSTRAINT `VENTAS_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `USERS` (`user_id`),
+  ADD CONSTRAINT `VENTAS_ibfk_2` FOREIGN KEY (`turno_id`) REFERENCES `TURNOS` (`turno_id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
