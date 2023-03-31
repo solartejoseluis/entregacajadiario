@@ -85,7 +85,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 ],
                 language: {
                   url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
-                }
+                },
+                searching: false,
+                paging: false,
+                destroy: true,
               });
 
             // boton ver turnos
@@ -195,12 +198,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
           function datatables_todos_dias(mes_actual) {
+
             var listado = $("#tbl_dias").DataTable({
               ajax: {
                 url: "admin_home_mdl.php?accion=listar_dias_mes&mes_actual=" + mes_actual,
                 dataSrc: "",
                 data: "",
               },
+
 
               columns: [
                 { data: "turno_fecha" },
@@ -269,6 +274,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 dataSrc: "",
                 data: "",
               },
+
+
+
               columns: [
                 { data: "venta_id" },
                 { data: "FECHA" },
