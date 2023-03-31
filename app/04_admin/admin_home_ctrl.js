@@ -172,7 +172,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 },
                 {
                   targets: 11,
-                  defaultContent: "<button class='btn btn-primary btn-sm btn_ver_turnos' id='btn_ver_turnos' name='btn_ver_turnos'>Turnos</button>",
+                  defaultContent: "<button class='btn btn-primary btn-sm btn_ver_turnos' id='btn_ver_turnos' name='btn_ver_turnos'> Ver Turno</button>",
                   data: null,
                 },
               ],

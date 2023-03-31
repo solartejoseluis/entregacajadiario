@@ -56,7 +56,7 @@ case 'listar_dias_mes':
     SUM(turno_descuadre) AS suma_total_descuadre,
     SUM(SUM(turno_descuadre)) OVER (ORDER BY TURNOS.turno_fecha_creado ASC) AS acumulado_descuadre
     FROM TURNOS
-    WHERE MONTH(turno_fecha_creado) =2
+    WHERE MONTH(turno_fecha_creado) = $_GET[mes_actual]
     GROUP BY turno_fecha
     ORDER BY turno_fecha ASC;
   ";
@@ -102,7 +102,7 @@ case 'informe_mes':
           SUM(venta_utilidad)  DIV 2 AS valor_a_pagar
           FROM VENTAS
           INNER JOIN USERS ON USERS.user_id = VENTAS.user_id
-          WHERE MONTH(venta_fecha)=2
+          WHERE MONTH(venta_fecha)=$_GET[mes_actual]
           GROUP BY USERS.user_nombre;
         ";
     $stmt = $pdo->prepare($sql);
