@@ -111,4 +111,24 @@ case 'informe_mes':
     echo json_encode($result);
 break;
 
+
+
+case 'informe_mes_turno':
+$sql = "SELECT
+ELT(MONTH(turno_fecha_creado), 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre') AS mes,
+SUM(turno_saldo_caja) AS suma_total_caja,
+SUM(turno_total_utilidad) AS suma_total_utilidad,
+SUM(turno_total_entrega) AS suma_total_entrega,
+SUM(turno_descuadre) AS suma_total_descuadre,
+SUM(turno_total_utilidad) DIV 2 AS suma_total_pago_vendedor
+FROM TURNOS
+WHERE MONTH(turno_fecha_creado)=$_GET[mes_actual];
+";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($result);
+break;
+
+
 };

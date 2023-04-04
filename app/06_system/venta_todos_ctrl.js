@@ -32,7 +32,7 @@ user_id = $("#npt_user_id_actual").val();
     $.ajax({
       type: "POST",
       async: false, // hacer que sea asincronico para sarle tiempo a ajax para cargar variable
-      url: "../models/venta_todos_mdl.php?accion=consultar_acceso",
+      url: "venta_todos_mdl.php?accion=consultar_acceso",
       data: "",
       success: function (datos) {
         $("#npt_turno_id_actual").val(datos[0].turno_id);
@@ -66,7 +66,7 @@ user_id = $("#npt_user_id_actual").val();
     $.ajax({
       type: "GET",
       async: false, //necesario
-      url: "../models/venta_todos_mdl.php?accion=consultarDatosTurnoActual",
+      url: "venta_todos_mdl.php?accion=consultarDatosTurnoActual",
       data: { turno_id: turno_id },
       success: function (datos) {
         //$("#npt_turno_id_actual").val(datos[0].turno_id_actual);
@@ -86,7 +86,7 @@ user_id = $("#npt_user_id_actual").val();
     // INICIA DATATABLES
     var listadoVentas = $("#tblVentas").DataTable({
       ajax: {
-        url: "../models/venta_todos_mdl.php?accion=listar_ventas",
+        url: "venta_todos_mdl.php?accion=listar_ventas",
         dataSrc: "",
         data: { turno_id: turno_id },
       },
@@ -145,7 +145,7 @@ user_id = $("#npt_user_id_actual").val();
   function cargarDatosUtilidadVendedor1() {
     $.ajax({
       type: "GET",
-      url: "../models/venta_todos_mdl.php?accion=consultar_utilidad_vendedor1",
+      url: "venta_todos_mdl.php?accion=consultar_utilidad_vendedor1",
       data: { turno_id: turno_id },
       success: function (datos) {
         $("#utilidadVendedor1").html(datos[0].utilidad_vendedor1);
@@ -161,7 +161,7 @@ user_id = $("#npt_user_id_actual").val();
   function cargarDatosUtilidadVendedor2() {
     $.ajax({
       type: "GET",
-      url: "../models/venta_todos_mdl.php?accion=consultar_utilidad_vendedor2",
+      url: "venta_todos_mdl.php?accion=consultar_utilidad_vendedor2",
       data: { turno_id: turno_id },
       success: function (datos) {
         $("#utilidadVendedor2").html(datos[0].utilidad_vendedor2);
@@ -177,7 +177,7 @@ user_id = $("#npt_user_id_actual").val();
   function cargarDatosUtilidadVendedor3() {
     $.ajax({
       type: "GET",
-      url: "../models/venta_todos_mdl.php?accion=consultar_utilidad_vendedor3",
+      url: "venta_todos_mdl.php?accion=consultar_utilidad_vendedor3",
       data: { turno_id: turno_id },
       success: function (datos) {
         $("#utilidadVendedor3").html(datos[0].utilidad_vendedor3);
@@ -193,7 +193,7 @@ user_id = $("#npt_user_id_actual").val();
   function cargarDatosUtilidadVendedor4() {
     $.ajax({
       type: "GET",
-      url: "../models/venta_todos_mdl.php?accion=consultar_utilidad_vendedor4",
+      url: "venta_todos_mdl.php?accion=consultar_utilidad_vendedor4",
       data: { turno_id: turno_id },
       success: function (datos) {
         $("#utilidadVendedor4").html(datos[0].utilidad_vendedor4);
@@ -209,7 +209,7 @@ user_id = $("#npt_user_id_actual").val();
   function utilidadTurno() {
     $.ajax({
       type: "GET",
-      url: "../models/venta_todos_mdl.php?accion=consultar_utilidad_turno",
+      url: "venta_todos_mdl.php?accion=consultar_utilidad_turno",
       data: { turno_id: turno_id },
       success: function (datos) {
         $("#p_utilidad_turno").html(datos[0].utilidad_turno);
@@ -224,7 +224,7 @@ user_id = $("#npt_user_id_actual").val();
   function cargarAcumuladoMes() {
     $.ajax({
       type: "GET",
-      url: "../models/venta_todos_mdl.php?accion=consultar_acumulado",
+      url: "venta_todos_mdl.php?accion=consultar_acumulado",
       data: { user_id: user_id },
       success: function (datos) {
         $("#mes_actual").html(datos[0].mes_actual);
@@ -324,7 +324,7 @@ user_id = $("#npt_user_id_actual").val();
   function guardarRegistro(registro) {
     $.ajax({
       type: "POST",
-      url: "../models/venta_todos_mdl.php?accion=guardar_venta",
+      url: "venta_todos_mdl.php?accion=guardar_venta",
       data: registro,
       success: function (msg) {
         // listadoVentas.ajax.reload();
@@ -346,7 +346,7 @@ user_id = $("#npt_user_id_actual").val();
     $.ajax({
       type: "GET",
       url:
-        "../models/venta_todos_mdl.php?accion=consultar_venta&venta_id=" +
+        "venta_todos_mdl.php?accion=consultar_venta&venta_id=" +
         venta_id,
       data: "",
       success: function (datos) {
@@ -401,7 +401,7 @@ user_id = $("#npt_user_id_actual").val();
     $.ajax({
       type: "POST",
       url:
-        "../models/venta_todos_mdl.php?accion=modificar_venta&venta_id=" +
+        "venta_todos_mdl.php?accion=modificar_venta&venta_id=" +
         registro.venta_id,
       data: registro,
       success: function (msg) {
@@ -422,7 +422,7 @@ user_id = $("#npt_user_id_actual").val();
     $.ajax({
       type: "GET",
       url:
-        "../models/venta_todos_mdl.php?accion=borrar_venta&venta_id=" + venta_id,
+        "venta_todos_mdl.php?accion=borrar_venta&venta_id=" + venta_id,
       data: "",
       success: function (msg) {
         // listadoVentas.ajax.reload();
@@ -456,7 +456,7 @@ user_id = $("#npt_user_id_actual").val();
   $("#npt_turno_saldo_caja").focusout(function() {
     $.ajax({
       type: "GET",
-      url: "../models/venta_todos_mdl.php?accion=consultar_utilidad_turno",
+      url: "venta_todos_mdl.php?accion=consultar_utilidad_turno",
       data: { turno_id: turno_id },
       success: function (datos) {
         let valorCero = 0;
@@ -521,7 +521,7 @@ user_id = $("#npt_user_id_actual").val();
     $.ajax({
       type: "POST",
       url:
-        "../models/venta_todos_mdl.php?accion=guardar_cierre_turno&turno_id=" + turno_id,
+        "venta_todos_mdl.php?accion=guardar_cierre_turno&turno_id=" + turno_id,
       data: registro,
       success: function (msg) {
         //listadoVentas.ajax.reload();
@@ -551,7 +551,7 @@ user_id = $("#npt_user_id_actual").val();
     $.ajax({
       type: "GET",
       url:
-        "../models/venta_todos_mdl.php?accion=consultar_turno_cerrado",
+        "venta_todos_mdl.php?accion=consultar_turno_cerrado",
       data: { turno_id: turno_id },
       success: function (datos) {
         $("#npt_final_saldo_caja").val(datos[0].turno_saldo_caja);
@@ -578,7 +578,7 @@ user_id = $("#npt_user_id_actual").val();
   $(document).ready(function () {
     $.ajax({
       type: "POST",
-      url: "../models/selects/getVendedor.php",
+      url: "../00_selects/getVendedor.php",
       success: function (response) {
         $(".selectUser select").html(response).fadeIn();
       },

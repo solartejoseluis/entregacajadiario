@@ -1,7 +1,7 @@
 <?php
 session_start();
 header('Content-Type: application/json');
-require "pdo.php";
+require "../00_connect/pdo.php";
 $turno_id_sesion = $_SESSION['turno_id'];
 
 switch ($_GET['accion']) {

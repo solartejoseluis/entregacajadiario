@@ -2,7 +2,7 @@
 session_start();
 
 header('Content-Type: application/json');
-require "pdo.php";
+require "../00_connect/pdo.php";
 
 switch ($_GET['accion']) {
 

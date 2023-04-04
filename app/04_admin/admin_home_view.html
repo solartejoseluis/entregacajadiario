@@ -188,7 +188,7 @@
   <!-- Inicia modal Ver gestiones-->
   <!-- ------------------------->
   <div class="modal fade" tabindex="1" id="mdl_ver_gestiones">
-    <div class="modal-dialog modal-xl">
+    <div class="modal-dialog modal-fullscreen">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5"> GESTIONES DEL MES</h1>
@@ -238,7 +238,7 @@
         </div>
         <div class="modal-body">
           <div class="container-fluid">
-            <!-- inicia datatables del modal  -->
+            <!-- inicia primer datatables del modal  -->
             <div class="row">
               <div class="col-md-12">
                 <table class="table" id="tbl_informe_mes">
@@ -253,7 +253,27 @@
                 </table>
               </div>
             </div>
-            <!-- finaliza datatables del modal -->
+            <!-- finaliza primer datatables del modal -->
+            <!-- inicia segundo datatables del modal  -->
+            <div class="row">
+              <div class="col-md-12">
+                <table class="table" id="tbl_informe_mes_turno">
+                  <thead>
+                    <tr>
+                      <td>MES</td>
+                      <td>TOTAL CAJA</td>
+                      <td>TOTAL UTILIDAD</td>
+                      <td>TOTAL ENTREGADO</td>
+                      <td>TOTAL DESCUADRE</td>
+                      <td>TOTAL PAGO VENDEDOR</td>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+            </div>
+            <!-- finaliza segundo datatables del modal -->
+
+
           </div>
         </div>
         <!-- inicia el footer  -->
@@ -261,6 +281,7 @@
     </div>
   </div>
   <!-- finaliza modal ver gestiones -->
+
 
   <!-- ------- -->
   <!-- SCRIPTS -->

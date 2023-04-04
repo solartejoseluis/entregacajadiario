@@ -2,7 +2,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   let resumen = $("#tabla_reabrir").DataTable({
     ajax: {
-      url: "../models/turno_todos_mdl.php?accion=listar_resumen",
+      url: "turno_todos_mdl.php?accion=listar_resumen",
       dataSrc: "",
     },
     columns: [
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // alert(registro.turno_id);
     //crearVariableSesionDelTurno(registro.turno_id);
     //envio de la  variable por get
-    $(location).attr("href", "../views/venta_todos_view.html?turno_id="+ registro.turno_id+"&user_id="+registro.user_id);
+    $(location).attr("href", "venta_todos_view.html?turno_id="+ registro.turno_id+"&user_id="+registro.user_id);
     });
 
 

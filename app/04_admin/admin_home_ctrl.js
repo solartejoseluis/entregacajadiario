@@ -117,6 +117,7 @@ document.addEventListener("DOMContentLoaded", function() {
               let registro = listado.row($(this).parents("tr")).data();
               $("#mdl_informe_mes").modal("show");
               datatables_informe_mes(registro.mes_actual);
+              datatables_informe_mes_turno(registro.mes_actual);
             });
           }; // final funcion ejecutar datatables
 
@@ -374,7 +375,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 {
                   targets: 1,
                   createdCell: function(td) {
-                    $(td).css('background-color', "#CAFC26");
+                    $(td).css('background-color', "#86B000");
                   },
                   render: $.fn.dataTable.render.number('.', ',', 0, '$')
                 },
@@ -399,5 +400,61 @@ document.addEventListener("DOMContentLoaded", function() {
           } // fin función datatables todos dias
 
 
+          function datatables_informe_mes_turno(mes_actual) {
+
+            var listado = $("#tbl_informe_mes_turno").DataTable({
+              ajax: {
+                url: "admin_home_mdl.php?accion=informe_mes_turno&mes_actual=" + mes_actual,
+                dataSrc: "",
+                data: "",
+              },
+
+
+              columns: [
+                { data: "mes" },
+                { data: "suma_total_caja" },
+                { data: "suma_total_utilidad" },
+                { data: "suma_total_entrega" },
+                { data: "suma_total_descuadre" },
+                { data: "suma_total_pago_vendedor" },
+              ],
+              columnDefs: [{
+                  targets: 1,
+                  render: $.fn.dataTable.render.number('.', ',', 0, '$')
+                },
+                {
+                  targets: 2,
+                  createdCell: function(td) {
+                    $(td).css('background-color', "#86B000");
+                  },
+                  render: $.fn.dataTable.render.number('.', ',', 0, '$')
+                },
+                {
+                  targets: 3,
+                  render: $.fn.dataTable.render.number('.', ',', 0, '$')
+                },
+                {
+                  targets: 4,
+                  render: $.fn.dataTable.render.number('.', ',', 0, '$')
+                },
+                {
+                  targets: 5,
+                  createdCell: function(td) {
+                    $(td).css('background-color', "#CAFC26");
+                  },
+                  render: $.fn.dataTable.render.number('.', ',', 0, '$')
+                },
+              ],
+              language: {
+                url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+              },
+              searching: false,
+              paging: false,
+              order: [
+                [1, 'desc']
+              ],
+              destroy: true,
+            });
+          } // fin función datatables informe_mes_turno
 
         }); //  final del addEventListener de inicio

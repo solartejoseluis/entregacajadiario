@@ -50,7 +50,7 @@ if ($count=='1'){
       $_SESSION['user_bd'] = $user_local;
       $_SESSION['password_bd'] = $password_local;
       $_SESSION['user perfil'] = $user_perfil;
-      echo'<meta http-equiv="REFRESH"content="0;url=../03_turnos/turno_todos_view.html">';
+      echo'<meta http-equiv="REFRESH"content="0;url=../06_system/turno_todos_view.html">';
       break;
   }
 }else{
