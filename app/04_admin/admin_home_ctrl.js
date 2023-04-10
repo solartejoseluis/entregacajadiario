@@ -98,6 +98,13 @@ document.addEventListener("DOMContentLoaded", function() {
               datatables_todos_turnos(registro.mes_actual);
             });
 
+            // boton detalle_turno
+            $("#mdl_ver_turnos").on("click", "button.btn_detalle_turno", function() {
+              let registro = listado.row($(this).parents("tr")).data();
+              $("#mdl_detalle_turno").modal("show");
+              datatables_ver_detalle_turno(registro.turno_id);
+            });
+
             // boton ver dias
             $("#tbl_ventas tbody").on("click", "button.btn_ver_dias", function() {
               let registro = listado.row($(this).parents("tr")).data();
@@ -173,7 +180,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 },
                 {
                   targets: 11,
-                  defaultContent: "<button class='btn btn-primary btn-sm btn_ver_turnos' id='btn_ver_turnos' name='btn_ver_turnos'> Ver Turno</button>",
+                  defaultContent: "<button class='btn btn-primary btn-sm btn_detalle_turno' id='btn_detalle_turno'> Ver Turno</button>",
                   data: null,
                 },
               ],
@@ -195,6 +202,24 @@ document.addEventListener("DOMContentLoaded", function() {
               destroy: true,
             });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
           } // fin funcion datatables todos los turnos
 
 
@@ -456,5 +481,66 @@ document.addEventListener("DOMContentLoaded", function() {
               destroy: true,
             });
           } // fin función datatables informe_mes_turno
+
+
+  function datatables_ver_detalle_turno() {
+    var listadoVentas = $("#tbl_turnos").DataTable({
+      ajax: {
+        url: "admin_home_mdl.php?accion=ver_detalle_turno&turno_id:"+turno_id,
+        dataSrc: "",
+        //data: { turno_id: turno_id },
+      },
+      columns: [
+        { data: "venta_id" },
+        { data: "venta_nombre_producto" },
+        { data: "venta_nombre_proveedor" },
+        { data: "venta_costo_producto" },
+        { data: "venta_valor_venta" },
+        { data: "user_nombre" }, //nombre vendedor
+        { data: "venta_utilidad" },
+        { data: null, orderable: false },
+        { data: null, orderable: false },
+      ],
+      columnDefs: [
+        {
+          targets: 7,
+          defaultContent:
+            "<button class='btn btn-primary btn-sm btnEdit' id='btn_edit'>/<i class='fa-solid fa-pen'></i></button>",
+          data: null,
+        },
+
+        {
+          targets: 8,
+          defaultContent:
+            "<button  class='btn btn-danger btn-sm btnDel'>X<i class='fa fa-trash-o fa-lg'></i></button>",
+          data: null,
+        },
+      ],
+      language: {
+        url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+      },
+      paging: false,
+    });
+    // FIN DATATABLES
+
+    //boton Editar
+    $("#tblVentas tbody").on("click", "button.btnEdit", function () {
+      let registroEdit = listadoVentas.row($(this).parents("tr")).data();
+      recuperarRegistro(registroEdit.venta_id);
+    });
+
+    //boton borrar
+    $("#tblVentas tbody").on("click", "button.btnDel", function () {
+      //ACCIONA BOTON BORRAR REGISTRO DEL DATATABLES
+      if (confirm("¿Confirma la Eliminación?")) {
+        let registro = listadoVentas.row($(this).parents("tr")).data();
+        borrarRegistro(registro.venta_id);
+      }
+    });
+  }
+
+
+
+
 
         }); //  final del addEventListener de inicio

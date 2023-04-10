@@ -18,8 +18,7 @@
 
 <body>
   <div class="container-fluid bg-light" id="contenido">
-    <!-- inicia menu principal -->
-    <div class="row">
+    <nav class="row">
       <nav class="navbar navbar-expand-md navbar-dark bg-primary mb-4">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">GESTIONES DEL TURNO</a>
@@ -71,25 +70,24 @@
           </div>
         </div>
       </nav>
-    </div>
-    <!-- fin menu principal -->
-    <div class="row">
-      <div class="col-md-2">
+    </nav>
+    
+    <section class="row">
+      <article class="col-md-2">
         <div id="hoy_moment"></div>
-      </div>
-      <div class="col-md-4">
+      </article>
+      <article class="col-md-4">
         <input type="hidden" class="" id="npt_turno_id_actual" />
         <input type="hidden" class="" id="npt_user_id_actual" />
-        <!-- <h1>GESTIONES DEL TURNO</h1> -->
         <span>RESPONSABLE DE TURNO: </span>
         <span id="npt_user_nombre"></span>
         <span id="npt_user_apellido"></span><br />
         <span>JORNADA: </span>
         <span id="npt_jornada_nombre"></span>
-      </div>
+      </article>
 
       <!-- INICIA CUADRO DE ACUMULADOS -->
-      <div class="col-md-6">
+      <section class="col-md-6">
         <h6>
           Acumulados de
           <span id="mes_actual1"></span>
@@ -123,18 +121,18 @@
             </tbody>
           </table>
         </div>
-      </div>
+      </section>
       <!-- FINAL CUADRO DE ACUMULADOS -->
-    </div>
+    </section>
 
-    <div class="row">
-      <div class="col-md-6">
+    <section class="row">
+      <article class="col-md-6">
         <h3>CUADRO DE VENDEDORES</h3>
         <div class="table-responsive">
           <table class="table table-sm table-bordered table-hover border-primary" id="tabla_vendedores">
             <thead>
               <tr>
-                <th scope="col">CUADRO VENDEDORES</th>
+                <th scope="col"></th>
                 <th scope="col">YULY</th>
                 <th scope="col">LORENA</th>
                 <th scope="col">KAROL</th>
@@ -175,9 +173,10 @@
             </tbody>
           </table>
         </div>
-      </div>
+      </article>
+      <!-- fin seccion de vendedores -->
 
-      <div class="col-md-6">
+      <article class="col-md-6">
         <h3>CUADRO DE TOTALES</h3>
         <table class="table table-sm table-bordered table-hover border-primary" id="tabla_totales">
           <tbody class="table-group-divider">
@@ -195,22 +194,20 @@
             </tr>
           </tbody>
         </table>
-      </div>
-    </div>
+      </article>
+    </section>
 
-    <div class="row mb-3">
+    <section class="row mb-3">
       <div class="col-md-6 div_vacio_espacio"></div>
       <div class="col-md-6">
         <button type="button" class="btn btn-primary" id="btn_add" data-bs-toggle="modal">
           NUEVA GESTION <i class="fa-solid fa-circle-plus"></i>
         </button>
       </div>
-    </div>
+    </section>
 
     <div class="row">
-      <div class="container" id="tabla">
-        <div class="row">
-          <div class="col-12">
+      <section class="table-responsive" id="tabla">
             <table class="table" id="tblVentas">
               <thead>
                 <tr>
@@ -226,17 +223,7 @@
                 </tr>
               </thead>
             </table>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6 div_vacio_espacio"></div>
-      <div class="col-md-6">
-        <!-- <button type="button" class="btn btn-danger" id="btn_cerrar_turno" data-bs-toggle="modal">
-          CERRAR EL TURNO <i class="fa-solid fa-circle-plus"></i>
-        </button> -->
-      </div>
+      </section>
     </div>
 
   </div>
@@ -359,7 +346,6 @@
                 <label for="nptEdit_venta_nombre_producto" class="col-form-label">Producto:</label>
               </div>
               <div class="col-md-9 ms-auto">
-                <!-- <input type="text" class="form-control" id="nptEdit_venta_nombre_producto" placeholder="Digite Nombre del producto"> -->
                 <input type="text" class="form-control" id="nptEdit_venta_nombre_producto"
                   placeholder="Digite Nombre del producto"
                   onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" />
@@ -371,7 +357,6 @@
                 <label for="nptEdit_venta_nombre_proveedor" class="col-form-label">Proveedor:</label>
               </div>
               <div class="col-md-9 ms-auto">
-                <!-- <input type="text" class="form-control" id="nptEdit_venta_nombre_proveedor" placeholder="Digite Nombre proveedor"> -->
                 <input type="text" class="form-control" id="nptEdit_venta_nombre_proveedor"
                   placeholder="Digite Nombre proveedor"
                   onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" />
@@ -574,7 +559,6 @@
     </div>
   </div>
   <!-- FINALIZA MODAL CERRAR FINAL -->
-
 
 
   <!-- -------------------------->
