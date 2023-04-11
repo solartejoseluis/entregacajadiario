@@ -10,10 +10,20 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
   <!-- CDN datatables css-->
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+  <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"> -->
+
+  <link href="https://cdn.datatables.net/v/dt/dt-1.13.4/cr-1.6.2/date-1.4.0/fh-3.3.2/r-2.4.1/sc-2.1.1/sb-1.4.2/sp-2.1.2/sl-1.6.2/sr-1.2.2/datatables.min.css" rel="stylesheet"/>
+ 
 
   <!-- estilo de los botones -->
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">
+
+<!-- estilos para las extensiones del datatables -->
+<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.dataTables.min.css">
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedheader/3.3.2/css/fixedHeader.dataTables.min.css"> -->
+
+
 
 
 <!-- estilos personalizados -->
@@ -87,7 +97,7 @@
                 <table class="table" id="tbl_turnos">
                   <thead>
                     <tr>
-                      <td>ID</td>
+                      <td>venta_id</td>
                       <td>FECHA</td>
                       <td>DIA</td>
                       <td>JORNADA</td>
@@ -98,25 +108,9 @@
                       <td>DESCUADRE</td>
                       <td>Hora CREADO</td>
                       <td>Hora CIERRE</td>
-                      <td>Ver TURNO</td>
+                      <td>Gestiones</td>
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                      <td>ID</td>
-                      <td>FECHA</td>
-                      <td>DIA</td>
-                      <td>JORNADA</td>
-                      <td>RESPONSABLE</td>
-                      <td>CAJA GENERAL</td>
-                      <td>UTILIDAD GESTIONES</td>
-                      <td>TOTAL ENTREGA</td>
-                      <td>DESCUADRE</td>
-                      <td>Hora CREADO</td>
-                      <td>Hora CIERRE</td>
-                      <td>Ver TURNO</td>
-                    </tr>
-                    </tfoot>
                 </table>
               </div>
             </div>
@@ -288,47 +282,9 @@
         <span>JORNADA: </span>
         <span id="npt_jornada_nombre"></span>
       </article>
-
-      <!-- INICIA CUADRO DE ACUMULADOS -->
-      <section class="col-md-6">
-        <h6>
-          Acumulados de
-          <span id="mes_actual1"></span>
-          para:
-          <span id="npt_user_nombre1"></span>
-          <span id="npt_user_apellido1"></span>
-          <!-- <a href="resumen_gestiones_view.html" target="_blank">Ver Gestiones</a> -->
-        </h6>
-
-        <div class="table-responsive">
-          <table class="table table-sm table-bordered table-hover border-primary" id="tabla_acumulados">
-            <thead>
-              <tr>
-                <th scope="col"># Gestiones Mes</th>
-                <th scope="col">Utilidad Mes</th>
-                <th scope="col">Ganancia Mes</th>
-              </tr>
-            </thead>
-            <tbody class="table-group-divider">
-              <tr>
-                <td>
-                  <p id="cuenta_num_gestiones"></p>
-                </td>
-                <td>
-                  <p id="acumulado_utilidad"></p>
-                </td>
-                <td>
-                  <p id="acumulado_ganancia"></p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-      <!-- FINAL CUADRO DE ACUMULADOS -->
     </section>
 
-    <section class="row">
+    <section class="row" id="vendedores">
       <article class="col-md-6">
         <h3>CUADRO DE VENDEDORES</h3>
         <div class="table-responsive">
@@ -400,16 +356,13 @@
       </article>
     </section>
 
-    <section class="row mb-3">
+    <section class="row mb-3" id="vacio">
       <div class="col-md-6 div_vacio_espacio"></div>
       <div class="col-md-6">
-        <!-- <button type="button" class="btn btn-primary" id="btn_add" data-bs-toggle="modal">
-          NUEVA GESTION <i class="fa-solid fa-circle-plus"></i>
-        </button> -->
       </div>
     </section>
 
-    <div class="row">
+    <section class="row">
       <section class="table-responsive" id="tabla">
             <table class="table" id="tblVentas">
               <thead>
@@ -421,493 +374,12 @@
                   <td>PRECIO VENTA</td>
                   <td>VENDEDOR</td>
                   <td>UTILIDAD</td>
-                  <td></td>
-                  <td></td>
                 </tr>
               </thead>
             </table>
       </section>
-    </div>
-
+    </section>
   </div>
-
-  <!-- -------------------------->
-  <!-- INICIA MODAL NUEVA VENTA-->
-  <!-- ------------------------->
-
-  <div class="modal fade" data-bs-backdrop="static" tabindex="1" id="mdl_ventas">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5">NUEVA GESTION</h1>
-        </div>
-        <div class="modal-body">
-          <form id="frm_nueva_venta">
-            <!-- VENTAS_ID -->
-            <div class="row">
-              <input type="hidden" class="form-control" id="npt-venta_id" />
-            </div>
-            <!-- NUEVO PRODUCTO -->
-            <div class="row mb-3">
-              <div class="col-md-3 ms-auto">
-                <label for="npt_venta_nombre_producto" class="col-form-label">Producto:</label>
-              </div>
-              <div class="col-md-9 ms-auto">
-                <input type="text" class="form-control" id="npt_venta_nombre_producto"
-                  placeholder="Digite Nombre del producto"
-                  onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" />
-              </div>
-            </div>
-            <!-- NUEVO PROVEEDOR -->
-            <div class="row mb-3">
-              <div class="col-md-3 ms-auto">
-                <label for="npt_venta_nombre_proveedor" class="col-form-label">Proveedor:</label>
-              </div>
-              <div class="col-md-9 ms-auto">
-                <input type="text" class="form-control" id="npt_venta_nombre_proveedor"
-                  placeholder="Digite Nombre proveedor"
-                  onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" />
-              </div>
-            </div>
-            <!-- NUEVO COSTO PRODUCTO -->
-            <div class="row mb-3">
-              <div class="col-md-3 ms-auto">
-                <label for="npt_venta_costo_producto" class="col-form-label">Costo Prod:</label>
-              </div>
-              <div class="col-md-9 ms-auto">
-                <input type="text" class="form-control" id="npt_venta_costo_producto"
-                  placeholder="Digite Costo de producto" />
-              </div>
-            </div>
-            <!-- NUEVO VALOR VENTA -->
-            <div class="row mb-3">
-              <div class="col-md-3 ms-auto">
-                <label for="npt_venta_valor_venta" class="col-form-label">
-                  Valor Venta:</label>
-              </div>
-              <div class="col-md-9 ms-auto">
-                <input type="text" class="form-control" id="npt_venta_valor_venta" placeholder="Digite valor venta" />
-              </div>
-            </div>
-            <!--  NUEVO VENDEDOR -->
-            <div class="row mb-3">
-              <div class="col-md-3 ms-auto">
-                <label for="slct_user" class="col-form-label">Vendedor:</label>
-              </div>
-              <div class="col-md-9 ms-auto">
-                <input type="hidden" class="form-control" id="npt-user_id" />
-                <div class="selectUser">
-                  <select class="form-select" id="slct_user"></select>
-                </div>
-              </div>
-            </div>
-            <!-- NUEVA UTILIDAD -->
-            <div class="row mb-3">
-              <div class="col-md-3 ms-auto">
-                <label for="npt_venta_utilidad" class="col-form-label">Utilidad:</label>
-              </div>
-              <div class="col-md-9 ms-auto">
-                <input type="text" class="form-control" id="npt_venta_utilidad" disabled />
-              </div>
-            </div>
-          </form>
-          <!-- finaliza formulario del modal nueva venta -->
-        </div>
-        <!-- footer modal nueva venta -->
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary" id="btn_confirm_add">
-            Confirma Agregar
-          </button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-            Cancelar
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- FIN MODAL NUEVA VENTA -->
-
-  <!-- INICIA MODAL EDITAR VENTA-->
-  <div class="modal fade" data-bs-backdrop="static" id="mdl_edit_ventas" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <!-- cabecera del modal de edicion -->
-        <div class="modal-header">
-          <h1 class="modal-title fs-5">EDITAR REGISTRO</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <!-- cuerpo del modal de edicion -->
-        <div class="modal-body">
-          <form id="frm_edit_ventas">
-            <!-- EDITAR VENTAS_ID -->
-            <div class="row">
-              <input type="hidden" class="form-control" id="nptEdit-venta_id" />
-            </div>
-            <!-- EDITAR PRODUCTO -->
-            <div class="row mb-3">
-              <div class="col-md-3 ms-auto">
-                <label for="nptEdit_venta_nombre_producto" class="col-form-label">Producto:</label>
-              </div>
-              <div class="col-md-9 ms-auto">
-                <input type="text" class="form-control" id="nptEdit_venta_nombre_producto"
-                  placeholder="Digite Nombre del producto"
-                  onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" />
-              </div>
-            </div>
-            <!--  EDITAR PROVEEDOR -->
-            <div class="row mb-3">
-              <div class="col-md-3 ms-auto">
-                <label for="nptEdit_venta_nombre_proveedor" class="col-form-label">Proveedor:</label>
-              </div>
-              <div class="col-md-9 ms-auto">
-                <input type="text" class="form-control" id="nptEdit_venta_nombre_proveedor"
-                  placeholder="Digite Nombre proveedor"
-                  onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()" />
-              </div>
-            </div>
-            <!-- EDITAR COSTO PRODUCTO -->
-            <div class="row mb-3">
-              <div class="col-md-3 ms-auto">
-                <label for="nptEdit_venta_costo_producto" class="col-form-label">Costo Prod:</label>
-              </div>
-              <div class="col-md-9 ms-auto">
-                <input type="text" class="form-control" id="nptEdit_venta_costo_producto"
-                  placeholder="Digite Costo de producto" />
-              </div>
-            </div>
-            <!-- EDITAR VALOR VENTA -->
-            <div class="row mb-3">
-              <div class="col-md-3 ms-auto">
-                <label for="nptEdit_venta_valor_venta" class="col-form-label">
-                  Valor Venta:</label>
-              </div>
-              <div class="col-md-9 ms-auto">
-                <input type="text" class="form-control" id="nptEdit_venta_valor_venta"
-                  placeholder="Digite valor venta" />
-              </div>
-            </div>
-            <!--  EDITAR VENDEDOR -->
-            <div class="row mb-3">
-              <div class="col-md-3 ms-auto">
-                <label for="nptEdit_user_nombre" class="col-form-label">Vendedor:</label>
-              </div>
-              <div class="col-md-9 ms-auto">
-                <input type="hidden" class="form-control" id="nptEdit-user_id" />
-                <div class="selectUser">
-                  <!-- <input class="form-control" id="nptEdit_user_nombre"> -->
-                  <select class="form-select" id="slctEdit-user"></select>
-                </div>
-              </div>
-            </div>
-            <!-- EDITAR UTILIDAD -->
-            <div class="row mb-3">
-              <div class="col-md-3 ms-auto">
-                <label for="nptEdit_venta_utilidad" class="col-form-label">Utilidad:</label>
-              </div>
-              <div class="col-md-9 ms-auto">
-                <input type="text" class="form-control" id="nptEdit_venta_utilidad" disabled />
-              </div>
-            </div>
-          </form>
-        </div>
-        <!-- final modal body editar-->
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary" id="btn_confirm_edit">
-            Confirma Modificar
-          </button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-            Cancelar
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- FIN MODAL EDITAR VENTA -->
-
-  <!-- INICIA MODAL CERRAR TURNO-->
-  <div class="modal fade" data-bs-backdrop="static" tabindex="-1" id="mdl_cerrar_turno">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5">CERRAR TURNO</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form id="frm_cerrar_turno">
-            <!-- EDITAR VENTAS_ID -->
-            <div class="row">
-              <input type="hidden" class="form-control" id="npt_turno_id" />
-            </div>
-            <!-- SALDO DE CAJA PRINCIPAL -->
-            <div class="row mb-3">
-              <div class="col-md-3 ms-auto">
-                <label for="npt_turno_saldo_caja" class="col-form-label">Saldo De Caja Principal:</label>
-              </div>
-              <div class="col-md-9 ms-auto">
-                <input type="text" class="form-control" id="npt_turno_saldo_caja" placeholder="Digite saldo de caja" />
-              </div>
-            </div>
-
-            <!--  TOTAL UTILIDAD -->
-            <div class="row mb-3">
-              <div class="col-md-3 ms-auto">
-                <label for="npt_turno_total_utilidad" class="col-form-label">Total Utilidad del Turno:</label>
-              </div>
-              <div class="col-md-9 ms-auto calculoUtilidad">
-                <input type="text" class="form-control utilidad" id="npt_turno_total_utilidad" disabled />
-              </div>
-            </div>
-            <!--  TOTAL ENTREGA -->
-            <div class="row mb-3">
-              <div class="col-md-3 ms-auto">
-                <label for="npt_turno_total_entrega" class="col-form-label">Total Entrega:</label>
-              </div>
-              <div class="col-md-9 ms-auto">
-                <input type="text" class="form-control" id="npt_turno_total_entrega" disabled />
-              </div>
-            </div>
-
-            <!-- DESCUADRE -->
-            <div class="row mb-3">
-              <div class="col-md-3 ms-auto">
-                <label for="npt_turno_descuadre" class="col-form-label">Valor de Descuadre:</label>
-              </div>
-              <div class="col-md-9 ms-auto">
-                <input type="text" class="form-control" id="npt_turno_descuadre" placeholder="Digite valor descuadre" />
-              </div>
-            </div>
-          </form>
-          <!-- FIN FORM DEL MODAL -->
-        </div>
-        <!-- FOOTER DEL MODAL -->
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-danger" id="btn_confirma_cerrar_turno">
-            Cerrar Turno
-          </button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-            Cancelar
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- FIN MODAL CERRAR TURNO -->
-
-
-  <!-- INICIA MODAL CERRAR FINAL-->
-  <div class="modal fade" data-bs-backdrop="static" tabindex="-1" id="mdl_cerrar_final">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5">CONFIRMA CERRAR</h1>
-          <button type="button" class="btn_confirma_cerrar" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form id="frm_cerrar_final">
-            <!-- EDITAR VENTAS_ID -->
-            <div class="row">
-              <input type="hidden" class="form-control" id="npt_turno_id" disabled />
-            </div>
-            <!-- SALDO DE CAJA PRINCIPAL -->
-            <div class="row mb-3">
-              <div class="col-md-3 ms-auto">
-                <label for="npt_final_saldo_caja" class="col-form-label">Saldo De Caja Principal:</label>
-              </div>
-              <div class="col-md-9 ms-auto">
-                <input type="text" class="form-control" id="npt_final_saldo_caja" disabled />
-              </div>
-            </div>
-
-            <!--  TOTAL UTILIDAD -->
-            <div class="row mb-3">
-              <div class="col-md-3 ms-auto">
-                <label for="npt_final_total_utilidad" class="col-form-label">Total Utilidad del Turno:</label>
-              </div>
-              <div class="col-md-9 ms-auto calculoUtilidad">
-                <input type="text" class="form-control utilidad" id="npt_final_total_utilidad" disabled />
-              </div>
-            </div>
-            <!--  TOTAL ENTREGA -->
-            <div class="row mb-3">
-              <div class="col-md-3 ms-auto">
-                <label for="npt_final_total_entrega" class="col-form-label">Total Entrega:</label>
-              </div>
-              <div class="col-md-9 ms-auto">
-                <input type="text" class="form-control" id="npt_final_total_entrega" disabled />
-              </div>
-            </div>
-
-            <!-- DESCUADRE -->
-            <div class="row mb-3">
-              <div class="col-md-3 ms-auto">
-                <label for="npt_final_descuadre" class="col-form-label">Valor de Descuadre:</label>
-              </div>
-              <div class="col-md-9 ms-auto">
-                <input type="text" class="form-control" id="npt_final_descuadre" disabled />
-              </div>
-            </div>
-          </form>
-          <!-- finaliza formulario del modal cerrar final -->
-        </div>
-        <!-- footer del modal -->
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-danger" id="btn_final_turno">
-            Cerrar y Salir
-          </button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-            Cancelar
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- FINALIZA MODAL CERRAR FINAL -->
-
-
-  <!-- -------------------------->
-  <!-- INICIA MODAL Mis gestiones/Detalle de productos...-->
-  <!-- ------------------------->
-
-  <div class="modal fade" tabindex="1" id="mdl_gestiones_mes_vendedor">
-    <div class="modal-dialog modal-xl modal-dialog modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5">MIS GESTIONES DEL MES</h1>
-        </div>
-        <div class="modal-body">
-          <div class="container-fluid">
-            <!-- inicia datatables del modal  -->
-            <div class="row">
-              <div class="col-md-12">
-                <table class="table" id="tbl_gestiones_mes_vendedor">
-                  <thead>
-                    <tr>
-                      <td>ID</td>
-                      <td>FECHA</td>
-                      <td>DIA</td>
-                      <td>HORA</td>
-                      <td>PRODUCTO</td>
-                      <td>PROVEEDOR</td>
-                      <td>PRECIO COSTO</td>
-                      <td>PRECIO VENTA</td>
-                      <td>UTILIDAD</td>
-                    </tr>
-                  </thead>
-                </table>
-              </div>
-            </div>
-            <!-- finaliza datatables del modal -->
-          </div>
-        </div>
-
-        <!-- inicia footer modal -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-            Cerrar
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- FIN MODAL mis gestiones / detalle de productos -->
-
-  <!-- -------------------------->
-  <!-- INICIA MODAL Mis gestiones/Agrupadas por dia...-->
-  <!-- ------------------------->
-
-  <div class="modal fade" tabindex="1" id="mdl_gestiones_agrupadas_por_dia">
-    <div class="modal-dialog modal-xl modal-dialog modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5"> GESTIONES AGRUPADAS POR DIA</h1>
-        </div>
-        <div class="modal-body">
-          <div class="container-fluid">
-            <!-- inicia datatables del modal  -->
-            <div class="row">
-              <div class="col-md-12">
-                <table class="table" id="tbl_gestiones_agrupadas_por_dia">
-                  <thead>
-                    <tr>
-                      <td>FECHA</td>
-                      <td>DIA</td>
-                      <td>UTILIDAD</td>
-                      <td>NUM GESTIONES</td>
-                    </tr>
-                  </thead>
-                </table>
-              </div>
-            </div>
-            <!-- finaliza datatables del modal -->
-          </div>
-        </div>
-
-        <!-- inicia footer modal nueva venta -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-            Cerrar
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- FIN MODAL mis gestiones / detalle de productos -->
-
-
-  <!-- -------------------------->
-  <!-- INICIA MODAL productos/gestiones del mes...-->
-  <!-- ------------------------->
-
-  <div class="modal fade" tabindex="1" id="mdl_gestiones_mes_todos">
-    <div class="modal-dialog modal-xl modal-dialog modal-fullscreen">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5">TODAS LAS GESTIONES DEL MES</h1>
-        </div>
-        <div class="modal-body">
-          <div class="container-fluid">
-            <!-- inicia datatables del modal  -->
-            <div class="row">
-              <div class="col-md-12">
-                <table class="table" id="tbl_gestiones_mes_todos">
-                  <thead>
-                    <tr>
-                      <td>ID</td>
-                      <td>FECHA</td>
-                      <td>DIA</td>
-                      <td>HORA</td>
-                      <td>PRODUCTO</td>
-                      <td>PROVEEDOR</td>
-                      <td>PRECIO COSTO</td>
-                      <td>PRECIO VENTA</td>
-                      <td>VENDEDOR</td>
-                      <td>UTILIDAD</td>
-                    </tr>
-                  </thead>
-                </table>
-              </div>
-            </div>
-            <!-- finaliza datatables del modal -->
-          </div>
-        </div>
-        <!-- inicia el footer  -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-            Cerrar
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- finaliza modal ver gestiones -->
-
-
-
-
 
   <!-- ------- -->
   <!-- SCRIPTS -->
@@ -920,7 +392,9 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 
 <!-- datatables -->
-<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<!-- <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script> -->
+
+<script src="https://cdn.datatables.net/v/dt/dt-1.13.4/cr-1.6.2/date-1.4.0/fh-3.3.2/r-2.4.1/sc-2.1.1/sb-1.4.2/sp-2.1.2/sl-1.6.2/sr-1.2.2/datatables.min.js"></script>
 
   <!-- manejar de formatos de tiempo con moment.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
@@ -932,7 +406,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
-  <!-- scripts de la aplicacion -->
+<!-- responsive y fixeheader -->
+<!-- <script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
+<script scr="https://cdn.datatables.net/fixedheader/3.3.2/js/dataTables.fixedHeader.min.js"></script> -->
+
+<!-- scripts de la aplicacion -->
   <script src="admin_home_ctrl.js"></script>
 </body>
 </html>
+
+
+
+
