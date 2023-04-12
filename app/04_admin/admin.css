@@ -37,3 +37,11 @@ body {
 #btn_cerrar_turno{
   float: right;
 }
+
+
+.dataTables_scrollHeadInner{
+  width:100% !important;
+}
+.dataTables_scrollHeadInner table{
+  width:100% !important;
+}

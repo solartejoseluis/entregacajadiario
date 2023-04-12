@@ -219,6 +219,9 @@ break;
 
     case 'consultarDatosTurnoActual':
         $sql = "SELECT
+            DATE_FORMAT(turno_fecha_creado,'%Y-%m-%d') AS FECHA,
+            ELT(WEEKDAY(turno_fecha_creado)+ 1,
+    'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom') AS DIA,
             TURNOS.turno_id AS turno_id_actual,
             TURNOS.turno_jornada,
             TURNOS.turno_responsable,

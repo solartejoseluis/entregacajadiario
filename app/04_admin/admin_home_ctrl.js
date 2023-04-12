@@ -185,21 +185,11 @@ document.addEventListener("DOMContentLoaded", function () {
       language: {
         url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
       },
-
-      // fixedHeader: {
-      //   header: true,
-      //   footer: true,
-      // },
-      //fixedHeader: true,
       scrollY: "800px",
       scrollCollapse: true,
       paging: false,
-      //searching: true,
       destroy: true,
     });
-    // fija el titulo del datatables 
-    //new $.fn.dataTable.FixedHeader(listado);
-
 
 
     // boton detalle_turno (SUBMODAL)
@@ -271,6 +261,8 @@ document.addEventListener("DOMContentLoaded", function () {
       language: {
         url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
       },
+      scrollY: "800px",
+      scrollCollapse: true,
       searching: true,
       paging: false,
       order: [[0, "asc"]],
@@ -322,11 +314,10 @@ document.addEventListener("DOMContentLoaded", function () {
         header: true,
         footer: true,
       },
-      searching: true,
+      scrollY: "800px",
+      scrollCollapse: true,
       paging: false,
-      //fixedHeader: true,
-      //scrollY: "400px",
-      //scrollCollapse: true,
+      searching: true,
       destroy: true,
     });
   } // fin funcion datatables todos las gestiones
@@ -473,22 +464,8 @@ document.addEventListener("DOMContentLoaded", function () {
         { data: "venta_valor_venta" },
         { data: "user_nombre" }, //nombre vendedor
         { data: "venta_utilidad" },
-        // { data: null, orderable: false },
-        // { data: null, orderable: false },
       ],
       columnDefs: [
-        // {
-        //   targets: 7,
-        //   defaultContent:
-        //     "<button class='btn btn-primary btn-sm btnEdit' id='btn_edit'>/<i class='fa-solid fa-pen'></i></button>",
-        //   data: null,
-        // },
-        // {
-        //   targets: 8,
-        //   defaultContent:
-        //     "<button  class='btn btn-danger btn-sm btnDel'>X<i class='fa fa-trash-o fa-lg'></i></button>",
-        //   data: null,
-        // },
       ],
       language: {
         url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
@@ -624,6 +601,8 @@ document.addEventListener("DOMContentLoaded", function () {
           $("#npt_user_apellido").html(datos[0].user_apellido);
           $("#npt_user_apellido1").html(datos[0].user_apellido);
           $("#npt_jornada_nombre").html(datos[0].jornada_nombre);
+          $("#npt_turno_fecha").html(datos[0].FECHA);
+          $("#npt_turno_dia").html(datos[0].DIA);
         },
         error: function () {
           alert("Problema en consultar datos turno actual");
