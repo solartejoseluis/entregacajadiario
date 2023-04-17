@@ -1,43 +1,21 @@
 <?php
 session_start();
 header('Content-Type: application/json');
-require "pdo.php";
+require "../00_connect/pdo.php";
+
 
 switch ($_GET['accion']) {
 
-    case 'consultar_acceso':
-        // se ordenan descendente por turno_id y solo se muestra el primer registro
-        $sql = "SELECT 
-        acceso_id, 
-        turno_id, 
-        user_id 
-        FROM ACCESOS 
-        WHERE user_id = $_SESSION[user_id]
-        ORDER BY turno_id 
-        DESC LIMIT 1
-        ";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($result);
-        break;
-
-    case 'listar_ventas':
-        // ENVIA LOS DATOS AL DATATABLES
-        $sql = "SELECT 
-        VENTAS.venta_id,
-        VENTAS.venta_fecha,
-        VENTAS.venta_nombre_producto,
-        VENTAS.venta_nombre_proveedor,
-        VENTAS.venta_costo_producto,
-        VENTAS.venta_valor_venta,
-        VENTAS.venta_utilidad,
-        VENTAS.turno_id
-        FROM VENTAS
-        INNER JOIN USERS
-        ON VENTAS.user_id=USERS.user_id
-        WHERE (MONTH(venta_fecha) = (MONTH(CURRENT_DATE())))
-        AND (VENTAS.user_id = $_GET[user_id])
+    case 'listar_usuarios':
+        $sql = "SELECT
+        user_id,
+        user_nombre,
+        user_apellido,
+        user_user,
+        user_password,
+        user_perfil,
+        user_vendedor 
+        FROM USERS 
         ";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
@@ -67,7 +45,6 @@ switch ($_GET['accion']) {
         $response = $pdo->exec($sql);
         echo json_encode($response);
         break;
-
 
     case 'borrar_venta':
         $sql = "DELETE FROM VENTAS  WHERE venta_id=$_GET[venta_id]";
@@ -192,11 +169,12 @@ switch ($_GET['accion']) {
 
     case 'guardar_cierre_turno':
         $sql = "UPDATE TURNOS SET
-    turno_saldo_caja = $_POST[turno_saldo_caja],
-    turno_total_utilidad = $_POST[turno_total_utilidad],
-    turno_total_entrega = $_POST[turno_total_entrega],
-    turno_descuadre = $_POST[turno_descuadre]
-    WHERE turno_id = $_GET[turno_id_actual]";
+            turno_saldo_caja = $_POST[turno_saldo_caja],
+            turno_total_utilidad = $_POST[turno_total_utilidad],
+            turno_total_entrega = $_POST[turno_total_entrega],
+            turno_descuadre = $_POST[turno_descuadre],
+            turno_fechahora_cierre = now()
+    WHERE turno_id = $_GET[turno_id]";
         $response = $pdo->exec($sql);
         echo json_encode($response);
         break;
@@ -250,5 +228,95 @@ switch ($_GET['accion']) {
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($result);
     break;
-    
+
+    case 'consultar_turno_cerrado':
+        $sql = "SELECT
+            turno_saldo_caja,
+            turno_total_utilidad,
+            turno_total_entrega,
+            turno_descuadre
+            FROM TURNOS
+            WHERE turno_id=$_GET[turno_id]
+            ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+    break;
+
+    case 'listar_ventas_mes_vendedor':
+        // ENVIA LOS DATOS AL DATATABLES
+        $sql = "SELECT 
+        VENTAS.venta_id,
+        VENTAS.venta_fecha,
+        DATE_FORMAT(venta_fecha,'%Y-%m-%d') AS FECHA,
+        CONCAT(ELT(WEEKDAY(venta_fecha)+ 1, 
+        'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom')) AS DIA,
+        DATE_FORMAT(venta_fecha,'%H-%i') AS HORA,
+        VENTAS.venta_nombre_producto,
+        VENTAS.venta_nombre_proveedor,
+        VENTAS.venta_costo_producto,
+        VENTAS.venta_valor_venta,
+        VENTAS.venta_utilidad,
+        VENTAS.turno_id
+        FROM VENTAS
+        INNER JOIN USERS
+        ON VENTAS.user_id=USERS.user_id
+        WHERE (MONTH(venta_fecha) = (MONTH(CURRENT_DATE())))
+        AND (VENTAS.user_id = $_GET[user_id])
+        ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
+
+    case 'listar_ventas_agrupadas_por_dia_vendedor':
+        $sql ="SELECT 
+        DATE_FORMAT(venta_fecha,'%Y-%m-%d') AS FECHA,
+        CONCAT(ELT(WEEKDAY(venta_fecha)+ 1, 
+    'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom')) AS DIA,
+		SUM(venta_utilidad) AS UTILIDAD,
+		COUNT(venta_id) AS NUM_GESTIONES
+        FROM VENTAS
+        INNER JOIN USERS
+        ON VENTAS.user_id=USERS.user_id
+        WHERE (MONTH(venta_fecha) = (MONTH(CURRENT_DATE())))
+        AND (VENTAS.user_id = $_GET[user_id])
+        GROUP BY FECHA
+		ORDER BY FECHA ASC;
+        ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
+
+    case 'listar_ventas_mes_todos':
+        // ENVIA LOS DATOS AL DATATABLES
+        $sql = "SELECT 
+        VENTAS.venta_id,
+        VENTAS.venta_fecha,
+        DATE_FORMAT(venta_fecha,'%Y-%m-%d') AS FECHA,
+        CONCAT(ELT(WEEKDAY(venta_fecha)+ 1, 
+    'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom')) AS DIA,
+        DATE_FORMAT(venta_fecha,'%H-%i') AS HORA,
+        VENTAS.venta_nombre_producto,
+        VENTAS.venta_nombre_proveedor,
+        VENTAS.venta_costo_producto,
+        VENTAS.venta_valor_venta,
+        VENTAS.venta_utilidad,
+        VENTAS.turno_id,
+        USERS.user_nombre,
+        USERS.user_apellido
+        FROM VENTAS
+        INNER JOIN USERS
+        ON VENTAS.user_id=USERS.user_id
+        WHERE (MONTH(venta_fecha) = (MONTH(CURRENT_DATE())))
+        ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
 };
