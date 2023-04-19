@@ -24,23 +24,21 @@ switch ($_GET['accion']) {
         break;
 
 
-    case 'guardar_venta':
-        $sql = "INSERT INTO VENTAS(
-        venta_nombre_producto,
-        venta_nombre_proveedor,
-        venta_costo_producto,
-        venta_valor_venta,
-        user_id,
-        venta_utilidad,
-        turno_id
+    case 'guardar_nuevo_usuario':
+        $sql = "INSERT INTO USERS(
+        user_nombre,
+        user_apellido,
+        user_user,
+        user_password,
+        user_perfil,
+        user_vendedor
       )VALUES (
-        '$_POST[venta_nombre_producto]',
-        '$_POST[venta_nombre_proveedor]',
-        $_POST[venta_costo_producto],
-        $_POST[venta_valor_venta],
-        $_POST[user_id],
-        $_POST[venta_utilidad],
-        $_POST[turno_id_actual]
+        '$_POST[user_nombre]',
+        '$_POST[user_apellido]',
+        '$_POST[user_user]',
+        '$_POST[user_password]',
+        $_POST[user_perfil],
+        '$_POST[user_vendedor]'
     )";
         $response = $pdo->exec($sql);
         echo json_encode($response);
@@ -211,7 +209,7 @@ switch ($_GET['accion']) {
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($result);
-    break;
+        break;
 
     case 'consultar_acumulado':
         $sql = "SELECT
@@ -227,7 +225,7 @@ switch ($_GET['accion']) {
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($result);
-    break;
+        break;
 
     case 'consultar_turno_cerrado':
         $sql = "SELECT
@@ -242,7 +240,7 @@ switch ($_GET['accion']) {
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($result);
-    break;
+        break;
 
     case 'listar_ventas_mes_vendedor':
         // ENVIA LOS DATOS AL DATATABLES
@@ -272,7 +270,7 @@ switch ($_GET['accion']) {
         break;
 
     case 'listar_ventas_agrupadas_por_dia_vendedor':
-        $sql ="SELECT 
+        $sql = "SELECT 
         DATE_FORMAT(venta_fecha,'%Y-%m-%d') AS FECHA,
         CONCAT(ELT(WEEKDAY(venta_fecha)+ 1, 
     'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom')) AS DIA,

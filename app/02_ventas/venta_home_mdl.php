@@ -122,7 +122,6 @@ switch ($_GET['accion']) {
         echo json_encode($result);
         break;
 
-
     case 'consultar_utilidad_vendedor2':
         $sql = "SELECT
             SUM(venta_utilidad)  AS utilidad_vendedor2,

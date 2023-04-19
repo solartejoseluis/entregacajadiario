@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- ENTREGA DIARIA DROGUERIA SURICENTRO -->
 <html lang="es">
   <head>
     <meta charset="utf-8" />
@@ -55,15 +54,6 @@
         </div>
       </nav>
 
-      <!-- <section class="row mb-3">
-      <div class="col-md-6 div_vacio_espacio"></div>
-      <div class="col-md-6">
-        <button type="button" class="btn btn-primary" id="btn_add" data-bs-toggle="modal">
-          NUEVA GESTION <i class="fa-solid fa-circle-plus"></i>
-        </button>
-      </div>
-    </section> -->
-
       <div class="row">
         <section class="table-responsive" id="tabla">
           <table class="table" id="tblVentas">
@@ -89,12 +79,7 @@
     <!-- Inicia Modal Nuevo Usuario-->
     <!-- ------------------------->
 
-    <div
-      class="modal fade"
-      data-bs-backdrop="static"
-      tabindex="1"
-      id="mdl_ventas"
-    >
+    <div class="modal fade" data-bs-backdrop="static" tabindex="1" id="mdl_nuevo_usuario">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -169,22 +154,24 @@
               </div>
               <div class="row mb-3">
                 <div class="col-md-3 ms-auto">
-                  <label for="npt_user_perfil" class="col-form-label"
+                  <label for="slct_perfil" class="col-form-label"
                     >Perfil:</label
                   >
                 </div>
                 <div class="col-md-9 ms-auto">
                   <input
-                    type="text"
+                    type="hidden"
                     class="form-control"
-                    id="npt_user_perfil"
-                    placeholder="Perfil"
+                    id="npt_perfil_id"
                   />
+                  <div class="selectPerfil">
+                    <select class="form-select" id="slct_perfil"></select>
+                  </div>
                 </div>
               </div>
               <div class="row mb-3">
                 <div class="col-md-3 ms-auto">
-                  <label for="npt_user_vendedor" class="col-form-label"
+                  <label for="npt_perfil_vendedor" class="col-form-label"
                     >Vendedor:</label
                   >
                 </div>
@@ -192,7 +179,7 @@
                   <input
                     type="text"
                     class="form-control"
-                    id="npt_user_vendedor"
+                    id="npt_perfil_vendedor"
                     placeholder="Vendedor"
                   />
                 </div>
@@ -201,7 +188,7 @@
           </div>
           <!-- footer modal nueva venta -->
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" id="btn_confirm_add">
+            <button type="submit" class="btn btn-primary" id="btn_agrega">
               Agrega
             </button>
             <button
@@ -215,7 +202,7 @@
         </div>
       </div>
     </div>
-    <!-- FIN MODAL NUEVA VENTA -->
+    <!-- FINAL MODAL NUEVO USUARIO -->
 
     <!-- INICIA MODAL EDITAR VENTA-->
     <div

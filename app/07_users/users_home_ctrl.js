@@ -67,78 +67,75 @@ document.addEventListener("DOMContentLoaded", function () {
   //-----------------------------
   $("#btn_add").click(function () {
     limpiarFormulario();
-    $("#mdl_ventas").modal("show");
+    $("#mdl_nuevo_usuario").modal("show");
   });
 
   function limpiarFormulario() {
-    $("#npt-venta_id").val("");
-    $("#npt_venta_nombre_producto").val("");
-    $("#npt_venta_nombre_proveedor").val("");
-    $("#npt_venta_costo_producto").val("");
-    $("#npt_venta_valor_venta").val("");
-    $("#npt-user_id").val("");
-    $("#slct_user").val("0");
-    $("#npt_venta_utilidad").val("");
+    $("#npt_user_id").val("");
+    $("#npt_user_nombre").val("");
+    $("#npt_user_apellido").val("");
+    $("#npt_user_user").val("");
+    $("#npt_user_password").val("");
+    $("#slct_perfil").val("0");
+    $("#npt_perfil_id").val("");
+    $("#npt_perfil_vendedor").val("");
   }
 
-  $("#btn_confirm_add").click(function () {
+  $("#btn_agrega").click(function () {
     //VALIDACION DE DATOS DEL MODAL NUEVO
-    let valida_nombre_producto = $("#npt_venta_nombre_producto").val();
-    let valida_nombre_proveedor = $("#npt_venta_nombre_proveedor").val();
-    let valida_venta_costo_producto = $("#npt_venta_costo_producto").val();
-    let valida_venta_valor_venta = $("#npt_venta_valor_venta").val();
-    let valida_user_id = $("#npt-user_id").val();
-    let valida_venta_utilidad = $("#npt_venta_utilidad").val();
+    let valida_user_nombre = $("#npt_user_nombre").val();
+    let valida_user_apellido = $("#npt_user_apellido").val();
+    let valida_user_user = $("#npt_user_user").val();
+    let valida_user_password = $("#npt_user_password").val();
+    let valida_perfil_id = $("#npt_perfil_id").val();
+    let valida_perfil_vendedor = $("#npt_perfil_vendedor").val();
     // compara datos de variables contra vacio y muestra un alert
-    if (valida_nombre_producto.trim() == "") {
-      alert("revisar nombre producto.");
-      $("#npt_venta_nombre_producto").focus();
+    if (valida_user_nombre.trim() == "") {
+      alert("revisa nombre de usuario");
+      $("#npt_user_nombre").focus();
       return false;
-    } else if (valida_nombre_proveedor.trim() == "") {
-      alert("Revisar nombre proveedor");
-      $("#npt_venta_nombre_proveedor").focus();
+    } else if (valida_user_apellido.trim() == "") {
+      alert("Revisa apellido");
+      $("#npt_user_apellido").focus();
       return false;
-    } else if (valida_venta_costo_producto.trim() == "") {
-      alert("revisar costo");
-      $("#npt_venta_costo_producto").focus();
+    } else if (valida_user_user.trim() == "") {
+      alert("revisa usuario");
+      $("#npt_user_user").focus();
       return false;
-    } else if (valida_venta_valor_venta.trim() == "") {
-      alert("Revisar valor venta");
-      $("#npt_venta_valor_venta").focus();
+    } else if (valida_user_password.trim() == "") {
+      alert("Revisa password");
+      $("#npt_user_password").focus();
       return false;
-    } else if (valida_user_id.trim() == "0") {
-      alert("elija vendedor");
+    } else if (valida_perfil_id.trim() == "0") {
+      alert("elija Un Perfil");
       $("#slct_user").focus();
       return false;
-    } else if (valida_venta_utilidad.trim() == "") {
-      alert("Revisar utilidad");
-      $("#npt_venta_utilidad").focus();
+    } else if (valida_perfil_vendedor.trim() == "") {
+      alert("Revisa vendedor");
+      $("#npt_perfil_vendedor").focus();
       return false; // fin validacion formulario nuevo
     } else {
       //ejecutar Si todo fue validado
-      $("#mdl_ventas").modal("hide");
+      $("#mdl_nuevo_usuario").modal("hide");
       let registro = recolectarDatosFormularioNuevo();
       guardarRegistro(registro);
       cargaPantallaPrincipal();
-    }
+    } 
   });
 
   //TOMA EL VALOR DEL SELECT Y PONERLO EN INPUT
-  $("#slct_user").change(function () {
-    $("#npt-user_id").val($(this).val());
+  $("#slct_perfil").change(function () {
+    $("#npt_perfil_id").val($(this).val());
   });
 
   function recolectarDatosFormularioNuevo() {
     let registro = {
-      venta_id: $("#npt-venta_id").val(),
-      venta_nombre_producto: $("#npt_venta_nombre_producto").val(),
-      venta_nombre_proveedor: $("#npt_venta_nombre_proveedor").val(),
-      venta_costo_producto: $("#npt_venta_costo_producto").val(),
-      venta_valor_venta: $("#npt_venta_valor_venta").val(),
-      user_nombre: $("#npt-user_nombre").val(),
-      user_id: $("#npt-user_id").val(),
-      venta_utilidad: $("#npt_venta_utilidad").val(),
-      turno_id_actual: $("#npt_turno_id_actual").val(),
+      user_nombre: $("#npt_user_nombre").val(),
+      user_apellido: $("#npt_user_apellido").val(),
+      user_user: $("#npt_user_user").val(),
+      user_password: $("#npt_user_password").val(),
+      user_perfil: $("#npt_perfil_id").val(),
+      user_vendedor: $("#npt_perfil_vendedor").val(),
     };
     return registro;
   }
@@ -146,10 +143,9 @@ document.addEventListener("DOMContentLoaded", function () {
   function guardarRegistro(registro) {
     $.ajax({
       type: "POST",
-      url: "venta_home_mdl.php?accion=guardar_venta",
+      url: "users_home_mdl.php?accion=guardar_nuevo_usuario",
       data: registro,
       success: function (msg) {
-        // listadoVentas.ajax.reload();
         $("#tblVentas").DataTable().ajax.reload();
         cargaPantallaPrincipal();
       },
@@ -264,13 +260,13 @@ document.addEventListener("DOMContentLoaded", function () {
   // OPERACIONES EN EL MODAL
   //------------------------
 
-  //CARGA EL SELECT VENDEDORES
+  //CARGA EL SELECT PERFILES
   $(document).ready(function () {
     $.ajax({
       type: "POST",
-      url: "../00_selects/getVendedor.php",
+      url: "../00_selects/getPerfil.php",
       success: function (response) {
-        $(".selectUser select").html(response).fadeIn();
+        $(".selectPerfil select").html(response).fadeIn();
       },
     });
   });
