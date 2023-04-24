@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
-  var turno_id = "";
-  var user_id = "";
+  //var turno_id = "";
+  //var user_id = "";
 
   $(document).ready(function () {
     ejecutarDatatables();
   });
 
   function ejecutarDatatables() {
-    var listadoVentas = $("#tblVentas").DataTable({
+    var listadoUsers = $("#tblUsers").DataTable({
       ajax: {
         url: "users_home_mdl.php?accion=listar_usuarios",
         dataSrc: "",
@@ -47,17 +47,16 @@ document.addEventListener("DOMContentLoaded", function () {
     // FIN DATATABLES
 
     //boton Editar
-    $("#tblVentas tbody").on("click", "button.btnEdit", function () {
-      let registroEdit = listadoVentas.row($(this).parents("tr")).data();
-      recuperarRegistro(registroEdit.venta_id);
+    $("#tblUsers tbody").on("click", "button.btnEdit", function () {
+      let registroEdit = listadoUsers.row($(this).parents("tr")).data();
+      recuperarRegistro(registroEdit.user_id);
     });
 
     //boton borrar
-    $("#tblVentas tbody").on("click", "button.btnDel", function () {
-      //ACCIONA BOTON BORRAR REGISTRO DEL DATATABLES
+    $("#tblUsers tbody").on("click", "button.btnDel", function () {
       if (confirm("¿Confirma la Eliminación?")) {
-        let registro = listadoVentas.row($(this).parents("tr")).data();
-        borrarRegistro(registro.venta_id);
+        let registro = listadoUsers.row($(this).parents("tr")).data();
+        borrarRegistro(registro.user_id);
       }
     });
   }
@@ -78,7 +77,8 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#npt_user_password").val("");
     $("#slct_perfil").val("0");
     $("#npt_perfil_id").val("");
-    $("#npt_perfil_vendedor").val("");
+    $("#slct_rol_vendedor").val("0");
+    $("#npt_rol_vendedor_id").val("");
   }
 
   $("#btn_agrega").click(function () {
@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let valida_user_user = $("#npt_user_user").val();
     let valida_user_password = $("#npt_user_password").val();
     let valida_perfil_id = $("#npt_perfil_id").val();
-    let valida_perfil_vendedor = $("#npt_perfil_vendedor").val();
+    let valida_rol_vendedor_id = $("#npt_rol_vendedor_id").val();
     // compara datos de variables contra vacio y muestra un alert
     if (valida_user_nombre.trim() == "") {
       alert("revisa nombre de usuario");
@@ -106,26 +106,29 @@ document.addEventListener("DOMContentLoaded", function () {
       alert("Revisa password");
       $("#npt_user_password").focus();
       return false;
-    } else if (valida_perfil_id.trim() == "0") {
+    } else if (valida_perfil_id.trim() == "") {
       alert("elija Un Perfil");
-      $("#slct_user").focus();
+      $("#slct_perfil").focus();
       return false;
-    } else if (valida_perfil_vendedor.trim() == "") {
-      alert("Revisa vendedor");
-      $("#npt_perfil_vendedor").focus();
-      return false; // fin validacion formulario nuevo
+    } else if (valida_rol_vendedor_id.trim() == "") {
+      alert("Elija Rol Vendedor");
+      $("#slct_rol_vendedor").focus();
+      return false;
     } else {
       //ejecutar Si todo fue validado
       $("#mdl_nuevo_usuario").modal("hide");
       let registro = recolectarDatosFormularioNuevo();
       guardarRegistro(registro);
-      cargaPantallaPrincipal();
     } 
   });
 
   //TOMA EL VALOR DEL SELECT Y PONERLO EN INPUT
   $("#slct_perfil").change(function () {
     $("#npt_perfil_id").val($(this).val());
+  });
+
+  $("#slct_rol_vendedor").change(function () {
+    $("#npt_rol_vendedor_id").val($(this).val());
   });
 
   function recolectarDatosFormularioNuevo() {
@@ -135,7 +138,7 @@ document.addEventListener("DOMContentLoaded", function () {
       user_user: $("#npt_user_user").val(),
       user_password: $("#npt_user_password").val(),
       user_perfil: $("#npt_perfil_id").val(),
-      user_vendedor: $("#npt_perfil_vendedor").val(),
+      user_vendedor: $("#npt_rol_vendedor_id").val()
     };
     return registro;
   }
@@ -146,41 +149,37 @@ document.addEventListener("DOMContentLoaded", function () {
       url: "users_home_mdl.php?accion=guardar_nuevo_usuario",
       data: registro,
       success: function (msg) {
-        $("#tblVentas").DataTable().ajax.reload();
-        cargaPantallaPrincipal();
+        $("#tblUsers").DataTable().ajax.reload();
       },
       error: function () {
         alert("problema en: guardarRegistro");
       },
     });
   }
-  // FIN CICLO AGREGAR NUEVA VENTA
+  // Fin Ciclo Agregar Nuevo Usuario.
 
 
   //----------------------------------
   //CICLO EDITAR REGISTRO
 //----------------------------------
-  function recuperarRegistro(venta_id) {
+  function recuperarRegistro(user_id) {
     $.ajax({
       type: "GET",
       url:
-        "venta_home_mdl.php?accion=consultar_venta&venta_id=" +
-        venta_id,
+        "user_home_mdl.php?accion=consultar_usuario&user_id=" +
+        user_id,
       data: "",
       success: function (datos) {
-        $("#nptEdit-venta_id").val(datos[0].venta_id);
-        $("#nptEdit_venta_nombre_producto").val(datos[0].venta_nombre_producto);
-        $("#nptEdit_venta_nombre_proveedor").val(
-          datos[0].venta_nombre_proveedor
-        );
-        $("#nptEdit_venta_costo_producto").val(datos[0].venta_costo_producto);
-        $("#nptEdit_venta_valor_venta").val(datos[0].venta_valor_venta);
-        $("#nptEdit_user_nombre").val(datos[0].user_nombre);
-        $("#nptEdit-user_id").val(datos[0].user_id);
-
-        $("#slctEdit-user").val(datos[0].user_id);
-
-        $("#nptEdit_venta_utilidad").val(datos[0].venta_utilidad);
+        $("#npt_edit_user_id").val(datos[0].user_id);
+        $("#npt_edit_user_nombre").val(datos[0].user_nombre);
+        $("#npt_edit_user_apellido").val(datos[0].user_apellido);
+        $("#npt_edit_user_user").val(datos[0].user_user);
+        $("#npt_edit_user_password").val(datos[0].user_password);
+        $("#npt_edit_user_perfil").val(datos[0].user_perfil);
+        $("#npt_edit_user_vendedor").val(datos[0].user_vendedor);
+        $("#slct_edit_perfil").val(datos[0].perfil_id);
+        $("#slct_edit_rol_vendedor").val(datos[0].rol_vendedor_id);
+         // mostrar el modal
         $("#mdl_edit_ventas").modal("show");
       },
       error: function () {
@@ -223,9 +222,9 @@ document.addEventListener("DOMContentLoaded", function () {
         registro.venta_id,
       data: registro,
       success: function (msg) {
-        // listadoVentas.ajax.reload();
-        $("#tblVentas").DataTable().ajax.reload();
-        cargaPantallaPrincipal();
+        // listadoUsers.ajax.reload();
+        $("#tblUsers").DataTable().ajax.reload();
+        //cargaPantallaPrincipal();
       },
       error: function () {
         alert("Problema modificando");
@@ -235,17 +234,14 @@ document.addEventListener("DOMContentLoaded", function () {
   // FIN CICLO EDITAR REGISTRO
 
   // CICLO BORRAR REGISTRO
-  function borrarRegistro(venta_id) {
-    // BORRA REGISTRO Y ACTUALIZA DATATABLES
+  function borrarRegistro(user_id) {
     $.ajax({
       type: "GET",
       url:
-        "venta_home_mdl.php?accion=borrar_venta&venta_id=" + venta_id,
+        "users_home_mdl.php?accion=borrar_usuario&user_id=" + user_id,
       data: "",
       success: function (msg) {
-        // listadoVentas.ajax.reload();
-        $("#tblVentas").DataTable().ajax.reload();
-        cargaPantallaPrincipal();
+        $("#tblUsers").DataTable().ajax.reload();
       },
       error: function () {
         alert("Problema en borrarRegistro");
@@ -267,6 +263,16 @@ document.addEventListener("DOMContentLoaded", function () {
       url: "../00_selects/getPerfil.php",
       success: function (response) {
         $(".selectPerfil select").html(response).fadeIn();
+      },
+    });
+  });
+  //CARGA EL SELECT ROL_VENDEDOR
+  $(document).ready(function () {
+    $.ajax({
+      type: "POST",
+      url: "../00_selects/getRolVendedor.php",
+      success: function (response) {
+        $(".selectRolVendedor select").html(response).fadeIn();
       },
     });
   });
