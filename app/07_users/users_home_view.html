@@ -218,7 +218,7 @@
     <div
       class="modal fade"
       data-bs-backdrop="static"
-      id="mdl_edit_ventas"
+      id="mdl_edit_usuario"
       tabindex="-1"
     >
       <div class="modal-dialog modal-lg">
@@ -244,7 +244,7 @@
                   id="npt_edit_user_id"
                 />
               </div>
-              <!-- EDITAR PRODUCTO -->
+              <!-- nombre -->
               <div class="row mb-3">
                 <div class="col-md-3 ms-auto">
                   <label
@@ -263,92 +263,93 @@
                   />
                 </div>
               </div>
-              <!--  EDITAR PROVEEDOR -->
+              <!-- apellido -->
               <div class="row mb-3">
                 <div class="col-md-3 ms-auto">
                   <label
-                    for="nptEdit_venta_nombre_proveedor"
+                    for="npt_edit_user_apellido"
                     class="col-form-label"
-                    >Proveedor:</label
+                    >Apellido:</label
                   >
                 </div>
                 <div class="col-md-9 ms-auto">
                   <input
                     type="text"
                     class="form-control"
-                    id="nptEdit_venta_nombre_proveedor"
-                    placeholder="Digite Nombre proveedor"
+                    id="npt_edit_user_apellido"
+                    placeholder="Apellido"
                     onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()"
                   />
                 </div>
               </div>
-              <!-- EDITAR COSTO PRODUCTO -->
+              <!-- usuario -->
               <div class="row mb-3">
                 <div class="col-md-3 ms-auto">
                   <label
-                    for="nptEdit_venta_costo_producto"
+                    for="npt_edit_user_user"
                     class="col-form-label"
-                    >Costo Prod:</label
+                    >Usuario:</label
                   >
                 </div>
                 <div class="col-md-9 ms-auto">
                   <input
                     type="text"
                     class="form-control"
-                    id="nptEdit_venta_costo_producto"
+                    id="npt_edit_user_user"
                     placeholder="Digite Costo de producto"
                   />
                 </div>
               </div>
-              <!-- EDITAR VALOR VENTA -->
+              <!--password -->
               <div class="row mb-3">
                 <div class="col-md-3 ms-auto">
-                  <label for="nptEdit_venta_valor_venta" class="col-form-label">
-                    Valor Venta:</label
+                  <label for="npt_edit_user_password" class="col-form-label">
+                    Password:</label
                   >
                 </div>
                 <div class="col-md-9 ms-auto">
                   <input
                     type="text"
                     class="form-control"
-                    id="nptEdit_venta_valor_venta"
-                    placeholder="Digite valor venta"
+                    id="npt_edit_user_password"
+                    placeholder="password"
                   />
                 </div>
               </div>
-              <!--  EDITAR VENDEDOR -->
+              <!-- perfil -->
               <div class="row mb-3">
                 <div class="col-md-3 ms-auto">
-                  <label for="nptEdit_user_nombre" class="col-form-label"
-                    >Vendedor:</label
+                  <label for="npt_edit_user_perfil" class="col-form-label"
+                    >Perfil:</label
                   >
                 </div>
                 <div class="col-md-9 ms-auto">
                   <input
                     type="hidden"
                     class="form-control"
-                    id="nptEdit-user_id"
+                    id="npt_edit_user_perfil"
                   />
-                  <div class="selectUser">
-                    <!-- <input class="form-control" id="nptEdit_user_nombre"> -->
-                    <select class="form-select" id="slctEdit-user"></select>
+                  <div class="selectPerfil">
+                    <select class="form-select" id="slct_edit_perfil"></select>
                   </div>
                 </div>
               </div>
-              <!-- EDITAR UTILIDAD -->
+              <!-- rol vendedor -->
               <div class="row mb-3">
                 <div class="col-md-3 ms-auto">
-                  <label for="nptEdit_venta_utilidad" class="col-form-label"
-                    >Utilidad:</label
+                  <label for="npt_edit_rol_vendedor" class="col-form-label"
+                    >Rol Vendedor:</label
                   >
                 </div>
                 <div class="col-md-9 ms-auto">
                   <input
-                    type="text"
+                    type="hidden"
                     class="form-control"
-                    id="nptEdit_venta_utilidad"
-                    disabled
+                    id="npt_edit_rol_vendedor"
                   />
+                  <div class="selectRolVendedor">
+                    <select class="form-select" id="slct_edit_rol_vendedor"></select>
+                  </div>
                 </div>
               </div>
             </form>

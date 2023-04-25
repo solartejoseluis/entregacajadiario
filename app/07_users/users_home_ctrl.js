@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
       ajax: {
         url: "users_home_mdl.php?accion=listar_usuarios",
         dataSrc: "",
-        data: { turno_id: turno_id },
+        data:"",
       },
       columns: [
         { data: "user_id" },
@@ -19,8 +19,8 @@ document.addEventListener("DOMContentLoaded", function () {
         { data: "user_apellido" },
         { data: "user_user" },
         { data: "user_password" },
-        { data: "user_perfil" }, //nombre vendedor
-        { data: "user_vendedor" },
+        { data: "perfil_nombre" }, //nombre vendedor
+        { data: "rol_vendedor_descripcion"},
         { data: null, orderable: false },
         { data: null, orderable: false },
       ],
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       paging: false,
     });
-    // FIN DATATABLES
+    // Final Datatables Principal
 
     //boton Editar
     $("#tblUsers tbody").on("click", "button.btnEdit", function () {
@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
     $.ajax({
       type: "GET",
       url:
-        "user_home_mdl.php?accion=consultar_usuario&user_id=" +
+        "users_home_mdl.php?accion=consultar_usuario&user_id=" +
         user_id,
       data: "",
       success: function (datos) {
@@ -175,12 +175,12 @@ document.addEventListener("DOMContentLoaded", function () {
         $("#npt_edit_user_apellido").val(datos[0].user_apellido);
         $("#npt_edit_user_user").val(datos[0].user_user);
         $("#npt_edit_user_password").val(datos[0].user_password);
-        $("#npt_edit_user_perfil").val(datos[0].user_perfil);
-        $("#npt_edit_user_vendedor").val(datos[0].user_vendedor);
+        $("#npt_edit_user_perfil").val(datos[0].perfil_id);
+        $("#npt_edit_user_vendedor").val(datos[0].rol_vendedor_id);
         $("#slct_edit_perfil").val(datos[0].perfil_id);
         $("#slct_edit_rol_vendedor").val(datos[0].rol_vendedor_id);
          // mostrar el modal
-        $("#mdl_edit_ventas").modal("show");
+        $("#mdl_edit_usuario").modal("show");
       },
       error: function () {
         alert("Problema en recuperarRegistro");
@@ -189,27 +189,28 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   //TOMA EL VALOR DEL SELECT Y PONERLO EN INPUT
-  $("#slctEdit-user").change(function () {
-    $("#nptEdit-user_id").val($(this).val());
+  $("#slct_edit_user_perfil").change(function () {
+    $("#npt_edit_user_perfil").val($(this).val());
+  });
+  $("#slct_edit_rol_vendedor").change(function () {
+    $("#npt_edit_rol_vendedor").val($(this).val());
   });
 
   $("#btn_confirm_edit").click(function () {
-    //GUARDA LOS DATOS MODIFICADOS
-    $("#mdl_edit_ventas").modal("hide");
+    $("#mdl_edit_usuario").modal("hide");
     let registro = recolectarDatosFormularioEdit();
     modificarRegistro(registro);
   });
 
   function recolectarDatosFormularioEdit() {
     let registro = {
-      venta_id: $("#nptEdit-venta_id").val(),
-      venta_nombre_producto: $("#nptEdit_venta_nombre_producto").val(),
-      venta_nombre_proveedor: $("#nptEdit_venta_nombre_proveedor").val(),
-      venta_costo_producto: $("#nptEdit_venta_costo_producto").val(),
-      venta_valor_venta: $("#nptEdit_venta_valor_venta").val(),
-      user_nombre: $("#nptEdit_user_nombre").val(),
-      user_id: $("#nptEdit-user_id").val(),
-      venta_utilidad: $("#nptEdit_venta_utilidad").val(),
+      user_id: $("#npt_edit_user_id").val(),
+      user_nombre: $("#npt_edit_user_nombre").val(),
+      user_apellido: $("#npt_edit_user_apellido").val(),
+      user_user: $("#npt_edit_user_user").val(),
+      user_password: $("#npt_edit_user_password").val(),
+      perfil_id: $("#npt_edit_user_perfil").val(),
+      rol_vendedor_id: $("#npt_edit_rol_vendedor").val(),
     };
     return registro;
   }
@@ -218,20 +219,18 @@ document.addEventListener("DOMContentLoaded", function () {
     $.ajax({
       type: "POST",
       url:
-        "venta_home_mdl.php?accion=modificar_venta&venta_id=" +
-        registro.venta_id,
+        "users_home_mdl.php?accion=modificar_usuario&user_id=" +
+        registro.user_id,
       data: registro,
       success: function (msg) {
-        // listadoUsers.ajax.reload();
         $("#tblUsers").DataTable().ajax.reload();
-        //cargaPantallaPrincipal();
       },
       error: function () {
         alert("Problema modificando");
       },
     });
   }
-  // FIN CICLO EDITAR REGISTRO
+  // Fin ciclo editar usuario
 
   // CICLO BORRAR REGISTRO
   function borrarRegistro(user_id) {
@@ -250,8 +249,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   // FIN CICLO BORRAR REGISTRO
 
-
-
   //------------------------
   // OPERACIONES EN EL MODAL
   //------------------------
@@ -266,6 +263,7 @@ document.addEventListener("DOMContentLoaded", function () {
       },
     });
   });
+
   //CARGA EL SELECT ROL_VENDEDOR
   $(document).ready(function () {
     $.ajax({

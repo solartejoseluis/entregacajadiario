@@ -14,8 +14,14 @@ switch ($_GET['accion']) {
         user_user,
         user_password,
         user_perfil,
-        user_vendedor 
-        FROM USERS 
+        user_vendedor,
+        PERFILES.perfil_nombre,
+        ROL_VENDEDOR.rol_vendedor_descripcion 
+        FROM USERS
+        INNER JOIN PERFILES
+        ON USERS.user_perfil = PERFILES.perfil_id
+        INNER JOIN ROL_VENDEDOR
+        ON USERS.user_vendedor = ROL_VENDEDOR.rol_vendedor_id 
         ";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
@@ -61,7 +67,9 @@ switch ($_GET['accion']) {
         user_perfil,
         user_vendedor,
         PERFILES.perfil_id,
-        ROL_VENDEDOR.rol_vendedor_id
+        PERFILES.perfil_nombre,
+        ROL_VENDEDOR.rol_vendedor_id,
+        ROL_VENDEDOR.rol_vendedor_descripcion
         FROM USERS
         INNER JOIN PERFILES
         ON USERS.user_perfil=PERFILES.perfil_id
@@ -76,15 +84,15 @@ switch ($_GET['accion']) {
         break;
 
 
-    case 'modificar_venta':
-        $sql = "UPDATE VENTAS SET
-        venta_nombre_producto='$_POST[venta_nombre_producto]',
-        venta_nombre_proveedor='$_POST[venta_nombre_proveedor]',
-        venta_costo_producto=$_POST[venta_costo_producto],
-        venta_valor_venta=$_POST[venta_valor_venta],
-        user_id=$_POST[user_id],
-        venta_utilidad=$_POST[venta_utilidad]
-        WHERE venta_id=$_GET[venta_id]";
+    case 'modificar_usuario':
+        $sql = "UPDATE USERS SET
+        user_nombre='$_POST[npt_edit_user_nombre]',
+        user_apellido='$_POST[npt_edit_user_apellido]',
+        user_user=$_POST[npt_edit_user_user],
+        user_password=$_POST[npt_edit_user_password],
+        perfil_id=$_POST[npt_edit_perfil_id],
+        rol_vendedor_id=$_POST[npt_edit_rol_vendedor_id]
+        WHERE user_id=$_GET[user_id]";
         $response = $pdo->exec($sql);
         echo json_encode($response);
         break;
