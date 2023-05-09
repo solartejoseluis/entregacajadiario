@@ -175,10 +175,10 @@ document.addEventListener("DOMContentLoaded", function () {
         $("#npt_edit_user_apellido").val(datos[0].user_apellido);
         $("#npt_edit_user_user").val(datos[0].user_user);
         $("#npt_edit_user_password").val(datos[0].user_password);
-        $("#npt_edit_user_perfil").val(datos[0].perfil_id);
-        $("#npt_edit_user_vendedor").val(datos[0].rol_vendedor_id);
-        $("#slct_edit_perfil").val(datos[0].perfil_id);
-        $("#slct_edit_rol_vendedor").val(datos[0].rol_vendedor_id);
+        $("#npt_edit_user_perfil").val(datos[0].user_perfil);
+        $("#slct_edit_user_perfil").val(datos[0].user_perfil);
+        $("#npt_edit_user_vendedor").val(datos[0].user_vendedor);
+        $("#slct_edit_user_vendedor").val(datos[0].rol_vendedor_id);
          // mostrar el modal
         $("#mdl_edit_usuario").modal("show");
       },
@@ -188,12 +188,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  //TOMA EL VALOR DEL SELECT Y PONERLO EN INPUT
+  //Toma valor del Select y lo pone en el Input cuando hay un cambio
   $("#slct_edit_user_perfil").change(function () {
     $("#npt_edit_user_perfil").val($(this).val());
   });
-  $("#slct_edit_rol_vendedor").change(function () {
-    $("#npt_edit_rol_vendedor").val($(this).val());
+  $("#slct_edit_user_vendedor").change(function () {
+    $("#npt_edit_user_vendedor").val($(this).val());
   });
 
   $("#btn_confirm_edit").click(function () {
@@ -204,13 +204,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function recolectarDatosFormularioEdit() {
     let registro = {
-      user_id: $("#npt_edit_user_id").val(),
-      user_nombre: $("#npt_edit_user_nombre").val(),
-      user_apellido: $("#npt_edit_user_apellido").val(),
-      user_user: $("#npt_edit_user_user").val(),
-      user_password: $("#npt_edit_user_password").val(),
-      perfil_id: $("#npt_edit_user_perfil").val(),
-      rol_vendedor_id: $("#npt_edit_rol_vendedor").val(),
+      user_edit_id:$('#npt_edit_user_id').val(),
+      user_edit_nombre: $("#npt_edit_user_nombre").val(),
+      user_edit_apellido: $("#npt_edit_user_apellido").val(),
+      user_edit_user: $("#npt_edit_user_user").val(),
+      user_edit_password: $("#npt_edit_user_password").val(),
+      user_edit_perfil: $("#npt_edit_user_perfil").val(),
+      user_edit_vendedor: $("#npt_edit_user_vendedor").val(),
     };
     return registro;
   }
@@ -219,8 +219,8 @@ document.addEventListener("DOMContentLoaded", function () {
     $.ajax({
       type: "POST",
       url:
-        "users_home_mdl.php?accion=modificar_usuario&user_id=" +
-        registro.user_id,
+        "users_home_mdl.php?accion=modificar_usuario&user_edit_id=" +
+        registro.user_edit_id,
       data: registro,
       success: function (msg) {
         $("#tblUsers").DataTable().ajax.reload();

@@ -86,13 +86,13 @@ switch ($_GET['accion']) {
 
     case 'modificar_usuario':
         $sql = "UPDATE USERS SET
-        user_nombre='$_POST[npt_edit_user_nombre]',
-        user_apellido='$_POST[npt_edit_user_apellido]',
-        user_user=$_POST[npt_edit_user_user],
-        user_password=$_POST[npt_edit_user_password],
-        perfil_id=$_POST[npt_edit_perfil_id],
-        rol_vendedor_id=$_POST[npt_edit_rol_vendedor_id]
-        WHERE user_id=$_GET[user_id]";
+        user_nombre='$_POST[user_edit_nombre]',
+        user_apellido='$_POST[user_edit_apellido]',
+        user_user='$_POST[user_edit_user]',
+        user_password='$_POST[user_edit_password]',
+        user_perfil=$_POST[user_edit_perfil],
+        user_vendedor=$_POST[user_edit_vendedor]
+        WHERE user_id=$_GET[user_edit_id]";
         $response = $pdo->exec($sql);
         echo json_encode($response);
         break;
