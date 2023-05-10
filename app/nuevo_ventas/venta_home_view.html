@@ -23,6 +23,12 @@
     />
     <!-- estilos personalizados -->
     <link rel="stylesheet" href="ventas.css" />
+    <!-- select2 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   </head>
 
   <body>
@@ -1062,7 +1068,7 @@
       tabindex="1"
       id="mdl_domicilios"
     >
-      <div class="modal-dialog modal-xl">
+      <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5">NUEVO DOMICILIO</h1>
@@ -1079,176 +1085,100 @@
                 <input type="hidden" class="form-control" id="npt-venta_id" />
               </div>
 
-
-
-
-              <div class="row mb-3">
-                <div class="col-md-3 ms_auto">
-                  <label for="npt_venta_nombre_producto" class="col-form-label"
-                    >Fecha:</label
-                  >
-                </div>
-                <div class="col-md-3 ms_auto">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="npt_venta_nombre_producto"
-                    placeholder="Fecha"
-                    onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()"
-                  />
-                </div>
+              <div class="col-md-6 mb-3">
+                <label for="npt_venta_nombre_producto" class="col-form-label"
+                  >Fecha: 5 DE MAYO DE 2023</label
+                >
               </div>
 
-              <div class="row mb-3">
-                    <div class="col-md-3">
-                      <label
-                        for="npt_venta_nombre_proveedor"
-                        class="col-form-label"
-                        >Barrio:</label
-                      >
-                    </div>
-                    <div class="col-md-3">
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="npt_venta_nombre_proveedor"
-                        placeholder="barrio"
-                        onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()"
-                      />
-                    </div>
-                    <div class="col-md-3">
-                      <label
-                        for="npt_venta_costo_producto"
-                        class="col-form-label"
-                        >Comuna:</label
-                      >
-                    </div>
-                    <div class="col-md-3">
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="npt_venta_costo_producto"
-                        placeholder="comuna"
-                      />
-                    </div>
+              <div class="selectUser col-md-9 input-group input-group-sm mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >Barrio:</span
+                >
+                <select class="form-select" id="slct_user"></select>
+                <input type="hidden" class="form-control" id="npt-user_id" />
               </div>
 
-              <div class="row mb-3">
-                <div class="col-md-3 ms-auto">
-                  <label for="slct_user" class="col-form-label"
-                    >Asignado a:</label
-                  >
-                </div>
-                <div class="col-md-9 ms-auto">
-                  <input type="hidden" class="form-control" id="npt-user_id" />
-                  <div class="selectUser">
-                    <select class="form-select" id="slct_user"></select>
-                  </div>
-                </div>
+              <div class="selectUser col-md-9 input-group input-group-sm mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >Asignado a:</span
+                >
+                <select class="form-select" id="slct_user"></select>
+                <input type="hidden" class="form-control" id="npt-user_id" />
               </div>
-              <div class="row mb-3">
-                <div class="col-md-3 ms-auto">
-                  <label for="npt_venta_valor_venta" class="col-form-label"
-                    >Valor:</label
-                  >
-                </div>
-                <div class="col-md-9 ms-auto">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="npt_venta_valor_venta"
-                    placeholder="Digite valor venta"
-                  />
-                </div>
+
+              <div class="col-md-9 input-group input-group-sm mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >Valor:</span
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="npt_venta_costo_producto"
+                  placeholder="valor de la venta"
+                />
               </div>
-              <!-- NUEVA UTILIDAD -->
-              <div class="row mb-3">
-                <div class="col-md-3 ms-auto">
-                  <label for="npt_venta_utilidad" class="col-form-label"
-                    >Hora-Salida:</label
-                  >
-                </div>
-                <div class="col-md-9 ms-auto">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="npt_venta_utilidad"
-                    disabled
-                  />
-                </div>
+
+              <div class="input-group input-group input-group-sm mb-3">
+                <button
+                  class="btn btn-outline-primary"
+                  type="button"
+                  id="button-addon1"
+                >
+                  H.Salida
+                </button>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder=""
+                  aria-label="Example text with button addon"
+                  aria-describedby="button-addon1"
+                  disabled
+                />
               </div>
-              <div class="row mb-3">
-                <div class="col-md-3 ms-auto">
-                  <label for="npt_venta_utilidad" class="col-form-label"
-                    >Hora-Llegada:</label
-                  >
-                </div>
-                <div class="col-md-9 ms-auto">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="npt_venta_utilidad"
-                    disabled
-                  />
-                </div>
+
+              <div class="form-check form-switch mb-3">
+                <label class="form-check-label" for="flexSwitchCheckDefault"
+                  >inyectologia</label
+                >
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  role="switch"
+                  id="flexSwitchCheckDefault"
+                />
               </div>
-              <div class="row mb-3">
-                <div class="col-md-3 ms-auto">
-                  <label for="slct_user" class="col-form-label"
-                    >Asignado Por:</label
-                  >
-                </div>
-                <div class="col-md-9 ms-auto">
-                  <input type="hidden" class="form-control" id="npt-user_id" />
-                  <div class="selectUser">
-                    <select class="form-select" id="slct_user"></select>
-                  </div>
-                </div>
+
+              <div class="selectUser col-md-9 input-group input-group-sm mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >Domi Externo:</span
+                >
+                <select class="form-select" id="slct_user"></select>
+                <input type="hidden" class="form-control" id="npt-user_id" />
               </div>
-              <div class="row mb-3">
-                <div class="col-md-3 ms-auto">
-                  <label for="npt_venta_costo_producto" class="col-form-label"
-                    >Inyectologia:</label
-                  >
-                </div>
-                <div class="col-md-9 ms-auto">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="npt_venta_costo_producto"
-                    placeholder="Digite Costo de producto"
-                  />
-                </div>
+
+              <div class="col-md-9 input-group input-group-sm mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >Valor Domi Ext:</span
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="npt_venta_costo_producto"
+                  placeholder="valor domi externo"
+                />
               </div>
-              <div class="row mb-3">
-                <div class="col-md-3 ms-auto">
-                  <label for="npt_venta_costo_producto" class="col-form-label"
-                    >Observaciones:</label
-                  >
-                </div>
-                <div class="col-md-9 ms-auto">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="npt_venta_costo_producto"
-                    placeholder="Digite Costo de producto"
-                  />
-                </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-3 ms-auto">
-                  <label for="npt_venta_costo_producto" class="col-form-label"
-                    >Valor Domi Ext:</label
-                  >
-                </div>
-                <div class="col-md-9 ms-auto">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="npt_venta_costo_producto"
-                    placeholder="Digite Costo de producto"
-                  />
-                </div>
+
+              <div class="col-md-9 input-group input-group-sm mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >Observaciones:</span
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="npt_venta_costo_producto"
+                  placeholder="valor domi externo"
+                />
               </div>
             </form>
             <!-- finaliza formulario del modal nueva venta -->
