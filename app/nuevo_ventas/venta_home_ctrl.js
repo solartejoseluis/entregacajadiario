@@ -3,6 +3,22 @@ document.addEventListener("DOMContentLoaded", function () {
   var user_id = "";
 
   $(document).ready(function () {
+    //ajusta los modales para el select2
+    $.fn.modal.Constructor.prototype.enforceFocus = function () {};
+
+    $('#js-example-basic-single').select2();
+    
+    //solucion al problemal del select2 en el modal
+    $("#select_en_modal").select2({
+       dropdownParent: $("#mdl_domicilios"),
+     });
+
+    //solucion al problemal del select2 en el modal
+    $(".selBarrio").select2({
+      dropdownParent: $("#mdl_domicilios"),
+      width: '85%'
+    });
+    
     //cargarAcceso();
     //ejecutarDatatables();
     //cargaPantallaPrincipal();
@@ -115,100 +131,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // CARGAS EN PANTALLA PRINCIPAL
-  function cargarDatosUtilidadVendedor1() {
-    $.ajax({
-      type: "GET",
-      url: "venta_home_mdl.php?accion=consultar_utilidad_vendedor1",
-      data: { turno_id: turno_id },
-      success: function (datos) {
-        $("#utilidadVendedor1").html(datos[0].utilidad_vendedor1);
-        $("#ventasVendedor1").html(datos[0].ventas_vendedor1);
-      },
-      error: function () {
-        alert("Problema en consultarUtilidadVendedor1");
-      },
-    });
-  }
-
-  function cargarDatosUtilidadVendedor2() {
-    $.ajax({
-      type: "GET",
-      url: "venta_home_mdl.php?accion=consultar_utilidad_vendedor2",
-      data: { turno_id: turno_id },
-      success: function (datos) {
-        $("#utilidadVendedor2").html(datos[0].utilidad_vendedor2);
-        $("#ventasVendedor2").html(datos[0].ventas_vendedor2);
-      },
-      error: function () {
-        alert("Problema en consultarUtilidadVendedor2");
-      },
-    });
-  }
-
-  function cargarDatosUtilidadVendedor3() {
-    $.ajax({
-      type: "GET",
-      url: "venta_home_mdl.php?accion=consultar_utilidad_vendedor3",
-      data: { turno_id: turno_id },
-      success: function (datos) {
-        $("#utilidadVendedor3").html(datos[0].utilidad_vendedor3);
-        $("#ventasVendedor3").html(datos[0].ventas_vendedor3);
-      },
-      error: function () {
-        alert("Problema en consultarUtilidadVendedor3");
-      },
-    });
-  }
-
-  function cargarDatosUtilidadVendedor4() {
-    $.ajax({
-      type: "GET",
-      url: "venta_home_mdl.php?accion=consultar_utilidad_vendedor4",
-      data: { turno_id: turno_id },
-      success: function (datos) {
-        $("#utilidadVendedor4").html(datos[0].utilidad_vendedor4);
-        $("#ventasVendedor4").html(datos[0].ventas_vendedor4);
-      },
-      error: function () {
-        alert("Problema en consultarUtilidadVendedor4");
-      },
-    });
-  }
-
-  function utilidadTurno() {
-    $.ajax({
-      type: "GET",
-      url: "venta_home_mdl.php?accion=consultar_utilidad_turno",
-      data: { turno_id: turno_id },
-      success: function (datos) {
-        $("#p_utilidad_turno").html(datos[0].utilidad_turno);
-        $("#p_turno_numero_ventas").html(datos[0].ventas_turno);
-      },
-      error: function () {
-        alert("Problema en cargar datos utilidad turno");
-      },
-    });
-  }
-
-  function cargarAcumuladoMes() {
-    $.ajax({
-      type: "GET",
-      url: "venta_home_mdl.php?accion=consultar_acumulado",
-      data: { user_id: user_id },
-      success: function (datos) {
-        $("#mes_actual").html(datos[0].mes_actual);
-        $("#cuenta_num_gestiones").html(datos[0].cuenta_num_gestiones);
-        $("#acumulado_utilidad").html(datos[0].acumulado_utilidad);
-        $("#acumulado_ganancia").html(datos[0].acumulado_ganancia);
-      },
-      error: function () {
-        alert("Problema en cargar acumulado mes");
-      },
-    });
-  }
-
-  //  FIN CARGA EN PANTALLA PRINCIPAL
 
   //-----------------------------
   //CICLO AGREGAR NUEVA VENTA
@@ -275,10 +197,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  //TOMA EL VALOR DEL SELECT Y PONERLO EN INPUT
-  $("#slct_user").change(function () {
-    $("#npt-user_id").val($(this).val());
-  });
 
   function recolectarDatosFormularioNuevo() {
     let registro = {
@@ -312,9 +230,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   // FIN CICLO AGREGAR NUEVA VENTA
 
-  //----------------------------------
+  //----------------------
   //CICLO EDITAR REGISTRO
-  //----------------------------------
+  //----------------------
   function recuperarRegistro(venta_id) {
     $.ajax({
       type: "GET",
@@ -342,10 +260,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  //TOMA EL VALOR DEL SELECT Y PONERLO EN INPUT
-  $("#slctEdit-user").change(function () {
-    $("#nptEdit-user_id").val($(this).val());
-  });
+  // //TOMA EL VALOR DEL SELECT Y PONERLO EN INPUT
+  // $("#slctEdit-user").change(function () {
+  //   $("#nptEdit-user_id").val($(this).val());
+  // });
 
   $("#btn_confirm_edit").click(function () {
     //GUARDA LOS DATOS MODIFICADOS
@@ -530,16 +448,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // OPERACIONES EN EL MODAL
   //------------------------
 
-  //CARGA EL SELECT VENDEDORES
-  $(document).ready(function () {
-    $.ajax({
-      type: "POST",
-      url: "../00_selects/getVendedor.php",
-      success: function (response) {
-        $(".selectUser select").html(response).fadeIn();
-      },
-    });
-  });
 
   //CALCULAR UTILIDAD EN EL MODAL NUEVA VENTA
   $("#npt_venta_valor_venta").focusout(function calculoUtilidad() {
@@ -726,7 +634,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   //-----------------------------
-  //ciclo agragar nuevo domicilio
+  //ciclo agregar nuevo domicilio
   //-----------------------------
   $("#menu_nuevo_domicilio").click(function () {
     limpiarFormulario();
@@ -736,4 +644,38 @@ document.addEventListener("DOMContentLoaded", function () {
     limpiarFormulario();
     $("#mdl_domicilios").modal("show");
   });
+
+
+  //carga el select vendedores
+  $(document).ready(function () {
+    $.ajax({
+      type: "POST",
+      url: "../00_selects/getVendedor.php",
+      success: function (response) {
+        $(".selectUser select").html(response).fadeIn();
+      },
+    });
+  });
+
+  //Carga el select de barrios.
+  $(document).ready(function () {
+    $.ajax({
+      type: "POST",
+      url: "select_barrios_mdl.php",
+      success: function (response) {
+        $(".selectBarrio select").html(response).fadeIn();
+      },
+    });
+  });
+
+  //TOMA EL VALOR DEL SELECT Y PONERLO EN INPUT
+  $("#slct_user").change(function () {
+    $("#npt-user_id").val($(this).val());
+  });
+
+
+  $("#select_barrio").change(function () {
+    $("#npt_barrio_id").val($(this).val());
+  });
+
 }); // cierre del addEventListener del inicio de pagina

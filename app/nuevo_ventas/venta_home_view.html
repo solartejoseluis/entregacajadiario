@@ -28,7 +28,6 @@
       href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
       rel="stylesheet"
     />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   </head>
 
   <body>
@@ -333,6 +332,21 @@
             Nuevo Domicilio
           </button>
           <button type="button" class="btn btn-primary">Ver Listado</button>
+
+          <select class="" id="js-example-basic-single" name="state">
+            <option value="AL">mercurio</option>
+            <option value="AL">venus</option>
+            <option value="AL">tierra</option>
+            <option value="AL">marte</option>
+            <option value="AL">jupiter</option>
+            <option value="AL">saturno</option>
+            <option value="AL">urano</option>
+            <option value="AL">neptuno</option>
+            <option value="AL">pluton</option>
+            <option value="AL">kiron</option>
+            <option value="AL">vesta</option>
+            <option value="WY">ceres</option>
+          </select>
         </section>
         <section class="container col-md-6">
           <h3>AREA DE GESTIONES</h3>
@@ -1065,7 +1079,7 @@
     <div
       class="modal fade"
       data-bs-backdrop="static"
-      tabindex="1"
+      style="overflow: hidden"
       id="mdl_domicilios"
     >
       <div class="modal-dialog">
@@ -1080,108 +1094,135 @@
             ></button>
           </div>
           <div class="modal-body">
-            <form id="frm_nuevo_domicilio">
-              <div class="row">
-                <input type="hidden" class="form-control" id="npt-venta_id" />
-              </div>
+            <div class="container-fluid">
+              <form id="frm_nuevo_domicilio">
+                <div class="row">
+                  <input
+                    type="hidden"
+                    class="form-control"
+                    id="npt_domicilio_id"
+                  />
+                </div>
 
-              <div class="col-md-6 mb-3">
-                <label for="npt_venta_nombre_producto" class="col-form-label"
-                  >Fecha: 5 DE MAYO DE 2023</label
-                >
-              </div>
+                <div class="col-md-6 mb-3">
+                  <label for="fecha" class="col-form-label"
+                    >Fecha: 5 DE MAYO DE 2023</label
+                  >
+                </div>
 
-              <div class="selectUser col-md-9 input-group input-group-sm mb-3">
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Barrio:</span
+                <div
+                  class="selectBarrio col-md-9 input-group input-group-sm mb-3"
                 >
-                <select class="form-select" id="slct_user"></select>
-                <input type="hidden" class="form-control" id="npt-user_id" />
-              </div>
+                  <span class="input-group-text" id="inputGroup-sizing-sm"
+                    >Barrio:</span
+                  >
+                  <select
+                    class="form-select form-select-sm selBarrio "
+                    id="select_barrio"
+                  ></select>
+                  <input
+                    type="hidden"
+                    class="form-control"
+                    id="input_barrio_id"
+                  />
+                </div>
 
-              <div class="selectUser col-md-9 input-group input-group-sm mb-3">
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Asignado a:</span
+                <div
+                  class="selectUser col-md-9 input-group input-group-sm mb-3"
                 >
-                <select class="form-select" id="slct_user"></select>
-                <input type="hidden" class="form-control" id="npt-user_id" />
-              </div>
+                  <span class="input-group-text" id="inputGroup-sizing-sm"
+                    >Asignado a:</span
+                  >
+                  <select class="form-select" id="slct_user"></select>
+                  <input type="hidden" class="form-control" id="npt-user_id" />
+                </div>
 
-              <div class="col-md-9 input-group input-group-sm mb-3">
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Valor:</span
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="npt_venta_costo_producto"
-                  placeholder="valor de la venta"
-                />
-              </div>
+                <div class="col-md-9 input-group input-group-sm mb-3">
+                  <span class="input-group-text" id="inputGroup-sizing-sm"
+                    >Valor:</span
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="npt_venta_costo_producto"
+                    placeholder="valor de la venta"
+                  />
+                </div>
 
-              <div class="input-group input-group input-group-sm mb-3">
-                <button
-                  class="btn btn-outline-primary"
-                  type="button"
-                  id="button-addon1"
-                >
-                  H.Salida
-                </button>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder=""
-                  aria-label="Example text with button addon"
-                  aria-describedby="button-addon1"
-                  disabled
-                />
-              </div>
+                <div class="input-group input-group input-group-sm mb-3">
+                  <button
+                    class="btn btn-outline-primary"
+                    type="button"
+                    id="button-addon1"
+                  >
+                    H.Salida
+                  </button>
+                  <input type="text" class="form-control" placeholder="15:39" />
+                </div>
 
-              <div class="form-check form-switch mb-3">
-                <label class="form-check-label" for="flexSwitchCheckDefault"
-                  >inyectologia</label
-                >
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  role="switch"
-                  id="flexSwitchCheckDefault"
-                />
-              </div>
+                <div class="form-check form-switch mb-3">
+                  <label class="form-check-label" for="flexSwitchCheckDefault"
+                    >inyectologia</label
+                  >
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    role="switch"
+                    id="flexSwitchCheckDefault"
+                  />
+                </div>
 
-              <div class="selectUser col-md-9 input-group input-group-sm mb-3">
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Domi Externo:</span
+                <div
+                  class="selectUser col-md-9 input-group input-group-sm mb-3"
                 >
-                <select class="form-select" id="slct_user"></select>
-                <input type="hidden" class="form-control" id="npt-user_id" />
-              </div>
+                  <span class="input-group-text" id="inputGroup-sizing-sm"
+                    >D_externo:</span
+                  >
+                  <select class="form-select" id="slct_user"></select>
+                  <input type="hidden" class="form-control" id="npt-user_id" />
+                </div>
 
-              <div class="col-md-9 input-group input-group-sm mb-3">
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Valor Domi Ext:</span
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="npt_venta_costo_producto"
-                  placeholder="valor domi externo"
-                />
-              </div>
+                <div class="col-md-9 input-group input-group-sm mb-3">
+                  <span class="input-group-text" id="inputGroup-sizing-sm"
+                    >Valor Domi Ext:</span
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="npt_venta_costo_producto"
+                    placeholder="valor domi externo"
+                  />
+                </div>
 
-              <div class="col-md-9 input-group input-group-sm mb-3">
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Observaciones:</span
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="npt_venta_costo_producto"
-                  placeholder="valor domi externo"
-                />
-              </div>
-            </form>
-            <!-- finaliza formulario del modal nueva venta -->
+                <div class="col-md-9 input-group input-group-sm mb-3">
+                  <span class="input-group-text" id="inputGroup-sizing-sm"
+                    >Observaciones:</span
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="npt_venta_costo_producto"
+                    placeholder="valor domi externo"
+                  />
+                </div>
+
+                <select class="form-select" id="select_en_modal" name="state">
+                  <option value="AL">mercurio</option>
+                  <option value="AL">venus</option>
+                  <option value="AL">tierra</option>
+                  <option value="AL">marte</option>
+                  <option value="AL">jupiter</option>
+                  <option value="AL">saturno</option>
+                  <option value="AL">urano</option>
+                  <option value="AL">neptuno</option>
+                  <option value="AL">pluton</option>
+                  <option value="AL">kiron</option>
+                  <option value="AL">vesta</option>
+                  <option value="WY">ceres</option>
+                </select>
+              </form>
+              <!-- finaliza formulario del modal nueva venta -->
+            </div>
           </div>
           <!-- footer modal nueva venta -->
           <div class="modal-footer">
@@ -1223,5 +1264,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/es-us.min.js"></script>
     <!-- scripts de la aplicacion -->
     <script src="venta_home_ctrl.js"></script>
+    <!-- select2 -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   </body>
 </html>
