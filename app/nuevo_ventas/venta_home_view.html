@@ -99,6 +99,28 @@
                     role="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
+                    >CLIENTES</a
+                  >
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a class="dropdown-item" id="menu_nueva_gestion" href="#"
+                        >listado de clientes...</a
+                      >
+                    </li>
+                    <hr class="dropdown-divider" />
+                    <li>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                    </li>
+                  </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link active dropdown-toggle"
+                    href="#"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
                     >TURNOS</a
                   >
                   <ul class="dropdown-menu">
@@ -1074,14 +1096,14 @@
       </div>
     </div>
     <!-- -------------------------->
-    <!-- Inicia Nuevo domicilio-->
+    <!-- Inicia modal Nuevo domicilio-->
     <!-- ------------------------->
     <div
       class="modal fade"
       data-bs-backdrop="static"
       style="overflow: hidden"
       id="mdl_domicilios"
-    >
+      >
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -1112,12 +1134,12 @@
 
                 <div
                   class="selectBarrio col-md-9 input-group input-group-sm mb-3"
-                >
+                  >
                   <span class="input-group-text" id="inputGroup-sizing-sm"
                     >Barrio:</span
                   >
                   <select
-                    class="form-select form-select-sm selBarrio "
+                    class="form-select form-select-sm selBarrio"
                     id="select_barrio"
                   ></select>
                   <input
@@ -1125,6 +1147,27 @@
                     class="form-control"
                     id="input_barrio_id"
                   />
+                </div>
+
+                <div
+                  class="selectCliente col-md-9 input-group input-group-sm mb-3"
+                >
+                  <span class="input-group-text" id="inputGroup-sizing-sm"
+                    >Cliente:</span
+                  >
+                  <select class="form-select" id="select_cliente"></select>
+                  <input
+                    type="hidden"
+                    class="form-control"
+                    id="input_cliente_id"
+                  />
+                  <button
+                    class="btn btn-outline-primary"
+                    type="button"
+                    id="btn_nuevo_cliente"
+                  >
+                    Agregar
+                  </button>
                 </div>
 
                 <div
@@ -1240,6 +1283,173 @@
         </div>
       </div>
     </div>
+
+<!-- inicia modal nuevo cliente -->
+    <div
+      class="modal fade"
+      data-bs-backdrop="static"
+      style="overflow: hidden"
+      id="mdl_nuevo_cliente"
+      >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">NUEVO CLIENTE</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid">
+              <form id="frm_nuevo_cliente">
+                <div class="row">
+                  <input
+                    type="hidden"
+                    class="form-control"
+                    id="npt_cliente_id"
+                  />
+                </div>
+
+                <div class="col-md-6 mb-3">
+                  <label for="fecha" class="col-form-label"
+                    >AÑADIR NUEVO CLIENTE</label
+                  >
+                </div>
+
+                <div class="col-md-9 input-group input-group-sm mb-3">
+                  <span class="input-group-text" id="inputGroup-sizing-sm"
+                    >Nombres:</span
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="input_nombre"
+                    placeholder="nombres"
+                  />
+                </div>
+
+
+                <div class="col-md-9 input-group input-group-sm mb-3">
+                  <span class="input-group-text" id="inputGroup-sizing-sm"
+                    >Apellidos:</span
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="input_aprellido"
+                    placeholder="apellidos"
+                  />
+                </div>
+
+
+                <div class="col-md-9 input-group input-group-sm mb-3">
+                  <span class="input-group-text" id="inputGroup-sizing-sm"
+                    >Documento:</span
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="input_documento"
+                    placeholder="documento"
+                  />
+                </div>
+
+
+                <div class="col-md-9 input-group input-group-sm mb-3">
+                  <span class="input-group-text" id="inputGroup-sizing-sm"
+                    >Direccion:</span
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="input_direccion"
+                    placeholder="direccion"
+                  />
+                </div>
+
+
+                <div
+                  class="selectBarrio col-md-9 input-group input-group-sm mb-3"
+                  >
+                  <span class="input-group-text" id="inputGroup-sizing-sm"
+                    >Barrio:</span
+                  >
+                  <select
+                    class="form-select form-select-sm selBarrio"
+                    id="select_barrio"
+                  ></select>
+                  <input
+                    type="hidden"
+                    class="form-control"
+                    id="input_barrio_id"
+                  />
+                </div>
+
+
+                <div class="col-md-9 input-group input-group-sm mb-3">
+                  <span class="input-group-text" id="inputGroup-sizing-sm"
+                    >Teléfono 1:</span
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="input_telefono1"
+                    placeholder="telefono1"
+                  />
+                </div>
+
+
+                <div class="col-md-9 input-group input-group-sm mb-3">
+                  <span class="input-group-text" id="inputGroup-sizing-sm"
+                    >Teléfono 2:</span
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="input_telefono2"
+                    placeholder="telefono2"
+                  />
+                </div>
+
+
+                <div class="col-md-9 input-group input-group-sm mb-3">
+                  <span class="input-group-text" id="inputGroup-sizing-sm"
+                    >Tel fijo:</span
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="input_telefono_fijo"
+                    placeholder="telefono fijo"
+                  />
+                </div>
+
+
+              </form>
+              <!-- finaliza formulario del modal nueva venta -->
+            </div>
+          </div>
+          <!-- footer modal nueva venta -->
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" id="btn_confirm_add">
+              Confirma Agregar
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <!-- ------- -->
     <!-- SCRIPTS -->
     <!-- ------- -->

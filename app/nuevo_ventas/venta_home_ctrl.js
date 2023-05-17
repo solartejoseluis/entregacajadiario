@@ -661,9 +661,21 @@ document.addEventListener("DOMContentLoaded", function () {
   $(document).ready(function () {
     $.ajax({
       type: "POST",
-      url: "select_barrios_mdl.php",
+      url: "select_barrio_mdl.php",
       success: function (response) {
         $(".selectBarrio select").html(response).fadeIn();
+      },
+    });
+  });
+
+
+  //Carga el select de clientes.
+  $(document).ready(function () {
+    $.ajax({
+      type: "POST",
+      url: "select_cliente_mdl.php",
+      success: function (response) {
+        $(".selectCliente select").html(response).fadeIn();
       },
     });
   });
@@ -676,6 +688,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
   $("#select_barrio").change(function () {
     $("#npt_barrio_id").val($(this).val());
+  });
+
+
+  $("#select_cliente").change(function () {
+    $("#input_cliente_id").val($(this).val());
+  });
+
+
+// inicia ciclo agregar cliente
+
+  $("#btn_nuevo_cliente").click(function () {
+    limpiarFormulario();
+    $("#mdl_domicilios").modal("hide");
+    $("#mdl_nuevo_cliente").modal("show");
   });
 
 }); // cierre del addEventListener del inicio de pagina
