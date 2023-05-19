@@ -691,12 +691,13 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 
-  $("#select_cliente").change(function () {
+  $("#slct_cliente").change(function () {
     $("#input_cliente_id").val($(this).val());
   });
 
-
+//-------------------------
 // inicia ciclo agregar cliente
+//-------------------------
 
   $("#btn_nuevo_cliente").click(function () {
     limpiarFormulario();
