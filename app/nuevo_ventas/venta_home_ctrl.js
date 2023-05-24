@@ -6,15 +6,14 @@ document.addEventListener("DOMContentLoaded", function () {
     //ajusta los modales para el select2
     $.fn.modal.Constructor.prototype.enforceFocus = function () {};
 
-    $('#js-example-basic-single').select2();
     
-    //solucion al problemal del select2 en el modal
+    //solucion al problema del select2 en el modal
     $("#select_en_modal").select2({
        dropdownParent: $("#mdl_domicilios"),
      });
 
     //solucion al problemal del select2 en el modal
-    $(".selBarrio").select2({
+    $("#slct_barrio").select2({
       dropdownParent: $("#mdl_domicilios"),
       width: '85%'
     });
@@ -130,7 +129,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
-
 
   //-----------------------------
   //CICLO AGREGAR NUEVA VENTA
@@ -646,16 +644,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 
-  //carga el select vendedores
-  $(document).ready(function () {
-    $.ajax({
-      type: "POST",
-      url: "../00_selects/getVendedor.php",
-      success: function (response) {
-        $(".selectUser select").html(response).fadeIn();
-      },
-    });
-  });
 
   //Carga el select de barrios.
   $(document).ready(function () {
@@ -669,30 +657,39 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 
-  //Carga el select de clientes.
+  //Carga el select de transportador.
   $(document).ready(function () {
     $.ajax({
       type: "POST",
-      url: "select_cliente_mdl.php",
+      url: "select_transportador_mdl.php",
       success: function (response) {
-        $(".selectCliente select").html(response).fadeIn();
+        $(".selectTransportador select").html(response).fadeIn();
       },
     });
   });
 
+  //carga el select domi externo
+  $(document).ready(function () {
+    $.ajax({
+      type: "POST",
+      url: "select_domi_externo_mdl.php",
+      success: function (response) {
+        $(".selectDomiExterno select").html(response).fadeIn();
+      },
+    });
+  });
   //TOMA EL VALOR DEL SELECT Y PONERLO EN INPUT
-  $("#slct_user").change(function () {
-    $("#npt-user_id").val($(this).val());
+  $("#slct_transportador").change(function () {
+    $("#npt_transportador_id").val($(this).val());
   });
 
-
+// asigna valor select barrio al input
   $("#select_barrio").change(function () {
     $("#npt_barrio_id").val($(this).val());
   });
-
-
-  $("#slct_cliente").change(function () {
-    $("#input_cliente_id").val($(this).val());
+// asigna valor select domi externo al input
+  $("#slct_domi_externo").change(function () {
+    $("#input_domi_externo_id").val($(this).val());
   });
 
 //-------------------------

@@ -1139,8 +1139,8 @@
                     >Barrio:</span
                   >
                   <select
-                    class="form-select form-select-sm selBarrio"
-                    id="select_barrio"
+                    class="form-select form-select-sm"
+                    id="slct_barrio"
                   ></select>
                   <input
                     type="hidden"
@@ -1149,35 +1149,27 @@
                   />
                 </div>
 
-                <div
-                  class="selectCliente col-md-9 input-group input-group-sm mb-3"
-                >
-                  <span class="input-group-text" id="inputGroup-sizing-sm"
-                    >Cliente:</span
-                  >
-                  <select class="form-select" id="slct_cliente"></select>
-                  <input
-                    type="hidden"
-                    class="form-control"
-                    id="input_cliente_id"
-                  />
-                  <button
-                    class="btn btn-outline-primary"
-                    type="button"
-                    id="btn_nuevo_cliente"
-                  >
-                    Agregar
-                  </button>
-                </div>
 
+                <div class="col-md-9 input-group input-group-sm mb-3">
+                  <span class="input-group-text" id="inputGroup-sizing-sm"
+                    ># Factura:</span
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="npt_venta_costo_producto"
+                    placeholder="Número de Factura"
+                  />
+                </div>
+                
                 <div
-                  class="selectUser col-md-9 input-group input-group-sm mb-3"
+                  class="selectTransportador col-md-9 input-group input-group-sm mb-3"
                 >
                   <span class="input-group-text" id="inputGroup-sizing-sm"
                     >Asignado a:</span
                   >
-                  <select class="form-select" id="slct_user"></select>
-                  <input type="hidden" class="form-control" id="npt-user_id" />
+                  <select class="form-select" id="slct_trasportador"></select>
+                  <input type="hidden" class="form-control" id="npt_transportador_id" />
                 </div>
 
                 <div class="col-md-9 input-group input-group-sm mb-3">
@@ -1216,13 +1208,13 @@
                 </div>
 
                 <div
-                  class="selectUser col-md-9 input-group input-group-sm mb-3"
+                  class="selectDomiExterno col-md-9 input-group input-group-sm mb-3"
                 >
                   <span class="input-group-text" id="inputGroup-sizing-sm"
                     >D_externo:</span
                   >
-                  <select class="form-select" id="slct_user"></select>
-                  <input type="hidden" class="form-control" id="npt-user_id" />
+                  <select class="form-select" id="slct_domi_externo"></select>
+                  <input type="hidden" class="form-control" id="npt_domi_externo_id"/>
                 </div>
 
                 <div class="col-md-9 input-group input-group-sm mb-3">
@@ -1245,191 +1237,12 @@
                     type="text"
                     class="form-control"
                     id="npt_venta_costo_producto"
-                    placeholder="valor domi externo"
+                    placeholder="observaciones"
                   />
                 </div>
-
-                <select class="form-select" id="select_en_modal" name="state">
-                  <option value="AL">mercurio</option>
-                  <option value="AL">venus</option>
-                  <option value="AL">tierra</option>
-                  <option value="AL">marte</option>
-                  <option value="AL">jupiter</option>
-                  <option value="AL">saturno</option>
-                  <option value="AL">urano</option>
-                  <option value="AL">neptuno</option>
-                  <option value="AL">pluton</option>
-                  <option value="AL">kiron</option>
-                  <option value="AL">vesta</option>
-                  <option value="WY">ceres</option>
-                </select>
-              </form>
-              <!-- finaliza formulario del modal nueva venta -->
-            </div>
-          </div>
-          <!-- footer modal nueva venta -->
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" id="btn_confirm_add">
-              Confirma Agregar
-            </button>
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Cancelar
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-<!-- inicia modal nuevo cliente -->
-    <div
-      class="modal fade"
-      data-bs-backdrop="static"
-      style="overflow: hidden"
-      id="mdl_nuevo_cliente"
-      >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5">NUEVO CLIENTE</h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <div class="container-fluid">
-              <form id="frm_nuevo_cliente">
-                <div class="row">
-                  <input
-                    type="hidden"
-                    class="form-control"
-                    id="npt_cliente_id"
-                  />
-                </div>
-
-                <div class="col-md-6 mb-3">
-                  <label for="fecha" class="col-form-label"
-                    >AÑADIR NUEVO CLIENTE</label
-                  >
-                </div>
-
-                <div class="col-md-9 input-group input-group-sm mb-3">
-                  <span class="input-group-text" id="inputGroup-sizing-sm"
-                    >Nombres:</span
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="input_nombre"
-                    placeholder="nombres"
-                  />
-                </div>
-
-
-                <div class="col-md-9 input-group input-group-sm mb-3">
-                  <span class="input-group-text" id="inputGroup-sizing-sm"
-                    >Apellidos:</span
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="input_aprellido"
-                    placeholder="apellidos"
-                  />
-                </div>
-
-
-                <div class="col-md-9 input-group input-group-sm mb-3">
-                  <span class="input-group-text" id="inputGroup-sizing-sm"
-                    >Documento:</span
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="input_documento"
-                    placeholder="documento"
-                  />
-                </div>
-
-
-                <div class="col-md-9 input-group input-group-sm mb-3">
-                  <span class="input-group-text" id="inputGroup-sizing-sm"
-                    >Direccion:</span
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="input_direccion"
-                    placeholder="direccion"
-                  />
-                </div>
-
-
-                <div
-                  class="selectBarrio col-md-9 input-group input-group-sm mb-3"
-                  >
-                  <span class="input-group-text" id="inputGroup-sizing-sm"
-                    >Barrio:</span
-                  >
-                  <select
-                    class="form-select form-select-sm selBarrio"
-                    id="select_barrio"
-                  ></select>
-                  <input
-                    type="hidden"
-                    class="form-control"
-                    id="input_barrio_id"
-                  />
-                </div>
-
-
-                <div class="col-md-9 input-group input-group-sm mb-3">
-                  <span class="input-group-text" id="inputGroup-sizing-sm"
-                    >Teléfono 1:</span
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="input_telefono1"
-                    placeholder="telefono1"
-                  />
-                </div>
-
-
-                <div class="col-md-9 input-group input-group-sm mb-3">
-                  <span class="input-group-text" id="inputGroup-sizing-sm"
-                    >Teléfono 2:</span
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="input_telefono2"
-                    placeholder="telefono2"
-                  />
-                </div>
-
-
-                <div class="col-md-9 input-group input-group-sm mb-3">
-                  <span class="input-group-text" id="inputGroup-sizing-sm"
-                    >Tel fijo:</span
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="input_telefono_fijo"
-                    placeholder="telefono fijo"
-                  />
-                </div>
-
 
               </form>
-              <!-- finaliza formulario del modal nueva venta -->
+              <!-- finaliza formulario modal nuevo domicilio -->
             </div>
           </div>
           <!-- footer modal nueva venta -->
