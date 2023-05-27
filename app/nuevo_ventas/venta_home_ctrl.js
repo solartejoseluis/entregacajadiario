@@ -4,20 +4,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
   $(document).ready(function () {
     //ajusta los modales para el select2
-    $.fn.modal.Constructor.prototype.enforceFocus = function () {};
+    // $.fn.modal.Constructor.prototype.enforceFocus = function () {};
 
-    
     //solucion al problema del select2 en el modal
     $("#select_en_modal").select2({
-       dropdownParent: $("#mdl_domicilios"),
-     });
+      dropdownParent: $("#mdl_domicilios"),
+    });
 
     //solucion al problemal del select2 en el modal
     $("#slct_barrio").select2({
       dropdownParent: $("#mdl_domicilios"),
-      width: '85%'
+      width: "85%",
     });
-    
+
     //cargarAcceso();
     //ejecutarDatatables();
     //cargaPantallaPrincipal();
@@ -194,7 +193,6 @@ document.addEventListener("DOMContentLoaded", function () {
       cargaPantallaPrincipal();
     }
   });
-
 
   function recolectarDatosFormularioNuevo() {
     let registro = {
@@ -446,7 +444,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // OPERACIONES EN EL MODAL
   //------------------------
 
-
   //CALCULAR UTILIDAD EN EL MODAL NUEVA VENTA
   $("#npt_venta_valor_venta").focusout(function calculoUtilidad() {
     let costo = $("#npt_venta_costo_producto").val();
@@ -643,8 +640,6 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#mdl_domicilios").modal("show");
   });
 
-
-
   //Carga el select de barrios.
   $(document).ready(function () {
     $.ajax({
@@ -655,7 +650,6 @@ document.addEventListener("DOMContentLoaded", function () {
       },
     });
   });
-
 
   //Carga el select de transportador.
   $(document).ready(function () {
@@ -678,28 +672,22 @@ document.addEventListener("DOMContentLoaded", function () {
       },
     });
   });
-  //TOMA EL VALOR DEL SELECT Y PONERLO EN INPUT
+  // asigna valor del select transportador al input
   $("#slct_transportador").change(function () {
     $("#npt_transportador_id").val($(this).val());
   });
 
-// asigna valor select barrio al input
+  // asigna valor select barrio al input
   $("#select_barrio").change(function () {
     $("#npt_barrio_id").val($(this).val());
   });
-// asigna valor select domi externo al input
+  // asigna valor select domi externo al input
   $("#slct_domi_externo").change(function () {
     $("#input_domi_externo_id").val($(this).val());
   });
 
-//-------------------------
-// inicia ciclo agregar cliente
-//-------------------------
-
-  $("#btn_nuevo_cliente").click(function () {
-    limpiarFormulario();
-    $("#mdl_domicilios").modal("hide");
-    $("#mdl_nuevo_cliente").modal("show");
+let hora_actual = moment().format('HH:mm')
+  $("#btn_hora_salida").click(function () {
+    $("#input_hora_salida").val(hora_actual);
   });
-
 }); // cierre del addEventListener del inicio de pagina

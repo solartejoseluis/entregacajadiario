@@ -1103,7 +1103,7 @@
       data-bs-backdrop="static"
       style="overflow: hidden"
       id="mdl_domicilios"
-      >
+    >
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -1134,7 +1134,7 @@
 
                 <div
                   class="selectBarrio col-md-9 input-group input-group-sm mb-3"
-                  >
+                >
                   <span class="input-group-text" id="inputGroup-sizing-sm"
                     >Barrio:</span
                   >
@@ -1149,7 +1149,6 @@
                   />
                 </div>
 
-
                 <div class="col-md-9 input-group input-group-sm mb-3">
                   <span class="input-group-text" id="inputGroup-sizing-sm"
                     ># Factura:</span
@@ -1161,7 +1160,7 @@
                     placeholder="Número de Factura"
                   />
                 </div>
-                
+
                 <div
                   class="selectTransportador col-md-9 input-group input-group-sm mb-3"
                 >
@@ -1169,7 +1168,11 @@
                     >Asignado a:</span
                   >
                   <select class="form-select" id="slct_trasportador"></select>
-                  <input type="hidden" class="form-control" id="npt_transportador_id" />
+                  <input
+                    type="hidden"
+                    class="form-control"
+                    id="npt_transportador_id"
+                  />
                 </div>
 
                 <div class="col-md-9 input-group input-group-sm mb-3">
@@ -1188,16 +1191,33 @@
                   <button
                     class="btn btn-outline-primary"
                     type="button"
-                    id="button-addon1"
+                    id="btn_hora_salida"
                   >
                     H.Salida
                   </button>
-                  <input type="text" class="form-control" placeholder="15:39" />
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="hora de salida"
+                    id="input_hora_salida"
+                  />
                 </div>
 
                 <div class="form-check form-switch mb-3">
                   <label class="form-check-label" for="flexSwitchCheckDefault"
                     >inyectologia</label
+                  >
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    role="switch"
+                    id="flexSwitchCheckDefault"
+                  />
+                </div>
+
+                <div class="form-check form-switch mb-3">
+                  <label class="form-check-label" for="flexSwitchCheckDefault"
+                    >Domi-Externo</label
                   >
                   <input
                     class="form-check-input"
@@ -1214,7 +1234,11 @@
                     >D_externo:</span
                   >
                   <select class="form-select" id="slct_domi_externo"></select>
-                  <input type="hidden" class="form-control" id="npt_domi_externo_id"/>
+                  <input
+                    type="hidden"
+                    class="form-control"
+                    id="npt_domi_externo_id"
+                  />
                 </div>
 
                 <div class="col-md-9 input-group input-group-sm mb-3">
@@ -1240,7 +1264,6 @@
                     placeholder="observaciones"
                   />
                 </div>
-
               </form>
               <!-- finaliza formulario modal nuevo domicilio -->
             </div>
@@ -1261,7 +1284,6 @@
         </div>
       </div>
     </div>
-
 
     <!-- ------- -->
     <!-- SCRIPTS -->
