@@ -21,23 +21,23 @@
       rel="stylesheet"
       href="https://cdn.datatables.net/1.13.1/css/dataTables.jqueryui.min.css"
     />
-        <!-- fontawesome icons version 6 -->
+    <!-- fontawesome icons version 6 -->
     <script
       src="https://kit.fontawesome.com/382e1ebb20.js"
       crossorigin="anonymous"
     ></script>
     <!-- estilos personalizados -->
     <link rel="stylesheet" href="ventas.css" />
-    <link rel="stylesheet" href="sidebar.css" />
     <!-- select2 -->
     <link
       href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
       rel="stylesheet"
     />
+
+    <link rel="stylesheet" href="sidebar.css" />
   </head>
 
   <body>
-
     <!-- INICIO SIDEBAR BOOTSTRAP -->
 
     <div id="mySidebar" class="sidebar">
@@ -56,12 +56,12 @@
           <hr />
           <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">
-              <a href="#" class="nav-link text-white">
+              <a href="#" class="nav-link active" aria-current="page">
                 <i
                   class="fa-solid fa-temperature-three-quarters"
                   style="color: #ffffff"
                 ></i>
-                Temp./Hum.
+                Temperatura Humedad
               </a>
             </li>
             <li>
@@ -83,12 +83,6 @@
               <a href="#" class="nav-link text-white">
                 <i class="fa-brands fa-product-hunt" style="color: #ffffff"></i>
                 Productos
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link text-white">
-                <i class="fa-solid fa-file-invoice-dollar" style="color: #ffffff;"></i>
-                Venta Acumulada
               </a>
             </li>
             <li>
@@ -134,7 +128,8 @@
       <nav class="row">
         <nav class="navbar navbar-expand-md navbar-dark bg-primary mb-4">
           <div class="container-fluid" id="contenido_navbar">
-            <button class="btn_open">☰</button>
+            <button class="btn_open" onclick="openNav()">☰</button>
+            <!-- <button id="btn_open" class="openbtn">☰</button> -->
             <a class="navbar-brand" href="#">HOJA DEL TURNO</a>
             <button
               class="navbar-toggler"
@@ -192,7 +187,6 @@
                   </ul>
                 </li>
 
-
                 <li class="nav-item dropdown">
                   <a
                     class="nav-link active dropdown-toggle"
@@ -227,6 +221,7 @@
           <h4>RESPONSABLE DE TURNO: YULY DIAS</h4>
         </section>
         <section class="col-md-4">
+          <span class="fa-solid fa-temperature-sun"></span>
           <h4>SECCION DERECHA</h4>
         </section>
       </div>
@@ -524,8 +519,9 @@
         </section>
       </div>
     </div>
+
     <!-- -------------------------->
-    <!-- Inicia Nueva Gestión-->
+    <!-- Inicia Modal Nueva Gestión-->
     <!-- ------------------------->
     <div
       class="modal fade"
@@ -658,10 +654,8 @@
         </div>
       </div>
     </div>
-    <!-- Final Modal Nueva Gestion -->
-
-
-    <!-- Inicia Modal Editar Gestion-->
+    <!-- final modal nueva gestion -->
+    <!-- inicia modal editar gestion-->
     <div
       class="modal fade"
       data-bs-backdrop="static"
@@ -1367,6 +1361,8 @@
     <!-- ------- -->
     <!-- SCRIPTS -->
     <!-- ------- -->
+    <!-- <script src="sidebar.js"></script> -->
+
     <!-- CDN jquery 3.6.1 js -->
     <script
       src="https://code.jquery.com/jquery-3.6.1.min.js"

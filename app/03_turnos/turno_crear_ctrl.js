@@ -25,7 +25,6 @@ function actualDate() {
     return now;
 };
 
-
 //------------------------
 // CARGA DE SELECTS
 //------------------------

@@ -690,4 +690,19 @@ let hora_actual = moment().format('HH:mm')
   $("#btn_hora_salida").click(function () {
     $("#input_hora_salida").val(hora_actual);
   });
+
+  // Control del Sidebar
+    $("#contenido_navbar").on("click", "button.btn_open", function () {
+    document.getElementById("mySidebar").style.width = "250px";
+    document.getElementById("contenido").style.marginLeft = "250px";
+    $("#contenido_navbar button.btn_open").hide();
+    });
+
+    $("#mySidebar").on("click", "button.btn_close", function () {
+    document.getElementById("mySidebar").style.width = "0";
+    document.getElementById("contenido").style.marginLeft = "0";
+    $("#contenido_navbar button.btn_open").show();
+    });
+
+
 }); // cierre del addEventListener del inicio de pagina
