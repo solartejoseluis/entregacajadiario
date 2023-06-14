@@ -21,7 +21,7 @@
       rel="stylesheet"
       href="https://cdn.datatables.net/1.13.1/css/dataTables.jqueryui.min.css"
     />
-        <!-- fontawesome icons version 6 -->
+    <!-- fontawesome icons version 6 -->
     <script
       src="https://kit.fontawesome.com/382e1ebb20.js"
       crossorigin="anonymous"
@@ -37,7 +37,6 @@
   </head>
 
   <body>
-
     <!-- INICIO SIDEBAR BOOTSTRAP -->
 
     <div id="mySidebar" class="sidebar">
@@ -86,15 +85,25 @@
               </a>
             </li>
             <li>
-              <a href="#" class="nav-link text-white">
-                <i class="fa-solid fa-file-invoice-dollar" style="color: #ffffff;"></i>
+              <a id="link_venta_acumulada" href="#" class="nav-link text-white">
+                <i
+                  class="fa-solid fa-file-invoice-dollar"
+                  style="color: #ffffff"
+                ></i>
                 Venta Acumulada
+              </a>
+            </li>
+            <p>Mi Mes</p>
+            <li>
+              <a href="#" class="nav-link text-white">
+                <i class="fa-solid fa-truck-field" style="color: #ffffff"></i>
+                Mis productos
               </a>
             </li>
             <li>
               <a href="#" class="nav-link text-white">
                 <i class="fa-solid fa-truck-field" style="color: #ffffff"></i>
-                Proveedores
+                Gestiones/Dia
               </a>
             </li>
           </ul>
@@ -192,7 +201,6 @@
                   </ul>
                 </li>
 
-
                 <li class="nav-item dropdown">
                   <a
                     class="nav-link active dropdown-toggle"
@@ -210,7 +218,7 @@
                     </li>
                     <hr class="dropdown-divider" />
                     <li>
-                      <a class="dropdown-item" href="#">Something else here</a>
+                      <a class="dropdown-item" href="#">Turnos Anteriores</a>
                     </li>
                   </ul>
                 </li>
@@ -224,206 +232,37 @@
           <h4>VIERNES,5 DE MAYO DE 2023</h4>
         </section>
         <section class="col-md-4">
-          <h4>RESPONSABLE DE TURNO: YULY DIAS</h4>
+          <h4>RESPONSABLE DE TURNO: YULY DIAZ</h4>
         </section>
         <section class="col-md-4">
           <h4>SECCION DERECHA</h4>
         </section>
       </div>
-      <section class="row">
-        <section class="col-md-12">
-          <h5>VENTAS TOTALES 2023</h5>
-          <div class="table-responsive">
-            <table
-              class="table table-sm table-bordered table-hover border-primary"
-              id=""
-            >
-              <thead>
-                <tr>
-                  <th scope="col">Vendedor</th>
-                  <th colspan="2" scope="col">Ene</th>
-                  <th colspan="2" scope="col">Feb</th>
-                  <th colspan="2" scope="col">Mar</th>
-                  <th colspan="2" scope="col">Abr</th>
-                  <th colspan="2" scope="col">May</th>
-                  <th colspan="2" scope="col">Jun</th>
-                  <th colspan="2" scope="col">Jul</th>
-                  <th colspan="2" scope="col">Ago</th>
-                  <th colspan="2" scope="col">Sep</th>
-                  <th colspan="2" scope="col">Oct</th>
-                  <th colspan="2" scope="col">Nov</th>
-                  <th colspan="2" scope="col">Dic</th>
-                </tr>
-                <tr>
-                  <th scope="col">nombre</th>
-                  <th scope="col">Ges</th>
-                  <th scope="col">Util</th>
-                  <th scope="col">Ges</th>
-                  <th scope="col">Util</th>
-                  <th scope="col">Ges</th>
-                  <th scope="col">Util</th>
-                  <th scope="col">Ges</th>
-                  <th scope="col">Util</th>
-                  <th scope="col">Ges</th>
-                  <th scope="col">Util</th>
-                  <th scope="col">Ges</th>
-                  <th scope="col">Util</th>
-                  <th scope="col">Ges</th>
-                  <th scope="col">Util</th>
-                  <th scope="col">Ges</th>
-                  <th scope="col">Util</th>
-                  <th scope="col">Ges</th>
-                  <th scope="col">Util</th>
-                  <th scope="col">Ges</th>
-                  <th scope="col">Util</th>
-                  <th scope="col">Ges</th>
-                  <th scope="col">Util</th>
-                  <th scope="col">Ges</th>
-                  <th scope="col">Util</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <p id=""></p>
-                  </td>
-                  <td>
-                    <p id="ene_ges">5</p>
-                  </td>
-                  <td>
-                    <p id="ene_util">$100.000</p>
-                  </td>
-                  <td>
-                    <p id="feb_ges">6</p>
-                  </td>
-                  <td>
-                    <p id="feb_util">$200.000</p>
-                  </td>
-                  <td>
-                    <p id="mar_ges">8</p>
-                  </td>
-                  <td>
-                    <p id="mar_util">$540.000</p>
-                  </td>
-                  <td>
-                    <p id="abr_ges">10</p>
-                  </td>
-                  <td>
-                    <p id="abr_util">$100.000</p>
-                  </td>
-                  <td>
-                    <p id="may_ges">30</p>
-                  </td>
-                  <td>
-                    <p id="may_util">$80.000</p>
-                  </td>
-                  <td>
-                    <p id="Jun_ges">12</p>
-                  </td>
-                  <td>
-                    <p id="jun_util">$70.000</p>
-                  </td>
-                  <td>
-                    <p id="jul_ges">11</p>
-                  </td>
-                  <td>
-                    <p id="jul_util">$85.000</p>
-                  </td>
-                  <td>
-                    <p id="ago_ges">20</p>
-                  </td>
-                  <td>
-                    <p id="ago_util">$67.000</p>
-                  </td>
-                  <td>
-                    <p id="sep_ges">2</p>
-                  </td>
-                  <td>
-                    <p id="sep_util">$50.000</p>
-                  </td>
-                  <td>
-                    <p id="oct_ges">15</p>
-                  </td>
-                  <td>
-                    <p id="oct_util">$40.000</p>
-                  </td>
-                  <td>
-                    <p id="nov_ges">16</p>
-                  </td>
-                  <td>
-                    <p id="nov_util">$24.000</p>
-                  </td>
-                  <td>
-                    <p id="dic_ges">17</p>
-                  </td>
-                  <td>
-                    <p id="dic_util">$10.000</p>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-        <!-- FINAL CUADRO DE ACUMULADOS -->
-      </section>
       <!-- inicia sección de domicilios -->
       <div class="row">
         <section class="container col-md-6">
           <h3>AREA DE DOMICILIOS</h3>
           <h5>Últimos 5 Domicilios hoy</h5>
-          <div class="table-responsive">
-            <table
-              class="table table-sm table-bordered table-hover border-primary"
-              id=""
-            >
-              <thead>
-                <tr>
-                  <td scope="col">Salida</td>
-                  <td scope="col">Llegada</td>
-                  <td scope="col">Transportador</td>
-                  <td scope="col">Barrio</td>
-                  <td scope="col">Iny</td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>14:30</td>
-                  <td>14:50</td>
-                  <td>Windi</td>
-                  <td>Alvernia</td>
-                  <td>no</td>
-                </tr>
-                <tr>
-                  <td>14:50</td>
-                  <td>15:10</td>
-                  <td>Windi</td>
-                  <td>farfan</td>
-                  <td>si</td>
-                </tr>
-                <tr>
-                  <td>14:50</td>
-                  <td>15:10</td>
-                  <td>Windi</td>
-                  <td>Bolivar</td>
-                  <td>si</td>
-                </tr>
-                <tr>
-                  <td>14:50</td>
-                  <td>15:10</td>
-                  <td>Marino</td>
-                  <td>policia</td>
-                  <td>si</td>
-                </tr>
-                <tr>
-                  <td>15:20</td>
-                  <td>15:40</td>
-                  <td>Marino</td>
-                  <td>centro</td>
-                  <td>si</td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="row">
+            <section class="table-responsive" id="tabla">
+              <table class="table" id="tbl_domicilios">
+                <thead>
+                  <tr>
+                    <td>Barrio</td>
+                    <td>Factura</td>
+                    <td>AsignadoA</td>
+                    <td>Valor</td>
+                    <td>H/salida</td>
+                    <td>Estado</td>
+                    <td>H/llegada</td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </thead>
+              </table>
+            </section>
           </div>
+
           <button
             type="button"
             class="btn btn-primary"
@@ -433,90 +272,30 @@
             Nuevo Domicilio
           </button>
           <button type="button" class="btn btn-primary">Ver Listado</button>
-
-          <select class="" id="js-example-basic-single" name="state">
-            <option value="AL">mercurio</option>
-            <option value="AL">venus</option>
-            <option value="AL">tierra</option>
-            <option value="AL">marte</option>
-            <option value="AL">jupiter</option>
-            <option value="AL">saturno</option>
-            <option value="AL">urano</option>
-            <option value="AL">neptuno</option>
-            <option value="AL">pluton</option>
-            <option value="AL">kiron</option>
-            <option value="AL">vesta</option>
-            <option value="WY">ceres</option>
-          </select>
         </section>
         <section class="container col-md-6">
           <h3>AREA DE GESTIONES</h3>
           <h5>Últimos 5 Gestiones Hoy</h5>
-          <div class="table-responsive">
-            <table
-              class="table table-sm table-bordered table-hover border-primary"
-              id=""
-            >
-              <thead>
-                <tr>
-                  <td scope="col">id</td>
-                  <td scope="col">Producto</td>
-                  <td scope="col">Vendedor</td>
-                  <td scope="col">Precio Costo</td>
-                  <td scope="col">Precio Venta</td>
-                  <td scope="col">Vendedor</td>
-                  <td scope="col">Utilidad</td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>101</td>
-                  <td>ALCANFOR</td>
-                  <td>PEPE</td>
-                  <td>$2.000</td>
-                  <td>$7.000</td>
-                  <td>LORENA</td>
-                  <td>$5.000</td>
-                </tr>
-                <tr>
-                  <td>102</td>
-                  <td>TABLETA A</td>
-                  <td>BODEGA CUATRO</td>
-                  <td>$6.000</td>
-                  <td>$7.000</td>
-                  <td>LORENA</td>
-                  <td>$1.000</td>
-                </tr>
-                <tr>
-                  <td>103</td>
-                  <td>ASPIRINA VERDE</td>
-                  <td>MORNI</td>
-                  <td>$30.000</td>
-                  <td>$80.000</td>
-                  <td>YULI</td>
-                  <td>$50.000</td>
-                </tr>
-                <tr>
-                  <td>104</td>
-                  <td>GALLETA X</td>
-                  <td>LORPE</td>
-                  <td>$10.000</td>
-                  <td>$15.000</td>
-                  <td>MARINO</td>
-                  <td>$5.000</td>
-                </tr>
-                <tr>
-                  <td>105</td>
-                  <td>ALCANFOR</td>
-                  <td>PEPE</td>
-                  <td>$2.000</td>
-                  <td>$7.000</td>
-                  <td>LORENA</td>
-                  <td>$5.000</td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="row">
+            <section class="table-responsive" id="tabla">
+              <table class="table" id="tbl_domicilios">
+                <thead>
+                  <tr>
+                    <td>Producto</td>
+                    <td>Proveedor</td>
+                    <td>Costo Producto</td>
+                    <td>Valor Venta</td>
+                    <td>Vendedor</td>
+                    <td>Utilidad</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </thead>
+              </table>
+            </section>
           </div>
+
           <button type="button" class="btn btn-success" id="btn_nueva_gestion">
             Nueva Gestión
           </button>
@@ -659,7 +438,6 @@
       </div>
     </div>
     <!-- Final Modal Nueva Gestion -->
-
 
     <!-- Inicia Modal Editar Gestion-->
     <div
@@ -1128,6 +906,7 @@
       </div>
     </div>
     <!-- FIN MODAL mis gestiones / detalle de productos -->
+
     <!-- -------------------------->
     <!-- INICIA MODAL productos/gestiones del mes...-->
     <!-- ------------------------->
@@ -1348,6 +1127,183 @@
             </div>
           </div>
           <!-- footer modal nueva venta -->
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" id="btn_confirm_add">
+              Confirma Agregar
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- -------------------------->
+    <!-- Inicia Modal Venta Acumulada-->
+    <!-- ------------------------->
+    <div
+      class="modal fade"
+      data-bs-backdrop="static"
+      style="overflow: hidden"
+      id="mdl_venta_acumulada"
+    >
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">VENTA ACUMULADA</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid">
+              <section class="row">
+                <section class="col-md-12">
+                  <h5>VENTAS TOTALES 2023</h5>
+                  <div class="table-responsive">
+                    <table
+                      class="table table-sm table-bordered table-hover border-primary"
+                      id=""
+                    >
+                      <thead>
+                        <tr>
+                          <th scope="col">Vendedor</th>
+                          <th colspan="2" scope="col">Ene</th>
+                          <th colspan="2" scope="col">Feb</th>
+                          <th colspan="2" scope="col">Mar</th>
+                          <th colspan="2" scope="col">Abr</th>
+                          <th colspan="2" scope="col">May</th>
+                          <th colspan="2" scope="col">Jun</th>
+                          <th colspan="2" scope="col">Jul</th>
+                          <th colspan="2" scope="col">Ago</th>
+                          <th colspan="2" scope="col">Sep</th>
+                          <th colspan="2" scope="col">Oct</th>
+                          <th colspan="2" scope="col">Nov</th>
+                          <th colspan="2" scope="col">Dic</th>
+                        </tr>
+                        <tr>
+                          <th scope="col">nombre</th>
+                          <th scope="col">Ges</th>
+                          <th scope="col">Util</th>
+                          <th scope="col">Ges</th>
+                          <th scope="col">Util</th>
+                          <th scope="col">Ges</th>
+                          <th scope="col">Util</th>
+                          <th scope="col">Ges</th>
+                          <th scope="col">Util</th>
+                          <th scope="col">Ges</th>
+                          <th scope="col">Util</th>
+                          <th scope="col">Ges</th>
+                          <th scope="col">Util</th>
+                          <th scope="col">Ges</th>
+                          <th scope="col">Util</th>
+                          <th scope="col">Ges</th>
+                          <th scope="col">Util</th>
+                          <th scope="col">Ges</th>
+                          <th scope="col">Util</th>
+                          <th scope="col">Ges</th>
+                          <th scope="col">Util</th>
+                          <th scope="col">Ges</th>
+                          <th scope="col">Util</th>
+                          <th scope="col">Ges</th>
+                          <th scope="col">Util</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <p id=""></p>
+                          </td>
+                          <td>
+                            <p id="ene_ges">5</p>
+                          </td>
+                          <td>
+                            <p id="ene_util">$100.000</p>
+                          </td>
+                          <td>
+                            <p id="feb_ges">6</p>
+                          </td>
+                          <td>
+                            <p id="feb_util">$200.000</p>
+                          </td>
+                          <td>
+                            <p id="mar_ges">8</p>
+                          </td>
+                          <td>
+                            <p id="mar_util">$540.000</p>
+                          </td>
+                          <td>
+                            <p id="abr_ges">10</p>
+                          </td>
+                          <td>
+                            <p id="abr_util">$100.000</p>
+                          </td>
+                          <td>
+                            <p id="may_ges">30</p>
+                          </td>
+                          <td>
+                            <p id="may_util">$80.000</p>
+                          </td>
+                          <td>
+                            <p id="Jun_ges">12</p>
+                          </td>
+                          <td>
+                            <p id="jun_util">$70.000</p>
+                          </td>
+                          <td>
+                            <p id="jul_ges">11</p>
+                          </td>
+                          <td>
+                            <p id="jul_util">$85.000</p>
+                          </td>
+                          <td>
+                            <p id="ago_ges">20</p>
+                          </td>
+                          <td>
+                            <p id="ago_util">$67.000</p>
+                          </td>
+                          <td>
+                            <p id="sep_ges">2</p>
+                          </td>
+                          <td>
+                            <p id="sep_util">$50.000</p>
+                          </td>
+                          <td>
+                            <p id="oct_ges">15</p>
+                          </td>
+                          <td>
+                            <p id="oct_util">$40.000</p>
+                          </td>
+                          <td>
+                            <p id="nov_ges">16</p>
+                          </td>
+                          <td>
+                            <p id="nov_util">$24.000</p>
+                          </td>
+                          <td>
+                            <p id="dic_ges">17</p>
+                          </td>
+                          <td>
+                            <p id="dic_util">$10.000</p>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+                <!-- FINAL CUADRO DE ACUMULADOS -->
+              </section>
+            </div>
+          </div>
+          <!-- footer modal venta acumulada -->
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary" id="btn_confirm_add">
               Confirma Agregar

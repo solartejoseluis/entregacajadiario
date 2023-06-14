@@ -704,5 +704,14 @@ let hora_actual = moment().format('HH:mm')
     $("#contenido_navbar button.btn_open").show();
     });
 
+ //-----------------------------
+  //Ciclo SIDEBAR
+  //-----------------------------
+  $("#link_venta_acumulada").click(function () {
+    // limpiarFormulario();
+    $("#mdl_venta_acumulada").modal("show");
+  });
+
+// FINALIZA CICLO SIDEBAR
 
 }); // cierre del addEventListener del inicio de pagina
