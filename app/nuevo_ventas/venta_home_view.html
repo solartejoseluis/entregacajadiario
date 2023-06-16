@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- ENTREGA DIARIA DROGUERIA SURICENTRO -->
 <html lang="es">
   <head>
     <meta charset="utf-8" />
@@ -238,7 +237,9 @@
           <h4>SECCION DERECHA</h4>
         </section>
       </div>
+      <!-- ------------------------------- -->
       <!-- inicia sección de domicilios -->
+      <!-- ------------------------------- -->
       <div class="row">
         <section class="container col-md-6">
           <h3>AREA DE DOMICILIOS</h3>
@@ -303,8 +304,9 @@
         </section>
       </div>
     </div>
+    <!-- final seccion domicilios -->
     <!-- -------------------------->
-    <!-- Inicia Nueva Gestión-->
+    <!-- Inicia Modal Nueva Gestión-->
     <!-- ------------------------->
     <div
       class="modal fade"
@@ -315,7 +317,13 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5">NUEVA GESTION</h1>
+            <h1 class="modal-title fs-5">NUEVA GESTION1</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
           <div class="modal-body">
             <form id="frm_nueva_venta">
@@ -323,6 +331,7 @@
               <div class="row">
                 <input type="hidden" class="form-control" id="npt-venta_id" />
               </div>
+
               <!-- NUEVO PRODUCTO -->
               <div class="row mb-3">
                 <div class="col-md-3 ms-auto">
@@ -340,6 +349,21 @@
                   />
                 </div>
               </div>
+
+
+              <div class="col-md-9 input-group input-group-sm mb-2">
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >Producto</span
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="npt_venta_nombre_producto"
+                  placeholder="Digita el Producto"
+                  onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()"
+                />
+              </div>
+
               <!-- NUEVO PROVEEDOR -->
               <div class="row mb-3">
                 <div class="col-md-3 ms-auto">
@@ -419,9 +443,7 @@
                 </div>
               </div>
             </form>
-            <!-- finaliza formulario del modal nueva venta -->
           </div>
-          <!-- footer modal nueva venta -->
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary" id="btn_confirm_add">
               Confirma Agregar
@@ -439,7 +461,9 @@
     </div>
     <!-- Final Modal Nueva Gestion -->
 
+    <!-- ---------------------------------- -->
     <!-- Inicia Modal Editar Gestion-->
+    <!-- ---------------------------------- -->
     <div
       class="modal fade"
       data-bs-backdrop="static"
@@ -594,8 +618,10 @@
         </div>
       </div>
     </div>
-    <!-- FIN MODAL EDITAR VENTA -->
+    <!--  fin modal Editar Gestión -->
+    <!-- ---------------------------------- -->
     <!-- INICIA MODAL CERRAR TURNO-->
+    <!-- ---------------------------------- -->
     <div
       class="modal fade"
       data-bs-backdrop="static"
@@ -702,7 +728,10 @@
       </div>
     </div>
     <!-- FIN MODAL CERRAR TURNO -->
+
+    <!-- ------------------------------- -->
     <!-- INICIA MODAL CERRAR FINAL-->
+    <!-- ------------------------------- -->
     <div
       class="modal fade"
       data-bs-backdrop="static"
@@ -955,6 +984,8 @@
         </div>
       </div>
     </div>
+    <!-- final modal productos/gestiones del mes -->
+
     <!-- -------------------------->
     <!-- Inicia modal Nuevo domicilio-->
     <!-- ------------------------->
@@ -978,153 +1009,151 @@
             ></button>
           </div>
           <div class="modal-body">
-            <div class="container-fluid">
-              <form id="frm_nuevo_domicilio">
-                <div class="row">
-                  <input
-                    type="hidden"
-                    class="form-control"
-                    id="npt_domicilio_id"
-                  />
-                </div>
+            <form id="frm_nuevo_domicilio">
+              <div class="row">
+                <input
+                  type="hidden"
+                  class="form-control"
+                  id="npt_domicilio_id"
+                />
+              </div>
 
-                <div class="col-md-6 mb-3"></div>
+              <!-- <div class="col-md-6 mb-3"></div> -->
 
-                <div
-                  class="selectBarrio col-md-9 input-group input-group-sm mb-2"
+              <div
+                class="selectBarrio col-md-9 input-group input-group-sm mb-2"
+              >
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >Barrio:</span
                 >
-                  <span class="input-group-text" id="inputGroup-sizing-sm"
-                    >Barrio:</span
-                  >
-                  <select
-                    class="form-select form-select-sm"
-                    id="slct_barrio"
-                  ></select>
-                  <input
-                    type="hidden"
-                    class="form-control"
-                    id="input_barrio_id"
-                  />
-                </div>
+                <select
+                  class="form-select form-select-sm"
+                  id="slct_barrio"
+                ></select>
+                <input
+                  type="hidden"
+                  class="form-control"
+                  id="input_barrio_id"
+                />
+              </div>
 
-                <div class="col-md-9 input-group input-group-sm mb-2">
-                  <span class="input-group-text" id="inputGroup-sizing-sm"
-                    ># Factura:</span
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="npt_venta_costo_producto"
-                    placeholder="Número de Factura"
-                  />
-                </div>
-
-                <div
-                  class="selectTransportador col-md-9 input-group input-group-sm mb-2"
+              <div class="col-md-9 input-group input-group-sm mb-2">
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  ># Factura:</span
                 >
-                  <span class="input-group-text" id="inputGroup-sizing-sm"
-                    >Asignado a:</span
-                  >
-                  <select class="form-select" id="slct_trasportador"></select>
-                  <input
-                    type="hidden"
-                    class="form-control"
-                    id="npt_transportador_id"
-                  />
-                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="npt_venta_costo_producto"
+                  placeholder="Número de Factura"
+                />
+              </div>
 
-                <div class="col-md-9 input-group input-group-sm mb-2">
-                  <span class="input-group-text" id="inputGroup-sizing-sm"
-                    >Valor:</span
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="npt_venta_costo_producto"
-                    placeholder="valor de la venta"
-                  />
-                </div>
-
-                <div class="input-group input-group input-group-sm mb-2">
-                  <button
-                    class="btn btn-outline-primary"
-                    type="button"
-                    id="btn_hora_salida"
-                  >
-                    H.Salida
-                  </button>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="hora de salida"
-                    id="input_hora_salida"
-                  />
-                </div>
-
-                <div class="form-check form-switch mb-2">
-                  <label class="form-check-label" for="flexSwitchCheckDefault"
-                    >inyectologia</label
-                  >
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    role="switch"
-                    id="flexSwitchCheckDefault"
-                  />
-                </div>
-
-                <div class="form-check form-switch mb-2">
-                  <label class="form-check-label" for="flexSwitchCheckDefault"
-                    >Domi-Externo</label
-                  >
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    role="switch"
-                    id="flexSwitchCheckDefault"
-                  />
-                </div>
-
-                <div
-                  class="selectDomiExterno col-md-9 input-group input-group-sm mb-2"
+              <div
+                class="selectTransportador col-md-9 input-group input-group-sm mb-2"
+              >
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >Asignado a:</span
                 >
-                  <span class="input-group-text" id="inputGroup-sizing-sm"
-                    >D_externo:</span
-                  >
-                  <select class="form-select" id="slct_domi_externo"></select>
-                  <input
-                    type="hidden"
-                    class="form-control"
-                    id="npt_domi_externo_id"
-                  />
-                </div>
+                <select class="form-select" id="slct_trasportador"></select>
+                <input
+                  type="hidden"
+                  class="form-control"
+                  id="npt_transportador_id"
+                />
+              </div>
 
-                <div class="col-md-9 input-group input-group-sm mb-2">
-                  <span class="input-group-text" id="inputGroup-sizing-sm"
-                    >Valor Domi Ext:</span
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="npt_venta_costo_producto"
-                    placeholder="valor domi externo"
-                  />
-                </div>
+              <div class="col-md-9 input-group input-group-sm mb-2">
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >Valor:</span
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="npt_venta_costo_producto"
+                  placeholder="valor de la venta"
+                />
+              </div>
 
-                <div class="col-md-9 input-group input-group-sm mb-2">
-                  <span class="input-group-text" id="inputGroup-sizing-sm"
-                    >Observaciones:</span
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="npt_venta_costo_producto"
-                    placeholder="observaciones"
-                  />
-                </div>
-              </form>
-              <!-- finaliza formulario modal nuevo domicilio -->
-            </div>
+              <div class="input-group input-group input-group-sm mb-2">
+                <button
+                  class="btn btn-outline-primary"
+                  type="button"
+                  id="btn_hora_salida"
+                >
+                  H.Salida
+                </button>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="hora de salida"
+                  id="input_hora_salida"
+                />
+              </div>
+
+              <div class="form-check form-switch mb-2">
+                <label class="form-check-label" for="flexSwitchCheckDefault"
+                  >inyectologia</label
+                >
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  role="switch"
+                  id="flexSwitchCheckDefault"
+                />
+              </div>
+
+              <div class="form-check form-switch mb-2">
+                <label class="form-check-label" for="flexSwitchCheckDefault"
+                  >Domi-Externo</label
+                >
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  role="switch"
+                  id="flexSwitchCheckDefault"
+                />
+              </div>
+
+              <div
+                class="selectDomiExterno col-md-9 input-group input-group-sm mb-2"
+              >
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >D_externo:</span
+                >
+                <select class="form-select" id="slct_domi_externo"></select>
+                <input
+                  type="hidden"
+                  class="form-control"
+                  id="npt_domi_externo_id"
+                />
+              </div>
+
+              <div class="col-md-9 input-group input-group-sm mb-2">
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >Valor Domi Ext:</span
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="npt_venta_costo_producto"
+                  placeholder="valor domi externo"
+                />
+              </div>
+
+              <div class="col-md-9 input-group input-group-sm mb-2">
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >Observaciones:</span
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="npt_venta_costo_producto"
+                  placeholder="observaciones"
+                />
+              </div>
+            </form>
+            <!-- finaliza formulario modal nuevo domicilio -->
           </div>
           <!-- footer modal nueva venta -->
           <div class="modal-footer">
@@ -1142,6 +1171,7 @@
         </div>
       </div>
     </div>
+    <!-- final modal nuevo domicilio -->
 
     <!-- -------------------------->
     <!-- Inicia Modal Venta Acumulada-->
@@ -1319,6 +1349,7 @@
         </div>
       </div>
     </div>
+    <!-- final modal venta acumulada -->
 
     <!-- ------- -->
     <!-- SCRIPTS -->
