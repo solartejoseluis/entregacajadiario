@@ -317,7 +317,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5">NUEVA GESTION1</h1>
+            <h1 class="modal-title fs-5">NUEVA GESTION</h1>
             <button
               type="button"
               class="btn-close"
@@ -331,26 +331,7 @@
               <div class="row">
                 <input type="hidden" class="form-control" id="npt-venta_id" />
               </div>
-
-              <!-- NUEVO PRODUCTO -->
-              <div class="row mb-3">
-                <div class="col-md-3 ms-auto">
-                  <label for="npt_venta_nombre_producto" class="col-form-label"
-                    >Producto:</label
-                  >
-                </div>
-                <div class="col-md-9 ms-auto">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="npt_venta_nombre_producto"
-                    placeholder="Digite Nombre del producto"
-                    onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()"
-                  />
-                </div>
-              </div>
-
-
+              <!-- PRODUCTO -->
               <div class="col-md-9 input-group input-group-sm mb-2">
                 <span class="input-group-text" id="inputGroup-sizing-sm"
                   >Producto</span
@@ -360,89 +341,86 @@
                   class="form-control"
                   id="npt_venta_nombre_producto"
                   placeholder="Digita el Producto"
-                  onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()"
                 />
               </div>
 
-              <!-- NUEVO PROVEEDOR -->
-              <div class="row mb-3">
-                <div class="col-md-3 ms-auto">
-                  <label for="npt_venta_nombre_proveedor" class="col-form-label"
-                    >Proveedor:</label
-                  >
-                </div>
-                <div class="col-md-9 ms-auto">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="npt_venta_nombre_proveedor"
-                    placeholder="Digite Nombre proveedor"
-                    onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()"
-                  />
-                </div>
+              <!-- PROVEEDOR -->
+              <div class="col-md-9 input-group input-group-sm mb-2">
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >Proveedor</span
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="npt_venta_nombre_proveedor"
+                  placeholder="Digita Proveedor"
+                />
               </div>
-              <!-- NUEVO COSTO PRODUCTO -->
-              <div class="row mb-3">
-                <div class="col-md-3 ms-auto">
-                  <label for="npt_venta_costo_producto" class="col-form-label"
-                    >Costo Prod:</label
-                  >
-                </div>
-                <div class="col-md-9 ms-auto">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="npt_venta_costo_producto"
-                    placeholder="Digite Costo de producto"
-                  />
-                </div>
+
+              <!-- COSTO PRODUCTO -->
+              <div class="col-md-9 input-group input-group-sm mb-2">
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >Costo Producto</span
+                >
+                <input
+                  type="hidden"
+                  class="form-control"
+                  id="npt_venta_costo_producto_base"
+                />
+                <input
+                  type="text"
+                  class="form-control"
+                  id="npt_venta_costo_producto"
+                  placeholder="Digita Costo"
+                  onkeypress="return valideKey(evt);"
+                />
               </div>
-              <!-- NUEVO VALOR VENTA -->
-              <div class="row mb-3">
-                <div class="col-md-3 ms-auto">
-                  <label for="npt_venta_valor_venta" class="col-form-label">
-                    Valor Venta:</label
-                  >
-                </div>
-                <div class="col-md-9 ms-auto">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="npt_venta_valor_venta"
-                    placeholder="Digite valor venta"
-                  />
-                </div>
+
+              <!-- VALOR VENTA -->
+              <div class="col-md-9 input-group input-group-sm mb-2">
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >Valor Venta</span
+                >
+                <input
+                  type="hidden"
+                  class="form-control"
+                  id="npt_venta_valor_venta_base"
+                />
+                <input
+                  type="text"
+                  class="form-control"
+                  id="npt_venta_valor_venta"
+                  placeholder="Digita Valor Venta"
+                />
               </div>
-              <!--  NUEVO VENDEDOR -->
-              <div class="row mb-3">
-                <div class="col-md-3 ms-auto">
-                  <label for="slct_user" class="col-form-label"
-                    >Vendedor:</label
-                  >
-                </div>
-                <div class="col-md-9 ms-auto">
-                  <input type="hidden" class="form-control" id="npt-user_id" />
-                  <div class="selectUser">
-                    <select class="form-select" id="slct_user"></select>
-                  </div>
-                </div>
+
+              <!-- UTILIDAD -->
+              <div class="col-md-9 input-group input-group-sm mb-2">
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >Utilidad</span
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="npt_venta_utilidad"
+                  disabled
+                />
               </div>
-              <div class="row mb-3">
-                <div class="col-md-3 ms-auto">
-                  <label for="npt_venta_utilidad" class="col-form-label"
-                    >Utilidad:</label
-                  >
-                </div>
-                <div class="col-md-9 ms-auto">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="npt_venta_utilidad"
-                    disabled
-                  />
-                </div>
+              <!--   VENDEDOR -->
+              <div class="selectUser col-md-9 input-group input-group-sm mb-2">
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >Vendedor:</span
+                >
+                <select
+                  class="form-select form-select-sm"
+                  id="slct_user"
+                ></select>
+                <input type="hidden" class="form-control" id="npt_user_id" />
               </div>
+
             </form>
+
+          
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary" id="btn_confirm_add">

@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#select_en_modal").select2({
       dropdownParent: $("#mdl_domicilios"),
     });
-
     //solucion al problemal del select2 en el modal
     $("#slct_barrio").select2({
       dropdownParent: $("#mdl_domicilios"),
@@ -41,36 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  function cargaPantallaPrincipal() {
-    //mesActual();
-    //consultarDatosTurnoActual();
-    //cargarDatosUtilidadVendedor1();
-    //cargarDatosUtilidadVendedor2();
-    //cargarDatosUtilidadVendedor3();
-    //cargarDatosUtilidadVendedor4();
-    //utilidadTurno();
-    //cargarAcumuladoMes();
-  }
 
-  function consultarDatosTurnoActual() {
-    $.ajax({
-      type: "GET",
-      async: false, //necesario
-      url: "venta_home_mdl.php?accion=consultarDatosTurnoActual",
-      data: { turno_id: turno_id },
-      success: function (datos) {
-        //$("#npt_turno_id_actual").val(datos[0].turno_id_actual);
-        $("#npt_user_nombre").html(datos[0].user_nombre);
-        $("#npt_user_nombre1").html(datos[0].user_nombre);
-        $("#npt_user_apellido").html(datos[0].user_apellido);
-        $("#npt_user_apellido1").html(datos[0].user_apellido);
-        $("#npt_jornada_nombre").html(datos[0].jornada_nombre);
-      },
-      error: function () {
-        alert("Problema en consultar datos turno actual");
-      },
-    });
-  }
 
   function ejecutarDatatables() {
     // INICIA DATATABLES
@@ -130,13 +100,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   //-----------------------------
-  //CICLO AGREGAR NUEVA VENTA
+  //CICLO AGREGAR NUEVA GESTION
   //-----------------------------
-  $("#menu_nueva_gestion").click(function () {
-    limpiarFormulario();
-    $("#mdl_ventas").modal("show");
-  });
-  $("#btn_nueva_gestion").click(function () {
+  $("#menu_nueva_gestion, #btn_nueva_gestion").click(function () {
     limpiarFormulario();
     $("#mdl_ventas").modal("show");
   });
@@ -224,7 +190,7 @@ document.addEventListener("DOMContentLoaded", function () {
       },
     });
   }
-  // FIN CICLO AGREGAR NUEVA VENTA
+  // FIN CICLO AGREGAR NUEVA gestion 
 
   //----------------------
   //CICLO EDITAR REGISTRO
@@ -318,7 +284,7 @@ document.addEventListener("DOMContentLoaded", function () {
       },
     });
   }
-  // FIN CICLO BORRAR REGISTRO
+  // fin ciclo borrar registro
 
   //-------------------------------
   //CICLO CERRAR TURNO
@@ -440,23 +406,87 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   // FIN CICLO FINALIZAR CERRAR
 
-  //------------------------
-  // OPERACIONES EN EL MODAL
-  //------------------------
+  //-------------------------------------
+  // OPERACIONES EN MODAL NUEVA GESTION
+  //-------------------------------------
 
-  //CALCULAR UTILIDAD EN EL MODAL NUEVA VENTA
-  $("#npt_venta_valor_venta").focusout(function calculoUtilidad() {
-    let costo = $("#npt_venta_costo_producto").val();
-    let valor_venta = $("#npt_venta_valor_venta").val();
-    let utilidad =
-      parseFloat(valor_venta.replace(/\$|\./g, "")) -
-      parseFloat(costo.replace(/\$|\./g, ""));
-    $("#npt_venta_utilidad").val(utilidad);
+  // VALIDACIONES EN EL MODAL NUEVA GESTION
+
+  $("#npt_venta_nombre_producto").keyup(function () {
+    $("#npt_venta_nombre_producto").css("background-color", "#dbe5f0");
+    $("#npt_venta_nombre_producto").val($(this).val().toUpperCase());
   });
 
-  //CALCULAR UTILIDAD EN EL MODAL DE EDITAR
-  $("#nptEdit_venta_valor_venta").focusout(function calculoUtilidad() {
-    let costo = $("#nptEdit_venta_costo_producto").val();
+  $("#npt_venta_nombre_proveedor").keyup(function () {
+    $("#npt_venta_nombre_proveedor").css("background-color", "#dbe5f0");
+    $("#npt_venta_nombre_proveedor").val($(this).val().toUpperCase());
+  });
+
+  $("#npt_venta_costo_producto").on("blur", function () {
+    $("#npt_venta_costo_producto").css("background-color", "#dbe5f0");
+    const value = this.value.replace(/\$|\./g, "");
+    var valor_base01 = this.value;
+    //conversion del valor al formato moneda con parseFloat
+    this.value = parseFloat(value).toLocaleString("es-CO", {
+      style: "currency",
+      currency: "COP",
+      maximumFractionDigits: 0,
+      minimumFractionDigits: 0,
+    });
+    $("#npt_venta_costo_producto_base").val(valor_base01);
+  });
+
+  // validacion en el input valor venta
+
+  $("#npt_venta_valor_venta").on("blur", function () {
+    $("#npt_venta_valor_venta").css("background-color", "#dbe5f0");
+    const value = this.value.replace(/\$|\./g, "");
+    var valor_base02 = this.value;
+    //conversion del valor al formato moneda con parseFloat
+    this.value = parseFloat(value).toLocaleString("es-CO", {
+      style: "currency",
+      currency: "COP",
+      maximumFractionDigits: 0,
+      minimumFractionDigits: 0,
+    });
+    // cargar en un input oculto el valor de value
+    $("#npt_venta_valor_venta_base").val(valor_base02);
+
+    // calculo de la utilidad
+    let costo = $("#npt_venta_costo_producto_base").val();
+    let valor_venta = $("#npt_venta_valor_venta_base").val();
+    let utilidad = parseFloat(valor_venta) - parseFloat(costo);
+    $("#npt_venta_utilidad_base").val(utilidad);
+    let utilidad_formato = utilidad.toLocaleString("es-CO", {
+      style: "currency",
+      currency: "COP",
+      maximumFractionDigits: 0,
+      minimumFractionDigits: 0,
+    });
+    $("#npt_venta_utilidad").val(utilidad_formato);
+       valor_base01 = 0;
+       valor_base02 = 0;
+  });
+
+  // validacion solo deja ingresar numeros al input
+  $(document).ready(function () {
+    $("#npt_venta_costo_producto, #npt_venta_valor_venta").on(
+      "input",
+      function (evt) {
+        $(this).val(
+          $(this)
+            .val()
+            .replace(/[^0-9]/g, "")
+        );
+      }
+    );
+  });
+
+  // fin operaciones en modal Nueva Gestión
+
+  //CALCULAR UTILIDAD EN EL MODAL DE EDITAR NUEVA GESTION
+  $("#nptEdit_venta_valor_venta").focusout(function () {
+    let costo = $("#nptEdit_venta_costo_producto_base").val();
     let valor_venta = $("#nptEdit_venta_valor_venta").val();
     let utilidad =
       parseFloat(valor_venta.replace(/\$|\./g, "")) -
@@ -464,7 +494,7 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#nptEdit_venta_utilidad").val(utilidad);
   });
 
-  $("#nptEdit_venta_costo_producto").focusout(function calculoUtilidad() {
+  $("#nptEdit_venta_costo_producto").focusout(function () {
     let costo = $("#nptEdit_venta_costo_producto").val();
     let valor_venta = $("#nptEdit_venta_valor_venta").val();
     let utilidad =
@@ -472,8 +502,6 @@ document.addEventListener("DOMContentLoaded", function () {
       parseFloat(costo.replace(/\$|\./g, ""));
     $("#nptEdit_venta_utilidad").val(utilidad);
   });
-
-  // FIN OPERACIONES EN EL MODAL
 
   //-----------------------------
   //CICLO menu: mis gestiones / detalle de productos
@@ -686,32 +714,30 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#input_domi_externo_id").val($(this).val());
   });
 
-let hora_actual = moment().format('HH:mm')
+  let hora_actual = moment().format("HH:mm");
   $("#btn_hora_salida").click(function () {
     $("#input_hora_salida").val(hora_actual);
   });
 
   // Control del Sidebar
-    $("#contenido_navbar").on("click", "button.btn_open", function () {
-    document.getElementById("mySidebar").style.width = "250px";
-    document.getElementById("contenido").style.marginLeft = "250px";
+  $("#contenido_navbar").on("click", "button.btn_open", function () {
+    $("#mySidebar").width("250px");
+    $("#contenido").css({ marginLeft: "250px" });
     $("#contenido_navbar button.btn_open").hide();
-    });
+  });
 
-    $("#mySidebar").on("click", "button.btn_close", function () {
-    document.getElementById("mySidebar").style.width = "0";
-    document.getElementById("contenido").style.marginLeft = "0";
+  $("#mySidebar").on("click", "button.btn_close", function () {
+    $("#mySidebar").width("0px");
+    $("#contenido").css({ marginLeft: "0px" });
     $("#contenido_navbar button.btn_open").show();
-    });
+  });
 
- //-----------------------------
+  //-----------------------------
   //Ciclo SIDEBAR
   //-----------------------------
   $("#link_venta_acumulada").click(function () {
-    // limpiarFormulario();
     $("#mdl_venta_acumulada").modal("show");
   });
 
-// FINALIZA CICLO SIDEBAR
-
+  // FINALIZA CICLO SIDEBAR
 }); // cierre del addEventListener del inicio de pagina
