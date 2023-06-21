@@ -3,9 +3,6 @@ document.addEventListener("DOMContentLoaded", function () {
   var user_id = "";
 
   $(document).ready(function () {
-    //ajusta los modales para el select2
-    // $.fn.modal.Constructor.prototype.enforceFocus = function () {};
-
     //solucion al problema del select2 en el modal
     $("#select_en_modal").select2({
       dropdownParent: $("#mdl_domicilios"),
@@ -15,10 +12,6 @@ document.addEventListener("DOMContentLoaded", function () {
       dropdownParent: $("#mdl_domicilios"),
       width: "85%",
     });
-
-    //cargarAcceso();
-    //ejecutarDatatables();
-    //cargaPantallaPrincipal();
   });
 
   function cargarAcceso() {
@@ -39,8 +32,6 @@ document.addEventListener("DOMContentLoaded", function () {
       },
     });
   }
-
-
 
   function ejecutarDatatables() {
     // INICIA DATATABLES
@@ -100,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   //-----------------------------
-  //CICLO AGREGAR NUEVA GESTION
+  //CICLO AGREGAR GESTION
   //-----------------------------
   $("#menu_nueva_gestion, #btn_nueva_gestion").click(function () {
     limpiarFormulario();
@@ -108,24 +99,106 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   function limpiarFormulario() {
-    $("#npt-venta_id").val("");
+    $(
+      "#npt_venta_nombre_producto,#npt_venta_id, #npt_venta_nombre_producto, #npt_venta_nombre_proveedor, #npt_venta_costo_producto,#npt_venta_valor_venta,#npt_venta_utilidad"
+    ).css("background-color", "");
+
+    $("#npt_venta_id").val("");
     $("#npt_venta_nombre_producto").val("");
     $("#npt_venta_nombre_proveedor").val("");
     $("#npt_venta_costo_producto").val("");
+    $("#npt_venta_costo_producto_base").val("");
     $("#npt_venta_valor_venta").val("");
-    $("#npt-user_id").val("");
-    $("#slct_user").val("0");
+    $("#npt_venta_valor_venta_base").val("");
     $("#npt_venta_utilidad").val("");
+    $("#npt_venta_utilidad_base").val("");
+    $("#slct_vendedor").val("0");
+    $("#npt_vendedor_id").val("");
+    $("#npt_turno_id_actual").val("300");
   }
 
+  // validaciones al digitar
+  $("#npt_venta_nombre_producto").keyup(function () {
+    $("#npt_venta_nombre_producto").css("background-color", "#dbe5f0");
+    $("#npt_venta_nombre_producto").val($(this).val().toUpperCase());
+  });
+
+  $("#npt_venta_nombre_proveedor").keyup(function () {
+    $("#npt_venta_nombre_proveedor").css("background-color", "#dbe5f0");
+    $("#npt_venta_nombre_proveedor").val($(this).val().toUpperCase());
+  });
+
+  $("#npt_venta_costo_producto").on("blur", function () {
+    $("#npt_venta_costo_producto").css("background-color", "#dbe5f0");
+    const value = this.value.replace(/\$|\./g, "");
+    var valor_base01 = this.value;
+    //conversion del valor al formato moneda con parseFloat
+    this.value = parseFloat(value).toLocaleString("es-CO", {
+      style: "currency",
+      currency: "COP",
+      maximumFractionDigits: 0,
+      minimumFractionDigits: 0,
+    });
+    $("#npt_venta_costo_producto_base").val(valor_base01);
+  });
+
+  // validacion en el input valor venta
+
+  $("#npt_venta_valor_venta").on("blur", function () {
+    $("#npt_venta_valor_venta").css("background-color", "#dbe5f0");
+    const value = this.value.replace(/\$|\./g, "");
+    var valor_base02 = this.value;
+    //conversion del valor al formato moneda con parseFloat
+    this.value = parseFloat(value).toLocaleString("es-CO", {
+      style: "currency",
+      currency: "COP",
+      maximumFractionDigits: 0,
+      minimumFractionDigits: 0,
+    });
+    // cargar en un input oculto el valor de value
+    $("#npt_venta_valor_venta_base").val(valor_base02);
+
+    // calculo de la utilidad
+    let costo = $("#npt_venta_costo_producto_base").val();
+    let valor_venta = $("#npt_venta_valor_venta_base").val();
+    let utilidad = parseFloat(valor_venta) - parseFloat(costo);
+    $("#npt_venta_utilidad_base").val(utilidad);
+    let utilidad_formato = utilidad.toLocaleString("es-CO", {
+      style: "currency",
+      currency: "COP",
+      maximumFractionDigits: 0,
+      minimumFractionDigits: 0,
+    });
+    $("#npt_venta_utilidad").val(utilidad_formato);
+    valor_base01 = 0;
+    valor_base02 = 0;
+  });
+
+  // validacion solo deja ingresar numeros al input
+  $(document).ready(function () {
+    $("#npt_venta_costo_producto, #npt_venta_valor_venta").on(
+      "input",
+      function (evt) {
+        $(this).val(
+          $(this)
+            .val()
+            .replace(/[^0-9]/g, "")
+        );
+      }
+    );
+  });
+
+  // fin operaciones en modal Nueva Gestión
+
+  // confirma agregar gestion
   $("#btn_confirm_add").click(function () {
     //VALIDACION DE DATOS DEL MODAL NUEVO
     let valida_nombre_producto = $("#npt_venta_nombre_producto").val();
     let valida_nombre_proveedor = $("#npt_venta_nombre_proveedor").val();
-    let valida_venta_costo_producto = $("#npt_venta_costo_producto").val();
-    let valida_venta_valor_venta = $("#npt_venta_valor_venta").val();
-    let valida_user_id = $("#npt-user_id").val();
-    let valida_venta_utilidad = $("#npt_venta_utilidad").val();
+    let valida_venta_costo_producto = $("#npt_venta_costo_producto_base").val();
+    let valida_venta_valor_venta = $("#npt_venta_valor_venta_base").val();
+    let valida_vendedor_id = $("#npt_vendedor_id").val();
+    let valida_venta_utilidad = $("#npt_venta_utilidad_base").val();
     // compara datos de variables contra vacio y muestra un alert
     if (valida_nombre_producto.trim() == "") {
       alert("revisar nombre producto.");
@@ -143,9 +216,9 @@ document.addEventListener("DOMContentLoaded", function () {
       alert("Revisar valor venta");
       $("#npt_venta_valor_venta").focus();
       return false;
-    } else if (valida_user_id.trim() == "0") {
+    } else if (valida_vendedor_id.trim() == "") {
       alert("elija vendedor");
-      $("#slct_user").focus();
+      $("#slct_vendedor").focus();
       return false;
     } else if (valida_venta_utilidad.trim() == "") {
       alert("Revisar utilidad");
@@ -156,20 +229,18 @@ document.addEventListener("DOMContentLoaded", function () {
       $("#mdl_ventas").modal("hide");
       let registro = recolectarDatosFormularioNuevo();
       guardarRegistro(registro);
-      cargaPantallaPrincipal();
+      // cargaPantallaPrincipal();
     }
   });
 
   function recolectarDatosFormularioNuevo() {
     let registro = {
-      venta_id: $("#npt-venta_id").val(),
       venta_nombre_producto: $("#npt_venta_nombre_producto").val(),
       venta_nombre_proveedor: $("#npt_venta_nombre_proveedor").val(),
-      venta_costo_producto: $("#npt_venta_costo_producto").val(),
-      venta_valor_venta: $("#npt_venta_valor_venta").val(),
-      user_nombre: $("#npt-user_nombre").val(),
-      user_id: $("#npt-user_id").val(),
-      venta_utilidad: $("#npt_venta_utilidad").val(),
+      venta_costo_producto: $("#npt_venta_costo_producto_base").val(),
+      venta_valor_venta: $("#npt_venta_valor_venta_base").val(),
+      venta_utilidad: $("#npt_venta_utilidad_base").val(),
+      vendedor_id: $("#npt_vendedor_id").val(),
       turno_id_actual: $("#npt_turno_id_actual").val(),
     };
     return registro;
@@ -180,17 +251,20 @@ document.addEventListener("DOMContentLoaded", function () {
       type: "POST",
       url: "venta_home_mdl.php?accion=guardar_venta",
       data: registro,
-      success: function (msg) {
-        // listadoVentas.ajax.reload();
-        $("#tblVentas").DataTable().ajax.reload();
-        cargaPantallaPrincipal();
-      },
+
+      // success: function (msg) {
+      //   // listadoVentas.ajax.reload();
+      //   $("#tblVentas").DataTable().ajax.reload();
+      //   cargaPantallaPrincipal();
+      // },
+
       error: function () {
         alert("problema en: guardarRegistro");
       },
     });
   }
-  // FIN CICLO AGREGAR NUEVA gestion 
+
+  // FIN CICLO AGREGAR NUEVA gestion
 
   //----------------------
   //CICLO EDITAR REGISTRO
@@ -302,7 +376,7 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#npt_turno_descuadre").val("");
   }
 
-  //CALCULAR UTILIDAD EN EL MODAL
+  //CALCULO UTILIDAD
   $("#npt_turno_saldo_caja").focusout(function () {
     $.ajax({
       type: "GET",
@@ -405,84 +479,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
   // FIN CICLO FINALIZAR CERRAR
-
-  //-------------------------------------
-  // OPERACIONES EN MODAL NUEVA GESTION
-  //-------------------------------------
-
-  // VALIDACIONES EN EL MODAL NUEVA GESTION
-
-  $("#npt_venta_nombre_producto").keyup(function () {
-    $("#npt_venta_nombre_producto").css("background-color", "#dbe5f0");
-    $("#npt_venta_nombre_producto").val($(this).val().toUpperCase());
-  });
-
-  $("#npt_venta_nombre_proveedor").keyup(function () {
-    $("#npt_venta_nombre_proveedor").css("background-color", "#dbe5f0");
-    $("#npt_venta_nombre_proveedor").val($(this).val().toUpperCase());
-  });
-
-  $("#npt_venta_costo_producto").on("blur", function () {
-    $("#npt_venta_costo_producto").css("background-color", "#dbe5f0");
-    const value = this.value.replace(/\$|\./g, "");
-    var valor_base01 = this.value;
-    //conversion del valor al formato moneda con parseFloat
-    this.value = parseFloat(value).toLocaleString("es-CO", {
-      style: "currency",
-      currency: "COP",
-      maximumFractionDigits: 0,
-      minimumFractionDigits: 0,
-    });
-    $("#npt_venta_costo_producto_base").val(valor_base01);
-  });
-
-  // validacion en el input valor venta
-
-  $("#npt_venta_valor_venta").on("blur", function () {
-    $("#npt_venta_valor_venta").css("background-color", "#dbe5f0");
-    const value = this.value.replace(/\$|\./g, "");
-    var valor_base02 = this.value;
-    //conversion del valor al formato moneda con parseFloat
-    this.value = parseFloat(value).toLocaleString("es-CO", {
-      style: "currency",
-      currency: "COP",
-      maximumFractionDigits: 0,
-      minimumFractionDigits: 0,
-    });
-    // cargar en un input oculto el valor de value
-    $("#npt_venta_valor_venta_base").val(valor_base02);
-
-    // calculo de la utilidad
-    let costo = $("#npt_venta_costo_producto_base").val();
-    let valor_venta = $("#npt_venta_valor_venta_base").val();
-    let utilidad = parseFloat(valor_venta) - parseFloat(costo);
-    $("#npt_venta_utilidad_base").val(utilidad);
-    let utilidad_formato = utilidad.toLocaleString("es-CO", {
-      style: "currency",
-      currency: "COP",
-      maximumFractionDigits: 0,
-      minimumFractionDigits: 0,
-    });
-    $("#npt_venta_utilidad").val(utilidad_formato);
-       valor_base01 = 0;
-       valor_base02 = 0;
-  });
-
-  // validacion solo deja ingresar numeros al input
-  $(document).ready(function () {
-    $("#npt_venta_costo_producto, #npt_venta_valor_venta").on(
-      "input",
-      function (evt) {
-        $(this).val(
-          $(this)
-            .val()
-            .replace(/[^0-9]/g, "")
-        );
-      }
-    );
-  });
-
-  // fin operaciones en modal Nueva Gestión
 
   //CALCULAR UTILIDAD EN EL MODAL DE EDITAR NUEVA GESTION
   $("#nptEdit_venta_valor_venta").focusout(function () {
@@ -636,34 +632,30 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // CARGA LA FECHA ACTUAL y CUADRO PRINCIPAL DE PAGINA
-  function getTime() {
-    var today = moment();
+  // function getTime() {
+  //   var today = moment();
 
-    time = today.format("LT");
-    //date = today.format('dddd, MMMM, YYYY');
-    date = today.format("LL");
-    document.getElementById("hoy_moment").innerHTML =
-      `<br>` +
-      `<h1 class='large'>${time}</h1>` +
-      `<span class='dark'>${date}</span>`;
-  }
-  setInterval(function () {
-    getTime();
-  }, 1000);
+  //   time = today.format("LT");
+  //   //date = today.format('dddd, MMMM, YYYY');
+  //   date = today.format("LL");
+  //   document.getElementById("hoy_moment").innerHTML =
+  //     `<br>` +
+  //     `<h1 class='large'>${time}</h1>` +
+  //     `<span class='dark'>${date}</span>`;
+  // }
+  // setInterval(function () {
+  //   getTime();
+  // }, 1000);
 
-  function mesActual() {
-    let mes_actual = moment().format("MMMM-YYYY");
-    $("#mes_actual1").html(mes_actual);
-  }
+  // function mesActual() {
+  //   let mes_actual = moment().format("MMMM-YYYY");
+  //   $("#mes_actual1").html(mes_actual);
+  // }
 
   //-----------------------------
-  //ciclo agregar nuevo domicilio
+  //CICLO AGREGAR DOMICILIO
   //-----------------------------
-  $("#menu_nuevo_domicilio").click(function () {
-    limpiarFormulario();
-    $("#mdl_domicilios").modal("show");
-  });
-  $("#btn_nuevo_domicilio").click(function () {
+  $("#menu_nuevo_domicilio, #btn_nuevo_domicilio").click(function () {
     limpiarFormulario();
     $("#mdl_domicilios").modal("show");
   });
@@ -678,6 +670,10 @@ document.addEventListener("DOMContentLoaded", function () {
       },
     });
   });
+  // asigna valor select barrio al input
+  $("#select_barrio").change(function () {
+    $("#npt_barrio_id").val($(this).val());
+  });
 
   //Carga el select de transportador.
   $(document).ready(function () {
@@ -688,6 +684,10 @@ document.addEventListener("DOMContentLoaded", function () {
         $(".selectTransportador select").html(response).fadeIn();
       },
     });
+  });
+  // asigna valor del select transportador al input
+  $("#slct_transportador").change(function () {
+    $("#npt_transportador_id").val($(this).val());
   });
 
   //carga el select domi externo
@@ -700,20 +700,27 @@ document.addEventListener("DOMContentLoaded", function () {
       },
     });
   });
-  // asigna valor del select transportador al input
-  $("#slct_transportador").change(function () {
-    $("#npt_transportador_id").val($(this).val());
-  });
-
-  // asigna valor select barrio al input
-  $("#select_barrio").change(function () {
-    $("#npt_barrio_id").val($(this).val());
-  });
   // asigna valor select domi externo al input
   $("#slct_domi_externo").change(function () {
     $("#input_domi_externo_id").val($(this).val());
   });
 
+  //carga el select vendedores
+  $(document).ready(function () {
+    $.ajax({
+      type: "POST",
+      url: "select_vendedor_mdl.php",
+      success: function (response) {
+        $(".selectVendedor select").html(response).fadeIn();
+      },
+    });
+  });
+  // asigna valor select domi externo al input
+  $("#slct_vendedor").change(function () {
+    $("#npt_vendedor_id").val($(this).val());
+  });
+
+  // muestra hora actual
   let hora_actual = moment().format("HH:mm");
   $("#btn_hora_salida").click(function () {
     $("#input_hora_salida").val(hora_actual);

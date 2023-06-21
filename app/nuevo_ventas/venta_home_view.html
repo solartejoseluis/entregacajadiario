@@ -39,6 +39,11 @@
     <!-- INICIO SIDEBAR BOOTSTRAP -->
 
     <div id="mySidebar" class="sidebar">
+      <input 
+      type="hidden"
+      class="form-control"
+      id="npt_turno_id_actual">
+
       <button class="btn_close">x</button>
       <main class="d-flex flex-nowrap">
         <div
@@ -304,7 +309,7 @@
         </section>
       </div>
     </div>
-    <!-- final seccion domicilios -->
+    <!-- final seccion contenido -->
     <!-- -------------------------->
     <!-- Inicia Modal Nueva Gestión-->
     <!-- ------------------------->
@@ -318,18 +323,12 @@
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5">NUEVA GESTION</h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
           </div>
           <div class="modal-body">
             <form id="frm_nueva_venta">
               <!-- VENTAS_ID -->
               <div class="row">
-                <input type="hidden" class="form-control" id="npt-venta_id" />
+                <input type="hidden" class="form-control" id="npt_venta_id" />
               </div>
               <!-- PRODUCTO -->
               <div class="col-md-9 input-group input-group-sm mb-2">
@@ -400,6 +399,11 @@
                   >Utilidad</span
                 >
                 <input
+                  type="hidden"
+                  class="form-control"
+                  id="npt_venta_utilidad_base"
+                />
+                <input
                   type="text"
                   class="form-control"
                   id="npt_venta_utilidad"
@@ -407,15 +411,15 @@
                 />
               </div>
               <!--   VENDEDOR -->
-              <div class="selectUser col-md-9 input-group input-group-sm mb-2">
+              <div class="selectVendedor col-md-9 input-group input-group-sm mb-2">
                 <span class="input-group-text" id="inputGroup-sizing-sm"
                   >Vendedor:</span
                 >
                 <select
                   class="form-select form-select-sm"
-                  id="slct_user"
+                  id="slct_vendedor"
                 ></select>
-                <input type="hidden" class="form-control" id="npt_user_id" />
+                <input type="hidden" class="form-control" id="npt_vendedor_id" />
               </div>
 
             </form>

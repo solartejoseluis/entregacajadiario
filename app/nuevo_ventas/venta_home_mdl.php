@@ -52,16 +52,16 @@ switch ($_GET['accion']) {
         venta_nombre_proveedor,
         venta_costo_producto,
         venta_valor_venta,
-        user_id,
         venta_utilidad,
+        user_id,
         turno_id
       )VALUES (
         '$_POST[venta_nombre_producto]',
         '$_POST[venta_nombre_proveedor]',
         $_POST[venta_costo_producto],
         $_POST[venta_valor_venta],
-        $_POST[user_id],
         $_POST[venta_utilidad],
+        $_POST[vendedor_id],
         $_POST[turno_id_actual]
     )";
         $response = $pdo->exec($sql);
