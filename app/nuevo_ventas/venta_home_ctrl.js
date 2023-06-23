@@ -2,18 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
   var turno_id = "";
   var user_id = "";
 
-  $(document).ready(function () {
-    //solucion al problema del select2 en el modal
-    $("#select_en_modal").select2({
-      dropdownParent: $("#mdl_domicilios"),
-    });
-    //solucion al problemal del select2 en el modal
-    $("#slct_barrio").select2({
-      dropdownParent: $("#mdl_domicilios"),
-      width: "85%",
-    });
-  });
-
   function cargarAcceso() {
     $.ajax({
       type: "POST",
@@ -94,11 +82,11 @@ document.addEventListener("DOMContentLoaded", function () {
   //CICLO AGREGAR GESTION
   //-----------------------------
   $("#menu_nueva_gestion, #btn_nueva_gestion").click(function () {
-    limpiarFormulario();
+    limpiarModalGestiones();
     $("#mdl_ventas").modal("show");
   });
 
-  function limpiarFormulario() {
+  function limpiarModalGestiones() {
     $(
       "#npt_venta_nombre_producto,#npt_venta_id, #npt_venta_nombre_producto, #npt_venta_nombre_proveedor, #npt_venta_costo_producto,#npt_venta_valor_venta,#npt_venta_utilidad"
     ).css("background-color", "");
@@ -341,7 +329,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   // FIN CICLO EDITAR REGISTRO
 
+  //----------------------
   // CICLO BORRAR REGISTRO
+  //----------------------
   function borrarRegistro(venta_id) {
     // BORRA REGISTRO Y ACTUALIZA DATATABLES
     $.ajax({
@@ -376,7 +366,9 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#npt_turno_descuadre").val("");
   }
 
+  //----------------------
   //CALCULO UTILIDAD
+  //----------------------
   $("#npt_turno_saldo_caja").focusout(function () {
     $.ajax({
       type: "GET",
@@ -480,7 +472,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   // FIN CICLO FINALIZAR CERRAR
 
-  //CALCULAR UTILIDAD EN EL MODAL DE EDITAR NUEVA GESTION
+  //CalculaUtilidad Modal EDITAR GESTION
   $("#nptEdit_venta_valor_venta").focusout(function () {
     let costo = $("#nptEdit_venta_costo_producto_base").val();
     let valor_venta = $("#nptEdit_venta_valor_venta").val();
@@ -511,7 +503,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   function ejecutar_datatables_mes_vendedor() {
-    // INICIA DATATABLES
+     // Datatables Mes/Vendedor
     var listado_gestiones_mes_vendedor = $(
       "#tbl_gestiones_mes_vendedor"
     ).DataTable({
@@ -542,7 +534,7 @@ document.addEventListener("DOMContentLoaded", function () {
       paging: false,
       destroy: true,
     });
-    // FIN DATATABLES DEL MODAL
+    // fin datatables mes/vendedor
   }
 
   //-----------------------------
@@ -554,7 +546,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   function ejecutar_datatables_gestiones_agrupadas_por_dia() {
-    // INICIA DATATABLES
+    // datatables gestiones/dia
     var listado_gestiones_agrupadas_por_dia = $(
       "#tbl_gestiones_agrupadas_por_dia"
     ).DataTable({
@@ -581,7 +573,7 @@ document.addEventListener("DOMContentLoaded", function () {
       paging: false,
       destroy: true,
     });
-    // FIN DATATABLES DEL MODAL
+    // fin datatables gestiones dia
   }
 
   //-----------------------------
@@ -596,7 +588,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   function ejecutar_datatables_mes_todos() {
-    // INICIA DATATABLES
+    // datatables mes/todos
     var listado_gestiones_mes_vendedor = $(
       "#tbl_gestiones_mes_todos"
     ).DataTable({
@@ -628,7 +620,7 @@ document.addEventListener("DOMContentLoaded", function () {
       paging: false,
       destroy: true,
     });
-    // FIN DATATABLES DEL MODAL
+    // fin datatables mes todos
   }
 
   // CARGA LA FECHA ACTUAL y CUADRO PRINCIPAL DE PAGINA
@@ -656,12 +648,104 @@ document.addEventListener("DOMContentLoaded", function () {
   //CICLO AGREGAR DOMICILIO
   //-----------------------------
   $("#menu_nuevo_domicilio, #btn_nuevo_domicilio").click(function () {
-    limpiarFormulario();
+    limpiarModalDomicilios();
+    $("#btn_domi_interno").show();
+    $("#btn_domi_interno").removeClass("btn-secondary");
+    $("#btn_domi_interno").addClass("btn-primary");
+    $("#btn_domi_externo").show();
+    $("#btn_domi_externo").removeClass("btn-secondary");
+    $("#btn_domi_externo").addClass("btn-primary");
+    $("#bloque_transportador").hide();
+    $("#bloque_domi_externo, #bloque_valor_domi_externo").hide();
     $("#mdl_domicilios").modal("show");
+  });
+
+  function limpiarModalDomicilios() {
+    //  $(
+    //     "#npt_venta_nombre_producto,#npt_venta_id, #npt_venta_nombre_producto, #npt_venta_nombre_proveedor, #npt_venta_costo_producto,#npt_venta_valor_venta,#npt_venta_utilidad"
+    //   ).css("background-color", "");
+    $("#slct_barrio").select2("val", "0");  //select
+    $("#npt_barrio_id").val("");
+    $("#npt_factura").val("");
+    $("#slct_domi_externo").val("0"); //select
+    $("#npt_domi_externo_id").val("");
+    $("#npt_valor_domi_externo").val("");
+    $("#slct_transportador").val("0"); //select
+    $("#npt_transportador_id").val("");
+    $("#npt_valor_producto").val("");
+    $("#npt_hora_salida").val("");
+    $("#check_inyectologia[type='checkbox']").prop({ checked: false });
+    $("#npt_observaciones").val("");
+  }
+
+  // validaciones al digitar
+
+  // validacion solo deja ingresar numeros al input
+  $(document).ready(function () {
+    $("#npt_factura, #npt_valor_domi_externo, #npt_valor_producto").on(
+      "input",
+      function (evt) {
+        $(this).val(
+          $(this)
+            .val()
+            .replace(/[^0-9]/g, "")
+        );
+      }
+    );
+  });
+
+  $("#npt_factura").on("blur",function () {
+    $("#npt_factura").css("background-color", "#dbe5f0");
+  });
+
+  $("#npt_valor_producto").on("blur", function () {
+    $("#npt_valor_producto").css("background-color", "#dbe5f0");
+    const value = this.value.replace(/\$|\./g, "");
+    if (value === "") {
+      // validacion para evitar que se muestre NaN en el input al quitar foco
+      return false;
+    } else {
+      //Las validaciones que necesitas hacer
+      let valor_base = this.value;
+      //conversion del valor al formato moneda con parseFloat
+      this.value = parseFloat(value).toLocaleString("es-CO", {
+        style: "currency",
+        currency: "COP",
+        maximumFractionDigits: 0,
+        minimumFractionDigits: 0,
+      });
+      $("#npt_valor_producto_base").val(valor_base);
+    }
+  });
+
+  $("#npt_valor_domi_externo").on("blur", function () {
+    $("#npt_valor_domi_externo").css("background-color", "#dbe5f0");
+    const value = this.value.replace(/\$|\./g, "");
+    if (value === "") {
+      // validacion para evitar que se muestre NaN en el input al quitar foco
+      return false;
+    } else {
+      //Las validaciones que necesitas hacer
+      let valor_base = this.value;
+      //conversion del valor al formato moneda con parseFloat
+      this.value = parseFloat(value).toLocaleString("es-CO", {
+        style: "currency",
+        currency: "COP",
+        maximumFractionDigits: 0,
+        minimumFractionDigits: 0,
+      });
+      $("#npt_valor_domi_externo_base").val(valor_base);
+    }
   });
 
   //Carga el select de barrios.
   $(document).ready(function () {
+    //activa el Select2 en el modal
+    $("#slct_barrio").select2({
+      dropdownParent: $("#mdl_domicilios"),
+      width: "85%",
+    });
+    // carga de los datos
     $.ajax({
       type: "POST",
       url: "select_barrio_mdl.php",
@@ -671,7 +755,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
   // asigna valor select barrio al input
-  $("#select_barrio").change(function () {
+  $("#slct_barrio").change(function () {
     $("#npt_barrio_id").val($(this).val());
   });
 
@@ -720,13 +804,33 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#npt_vendedor_id").val($(this).val());
   });
 
-  // muestra hora actual
-  let hora_actual = moment().format("HH:mm");
-  $("#btn_hora_salida").click(function () {
-    $("#input_hora_salida").val(hora_actual);
+  // boton domi interno
+  $("#btn_domi_interno").click(function () {
+    $("#btn_domi_interno").removeClass("btn-primary");
+    $("#btn_domi_interno").addClass("btn-secondary");
+    $("#btn_domi_externo").hide();
+    $("#bloque_domi_externo, #bloque_valor_domi_externo").hide();
+    $("#bloque_transportador").show();
+  });
+  // boton domi externo
+  $("#btn_domi_externo").click(function () {
+    $("#btn_domi_externo").removeClass("btn-primary");
+    $("#btn_domi_externo").addClass("btn-secondary");
+    $("#btn_domi_interno").hide();
+    $("#bloque_transportador").hide();
+    $("#bloque_domi_externo, #bloque_valor_domi_externo").show();
   });
 
-  // Control del Sidebar
+  // rellena hora salida
+  $("#btn_hora_salida").on("click", function () {
+    let hora_actual = moment().format("HH:mm");
+    $("#npt_hora_salida").val(hora_actual);
+  });
+// fin ciclo agregar domicilio
+  
+//----------------------
+  // CONTROL  SIDEBAR
+  //----------------------
   $("#contenido_navbar").on("click", "button.btn_open", function () {
     $("#mySidebar").width("250px");
     $("#contenido").css({ marginLeft: "250px" });
@@ -739,12 +843,9 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#contenido_navbar button.btn_open").show();
   });
 
-  //-----------------------------
-  //Ciclo SIDEBAR
-  //-----------------------------
   $("#link_venta_acumulada").click(function () {
     $("#mdl_venta_acumulada").modal("show");
   });
+  // fin control sidebar
 
-  // FINALIZA CICLO SIDEBAR
 }); // cierre del addEventListener del inicio de pagina

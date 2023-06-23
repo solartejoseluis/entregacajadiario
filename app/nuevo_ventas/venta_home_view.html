@@ -37,12 +37,8 @@
 
   <body>
     <!-- INICIO SIDEBAR BOOTSTRAP -->
-
     <div id="mySidebar" class="sidebar">
-      <input 
-      type="hidden"
-      class="form-control"
-      id="npt_turno_id_actual">
+      <input type="hidden" class="form-control" id="npt_turno_id_actual" />
 
       <button class="btn_close">x</button>
       <main class="d-flex flex-nowrap">
@@ -311,7 +307,7 @@
     </div>
     <!-- final seccion contenido -->
     <!-- -------------------------->
-    <!-- Inicia Modal Nueva Gestión-->
+    <!-- MODAL NUEVA GESTIÓN-->
     <!-- ------------------------->
     <div
       class="modal fade"
@@ -371,7 +367,6 @@
                   class="form-control"
                   id="npt_venta_costo_producto"
                   placeholder="Digita Costo"
-                  onkeypress="return valideKey(evt);"
                 />
               </div>
 
@@ -411,7 +406,9 @@
                 />
               </div>
               <!--   VENDEDOR -->
-              <div class="selectVendedor col-md-9 input-group input-group-sm mb-2">
+              <div
+                class="selectVendedor col-md-9 input-group input-group-sm mb-2"
+              >
                 <span class="input-group-text" id="inputGroup-sizing-sm"
                   >Vendedor:</span
                 >
@@ -419,12 +416,13 @@
                   class="form-select form-select-sm"
                   id="slct_vendedor"
                 ></select>
-                <input type="hidden" class="form-control" id="npt_vendedor_id" />
+                <input
+                  type="hidden"
+                  class="form-control"
+                  id="npt_vendedor_id"
+                />
               </div>
-
             </form>
-
-          
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary" id="btn_confirm_add">
@@ -444,7 +442,7 @@
     <!-- Final Modal Nueva Gestion -->
 
     <!-- ---------------------------------- -->
-    <!-- Inicia Modal Editar Gestion-->
+    <!-- MODAL EDITAR GESTION-->
     <!-- ---------------------------------- -->
     <div
       class="modal fade"
@@ -602,7 +600,7 @@
     </div>
     <!--  fin modal Editar Gestión -->
     <!-- ---------------------------------- -->
-    <!-- INICIA MODAL CERRAR TURNO-->
+    <!-- MODAL CERRAR TURNO-->
     <!-- ---------------------------------- -->
     <div
       class="modal fade"
@@ -712,7 +710,7 @@
     <!-- FIN MODAL CERRAR TURNO -->
 
     <!-- ------------------------------- -->
-    <!-- INICIA MODAL CERRAR FINAL-->
+    <!-- MODAL CERRAR FINAL-->
     <!-- ------------------------------- -->
     <div
       class="modal fade"
@@ -827,7 +825,7 @@
     </div>
     <!-- FINALIZA MODAL CERRAR FINAL -->
     <!-- -------------------------->
-    <!-- INICIA MODAL Mis gestiones/Detalle de productos...-->
+    <!-- MODAL MIS GESTIONES/DETALLE DE PRODUCTOS-->
     <!-- ------------------------->
     <div class="modal fade" tabindex="1" id="mdl_gestiones_mes_vendedor">
       <div class="modal-dialog modal-xl modal-dialog modal-dialog-scrollable">
@@ -875,7 +873,7 @@
     </div>
     <!-- FIN MODAL mis gestiones / detalle de productos -->
     <!-- -------------------------->
-    <!-- INICIA MODAL Mis gestiones/Agrupadas por dia...-->
+    <!-- MODAL MIS GESTIONES/AGRUPADAS POR DIA-->
     <!-- ------------------------->
     <div class="modal fade" tabindex="1" id="mdl_gestiones_agrupadas_por_dia">
       <div class="modal-dialog modal-xl modal-dialog modal-dialog-scrollable">
@@ -919,7 +917,7 @@
     <!-- FIN MODAL mis gestiones / detalle de productos -->
 
     <!-- -------------------------->
-    <!-- INICIA MODAL productos/gestiones del mes...-->
+    <!-- MODAL PRODUCTOS/GESTIONES DEL MES-->
     <!-- ------------------------->
     <div class="modal fade" tabindex="1" id="mdl_gestiones_mes_todos">
       <div class="modal-dialog modal-xl modal-dialog modal-fullscreen">
@@ -969,7 +967,7 @@
     <!-- final modal productos/gestiones del mes -->
 
     <!-- -------------------------->
-    <!-- Inicia modal Nuevo domicilio-->
+    <!-- MODAL NUEVO DOMICILIO-->
     <!-- ------------------------->
     <div
       class="modal fade"
@@ -983,12 +981,6 @@
             <h1 class="modal-title fs-5">
               NUEVO DOMICILIO <span id="fecha_hoy"> 5 DE MAYO 2023</span>
             </h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
           </div>
           <div class="modal-body">
             <form id="frm_nuevo_domicilio">
@@ -999,8 +991,6 @@
                   id="npt_domicilio_id"
                 />
               </div>
-
-              <!-- <div class="col-md-6 mb-3"></div> -->
 
               <div
                 class="selectBarrio col-md-9 input-group input-group-sm mb-2"
@@ -1015,7 +1005,7 @@
                 <input
                   type="hidden"
                   class="form-control"
-                  id="input_barrio_id"
+                  id="npt_barrio_id"
                 />
               </div>
 
@@ -1026,79 +1016,32 @@
                 <input
                   type="text"
                   class="form-control"
-                  id="npt_venta_costo_producto"
+                  id="npt_factura"
                   placeholder="Número de Factura"
                 />
               </div>
 
-              <div
-                class="selectTransportador col-md-9 input-group input-group-sm mb-2"
-              >
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Asignado a:</span
-                >
-                <select class="form-select" id="slct_trasportador"></select>
-                <input
-                  type="hidden"
-                  class="form-control"
-                  id="npt_transportador_id"
-                />
-              </div>
 
-              <div class="col-md-9 input-group input-group-sm mb-2">
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Valor:</span
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="npt_venta_costo_producto"
-                  placeholder="valor de la venta"
-                />
-              </div>
-
-              <div class="input-group input-group input-group-sm mb-2">
+              <div class="mb-2">
                 <button
-                  class="btn btn-outline-primary"
                   type="button"
-                  id="btn_hora_salida"
+                  class="btn btn-primary btn-sm"
+                  id="btn_domi_interno"
                 >
-                  H.Salida
+                  Domi Interno
                 </button>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="hora de salida"
-                  id="input_hora_salida"
-                />
-              </div>
-
-              <div class="form-check form-switch mb-2">
-                <label class="form-check-label" for="flexSwitchCheckDefault"
-                  >inyectologia</label
+                <button
+                  type="button"
+                  class="btn btn-primary btn-sm"
+                  id="btn_domi_externo"
                 >
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  role="switch"
-                  id="flexSwitchCheckDefault"
-                />
-              </div>
-
-              <div class="form-check form-switch mb-2">
-                <label class="form-check-label" for="flexSwitchCheckDefault"
-                  >Domi-Externo</label
-                >
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  role="switch"
-                  id="flexSwitchCheckDefault"
-                />
+                  Domi Externo
+                </button>
               </div>
 
               <div
                 class="selectDomiExterno col-md-9 input-group input-group-sm mb-2"
+                id="bloque_domi_externo"
               >
                 <span class="input-group-text" id="inputGroup-sizing-sm"
                   >D_externo:</span
@@ -1111,15 +1054,85 @@
                 />
               </div>
 
-              <div class="col-md-9 input-group input-group-sm mb-2">
+              <div
+                class="col-md-9 input-group input-group-sm mb-2"
+                id="bloque_valor_domi_externo"
+              >
                 <span class="input-group-text" id="inputGroup-sizing-sm"
                   >Valor Domi Ext:</span
                 >
                 <input
                   type="text"
                   class="form-control"
-                  id="npt_venta_costo_producto"
+                  id="npt_valor_domi_externo"
                   placeholder="valor domi externo"
+                />
+                <input
+                  type="hidden"
+                  class="form-control"
+                  id="npt_valor_domi_externo_base"
+                />
+              </div>
+
+              <div
+                class="selectTransportador col-md-9 input-group input-group-sm mb-2"
+                id="bloque_transportador"
+              >
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >Asignado a:</span
+                >
+                <select class="form-select" id="slct_transportador"></select>
+                <input
+                  type="hidden"
+                  class="form-control"
+                  id="npt_transportador_id"
+                />
+              </div>
+
+              <div class="col-md-9 input-group input-group-sm mb-2">
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >Valor Venta:</span
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="npt_valor_producto"
+                  placeholder="valor de la venta"
+                />
+                <input
+                  type="hidden"
+                  class="form-control"
+                  id="npt_valor_producto_base"
+                />
+              </div>
+
+              <div class="input-group input-group input-group-sm mb-2">
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                  id="btn_hora_salida"
+                >
+                  H.Salida
+                </button>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="hora de salida"
+                  id="npt_hora_salida"
+                  disabled
+                />
+              </div>
+
+              <div class="form-check form-switch mb-2">
+                <label class="form-check-label" for="check_inyectologia"
+                  >Inyectologia</label
+                >
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  role="switch"
+                  value="1"
+                  id="check_inyectologia"
                 />
               </div>
 
@@ -1130,7 +1143,7 @@
                 <input
                   type="text"
                   class="form-control"
-                  id="npt_venta_costo_producto"
+                  id="npt_observaciones"
                   placeholder="observaciones"
                 />
               </div>
@@ -1156,7 +1169,7 @@
     <!-- final modal nuevo domicilio -->
 
     <!-- -------------------------->
-    <!-- Inicia Modal Venta Acumulada-->
+    <!-- MODAL VENTA ACUMULADA-->
     <!-- ------------------------->
     <div
       class="modal fade"
