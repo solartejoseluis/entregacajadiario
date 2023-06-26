@@ -215,13 +215,13 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       //ejecutar Si todo fue validado
       $("#mdl_ventas").modal("hide");
-      let registro = recolectarDatosFormularioNuevo();
+      let registro = recolectaDatosMdlNuevaGestion();
       guardarRegistro(registro);
       // cargaPantallaPrincipal();
     }
   });
 
-  function recolectarDatosFormularioNuevo() {
+  function recolectaDatosMdlNuevaGestion() {
     let registro = {
       venta_nombre_producto: $("#npt_venta_nombre_producto").val(),
       venta_nombre_proveedor: $("#npt_venta_nombre_proveedor").val(),
@@ -503,7 +503,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   function ejecutar_datatables_mes_vendedor() {
-     // Datatables Mes/Vendedor
+    // Datatables Mes/Vendedor
     var listado_gestiones_mes_vendedor = $(
       "#tbl_gestiones_mes_vendedor"
     ).DataTable({
@@ -661,21 +661,24 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   function limpiarModalDomicilios() {
-    //  $(
-    //     "#npt_venta_nombre_producto,#npt_venta_id, #npt_venta_nombre_producto, #npt_venta_nombre_proveedor, #npt_venta_costo_producto,#npt_venta_valor_venta,#npt_venta_utilidad"
-    //   ).css("background-color", "");
-    $("#slct_barrio").select2("val", "0");  //select
+    $(
+      "#npt_factura,#npt_valor_domi_externo,#npt_valor_producto,#npt_hora_salida,#npt_observaciones"
+    ).css("background-color", "");
+    $("#slct_barrio").select2("val", "0"); //select
     $("#npt_barrio_id").val("");
     $("#npt_factura").val("");
     $("#slct_domi_externo").val("0"); //select
     $("#npt_domi_externo_id").val("");
+    $("#npt_btn_domi_interno").val("0");
     $("#npt_valor_domi_externo").val("");
+    $("#npt_btn_domi_externo").val("0");
     $("#slct_transportador").val("0"); //select
     $("#npt_transportador_id").val("");
     $("#npt_valor_producto").val("");
     $("#npt_hora_salida").val("");
     $("#check_inyectologia[type='checkbox']").prop({ checked: false });
     $("#npt_observaciones").val("");
+    $("#npt_confirm_btn").val("");
   }
 
   // validaciones al digitar
@@ -694,7 +697,7 @@ document.addEventListener("DOMContentLoaded", function () {
     );
   });
 
-  $("#npt_factura").on("blur",function () {
+  $("#npt_factura").on("blur", function () {
     $("#npt_factura").css("background-color", "#dbe5f0");
   });
 
@@ -786,7 +789,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   // asigna valor select domi externo al input
   $("#slct_domi_externo").change(function () {
-    $("#input_domi_externo_id").val($(this).val());
+    $("#npt_domi_externo_id").val($(this).val());
   });
 
   //carga el select vendedores
@@ -799,7 +802,7 @@ document.addEventListener("DOMContentLoaded", function () {
       },
     });
   });
-  // asigna valor select domi externo al input
+  // asigna valor select vendedor al input
   $("#slct_vendedor").change(function () {
     $("#npt_vendedor_id").val($(this).val());
   });
@@ -811,6 +814,8 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#btn_domi_externo").hide();
     $("#bloque_domi_externo, #bloque_valor_domi_externo").hide();
     $("#bloque_transportador").show();
+    $("#npt_btn_domi_interno").val("1");
+    $("#npt_confirm_btn").val("1");
   });
   // boton domi externo
   $("#btn_domi_externo").click(function () {
@@ -819,6 +824,8 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#btn_domi_interno").hide();
     $("#bloque_transportador").hide();
     $("#bloque_domi_externo, #bloque_valor_domi_externo").show();
+    $("#npt_btn_domi_externo").val("1");
+    $("#npt_confirm_btn").val("1");
   });
 
   // rellena hora salida
@@ -826,9 +833,122 @@ document.addEventListener("DOMContentLoaded", function () {
     let hora_actual = moment().format("HH:mm");
     $("#npt_hora_salida").val(hora_actual);
   });
-// fin ciclo agregar domicilio
-  
-//----------------------
+  // fin ciclo agregar domicilio
+
+  // confirma agregar domicilio
+  $("#btn_guardar_nuevo_domicilio").click(function () {
+    //VALIDACION DE DATOS DEL MODAL NUEVO
+    let valida_barrio_id = $("#npt_barrio_id").val();
+    let valida_factura = $("#npt_factura").val();
+    let valida_confirm_btn = $("#npt_confirm_btn").val();
+    let valida_btn_domi_interno = $("#npt_btn_domi_interno").val();
+    let valida_btn_domi_externo = $("#npt_btn_domi_externo").val();
+    let valida_domi_externo_id = $("#npt_domi_externo_id").val();
+    let valida_valor_domi_externo = $("#npt_valor_domi_externo").val();
+    let valida_transportador_id = $("#npt_transportador_id").val();
+    let valida_valor_producto = $("#npt_valor_producto").val();
+    let valida_hora_salida = $("#npt_hora_salida").val();
+    // let valida_inyectologia = $("#npt_inyectologia").val();
+    // let valida_observaciones = $("#npt_observaciones").val();
+
+    // compara datos de variables contra vacio y muestra un alert
+    if (valida_barrio_id.trim() == "") {
+      alert("elija un barrio.");
+      $("#slct_barrio").focus();
+      return false;
+    } else if (valida_factura.trim() == "") {
+      alert("digita factura.");
+      $("#npt_factura").focus();
+      return false;
+    } else if (valida_confirm_btn.trim() != "1") {
+      alert("elige Botón domi interno o externo");
+      return false;
+    } else if (
+      valida_btn_domi_interno.trim() == "1" &&
+      valida_transportador_id.trim() == ""
+    ) {
+      alert("elija transportador.");
+      $("#slct_transportador").focus();
+      return false;
+    } else if (
+      valida_btn_domi_externo.trim() == "1" &&
+      valida_domi_externo_id.trim() == ""
+    ) {
+      alert("elija trasportador domi externo.");
+      $("#slct_domi_externo").focus();
+      return false;
+    } else if (
+      valida_btn_domi_externo.trim() == "1" &&
+      valida_valor_domi_externo.trim() == ""
+    ) {
+      alert("elija valor domi externo");
+      $("#npt_valor_domi_externo").focus();
+      return false;
+    } else if (valida_valor_producto.trim() == "") {
+      alert("digite valor venta");
+      $("#npt_valor_producto").focus();
+      return false;
+    } else if (valida_hora_salida.trim() == "") {
+      alert("marque hora de salida");
+      $("#npt_hora_salida").focus();
+      return false;
+    } else {
+      //ejecutar Si todo fue validado
+      $("#mdl_domicilios").modal("hide");
+      let registro = recolectaDatosMdlNuevoDomi();
+      guardarRegistro(registro);
+      // cargaPantallaPrincipal();
+    }
+  });
+
+
+  function recolectaDatosMdlNuevoDomi() {
+    let registro = {
+      barrio_id: $("#npt_barrio_id").val(),
+      numero_factura: $("#npt_factura").val(),
+      domi_interno_btn: $("#").val(),
+      domi_externo_btn
+      domi_externo_id
+      valor_domi_externo
+      user_id  // el id de los domiciliarios
+      valor_venta
+      hora_salida
+      hora_llegada
+      inyectologia
+      observaciones
+      turno_id // este valor debe colocarse
+      // completar estos datos de la tabla relacionada...
+
+
+
+
+
+
+
+    };
+    return registro;
+  }
+
+  function guardarRegistro(registro) {
+    $.ajax({
+      type: "POST",
+      url: "venta_home_mdl.php?accion=guardar_venta",
+      data: registro,
+
+      // success: function (msg) {
+      //   // listadoVentas.ajax.reload();
+      //   $("#tblVentas").DataTable().ajax.reload();
+      //   cargaPantallaPrincipal();
+      // },
+
+      error: function () {
+        alert("problema en: guardarRegistro");
+      },
+    });
+  }
+
+  // FIN CICLO AGREGAR NUEVA gestion
+  //----------------------
   // CONTROL  SIDEBAR
   //----------------------
   $("#contenido_navbar").on("click", "button.btn_open", function () {
@@ -847,5 +967,4 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#mdl_venta_acumulada").modal("show");
   });
   // fin control sidebar
-
 }); // cierre del addEventListener del inicio de pagina
