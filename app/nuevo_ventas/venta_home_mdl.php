@@ -33,7 +33,7 @@ switch ($_GET['accion']) {
         VENTAS.venta_valor_venta,
         USERS.user_nombre,
         VENTAS.venta_utilidad,
-        VENTAS.turno_id
+        VENTAS.turno_iid
         FROM VENTAS
         INNER JOIN USERS
         ON VENTAS.user_id=USERS.user_id
@@ -45,6 +45,48 @@ switch ($_GET['accion']) {
         echo json_encode($result);
         break;
 
+        case 'listar_domi_interno_por_salir':
+            $sql ="SELECT
+            BARRIOS.barrio_nombre,
+            USERS.user_nombre,
+            DOMICILIOS.valor_venta,
+            DOMICILIOS.hora_salida,
+            DOMICILIOS.hora_llegada,
+            DOMICILIOS.inyectologia
+            FROM DOMICILIOS 
+            INNER JOIN USERS 
+            ON DOMICILIOS.trans_interno_id=USERS.user_id
+            INNER JOIN BARRIOS 
+            ON DOMICILIOS.barrio_id=BARRIOS.barrio_id
+            WHERE (btn_domi_interno=1)
+            ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
+
+
+        case 'listar_domi_interno_en_curso':
+            $sql ="SELECT
+            BARRIOS.barrio_nombre,
+            USERS.user_nombre,
+            DOMICILIOS.valor_venta,
+            DOMICILIOS.hora_salida,
+            DOMICILIOS.hora_llegada,
+            DOMICILIOS.inyectologia
+            FROM DOMICILIOS 
+            INNER JOIN USERS 
+            ON DOMICILIOS.trans_interno_id=USERS.user_id
+            INNER JOIN BARRIOS 
+            ON DOMICILIOS.barrio_id=BARRIOS.barrio_id
+            WHERE (btn_domi_interno=1)
+            ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
 
     case 'guardar_venta':
         $sql = "INSERT INTO VENTAS(
@@ -69,7 +111,7 @@ switch ($_GET['accion']) {
         break;
 
     case 'borrar_venta':
-        $sql = "DELETE FROM VENTAS  WHERE venta_id=$_GET[venta_id]";
+        $sql = "DELETE FROM VENTAS WHERE venta_id=$_GET[venta_id]";
         $response = $pdo->exec($sql);
         echo json_encode($response);
         break;
@@ -232,7 +274,7 @@ switch ($_GET['accion']) {
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($result);
-    break;
+        break;
 
     case 'consultar_acumulado':
         $sql = "SELECT
@@ -248,7 +290,7 @@ switch ($_GET['accion']) {
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($result);
-    break;
+        break;
 
     case 'consultar_turno_cerrado':
         $sql = "SELECT
@@ -263,7 +305,7 @@ switch ($_GET['accion']) {
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($result);
-    break;
+        break;
 
     case 'listar_ventas_mes_vendedor':
         // ENVIA LOS DATOS AL DATATABLES
@@ -293,7 +335,7 @@ switch ($_GET['accion']) {
         break;
 
     case 'listar_ventas_agrupadas_por_dia_vendedor':
-        $sql ="SELECT 
+        $sql = "SELECT 
         DATE_FORMAT(venta_fecha,'%Y-%m-%d') AS FECHA,
         CONCAT(ELT(WEEKDAY(venta_fecha)+ 1, 
     'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom')) AS DIA,
@@ -339,5 +381,39 @@ switch ($_GET['accion']) {
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($result);
+        break;
+
+    case 'guardar_domicilio':
+        $sql = "INSERT INTO DOMICILIOS(
+      barrio_id,
+      numero_factura,
+      btn_domi_interno,
+      trans_interno_id,
+      btn_domi_externo,
+      trans_externo_id,
+      valor_domi_externo,
+      valor_venta,
+      hora_salida,
+      hora_llegada,
+      inyectologia,
+      observaciones,
+      turno_id
+      )VALUES (
+      '$_POST[barrio_id]',
+      '$_POST[numero_factura]',
+      '$_POST[btn_domi_interno]',
+      '$_POST[trans_interno_id]',
+      '$_POST[btn_domi_externo]',
+      '$_POST[trans_externo_id]',
+      '$_POST[valor_domi_externo]',
+      '$_POST[valor_venta]',
+      '$_POST[hora_salida]',
+      '$_POST[hora_llegada]',
+      '$_POST[inyectologia]',
+      '$_POST[observaciones]',
+      '$_POST[turno_id]'
+    )";
+        $response = $pdo->exec($sql);
+        echo json_encode($response);
         break;
 };

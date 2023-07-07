@@ -1,4 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
+datatablesDomiInternoPorSalir();
+datatablesDomiInternoEnCurso();
+
   var turno_id = "";
   var user_id = "";
 
@@ -21,50 +24,82 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  function ejecutarDatatables() {
-    // INICIA DATATABLES
-    var listadoVentas = $("#tblVentas").DataTable({
+  // carga tabla domicilio interno por salir
+  function datatablesDomiInternoPorSalir() {
+    let listadoDomiInternoPorSalir = $("#tbl_domi_interno_por_salir").DataTable({
       ajax: {
-        url: "venta_home_mdl.php?accion=listar_ventas",
+        url: "venta_home_mdl.php?accion=listar_domi_interno_por_salir",
         dataSrc: "",
-        data: { turno_id: turno_id },
+        data: "",
       },
       columns: [
-        { data: "venta_id" },
-        { data: "venta_nombre_producto" },
-        { data: "venta_nombre_proveedor" },
-        { data: "venta_costo_producto" },
-        { data: "venta_valor_venta" },
-        { data: "user_nombre" }, //nombre vendedor
-        { data: "venta_utilidad" },
-        { data: null, orderable: false },
+        { data: "barrio_nombre" },
+        { data: "user_nombre" },
+        { data: "valor_venta" },
+        { data: "hora_salida" },
+        { data: "hora_llegada" },
+        { data: "inyectologia" },
         { data: null, orderable: false },
       ],
       columnDefs: [
         {
-          targets: 7,
+          targets: 6,
           defaultContent:
-            "<button class='btn btn-primary btn-sm btnEdit' id='btn_edit'>/<i class='fa-solid fa-pen'></i></button>",
-          data: null,
-        },
-
-        {
-          targets: 8,
-          defaultContent:
-            "<button  class='btn btn-danger btn-sm btnDel'>X<i class='fa fa-trash-o fa-lg'></i></button>",
+            "<button class='btn btn-primary btn-sm btnVerDomiInterno' id='btn_ver_domi_interno'><i class='fa-solid fa-pen'></i></button>",
           data: null,
         },
       ],
+      order: [[3, "desc"]],
       language: {
         url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
       },
+      searching: false,
       paging: false,
+      destroy: true,
     });
+  };
+
+  // carga tabla domicilio interno en curso
+  function datatablesDomiInternoEnCurso() {
+    let listadoDomiInternoEncurso = $("#tbl_domi_interno_en_curso").DataTable({
+      ajax: {
+        url: "venta_home_mdl.php?accion=listar_domi_interno_en curso",
+        dataSrc: "",
+        data: "",
+      },
+      columns: [
+        { data: "barrio_nombre" },
+        { data: "user_nombre" },
+        { data: "valor_venta" },
+        { data: "hora_salida" },
+        { data: "hora_llegada" },
+        { data: "inyectologia" },
+        { data: null, orderable: false },
+      ],
+      columnDefs: [
+        {
+          targets: 6,
+          defaultContent:
+            "<button class='btn btn-primary btn-sm btnVerDomiInterno' id='btn_ver_domi_interno'><i class='fa-solid fa-pen'></i></button>",
+          data: null,
+        },
+      ],
+      order: [[3, "desc"]],
+      language: {
+        url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+      },
+      searching: false,
+      paging: false,
+      destroy: true,
+    });
+  };
+
+
     // FIN DATATABLES
 
     //boton Editar
     $("#tblVentas tbody").on("click", "button.btnEdit", function () {
-      let registroEdit = listadoVentas.row($(this).parents("tr")).data();
+      let registroEdit = listadoDomiInterno.row($(this).parents("tr")).data();
       recuperarRegistro(registroEdit.venta_id);
     });
 
@@ -72,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#tblVentas tbody").on("click", "button.btnDel", function () {
       //ACCIONA BOTON BORRAR REGISTRO DEL DATATABLES
       if (confirm("¿Confirma la Eliminación?")) {
-        let registro = listadoVentas.row($(this).parents("tr")).data();
+        let registro = listadoDomiInterno.row($(this).parents("tr")).data();
         borrarRegistro(registro.venta_id);
       }
     });
@@ -668,17 +703,20 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#npt_barrio_id").val("");
     $("#npt_factura").val("");
     $("#slct_domi_externo").val("0"); //select
-    $("#npt_domi_externo_id").val("");
+    $("#npt_domi_externo_id").val("0");
     $("#npt_btn_domi_interno").val("0");
     $("#npt_valor_domi_externo").val("");
+    $("#npt_valor_domi_externo_base").val("0");
     $("#npt_btn_domi_externo").val("0");
     $("#slct_transportador").val("0"); //select
-    $("#npt_transportador_id").val("");
+    $("#npt_transportador_id").val("0");
     $("#npt_valor_producto").val("");
-    $("#npt_hora_salida").val("");
+    $("#npt_hora_salida").val("0");
+    $("#npt_hora_llegada").val("0");
     $("#check_inyectologia[type='checkbox']").prop({ checked: false });
     $("#npt_observaciones").val("");
-    $("#npt_confirm_btn").val("");
+    $("#npt_confirm_btn").val("0");
+    $("#npt_turno_id_actual").val("300");
   }
 
   // validaciones al digitar
@@ -867,6 +905,7 @@ document.addEventListener("DOMContentLoaded", function () {
       valida_btn_domi_interno.trim() == "1" &&
       valida_transportador_id.trim() == ""
     ) {
+      //alert para validar campo vacio
       alert("elija transportador.");
       $("#slct_transportador").focus();
       return false;
@@ -896,53 +935,42 @@ document.addEventListener("DOMContentLoaded", function () {
       //ejecutar Si todo fue validado
       $("#mdl_domicilios").modal("hide");
       let registro = recolectaDatosMdlNuevoDomi();
-      guardarRegistro(registro);
+      guardarDomicilio(registro);
       // cargaPantallaPrincipal();
     }
   });
-
 
   function recolectaDatosMdlNuevoDomi() {
     let registro = {
       barrio_id: $("#npt_barrio_id").val(),
       numero_factura: $("#npt_factura").val(),
-      domi_interno_btn: $("#").val(),
-      domi_externo_btn
-      domi_externo_id
-      valor_domi_externo
-      user_id  // el id de los domiciliarios
-      valor_venta
-      hora_salida
-      hora_llegada
-      inyectologia
-      observaciones
-      turno_id // este valor debe colocarse
-      // completar estos datos de la tabla relacionada...
-
-
-
-
-
-
-
+      btn_domi_interno: $("#npt_btn_domi_interno").val(),
+      trans_interno_id: $("#npt_transportador_id").val(),
+      btn_domi_externo: $("#npt_btn_domi_externo").val(),
+      trans_externo_id: $("#npt_domi_externo_id").val(),
+      valor_domi_externo: $("#npt_valor_domi_externo_base").val(),
+      valor_venta: $("#npt_valor_producto_base").val(),
+      hora_salida: $("#npt_hora_salida").val(),
+      hora_llegada: $("#npt_hora_llegada").val(),
+      inyectologia: $("#check_inyectologia").val(),
+      observaciones: $("#npt_observaciones").val(),
+      turno_id: $("#npt_turno_id_actual").val(),
     };
     return registro;
   }
 
-  function guardarRegistro(registro) {
+  function guardarDomicilio(registro) {
     $.ajax({
       type: "POST",
-      url: "venta_home_mdl.php?accion=guardar_venta",
+      url: "venta_home_mdl.php?accion=guardar_domicilio",
       data: registro,
 
-      // success: function (msg) {
-      //   // listadoVentas.ajax.reload();
-      //   $("#tblVentas").DataTable().ajax.reload();
-      //   cargaPantallaPrincipal();
-      // },
+      success: function (msg) {
+        $("#tbl_domicilio_interno").DataTable().ajax.reload();
+      },
 
       error: function () {
-        alert("problema en: guardarRegistro");
+        alert("problema en: guardarDomicilio");
       },
     });
   }
@@ -966,5 +994,6 @@ document.addEventListener("DOMContentLoaded", function () {
   $("#link_venta_acumulada").click(function () {
     $("#mdl_venta_acumulada").modal("show");
   });
+
   // fin control sidebar
 }); // cierre del addEventListener del inicio de pagina

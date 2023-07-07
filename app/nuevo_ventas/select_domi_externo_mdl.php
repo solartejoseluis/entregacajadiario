@@ -4,6 +4,7 @@ $sql="SELECT
 domi_externo_id,
 domi_externo_nombre
 FROM DOMI_EXTERNOS
+WHERE domi_externo_id >0
 ";
 $stmt = $pdo->prepare($sql);
 $stmt -> execute();

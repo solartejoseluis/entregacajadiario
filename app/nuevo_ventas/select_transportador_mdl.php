@@ -4,7 +4,7 @@ $sql="SELECT
 user_id,
 CONCAT(user_nombre,' ',user_apellido) AS user_nombre
 FROM USERS
-wHERE user_transportador ='SI'
+wHERE (user_transportador ='SI') AND (user_id >0)
 ";
 $stmt = $pdo->prepare($sql);
 $stmt -> execute();

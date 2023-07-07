@@ -139,7 +139,9 @@
     </div>
     <!-- FIN SIDEBAR BOOTSTRAP -->
 
+    <!-- inicia el contenido de la pagina -->
     <div class="container-fluid bg-light" id="contenido">
+      <!-- inicia navbar -->
       <nav class="row">
         <nav class="navbar navbar-expand-md navbar-dark bg-primary mb-4">
           <div class="container-fluid" id="contenido_navbar">
@@ -227,6 +229,9 @@
           </div>
         </nav>
       </nav>
+      <!-- finaliza navbar -->
+
+      <!-- inicia encabezado pagina -->
       <div class="row">
         <section class="col-md-4">
           <h4>VIERNES,5 DE MAYO DE 2023</h4>
@@ -238,33 +243,13 @@
           <h4>SECCION DERECHA</h4>
         </section>
       </div>
-      <!-- ------------------------------- -->
-      <!-- inicia sección de domicilios -->
-      <!-- ------------------------------- -->
+      <!-- finaliza encabezado       -->
+
       <div class="row">
+        <!-- inicia sección de domicilios -->
         <section class="container col-md-6">
           <h3>AREA DE DOMICILIOS</h3>
           <h5>Últimos 5 Domicilios hoy</h5>
-          <div class="row">
-            <section class="table-responsive" id="tabla">
-              <table class="table" id="tbl_domicilios">
-                <thead>
-                  <tr>
-                    <td>Barrio</td>
-                    <td>Factura</td>
-                    <td>AsignadoA</td>
-                    <td>Valor</td>
-                    <td>H/salida</td>
-                    <td>Estado</td>
-                    <td>H/llegada</td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                </thead>
-              </table>
-            </section>
-          </div>
-
           <button
             type="button"
             class="btn btn-primary"
@@ -274,7 +259,49 @@
             Nuevo Domicilio
           </button>
           <button type="button" class="btn btn-primary">Ver Listado</button>
+
+
+
+          <h5>PENDIENTES POR SALIR</h5>
+          <div class="row">
+            <section class="table-responsive"  id="tabla">
+              <table class="table display compact" id="tbl_domi_interno_por_salir">
+                <thead>
+                  <tr>
+                    <td>Barrio</td>
+                    <td>Asigna</td>
+                    <td>Venta</td>
+                    <td>H/Sale</td>
+                    <td>H/Llega</td>
+                    <td>Iny</td>
+                    <td></td>
+                  </tr>
+                </thead>
+              </table>
+            </section>
+          </div>
+
+          <h5>EN ENTREGA</h5>
+          <div class="row">
+            <section class="table-responsive"  id="tabla">
+              <table class="table display compact" id="tbl_domi_interno_en_curso">
+                <thead>
+                  <tr>
+                    <td>Barrio</td>
+                    <td>Asigna</td>
+                    <td>Venta</td>
+                    <td>H/Sale</td>
+                    <td>H/Llega</td>
+                    <td>Iny</td>
+                    <td></td>
+                  </tr>
+                </thead>
+              </table>
+            </section>
+          </div>
         </section>
+        <!-- finaliza seccion de  domicilios -->
+        <!-- inicia seccion de gestiones -->
         <section class="container col-md-6">
           <h3>AREA DE GESTIONES</h3>
           <h5>Últimos 5 Gestiones Hoy</h5>
@@ -303,9 +330,11 @@
           </button>
           <button type="button" class="btn btn-success">Listado</button>
         </section>
+        <!-- finaliza seccion de gestiones -->
       </div>
     </div>
-    <!-- final seccion contenido -->
+    <!-- final seccion contenido de la pagina -->
+
     <!-- -------------------------->
     <!-- MODAL NUEVA GESTIÓN-->
     <!-- ------------------------->
@@ -984,7 +1013,6 @@
           </div>
           <div class="modal-body">
             <form id="frm_nuevo_domicilio">
-
               <div
                 class="selectBarrio col-md-9 input-group input-group-sm mb-2"
               >
@@ -995,11 +1023,7 @@
                   class="form-select form-select-sm"
                   id="slct_barrio"
                 ></select>
-                <input
-                  type="hidden"
-                  class="form-control"
-                  id="npt_barrio_id"
-                />
+                <input type="hidden" class="form-control" id="npt_barrio_id" />
               </div>
 
               <div class="col-md-9 input-group input-group-sm mb-2">
@@ -1125,6 +1149,13 @@
                   id="npt_hora_salida"
                   disabled
                 />
+                <input
+                  type="hidden"
+                  class="form-control"
+                  placeholder="hora de llegada"
+                  id="npt_hora_llegada"
+                  disabled
+                />
               </div>
 
               <div class="form-check form-switch mb-2">
@@ -1156,7 +1187,11 @@
           </div>
           <!-- footer modal nueva venta -->
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" id="btn_guardar_nuevo_domicilio">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              id="btn_guardar_nuevo_domicilio"
+            >
               Confirma Agregar
             </button>
             <button
