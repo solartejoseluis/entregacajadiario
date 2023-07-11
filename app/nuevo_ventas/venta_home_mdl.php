@@ -58,14 +58,13 @@ switch ($_GET['accion']) {
             ON DOMICILIOS.trans_interno_id=USERS.user_id
             INNER JOIN BARRIOS 
             ON DOMICILIOS.barrio_id=BARRIOS.barrio_id
-            WHERE (btn_domi_interno=1)
+            WHERE (btn_domi_interno=1) AND (hora_salida = 0)
             ";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($result);
         break;
-
 
         case 'listar_domi_interno_en_curso':
             $sql ="SELECT
@@ -80,13 +79,36 @@ switch ($_GET['accion']) {
             ON DOMICILIOS.trans_interno_id=USERS.user_id
             INNER JOIN BARRIOS 
             ON DOMICILIOS.barrio_id=BARRIOS.barrio_id
-            WHERE (btn_domi_interno=1)
+            WHERE (btn_domi_interno=1) AND (hora_salida != 0) AND (hora_llegada = 0)
             ";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($result);
         break;
+
+        
+        case 'listar_domi_entregados':
+            $sql ="SELECT
+            BARRIOS.barrio_nombre,
+            USERS.user_nombre,
+            DOMICILIOS.valor_venta,
+            DOMICILIOS.hora_salida,
+            DOMICILIOS.hora_llegada,
+            DOMICILIOS.inyectologia
+            FROM DOMICILIOS 
+            INNER JOIN USERS 
+            ON DOMICILIOS.trans_interno_id=USERS.user_id
+            INNER JOIN BARRIOS 
+            ON DOMICILIOS.barrio_id=BARRIOS.barrio_id
+            WHERE (btn_domi_interno=1) AND (hora_salida != 0) AND (hora_llegada = 0)
+            ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
+
 
     case 'guardar_venta':
         $sql = "INSERT INTO VENTAS(
