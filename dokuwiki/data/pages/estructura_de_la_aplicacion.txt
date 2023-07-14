@@ -1,0 +1,20 @@
+2023-01-19
+
+Estructura General de la Aplicación Control Caja.
+
+Organizando la aplicación control caja para ir recopilando información de los avances teniendo en cuenta la evolución por módulos.
+
+Utilizaré la palabra "módulos" para nombrar una funcionalidad definida de la aplicación.
+usaré la palabra "sección" para agrupar los módulos que tienen que ver con un perfil
+
+1.- MODULO LOGIN [[modulo_login|Ver]]
+
+2.- MODULO CREACIÓN DE TURNO [[modulo_creacion_de_turno|Ver]]
+
+3.- MODULO CONSULTA DE TURNO DÍA ANTERIOR
+
+4.- MODULO VISTA DE TURNOS
+
+5.- MODULO EDICIÓN DE TURNOS
+
+Para cada uno de estos módulos elaboro una hoja que va describiendo la evolución de cada uno.

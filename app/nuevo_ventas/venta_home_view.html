@@ -253,11 +253,16 @@
             type="button"
             class="btn btn-primary"
             id="btn_nuevo_domicilio"
-            data-bs-toggle="modal"
           >
             Nuevo Domicilio
           </button>
-          <button type="button" class="btn btn-primary">Entregados</button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            id="btn_domi_entregados"
+          >
+            Entregados
+          </button>
 
           <h5>PENDIENTES POR SALIR</h5>
           <div class="row">
@@ -269,7 +274,8 @@
                 <thead>
                   <tr>
                     <td>Barrio</td>
-                    <td>Asigna</td>
+                    <td>Interno</td>
+                    <td>Externo</td>
                     <td>Venta</td>
                     <td>H/Sale</td>
                     <td>H/Llega</td>
@@ -291,10 +297,11 @@
                 <thead>
                   <tr>
                     <td>Barrio</td>
-                    <td>Asigna</td>
+                    <td>Interno</td>
+                    <td>Externo</td>
                     <td>Venta</td>
-                    <td>H/Sale</td>
-                    <td>H/Llega</td>
+                    <td>Salió</td>
+                    <td>Llega</td>
                     <td>Iny</td>
                     <td></td>
                   </tr>
@@ -1090,7 +1097,7 @@
                 id="bloque_valor_domi_externo"
               >
                 <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Valor Domi Ext:</span
+                  >Valor Servicio:</span
                 >
                 <input
                   type="text"
@@ -1162,7 +1169,10 @@
               </div>
 
               <div class="form-check form-switch mb-2">
-                <label class="form-check-label" for="check_inyectologia"
+                <label
+                  class="form-check-label"
+                  for="check_inyectologia"
+                  id="check_inyectologia_label"
                   >Inyectologia</label
                 >
                 <input
@@ -1209,6 +1219,63 @@
       </div>
     </div>
     <!-- final modal nuevo domicilio -->
+
+<!-- ----------------------------- -->
+<!-- modal domicilios entregados -->
+<!-- ----------------------------- -->
+    <div
+      class="modal fade"
+      data-bs-backdrop="static"
+      style="overflow: hidden"
+      id="mdl_domi_entregados"
+    >
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">
+              DOMICILIOS ENTREGADOS <span id="fecha_hoy"> 5 DE MAYO 2023</span>
+            </h1>
+          </div>
+          <div class="modal-body">
+          <!-- contenido del modal body -->
+              <div class="row">
+                <div class="col-md-12">
+                  <table class="table" id="tbl_domi_entregados">
+                    <thead>
+                      <tr>
+                        <td>Id</td>
+                        <td>Barrio</td>
+                        <td>Interno</td>
+                        <td>Externo</td>
+                        <td>Ext/val</td>
+                        <td>Venta</td>
+                        <td>Factura</td>
+                        <td>Salió</td>
+                        <td>Llegó</td>
+                        <td>Iny</td>
+                        <td>Obs</td>
+                        <td>Turno</td>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
 
     <!-- -------------------------->
     <!-- MODAL VENTA ACUMULADA-->

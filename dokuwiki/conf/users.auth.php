@@ -10,4 +10,4 @@
 # Format:
 # login:passwordhash:Real Name:email:groups,comma,separated
 
-admin:$2y$10$FAHEUaQ6tbFgiBD6EjIudegLRFGlRyTNom2tKfP7NaXRjuyAIJBY2:kiron:solartejoseluis@gmail.com:admin,user
+admin:$2y$10$jSih623XTzPeaRPkK0GBi.aUBATACCp7Bvr4eRKf0GQOoiBYFknlK:kiron:solartejoseluis@gmail.com:admin,user

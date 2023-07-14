@@ -1,0 +1,46 @@
+====== MODAL DOMICILIOS ENTREGADOS ======
+ 
+Contiene un Listado Datatables.
+
+ # `domicilio_id` int(5) NOT NULL,
+ x`hora_creado` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `barrio_id` int(5) NOT NULL,
+  `numero_factura` int(10) NOT NULL,
+  `btn_domi_interno` int(5) NOT NULL,
+  `trans_interno_id` int(5) NOT NULL,
+  `btn_domi_externo` int(5) NOT NULL,
+  `trans_externo_id` int(5) NOT NULL,
+  `valor_domi_externo` int(10) NOT NULL,
+  `valor_venta` int(10) NOT NULL,
+  `hora_salida` varchar(10) NOT NULL,
+  `hora_llegada` varchar(10) NOT NULL,
+  `inyectologia` text NOT NULL,
+  `observaciones` varchar(200) NOT NULL,
+  `turno_id` int(5) NOT NULL
+
+
+
+los campos son
+
+Id | Barrio | Interno | Externo| VExterno | Venta | Factura | Salió | Llegó | Inyecto | Obs | turnoid
+
+domi_id
+barrio
+interno_trans
+externo_trans
+valor externo
+venta
+factura
+salio
+llego
+inyecto
+obs
+turnoid
+
+
+
+la consulta mysql es:
+
+
+
+

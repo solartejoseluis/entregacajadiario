@@ -45,69 +45,6 @@ switch ($_GET['accion']) {
         echo json_encode($result);
         break;
 
-        case 'listar_domi_interno_por_salir':
-            $sql ="SELECT
-            BARRIOS.barrio_nombre,
-            USERS.user_nombre,
-            DOMICILIOS.valor_venta,
-            DOMICILIOS.hora_salida,
-            DOMICILIOS.hora_llegada,
-            DOMICILIOS.inyectologia
-            FROM DOMICILIOS 
-            INNER JOIN USERS 
-            ON DOMICILIOS.trans_interno_id=USERS.user_id
-            INNER JOIN BARRIOS 
-            ON DOMICILIOS.barrio_id=BARRIOS.barrio_id
-            WHERE (btn_domi_interno=1) AND (hora_salida = 0)
-            ";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($result);
-        break;
-
-        case 'listar_domi_interno_en_curso':
-            $sql ="SELECT
-            BARRIOS.barrio_nombre,
-            USERS.user_nombre,
-            DOMICILIOS.valor_venta,
-            DOMICILIOS.hora_salida,
-            DOMICILIOS.hora_llegada,
-            DOMICILIOS.inyectologia
-            FROM DOMICILIOS 
-            INNER JOIN USERS 
-            ON DOMICILIOS.trans_interno_id=USERS.user_id
-            INNER JOIN BARRIOS 
-            ON DOMICILIOS.barrio_id=BARRIOS.barrio_id
-            WHERE (btn_domi_interno=1) AND (hora_salida != 0) AND (hora_llegada = 0)
-            ";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($result);
-        break;
-
-        
-        case 'listar_domi_entregados':
-            $sql ="SELECT
-            BARRIOS.barrio_nombre,
-            USERS.user_nombre,
-            DOMICILIOS.valor_venta,
-            DOMICILIOS.hora_salida,
-            DOMICILIOS.hora_llegada,
-            DOMICILIOS.inyectologia
-            FROM DOMICILIOS 
-            INNER JOIN USERS 
-            ON DOMICILIOS.trans_interno_id=USERS.user_id
-            INNER JOIN BARRIOS 
-            ON DOMICILIOS.barrio_id=BARRIOS.barrio_id
-            WHERE (btn_domi_interno=1) AND (hora_salida != 0) AND (hora_llegada = 0)
-            ";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($result);
-        break;
 
 
     case 'guardar_venta':
@@ -437,5 +374,83 @@ switch ($_GET['accion']) {
     )";
         $response = $pdo->exec($sql);
         echo json_encode($response);
+        break;
+
+    case 'listar_domi_interno_por_salir':
+        $sql = "SELECT
+            BARRIOS.barrio_nombre,
+            USERS.user_nombre,
+            DOMI_EXTERNOS.domi_externo_nombre,
+            DOMICILIOS.valor_venta,
+            DOMICILIOS.hora_salida,
+            DOMICILIOS.hora_llegada,
+            DOMICILIOS.inyectologia
+            FROM DOMICILIOS 
+            INNER JOIN USERS
+            ON DOMICILIOS.trans_interno_id=USERS.user_id
+            INNER JOIN BARRIOS 
+            ON DOMICILIOS.barrio_id=BARRIOS.barrio_id
+            INNER JOIN DOMI_EXTERNOS
+            ON DOMICILIOS.trans_externo_id = DOMI_EXTERNOS.domi_externo_id
+            WHERE (hora_salida = 0);
+            ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
+
+    case 'listar_domi_interno_en_curso':
+        $sql = "SELECT
+            BARRIOS.barrio_nombre,
+            USERS.user_nombre,
+            DOMI_EXTERNOS.domi_externo_nombre,
+            DOMICILIOS.valor_venta,
+            DOMICILIOS.hora_salida,
+            DOMICILIOS.hora_llegada,
+            DOMICILIOS.inyectologia
+            FROM DOMICILIOS 
+            INNER JOIN USERS
+            ON DOMICILIOS.trans_interno_id=USERS.user_id
+            INNER JOIN BARRIOS 
+            ON DOMICILIOS.barrio_id=BARRIOS.barrio_id
+            INNER JOIN DOMI_EXTERNOS
+            ON DOMICILIOS.trans_externo_id = DOMI_EXTERNOS.domi_externo_id
+            WHERE (hora_salida != 0) AND (hora_llegada = 0);
+            ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
+
+
+    case 'listar_domi_entregados':
+        $sql = "SELECT
+			DOMICILIOS.domicilio_id,
+            BARRIOS.barrio_nombre,
+            USERS.user_nombre,
+            DOMI_EXTERNOS.domi_externo_nombre,
+            DOMICILIOS.valor_domi_externo,
+            DOMICILIOS.valor_venta,
+            DOMICILIOS.numero_factura,
+            DOMICILIOS.hora_salida,
+            DOMICILIOS.hora_llegada,
+            DOMICILIOS.inyectologia,
+            DOMICILIOS.observaciones,
+            DOMICILIOS.turno_id
+            FROM DOMICILIOS 
+            INNER JOIN USERS
+            ON DOMICILIOS.trans_interno_id=USERS.user_id
+            INNER JOIN BARRIOS 
+            ON DOMICILIOS.barrio_id=BARRIOS.barrio_id
+            INNER JOIN DOMI_EXTERNOS
+            ON DOMICILIOS.trans_externo_id = DOMI_EXTERNOS.domi_externo_id
+            WHERE (hora_salida = '0') AND (hora_llegada = '0');
+        ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
         break;
 };

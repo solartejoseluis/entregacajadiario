@@ -36,6 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
         columns: [
           { data: "barrio_nombre" },
           { data: "user_nombre" },
+          { data: "domi_externo_nombre" },
           { data: "valor_venta" },
           { data: "hora_salida" },
           { data: "hora_llegada" },
@@ -44,17 +45,22 @@ document.addEventListener("DOMContentLoaded", function () {
         ],
         columnDefs: [
           {
-            targets: 6,
+            targets: 7,
             defaultContent:
               "<button class='btn btn-primary btn-sm btnVerDomiInterno' id='btn_ver_domi_interno'><i class='fa-solid fa-pen'></i></button>",
             data: null,
           },
         ],
         // order: [[3, "desc"]],
+        // fixedHeader: {
+        //   header: false,
+        //   footer: false,
+        // },
         language: {
           url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
         },
         searching: false,
+        info: false,
         paging: false,
         destroy: true,
       }
@@ -72,6 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
       columns: [
         { data: "barrio_nombre" },
         { data: "user_nombre" },
+        { data: "domi_externo_nombre" },
         { data: "valor_venta" },
         { data: "hora_salida" },
         { data: "hora_llegada" },
@@ -80,13 +87,14 @@ document.addEventListener("DOMContentLoaded", function () {
       ],
       columnDefs: [
         {
-          targets: 6,
+          targets: 7,
           defaultContent:
             "<button class='btn btn-primary btn-sm btnVerDomiInterno' id='btn_ver_domi_interno'><i class='fa-solid fa-pen'></i></button>",
           data: null,
         },
       ],
-      order: [[3, "desc"]],
+      order: [[4, "asc"]],
+      info: false,
       language: {
         url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
       },
@@ -95,6 +103,9 @@ document.addEventListener("DOMContentLoaded", function () {
       destroy: true,
     });
   }
+
+
+
 
   // FIN DATATABLES
 
@@ -695,6 +706,9 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#mdl_domicilios").modal("show");
   });
 
+
+
+
   function limpiarModalDomicilios() {
     $(
       "#npt_factura,#npt_valor_domi_externo,#npt_valor_producto,#npt_hora_salida,#npt_observaciones"
@@ -860,6 +874,8 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#btn_domi_externo").removeClass("btn-primary");
     $("#btn_domi_externo").addClass("btn-secondary");
     $("#btn_domi_interno").hide();
+    $("#check_inyectologia").hide();
+    $("#check_inyectologia_label").hide();
     $("#bloque_transportador").hide();
     $("#bloque_domi_externo, #bloque_valor_domi_externo").show();
     $("#npt_btn_domi_externo").val("1");
@@ -975,7 +991,59 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // FIN CICLO AGREGAR NUEVA gestion
+  // FIN CICLO agregar domicilios
+
+// -------------------------------------
+// ciclo mostrar domicilios realizados
+// -------------------------------------
+
+  $("#btn_domi_entregados").click(function () {
+    $("#mdl_domi_entregados").modal("show");
+    datatablesDomiEntregados();
+  });
+
+
+  function datatablesDomiEntregados() {
+    let listado = $("#tbl_domi_entregados").DataTable({
+      ajax: {
+        url: "venta_home_mdl.php?accion=listar_domi_entregados",
+        dataSrc: "",
+        data: "",
+      },
+      columns: [
+        { data: "domicilio_id" },
+        { data: "barrio_nombre" },
+        { data: "user_nombre" },
+        { data: "domi_externo_nombre" },
+        { data: "valor_domi_externo" },
+        { data: "valor_venta" },
+        { data: "numero_factura" },
+        { data: "hora_salida" },
+        { data: "hora_llegada" },
+        { data: "inyectologia" },
+        { data: "observaciones" },
+        { data: "turno_id" },
+        { data: null, orderable: false },
+      ],
+      columnDefs: [
+        {
+          targets: 12,
+          defaultContent:
+            "<button class='btn btn-primary btn-sm btnVerDomiEntregado' id='btn_ver_domi_entregado'><i class='fa-solid fa-pen'></i></button>",
+          data: null,
+        },
+      ],
+      order: [[7, "asc"]],
+      info: false,
+      language: {
+        url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+      },
+      searching: false,
+      paging: false,
+      destroy: true,
+    });
+  }
+
   //----------------------
   // CONTROL  SIDEBAR
   //----------------------
