@@ -269,7 +269,7 @@
             <section class="table-responsive" id="tabla">
               <table
                 class="table display compact"
-                id="tbl_domi_interno_por_salir"
+                id="tbl_domi_por_salir"
               >
                 <thead>
                   <tr>
@@ -292,7 +292,7 @@
             <section class="table-responsive" id="tabla">
               <table
                 class="table display compact"
-                id="tbl_domi_interno_en_curso"
+                id="tbl_domi_en_curso"
               >
                 <thead>
                   <tr>
@@ -1220,6 +1220,225 @@
     </div>
     <!-- final modal nuevo domicilio -->
 
+<!-- ------------------------------------------------------- -->
+<!-- INICIA MODAL EDITAR DOMICILIO INTERNO POR SALIR -->
+<!-- ------------------------------------------------------- -->
+    <div
+      class="modal fade"
+      data-bs-backdrop="static"
+      style="overflow: hidden"
+      id="mdl_domi_interno_por_salir"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">
+              MODAL DOMI INTERNO POR SALIR <span id="fecha_hoy"> 5 DE MAYO 2023</span>
+            </h1>
+          </div>
+          <div class="modal-body">
+            <form id="frm_domi_interno_por_salir">
+              <div
+                class="selectBarrio col-md-9 input-group input-group-sm mb-2"
+              >
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >Barrio:</span
+                >
+                <select
+                  class="form-select form-select-sm"
+                  id="slct_barrio"
+                ></select>
+                <input type="hidden" class="form-control" id="npt_barrio_id" />
+              </div>
+
+              <div class="col-md-9 input-group input-group-sm mb-2">
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  ># Factura:</span
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="npt_factura"
+                  placeholder="Número de Factura"
+                />
+              </div>
+              <div class="mb-2">
+                <input
+                  type="hidden"
+                  class="form-control"
+                  id="npt_confirm_btn"
+                />
+                <button
+                  type="button"
+                  class="btn btn-primary btn-sm"
+                  id="btn_domi_interno"
+                >
+                  Domi Interno
+                </button>
+                <input
+                  type="hidden"
+                  class="form-control"
+                  id="npt_btn_domi_interno"
+                />
+                <button
+                  type="button"
+                  class="btn btn-primary btn-sm"
+                  id="btn_domi_externo"
+                >
+                  Domi Externo
+                </button>
+                <input
+                  type="hidden"
+                  class="form-control"
+                  id="npt_btn_domi_externo"
+                />
+              </div>
+              <div
+                class="selectDomiExterno col-md-9 input-group input-group-sm mb-2"
+                id="bloque_domi_externo"
+              >
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >transporte_externo:</span
+                >
+                <select class="form-select" id="slct_domi_externo"></select>
+                <input
+                  type="hidden"
+                  class="form-control"
+                  id="npt_domi_externo_id"
+                />
+              </div>
+              <div
+                class="col-md-9 input-group input-group-sm mb-2"
+                id="bloque_valor_domi_externo"
+              >
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >Valor Servicio:</span
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="npt_valor_domi_externo"
+                  placeholder="valor domi externo"
+                />
+                <input
+                  type="hidden"
+                  class="form-control"
+                  id="npt_valor_domi_externo_base"
+                />
+              </div>
+
+              <div
+                class="selectTransportador col-md-9 input-group input-group-sm mb-2"
+                id="bloque_transportador"
+              >
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >Asignado a:</span
+                >
+                <select class="form-select" id="slct_transportador"></select>
+                <input
+                  type="hidden"
+                  class="form-control"
+                  id="npt_transportador_id"
+                />
+              </div>
+
+              <div class="col-md-9 input-group input-group-sm mb-2">
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >Valor Venta:</span
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="npt_valor_producto"
+                  placeholder="valor de la venta"
+                />
+                <input
+                  type="hidden"
+                  class="form-control"
+                  id="npt_valor_producto_base"
+                />
+              </div>
+
+              <div class="input-group input-group input-group-sm mb-2">
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                  id="btn_hora_salida"
+                >
+                  H.Salida
+                </button>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="hora de salida"
+                  id="npt_hora_salida"
+                  disabled
+                />
+                <input
+                  type="hidden"
+                  class="form-control"
+                  placeholder="hora de llegada"
+                  id="npt_hora_llegada"
+                  disabled
+                />
+              </div>
+
+              <div class="form-check form-switch mb-2">
+                <label
+                  class="form-check-label"
+                  for="check_inyectologia"
+                  id="check_inyectologia_label"
+                  >Inyectologia</label
+                >
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  role="switch"
+                  value="1"
+                  id="check_inyectologia"
+                />
+              </div>
+
+              <div class="col-md-9 input-group input-group-sm mb-2">
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >Observaciones:</span
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="npt_observaciones"
+                  placeholder="observaciones"
+                />
+              </div>
+            </form>
+            <!-- finaliza formulario modal nuevo domicilio -->
+          </div>
+          <!-- footer modal nueva venta -->
+          <div class="modal-footer">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              id="btn_guardar_nuevo_domicilio"
+            >
+              Confirma Agregar
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- final modal nuevo domicilio -->
+
+
+<!-- final modal editar domicilio interno por salir-- >
+
+
 <!-- ----------------------------- -->
 <!-- modal domicilios entregados -->
 <!-- ----------------------------- -->
@@ -1255,6 +1474,7 @@
                         <td>Iny</td>
                         <td>Obs</td>
                         <td>Turno</td>
+                        <td></td>
                       </tr>
                     </thead>
                   </table>

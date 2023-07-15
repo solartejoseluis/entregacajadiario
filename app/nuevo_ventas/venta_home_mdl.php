@@ -376,7 +376,7 @@ switch ($_GET['accion']) {
         echo json_encode($response);
         break;
 
-    case 'listar_domi_interno_por_salir':
+    case 'listar_domi_por_salir':
         $sql = "SELECT
             BARRIOS.barrio_nombre,
             USERS.user_nombre,
@@ -400,7 +400,7 @@ switch ($_GET['accion']) {
         echo json_encode($result);
         break;
 
-    case 'listar_domi_interno_en_curso':
+    case 'listar_domi_en_curso':
         $sql = "SELECT
             BARRIOS.barrio_nombre,
             USERS.user_nombre,
@@ -424,7 +424,6 @@ switch ($_GET['accion']) {
         echo json_encode($result);
         break;
 
-
     case 'listar_domi_entregados':
         $sql = "SELECT
 			DOMICILIOS.domicilio_id,
@@ -446,7 +445,7 @@ switch ($_GET['accion']) {
             ON DOMICILIOS.barrio_id=BARRIOS.barrio_id
             INNER JOIN DOMI_EXTERNOS
             ON DOMICILIOS.trans_externo_id = DOMI_EXTERNOS.domi_externo_id
-            WHERE (hora_salida = '0') AND (hora_llegada = '0');
+            WHERE (hora_salida != '0') AND (hora_llegada != '0');
         ";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();

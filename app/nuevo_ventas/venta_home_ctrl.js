@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-  datatablesDomiInternoPorSalir();
-  datatablesDomiInternoEnCurso();
+  datatablesDomiPorSalir();
+  datatablesDomiEnCurso();
 
   var turno_id = "";
   var user_id = "";
@@ -25,53 +25,143 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // carga tabla domicilio interno por salir
-  function datatablesDomiInternoPorSalir() {
-    let listadoDomiInternoPorSalir = $("#tbl_domi_interno_por_salir").DataTable(
-      {
-        ajax: {
-          url: "venta_home_mdl.php?accion=listar_domi_interno_por_salir",
-          dataSrc: "",
-          data: "",
+  function datatablesDomiPorSalir() {
+    var listadoDomiPorSalir = $("#tbl_domi_por_salir").DataTable({
+      ajax: {
+        url: "venta_home_mdl.php?accion=listar_domi_por_salir",
+        dataSrc: "",
+        data: "",
+      },
+      columns: [
+        { data: "barrio_nombre" },
+        { data: "user_nombre" },
+        { data: "domi_externo_nombre" },
+        { data: "valor_venta" },
+        { data: "hora_salida" },
+        { data: "hora_llegada" },
+        { data: "inyectologia" },
+        { data: null, orderable: false },
+      ],
+      columnDefs: [
+        {
+          targets: 7,
+          defaultContent:
+            "<button class='btn btn-primary btn-sm btnVerDomiPorSalir' id='btn_ver_domi_por_salir'><i class='fa-solid fa-pen'></i></button>",
+          data: null,
         },
-        columns: [
-          { data: "barrio_nombre" },
-          { data: "user_nombre" },
-          { data: "domi_externo_nombre" },
-          { data: "valor_venta" },
-          { data: "hora_salida" },
-          { data: "hora_llegada" },
-          { data: "inyectologia" },
-          { data: null, orderable: false },
-        ],
-        columnDefs: [
-          {
-            targets: 7,
-            defaultContent:
-              "<button class='btn btn-primary btn-sm btnVerDomiInterno' id='btn_ver_domi_interno'><i class='fa-solid fa-pen'></i></button>",
-            data: null,
-          },
-        ],
-        // order: [[3, "desc"]],
-        // fixedHeader: {
-        //   header: false,
-        //   footer: false,
-        // },
-        language: {
-          url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
-        },
-        searching: false,
-        info: false,
-        paging: false,
-        destroy: true,
-      }
-    );
+      ],
+      // order: [[3, "desc"]],
+      // fixedHeader: {
+      //   header: false,
+      //   footer: false,
+      // },
+      language: {
+        url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+      },
+      searching: false,
+      info: false,
+      paging: false,
+      destroy: true,
+    });
   }
 
+  // boton editar domi por salir
+  $("#tbl_domi_por_salir tbody").on(
+    "click",
+    "button.btnVerDomiPorSalir",
+    function () {
+      // let registro = listadoDomiPorSalir.row($(this).parents("tr")).data();
+      $("#mdl_domi_interno_por_salir").modal("show");
+      // recuperarRegistroDomiInternoPorSalir(registro.domicilio_id);
+    }
+  );
+
+  //====================================
+
+  //----------------------------------
+  //CICLO EDITAR REGISTRO DOMI INTERNO POR SALIR
+  //----------------------------------
+  function recuperarRegistroDomiInternoPorSalir(domicilio_id) {
+    $.ajax({
+      type: "GET",
+      url:
+        "venta_home_mdl.php?accion=consultar_domicilio&domicilio_id=" +
+        domicilio_id,
+      data: "",
+      success: function (datos) {
+        $("#nptEdit-venta_id").val(datos[0].venta_id);
+        $("#nptEdit_venta_nombre_producto").val(datos[0].venta_nombre_producto);
+        $("#nptEdit_venta_nombre_proveedor").val(
+          datos[0].venta_nombre_proveedor
+        );
+        $("#nptEdit_venta_costo_producto").val(datos[0].venta_costo_producto);
+        $("#nptEdit_venta_valor_venta").val(datos[0].venta_valor_venta);
+        $("#nptEdit_user_nombre").val(datos[0].user_nombre);
+        $("#nptEdit-user_id").val(datos[0].user_id);
+
+        $("#slctEdit-user").val(datos[0].user_id);
+
+        $("#nptEdit_venta_utilidad").val(datos[0].venta_utilidad);
+        $("#mdl_edit_domi_interno_por_salir").modal("show");
+      },
+      error: function () {
+        alert("Problema en recuperarRegistro");
+      },
+    });
+  }
+
+  //TOMA EL VALOR DEL SELECT Y PONERLO EN INPUT
+  $("#slctEdit-user").change(function () {
+    $("#nptEdit-user_id").val($(this).val());
+  });
+
+  $("#btn_confirm_edit").click(function () {
+    //GUARDA LOS DATOS MODIFICADOS
+    $("#mdl_edit_ventas").modal("hide");
+    let registro = recolectarDatosFormularioEdit();
+    modificarRegistro(registro);
+  });
+
+  function recolectarDatosFormularioEdit() {
+    let registro = {
+      venta_id: $("#nptEdit-venta_id").val(),
+      venta_nombre_producto: $("#nptEdit_venta_nombre_producto").val(),
+      venta_nombre_proveedor: $("#nptEdit_venta_nombre_proveedor").val(),
+      venta_costo_producto: $("#nptEdit_venta_costo_producto").val(),
+      venta_valor_venta: $("#nptEdit_venta_valor_venta").val(),
+      user_nombre: $("#nptEdit_user_nombre").val(),
+      user_id: $("#nptEdit-user_id").val(),
+      venta_utilidad: $("#nptEdit_venta_utilidad").val(),
+    };
+    return registro;
+  }
+
+  function modificarRegistro(registro) {
+    $.ajax({
+      type: "POST",
+      url:
+        "venta_home_mdl.php?accion=modificar_venta&venta_id=" +
+        registro.venta_id,
+      data: registro,
+      success: function (msg) {
+        // listadoVentas.ajax.reload();
+        $("#tblVentas").DataTable().ajax.reload();
+        cargaPantallaPrincipal();
+      },
+      error: function () {
+        alert("Problema modificando");
+      },
+    });
+  }
+  // FIN CICLO EDITAR REGISTRO
+
+  //====================================0
+
   // carga tabla domicilio interno en curso
-  function datatablesDomiInternoEnCurso() {
-    let listadoDomiInternoEncurso = $("#tbl_domi_interno_en_curso").DataTable({
+  function datatablesDomiEnCurso() {
+    let listadoDomiInternoEncurso = $("#tbl_domi_en_curso").DataTable({
       ajax: {
-        url: "venta_home_mdl.php?accion=listar_domi_interno_en_curso",
+        url: "venta_home_mdl.php?accion=listar_domi_en_curso",
         dataSrc: "",
         data: "",
       },
@@ -103,9 +193,6 @@ document.addEventListener("DOMContentLoaded", function () {
       destroy: true,
     });
   }
-
-
-
 
   // FIN DATATABLES
 
@@ -706,9 +793,6 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#mdl_domicilios").modal("show");
   });
 
-
-
-
   function limpiarModalDomicilios() {
     $(
       "#npt_factura,#npt_valor_domi_externo,#npt_valor_producto,#npt_hora_salida,#npt_observaciones"
@@ -982,7 +1066,8 @@ document.addEventListener("DOMContentLoaded", function () {
       data: registro,
 
       success: function (msg) {
-        $("#tbl_domicilio_interno").DataTable().ajax.reload();
+        $("#tbl_domi_por_salir").DataTable().ajax.reload();
+        $("#tbl_domi_en_curso").DataTable().ajax.reload();
       },
 
       error: function () {
@@ -993,15 +1078,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // FIN CICLO agregar domicilios
 
-// -------------------------------------
-// ciclo mostrar domicilios realizados
-// -------------------------------------
+  // -------------------------------------
+  // ciclo mostrar domicilios realizados
+  // -------------------------------------
 
-  $("#btn_domi_entregados").click(function () {
+  $("#btn_domi_entregados").on("click", function () {
     $("#mdl_domi_entregados").modal("show");
     datatablesDomiEntregados();
   });
-
 
   function datatablesDomiEntregados() {
     let listado = $("#tbl_domi_entregados").DataTable({
