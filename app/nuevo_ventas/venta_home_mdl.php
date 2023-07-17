@@ -378,12 +378,12 @@ switch ($_GET['accion']) {
 
     case 'listar_domi_por_salir':
         $sql = "SELECT
+            DOMICILIOS.domicilio_id,
             BARRIOS.barrio_nombre,
             USERS.user_nombre,
             DOMI_EXTERNOS.domi_externo_nombre,
             DOMICILIOS.valor_venta,
             DOMICILIOS.hora_salida,
-            DOMICILIOS.hora_llegada,
             DOMICILIOS.inyectologia
             FROM DOMICILIOS 
             INNER JOIN USERS
@@ -452,4 +452,37 @@ switch ($_GET['accion']) {
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($result);
         break;
+
+
+        case 'consultar_domi':
+        $sql = "SELECT
+			DOMICILIOS.domicilio_id,
+            BARRIOS.barrio_id,
+            USERS.user_id,
+            DOMI_EXTERNOS.domi_externo_id,
+            DOMICILIOS.valor_domi_externo,
+            DOMICILIOS.valor_venta,
+            DOMICILIOS.numero_factura,
+            DOMICILIOS.hora_salida,
+            DOMICILIOS.inyectologia,
+            DOMICILIOS.observaciones,
+            DOMICILIOS.turno_id
+            FROM DOMICILIOS 
+            INNER JOIN USERS
+            ON DOMICILIOS.trans_interno_id=USERS.user_id
+            INNER JOIN BARRIOS 
+            ON DOMICILIOS.barrio_id=BARRIOS.barrio_id
+            INNER JOIN DOMI_EXTERNOS
+            ON DOMICILIOS.trans_externo_id = DOMI_EXTERNOS.domi_externo_id
+            WHERE domicilio_id=$_GET[domicilio_id]
+        ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
+
+
+
+
 };
