@@ -378,12 +378,14 @@ switch ($_GET['accion']) {
 
     case 'listar_domi_por_salir':
         $sql = "SELECT
+            DATE_FORMAT(DOMICILIOS.hora_creado, '%H:%i') AS hora_creado,
             DOMICILIOS.domicilio_id,
             BARRIOS.barrio_nombre,
             USERS.user_nombre,
             DOMI_EXTERNOS.domi_externo_nombre,
             DOMICILIOS.valor_venta,
-            DOMICILIOS.hora_salida,
+            DOMICILIOS.btn_domi_interno,
+            DOMICILIOS.btn_domi_externo,
             DOMICILIOS.inyectologia
             FROM DOMICILIOS 
             INNER JOIN USERS
@@ -407,7 +409,6 @@ switch ($_GET['accion']) {
             DOMI_EXTERNOS.domi_externo_nombre,
             DOMICILIOS.valor_venta,
             DOMICILIOS.hora_salida,
-            DOMICILIOS.hora_llegada,
             DOMICILIOS.inyectologia
             FROM DOMICILIOS 
             INNER JOIN USERS
@@ -427,6 +428,7 @@ switch ($_GET['accion']) {
     case 'listar_domi_entregados':
         $sql = "SELECT
 			DOMICILIOS.domicilio_id,
+			DATE_FORMAT(DOMICILIOS.hora_creado,'%H:%i') AS hora_creado,
             BARRIOS.barrio_nombre,
             USERS.user_nombre,
             DOMI_EXTERNOS.domi_externo_nombre,

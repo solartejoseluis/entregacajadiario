@@ -33,11 +33,11 @@ document.addEventListener("DOMContentLoaded", function () {
         data: "",
       },
       columns: [
+        { data: "hora_creado" },
         { data: "barrio_nombre" },
         { data: "user_nombre" },
         { data: "domi_externo_nombre" },
         { data: "valor_venta" },
-        { data: "hora_salida" },
         { data: "inyectologia" },
         { data: null, orderable: false },
       ],
@@ -69,11 +69,32 @@ document.addEventListener("DOMContentLoaded", function () {
       "button.btnVerDomiPorSalir",
       function () {
         let registro = listadoDomiPorSalir.row($(this).parents("tr")).data();
+        reestablecerModalDomiInternoPorSalir();
         recuperarRegistroDomiInternoPorSalir(registro.domicilio_id);
-        // $("#mdl_domi_interno_por_salir").modal("show");
-        // recuperarRegistroDomiInternoPorSalir(registro.domicilio_id);
+        // creo las variables de btn_ domi interno para este registro
+        let btnDomiInternoPorsalir = registro.btn_domi_interno;
+        // let btnDomiExternoPorsalir = registro.btn_domi_Externo;
+        // alert("domi interno"+" "+btnDomiInternoPorsalir);
+        if (btnDomiInternoPorsalir == 1) {
+          $(
+            "#bloque_edit_domi_externo, #bloque_edit_valor_domi_externo"
+          ).hide();
+        } else {
+          $("#grupo_edit_inyectologia").hide();
+          $("#bloque_edit_transportador").hide();
+          $(
+            "#bloque_edit_domi_externo, #bloque_edit_valor_domi_externo"
+          ).show();
+        }
+        $("#mdl_domi_interno_por_salir").modal("show");
       }
     );
+
+    function reestablecerModalDomiInternoPorSalir() {
+      $("#bloque_edit_domi_externo, #bloque_edit_valor_domi_externo").show();
+      $("#grupo_edit_inyectologia").show();
+      $("#bloque_edit_transportador").show();
+    }
   } // final de la funcion del datatables
   //====================================
 
@@ -169,13 +190,12 @@ document.addEventListener("DOMContentLoaded", function () {
         { data: "domi_externo_nombre" },
         { data: "valor_venta" },
         { data: "hora_salida" },
-        { data: "hora_llegada" },
         { data: "inyectologia" },
         { data: null, orderable: false },
       ],
       columnDefs: [
         {
-          targets: 7,
+          targets: 6,
           defaultContent:
             "<button class='btn btn-primary btn-sm btnVerDomiInterno' id='btn_ver_domi_interno'><i class='fa-solid fa-pen'></i></button>",
           data: null,
@@ -786,8 +806,11 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#btn_domi_externo").show();
     $("#btn_domi_externo").removeClass("btn-secondary");
     $("#btn_domi_externo").addClass("btn-primary");
+    $("#bloque_inyectologia").hide();
     $("#bloque_transportador").hide();
     $("#bloque_domi_externo, #bloque_valor_domi_externo").hide();
+    $("#bloque_hora_salida").hide();
+    $("#bloque_observaciones").hide();
     $("#mdl_domicilios").modal("show");
   });
 
@@ -947,7 +970,10 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#btn_domi_interno").addClass("btn-secondary");
     $("#btn_domi_externo").hide();
     $("#bloque_domi_externo, #bloque_valor_domi_externo").hide();
+    $("#bloque_inyectologia").show();
     $("#bloque_transportador").show();
+    $("#bloque_hora_salida").show();
+    $("#bloque_observaciones").show();
     $("#npt_btn_domi_interno").val("1");
     $("#npt_confirm_btn").val("1");
   });
@@ -956,9 +982,10 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#btn_domi_externo").removeClass("btn-primary");
     $("#btn_domi_externo").addClass("btn-secondary");
     $("#btn_domi_interno").hide();
-    $("#check_inyectologia").hide();
-    $("#check_inyectologia_label").hide();
+    $("#bloque_inyectologia").hide();
     $("#bloque_transportador").hide();
+    $("#bloque_hora_salida").show();
+    $("#bloque_observaciones").show();
     $("#bloque_domi_externo, #bloque_valor_domi_externo").show();
     $("#npt_btn_domi_externo").val("1");
     $("#npt_confirm_btn").val("1");
@@ -996,12 +1023,16 @@ document.addEventListener("DOMContentLoaded", function () {
       alert("digita factura.");
       $("#npt_factura").focus();
       return false;
+    } else if (valida_valor_producto.trim() == "") {
+      alert("digite valor venta");
+      $("#npt_valor_producto").focus();
+      return false;
     } else if (valida_confirm_btn.trim() != "1") {
       alert("elige Botón domi interno o externo");
       return false;
     } else if (
       valida_btn_domi_interno.trim() == "1" &&
-      valida_transportador_id.trim() == ""
+      valida_transportador_id.trim() == "0"
     ) {
       //alert para validar campo vacio
       alert("elija transportador.");
@@ -1009,7 +1040,7 @@ document.addEventListener("DOMContentLoaded", function () {
       return false;
     } else if (
       valida_btn_domi_externo.trim() == "1" &&
-      valida_domi_externo_id.trim() == ""
+      valida_domi_externo_id.trim() == "0"
     ) {
       alert("elija trasportador domi externo.");
       $("#slct_domi_externo").focus();
@@ -1020,10 +1051,6 @@ document.addEventListener("DOMContentLoaded", function () {
     ) {
       alert("elija valor domi externo");
       $("#npt_valor_domi_externo").focus();
-      return false;
-    } else if (valida_valor_producto.trim() == "") {
-      alert("digite valor venta");
-      $("#npt_valor_producto").focus();
       return false;
     } else if (valida_hora_salida.trim() == "") {
       alert("marque hora de salida");
@@ -1094,6 +1121,7 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       columns: [
         { data: "domicilio_id" },
+        { data: "hora_creado" },
         { data: "barrio_nombre" },
         { data: "user_nombre" },
         { data: "domi_externo_nombre" },
@@ -1109,7 +1137,7 @@ document.addEventListener("DOMContentLoaded", function () {
       ],
       columnDefs: [
         {
-          targets: 12,
+          targets: 13,
           defaultContent:
             "<button class='btn btn-primary btn-sm btnVerDomiEntregado' id='btn_ver_domi_entregado'><i class='fa-solid fa-pen'></i></button>",
           data: null,

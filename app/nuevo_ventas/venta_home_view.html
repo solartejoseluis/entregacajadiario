@@ -273,11 +273,11 @@
               >
                 <thead>
                   <tr>
+                    <td>Creado</td>
                     <td>Barrio</td>
                     <td>Interno</td>
                     <td>Externo</td>
                     <td>Venta</td>
-                    <td>H/Sale</td>
                     <td>Iny</td>
                     <td></td>
                   </tr>
@@ -300,7 +300,6 @@
                     <td>Externo</td>
                     <td>Venta</td>
                     <td>Salió</td>
-                    <td>Llega</td>
                     <td>Iny</td>
                     <td></td>
                   </tr>
@@ -1046,6 +1045,26 @@
                   placeholder="Número de Factura"
                 />
               </div>
+
+              <div 
+              class="col-md-9 input-group input-group-sm mb-2"
+              id="bloque_valor_venta"
+              >
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >Valor Venta:</span
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="npt_valor_producto"
+                  placeholder="valor de la venta"
+                />
+                <input
+                  type="hidden"
+                  class="form-control"
+                  id="npt_valor_producto_base"
+                />
+              </div>
               <div class="mb-2">
                 <input
                   type="hidden"
@@ -1126,24 +1145,11 @@
                 />
               </div>
 
-              <div class="col-md-9 input-group input-group-sm mb-2">
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Valor Venta:</span
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="npt_valor_producto"
-                  placeholder="valor de la venta"
-                />
-                <input
-                  type="hidden"
-                  class="form-control"
-                  id="npt_valor_producto_base"
-                />
-              </div>
 
-              <div class="input-group input-group input-group-sm mb-2">
+              <div 
+              class="input-group input-group input-group-sm mb-2"
+              id="bloque_hora_salida"
+              >
                 <button
                   class="btn btn-primary"
                   type="button"
@@ -1167,23 +1173,38 @@
                 />
               </div>
 
-              <div class="form-check form-switch mb-2">
-                <label
-                  class="form-check-label"
-                  for="check_inyectologia"
-                  id="check_inyectologia_label"
-                  >Inyectologia</label
+
+              <div 
+              class="input-group input-group input-group-sm mb-2"
+              id="bloque_inyectologia"
+              >
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                  id="btn_inyectologia_si"
                 >
+                  Inyectología
+                </button>
                 <input
-                  class="form-check-input"
-                  type="checkbox"
-                  role="switch"
-                  value="1"
-                  id="check_inyectologia"
+                  type="text"
+                  class="form-control"
+                  placeholder="pulse para asignar"
+                  id="npt_edit_inyectologia"
+                  disabled
                 />
+                <button
+                  class="btn btn-secondary"
+                  type="button"
+                  id="btn_inyectologia_no"
+                >
+                  x
+                </button>
               </div>
 
-              <div class="col-md-9 input-group input-group-sm mb-2">
+              <div 
+              class="col-md-9 input-group input-group-sm mb-2"
+              id="bloque_observaciones"
+              >
                 <span class="input-group-text" id="inputGroup-sizing-sm"
                   >Observaciones:</span
                 >
@@ -1276,7 +1297,7 @@
 
               <div
                 class="selectDomiExterno col-md-9 input-group input-group-sm mb-2"
-                id="bloque_domi_externo"
+                id="bloque_edit_domi_externo"
               >
                 <span class="input-group-text" id="inputGroup-sizing-sm"
                   >transporte_externo:</span
@@ -1290,7 +1311,7 @@
               </div>
               <div
                 class="col-md-9 input-group input-group-sm mb-2"
-                id="bloque_valor_domi_externo"
+                id="bloque_edit_valor_domi_externo"
               >
                 <span class="input-group-text" id="inputGroup-sizing-sm"
                   >Valor Servicio:</span
@@ -1309,7 +1330,7 @@
 
               <div
                 class="selectTransportador col-md-9 input-group input-group-sm mb-2"
-                id="bloque_transportador"
+                id="bloque_edit_transportador"
               >
                 <span class="input-group-text" id="inputGroup-sizing-sm"
                   >Tr.Interno:</span
@@ -1355,11 +1376,37 @@
                 />
               </div>
 
-              <div class="form-check form-switch mb-2">
+
+
+              <div class="input-group input-group input-group-sm mb-2">
+                <button
+                  class="btn btn-primary"
+                  type="button"
+                  id="btn_inyectologia_si"
+                >
+                  Inyectología
+                </button>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="hora de salida"
+                  id="npt_edit_inyectologia"
+                  disabled
+                />
+                <button
+                  class="btn btn-secondary"
+                  type="button"
+                  id="btn_inyectologia_no"
+                >
+                  x
+                </button>
+              </div>
+
+              <!-- <div class="form-check form-switch mb-2">
                 <label
                   class="form-check-label"
                   for="check_inyectologia"
-                  id="check_inyectologia_label"
+                  id="check_edit_inyectologia_label"
                   >Inyectologia</label
                 >
                 <input
@@ -1367,14 +1414,14 @@
                   type="checkbox"
                   role="switch"
                   value="1"
-                  id="check_inyectologia"
+                  id="check_edit_inyectologia"
                 />
                 <input
                   type="text"
                   class="form-control"
                   id="npt_edit_inyectologia"
                 />
-              </div>
+              </div> -->
 
               <div class="col-md-9 input-group input-group-sm mb-2">
                 <span class="input-group-text" id="inputGroup-sizing-sm"
@@ -1449,6 +1496,7 @@
                     <thead>
                       <tr>
                         <td>Id</td>
+                        <td>creado</td>
                         <td>Barrio</td>
                         <td>Interno</td>
                         <td>Externo</td>
