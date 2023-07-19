@@ -832,7 +832,7 @@ document.addEventListener("DOMContentLoaded", function () {
     $("#npt_valor_producto").val("");
     $("#npt_hora_salida").val("0");
     $("#npt_hora_llegada").val("0");
-    $("#check_inyectologia[type='checkbox']").prop({ checked: false });
+    $("#npt_inyectologia").val("");
     $("#npt_observaciones").val("");
     $("#npt_confirm_btn").val("0");
     $("#npt_turno_id_actual").val("300");
@@ -996,6 +996,16 @@ document.addEventListener("DOMContentLoaded", function () {
     let hora_actual = moment().format("HH:mm");
     $("#npt_hora_salida").val(hora_actual);
   });
+
+// botones de control de inyectologia
+$("#bloque_inyectologia").on("click", "#btn_inyectologia", function() {
+    $("#npt_inyectologia").val("SI");
+});
+$("#bloque_inyectologia").on("click", "#btn_inyectologia_cancel", function() {
+    $("#npt_inyectologia").val("");
+});
+
+
   // fin ciclo agregar domicilio
 
   // confirma agregar domicilio
@@ -1077,7 +1087,7 @@ document.addEventListener("DOMContentLoaded", function () {
       valor_venta: $("#npt_valor_producto_base").val(),
       hora_salida: $("#npt_hora_salida").val(),
       hora_llegada: $("#npt_hora_llegada").val(),
-      inyectologia: $("#check_inyectologia").val(),
+      inyectologia: $("#npt_inyectologia").val(),
       observaciones: $("#npt_observaciones").val(),
       turno_id: $("#npt_turno_id_actual").val(),
     };
