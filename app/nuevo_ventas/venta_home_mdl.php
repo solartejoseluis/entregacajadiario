@@ -2,7 +2,6 @@
 session_start();
 header('Content-Type: application/json');
 require "../00_connect/pdo.php";
-//$usuario_de_sesion = $_SESSION['user_id'];
 
 switch ($_GET['accion']) {
 
@@ -342,65 +341,6 @@ switch ($_GET['accion']) {
         echo json_encode($result);
         break;
 
-    case 'guardar_domicilio':
-        $sql = "INSERT INTO DOMICILIOS(
-      barrio_id,
-      numero_factura,
-      btn_domi_interno,
-      trans_interno_id,
-      btn_domi_externo,
-      trans_externo_id,
-      valor_domi_externo,
-      valor_venta,
-      hora_salida,
-      hora_llegada,
-      inyectologia,
-      observaciones,
-      turno_id
-      )VALUES (
-      '$_POST[barrio_id]',
-      '$_POST[numero_factura]',
-      '$_POST[btn_domi_interno]',
-      '$_POST[trans_interno_id]',
-      '$_POST[btn_domi_externo]',
-      '$_POST[trans_externo_id]',
-      '$_POST[valor_domi_externo]',
-      '$_POST[valor_venta]',
-      '$_POST[hora_salida]',
-      '$_POST[hora_llegada]',
-      '$_POST[inyectologia]',
-      '$_POST[observaciones]',
-      '$_POST[turno_id]'
-    )";
-        $response = $pdo->exec($sql);
-        echo json_encode($response);
-        break;
-
-    case 'listar_domi_por_salir':
-        $sql = "SELECT
-            DATE_FORMAT(DOMICILIOS.hora_creado, '%H:%i') AS hora_creado,
-            DOMICILIOS.domicilio_id,
-            BARRIOS.barrio_nombre,
-            USERS.user_nombre,
-            DOMI_EXTERNOS.domi_externo_nombre,
-            DOMICILIOS.valor_venta,
-            DOMICILIOS.btn_domi_interno,
-            DOMICILIOS.btn_domi_externo,
-            DOMICILIOS.inyectologia
-            FROM DOMICILIOS 
-            INNER JOIN USERS
-            ON DOMICILIOS.trans_interno_id=USERS.user_id
-            INNER JOIN BARRIOS 
-            ON DOMICILIOS.barrio_id=BARRIOS.barrio_id
-            INNER JOIN DOMI_EXTERNOS
-            ON DOMICILIOS.trans_externo_id = DOMI_EXTERNOS.domi_externo_id
-            WHERE (hora_salida = 0);
-            ";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($result);
-        break;
 
     case 'listar_domi_en_curso':
         $sql = "SELECT
@@ -455,34 +395,6 @@ switch ($_GET['accion']) {
         echo json_encode($result);
         break;
 
-
-        case 'consultar_domi':
-        $sql = "SELECT
-			DOMICILIOS.domicilio_id,
-            BARRIOS.barrio_id,
-            USERS.user_id,
-            DOMI_EXTERNOS.domi_externo_id,
-            DOMICILIOS.valor_domi_externo,
-            DOMICILIOS.valor_venta,
-            DOMICILIOS.numero_factura,
-            DOMICILIOS.hora_salida,
-            DOMICILIOS.inyectologia,
-            DOMICILIOS.observaciones,
-            DOMICILIOS.turno_id
-            FROM DOMICILIOS 
-            INNER JOIN USERS
-            ON DOMICILIOS.trans_interno_id=USERS.user_id
-            INNER JOIN BARRIOS 
-            ON DOMICILIOS.barrio_id=BARRIOS.barrio_id
-            INNER JOIN DOMI_EXTERNOS
-            ON DOMICILIOS.trans_externo_id = DOMI_EXTERNOS.domi_externo_id
-            WHERE domicilio_id=$_GET[domicilio_id]
-        ";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($result);
-        break;
 
 
 

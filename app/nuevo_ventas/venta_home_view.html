@@ -139,9 +139,9 @@
     </div>
     <!-- FIN SIDEBAR BOOTSTRAP -->
 
-    <!-- inicia el contenido de la pagina -->
+    <!-- CONTENIDO PAGINA -->
     <div class="container-fluid bg-light" id="contenido">
-      <!-- inicia navbar -->
+      <!-- NAVBAR -->
       <nav class="row">
         <nav class="navbar navbar-expand-md navbar-dark bg-primary mb-4">
           <div class="container-fluid" id="contenido_navbar">
@@ -231,7 +231,7 @@
       </nav>
       <!-- finaliza navbar -->
 
-      <!-- inicia encabezado pagina -->
+      <!-- ENCABEZADO PAGINA -->
       <div class="row">
         <section class="col-md-4">
           <h4>VIERNES,5 DE MAYO DE 2023</h4>
@@ -246,7 +246,7 @@
       <!-- finaliza encabezado       -->
 
       <div class="row">
-        <!-- inicia sección de domicilios -->
+        <!-- SECCION DOMICILIOS -->
         <section class="container col-md-6">
           <h3>AREA DE DOMICILIOS</h3>
           <button
@@ -267,12 +267,10 @@
           <h5>PENDIENTES POR SALIR</h5>
           <div class="row">
             <section class="table-responsive" id="tabla">
-              <table
-                class="table display compact"
-                id="tbl_domi_por_salir"
-              >
+              <table class="table display compact" id="tbl_domi_por_salir">
                 <thead>
                   <tr>
+                    <td>id</td>
                     <td>Creado</td>
                     <td>Barrio</td>
                     <td>Interno</td>
@@ -289,10 +287,7 @@
           <h5>EN ENTREGA</h5>
           <div class="row">
             <section class="table-responsive" id="tabla">
-              <table
-                class="table display compact"
-                id="tbl_domi_en_curso"
-              >
+              <table class="table display compact" id="tbl_domi_en_curso">
                 <thead>
                   <tr>
                     <td>Barrio</td>
@@ -309,7 +304,7 @@
           </div>
         </section>
         <!-- finaliza seccion de  domicilios -->
-        <!-- inicia seccion de gestiones -->
+        <!-- SECCION GESTIONES -->
         <section class="container col-md-6">
           <h3>AREA DE GESTIONES</h3>
           <h5>Últimos 5 Gestiones Hoy</h5>
@@ -862,7 +857,7 @@
     </div>
     <!-- FINALIZA MODAL CERRAR FINAL -->
     <!-- -------------------------->
-    <!-- MODAL MIS GESTIONES/DETALLE DE PRODUCTOS-->
+    <!-- MODAL GESTIONES/PRODUCTOS-->
     <!-- ------------------------->
     <div class="modal fade" tabindex="1" id="mdl_gestiones_mes_vendedor">
       <div class="modal-dialog modal-xl modal-dialog modal-dialog-scrollable">
@@ -910,7 +905,7 @@
     </div>
     <!-- FIN MODAL mis gestiones / detalle de productos -->
     <!-- -------------------------->
-    <!-- MODAL MIS GESTIONES/AGRUPADAS POR DIA-->
+    <!-- MODAL GESTIONES/DIA-->
     <!-- ------------------------->
     <div class="modal fade" tabindex="1" id="mdl_gestiones_agrupadas_por_dia">
       <div class="modal-dialog modal-xl modal-dialog modal-dialog-scrollable">
@@ -1046,9 +1041,9 @@
                 />
               </div>
 
-              <div 
-              class="col-md-9 input-group input-group-sm mb-2"
-              id="bloque_valor_venta"
+              <div
+                class="col-md-9 input-group input-group-sm mb-2"
+                id="bloque_valor_venta"
               >
                 <span class="input-group-text" id="inputGroup-sizing-sm"
                   >Valor Venta:</span
@@ -1145,10 +1140,9 @@
                 />
               </div>
 
-
-              <div 
-              class="input-group input-group input-group-sm mb-2"
-              id="bloque_hora_salida"
+              <div
+                class="input-group input-group input-group-sm mb-2"
+                id="bloque_hora_salida"
               >
                 <button
                   class="btn btn-primary"
@@ -1173,10 +1167,9 @@
                 />
               </div>
 
-
-              <div 
-              class="input-group input-group input-group-sm mb-2"
-              id="bloque_inyectologia"
+              <div
+                class="input-group input-group input-group-sm mb-2"
+                id="bloque_inyectologia"
               >
                 <button
                   class="btn btn-primary"
@@ -1201,9 +1194,9 @@
                 </button>
               </div>
 
-              <div 
-              class="col-md-9 input-group input-group-sm mb-2"
-              id="bloque_observaciones"
+              <div
+                class="col-md-9 input-group input-group-sm mb-2"
+                id="bloque_observaciones"
               >
                 <span class="input-group-text" id="inputGroup-sizing-sm"
                   >Observaciones:</span
@@ -1240,25 +1233,25 @@
     </div>
     <!-- final modal nuevo domicilio -->
 
-<!-- ------------------------------------------------------- -->
-<!-- INICIA MODAL EDITAR DOMICILIO INTERNO POR SALIR -->
-<!-- ------------------------------------------------------- -->
+    <!-- ------------------------------------------------------- -->
+    <!-- MODAL VER/EDITAR DOMI POR SALIR -->
+    <!-- ------------------------------------------------------- -->
     <div
       class="modal fade"
       data-bs-backdrop="static"
       style="overflow: hidden"
-      id="mdl_edit_domi_interno_por_salir"
+      id="mdl_domi_por_salir"
     >
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5">
-              MODAL editar/ver domi por salir <span id="fecha_hoy"> 5 DE MAYO 2023</span>
+              MODAL editar/ver domi por salir
+              <span id="fecha_hoy"> 5 DE MAYO 2023</span>
             </h1>
           </div>
           <div class="modal-body">
             <form id="frm_edit_domi_interno_por_salir">
-
               <div class="col-md-9 input-group input-group-sm mb-2">
                 <span class="input-group-text" id="inputGroup-sizing-sm"
                   >id:</span
@@ -1267,9 +1260,9 @@
                   type="text"
                   class="form-control"
                   id="npt_edit_domicilio_id"
+                  disabled
                 />
               </div>
-
 
               <div
                 class="selectBarrio col-md-9 input-group input-group-sm mb-2"
@@ -1281,18 +1274,18 @@
                   class="form-select form-select-sm"
                   id="slct_edit_barrio"
                 ></select>
-                <input type="hidden" class="form-control" id="npt_edit_barrio_id" />
+                <input
+                  type="hidden"
+                  class="form-control"
+                  id="npt_edit_barrio_id"
+                />
               </div>
 
               <div class="col-md-9 input-group input-group-sm mb-2">
                 <span class="input-group-text" id="inputGroup-sizing-sm"
                   ># Factura:</span
                 >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="npt_edit_factura"
-                />
+                <input type="text" class="form-control" id="npt_edit_factura" />
               </div>
 
               <div
@@ -1302,7 +1295,10 @@
                 <span class="input-group-text" id="inputGroup-sizing-sm"
                   >transporte_externo:</span
                 >
-                <select class="form-select" id="slct_edit_domi_externo"></select>
+                <select
+                  class="form-select"
+                  id="slct_edit_domi_externo"
+                ></select>
                 <input
                   type="hidden"
                   class="form-control"
@@ -1335,7 +1331,10 @@
                 <span class="input-group-text" id="inputGroup-sizing-sm"
                   >Tr.Interno:</span
                 >
-                <select class="form-select" id="slct_edit_transportador"></select>
+                <select
+                  class="form-select"
+                  id="slct_edit_transportador"
+                ></select>
                 <input
                   type="hidden"
                   class="form-control"
@@ -1376,13 +1375,14 @@
                 />
               </div>
 
-
-
-              <div class="input-group input-group input-group-sm mb-2">
+              <div
+                class="input-group input-group input-group-sm mb-2"
+                id="bloque_edit_inyectologia"
+              >
                 <button
                   class="btn btn-primary"
                   type="button"
-                  id="btn_inyectologia"
+                  id="btn_edit_inyectologia"
                 >
                   Inyectología
                 </button>
@@ -1396,32 +1396,11 @@
                 <button
                   class="btn btn-secondary"
                   type="button"
-                  id="btn_inyectologia_cancel"
+                  id="btn_edit_inyectologia_cancel"
                 >
                   x
                 </button>
               </div>
-
-              <!-- <div class="form-check form-switch mb-2">
-                <label
-                  class="form-check-label"
-                  for="check_inyectologia"
-                  id="check_edit_inyectologia_label"
-                  >Inyectologia</label
-                >
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  role="switch"
-                  value="1"
-                  id="check_edit_inyectologia"
-                />
-                <input
-                  type="text"
-                  class="form-control"
-                  id="npt_edit_inyectologia"
-                />
-              </div> -->
 
               <div class="col-md-9 input-group input-group-sm mb-2">
                 <span class="input-group-text" id="inputGroup-sizing-sm"
@@ -1441,6 +1420,7 @@
                   type="text"
                   class="form-control"
                   id="npt_edit_turno_id"
+                  disabled
                 />
               </div>
             </form>
@@ -1451,10 +1431,15 @@
             <button
               type="submit"
               class="btn btn-primary"
-              id="btn_guardar_nuevo_domicilio"
+              id="btn_modificar_domi"
             >
-              Confirma Agregar
+              Modificar Datos
             </button>
+
+            <button type="submit" class="btn btn-danger" id="btn_eliminar_domi">
+              Eliminar
+            </button>
+
             <button
               type="button"
               class="btn btn-secondary"
@@ -1466,15 +1451,55 @@
         </div>
       </div>
     </div>
-    <!-- final modal nuevo domicilio -->
+    <!-- final modal VER EDITAR domicilio -->
 
+    <!-- ----------------------- -->
+    <!-- MODAL CONFIRMA ELIMINAR -->
+    <!-- ----------------------- -->
 
-<!-- final modal editar domicilio interno por salir-- >
+    <div
+      class="modal fade"
+      data-bs-backdrop="static"
+      style="overflow: hidden"
+      id="mdl_confirma_eliminar"
+    >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">CONFIRMA ELIMINAR</h1>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-12">
+                <p>Está segur@ que Quiere Eliminar este Domicilio?</p>
+                <p>No podrá ser recuperado</p>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-bs-dismiss="modal"
+              id="btn_confirma_eliminar"
+            >
+              Confirma Eliminar
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-
-<!-- ----------------------------- -->
-<!-- modal domicilios entregados -->
-<!-- ----------------------------- -->
+    <!-- ----------------------------- -->
+    <!-- MODAL DOMICILIOS ENTREGADOS -->
+    <!-- ----------------------------- -->
     <div
       class="modal fade"
       data-bs-backdrop="static"
@@ -1489,31 +1514,31 @@
             </h1>
           </div>
           <div class="modal-body">
-          <!-- contenido del modal body -->
-              <div class="row">
-                <div class="col-md-12">
-                  <table class="table" id="tbl_domi_entregados">
-                    <thead>
-                      <tr>
-                        <td>Id</td>
-                        <td>creado</td>
-                        <td>Barrio</td>
-                        <td>Interno</td>
-                        <td>Externo</td>
-                        <td>Ext/val</td>
-                        <td>Venta</td>
-                        <td>Factura</td>
-                        <td>Salió</td>
-                        <td>Llegó</td>
-                        <td>Iny</td>
-                        <td>Obs</td>
-                        <td>Turno</td>
-                        <td></td>
-                      </tr>
-                    </thead>
-                  </table>
-                </div>
+            <!-- contenido del modal body -->
+            <div class="row">
+              <div class="col-md-12">
+                <table class="table" id="tbl_domi_entregados">
+                  <thead>
+                    <tr>
+                      <td>Id</td>
+                      <td>creado</td>
+                      <td>Barrio</td>
+                      <td>Interno</td>
+                      <td>Externo</td>
+                      <td>Ext/val</td>
+                      <td>Venta</td>
+                      <td>Factura</td>
+                      <td>Salió</td>
+                      <td>Llegó</td>
+                      <td>Iny</td>
+                      <td>Obs</td>
+                      <td>Turno</td>
+                      <td></td>
+                    </tr>
+                  </thead>
+                </table>
               </div>
+            </div>
           </div>
           <div class="modal-footer">
             <button
@@ -1527,9 +1552,6 @@
         </div>
       </div>
     </div>
-
-
-
 
     <!-- -------------------------->
     <!-- MODAL VENTA ACUMULADA-->
@@ -1712,7 +1734,7 @@
     <!-- ------- -->
     <!-- SCRIPTS -->
     <!-- ------- -->
-<!-- CDN jquery 3.6.1 js -->
+    <!-- CDN jquery 3.6.1 js -->
     <script
       src="https://code.jquery.com/jquery-3.6.1.min.js"
       integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
@@ -1732,7 +1754,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/es-us.min.js"></script>
     <!-- scripts de la aplicacion -->
-    <script src="venta_home_ctrl.js"></script>
+    <script src="ventas_home_ctrl.js"></script>
+    <script src="domi_create.js"></script>
+    <script src="domixsalir_edit.js"></script>
+    <script src="domixsalir_del.js"></script>
+    <script src="domi_en_curso.js"></script>
+    <script src="domi_entregados.js"></script>
+    <script src="gestion_create.js"></script>
+    <script src="gestion_edit.js"></script>
+    <script src="gestion_del.js"></script>
+    <script src="sidebar.js"></script>
+    <script src="turno_cerrar.js"></script>
     <!-- select2 -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   </body>

@@ -105,7 +105,8 @@ switch ($_GET['accion']) {
         venta_valor_venta=$_POST[venta_valor_venta],
         user_id=$_POST[user_id],
         venta_utilidad=$_POST[venta_utilidad]
-        WHERE venta_id=$_GET[venta_id]";
+        WHERE venta_id=$_GET[venta_id]
+        ";
         $response = $pdo->exec($sql);
         echo json_encode($response);
         break;
