@@ -72,14 +72,14 @@ document.addEventListener("DOMContentLoaded", function () {
       function () {
         let registro = listadoDomiPorSalir.row($(this).parents("tr")).data();
         reestablecerModalDomiPorSalir();
-        listarRegistroDomiPorSalir(registro.domicilio_id);
+        listarRegistroDomiPorSalir(registro);
         let btnDomiInternoPorsalir = registro.btn_domi_interno;
         if (btnDomiInternoPorsalir == 1) {
           $(
             "#bloque_edit_domi_externo, #bloque_edit_valor_domi_externo"
           ).hide();
         } else {
-          $("#grupo_edit_inyectologia").hide();
+          $("#bloque_edit_inyectologia").hide();
           $("#bloque_edit_transportador").hide();
           $(
             "#bloque_edit_domi_externo, #bloque_edit_valor_domi_externo"

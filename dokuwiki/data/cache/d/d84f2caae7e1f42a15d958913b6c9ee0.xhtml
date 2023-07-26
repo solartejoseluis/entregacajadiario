@@ -1,0 +1,54 @@
+
+<h2 class="sectionedit1" id="para_el_dia_de_hoy">Para el día de hoy:</h2>
+<div class="level2">
+
+<p>
+Revisar y adecuar el proceso de edición de un registro
+</p>
+
+<p>
+Llevo varios días intentando que funcione:
+</p>
+
+<p>
+Hoy voy a comenzar revisando los tipos de datos que recolecta la base de datos.
+</p>
+
+<p>
+Pero también necesito tener claro el proceso para precisar lugares error.
+</p>
+
+<p>
+<strong>Primero:</strong> revisar el estado actual de envío de datos a la base para guardar:
+</p>
+
+<p>
+Al pulsar el botón Guardar Modificaciones en el modal, aparece el siguiente error:
+</p>
+
+<p>
+<strong>Uncaught TypeError: can&#039;t convert undefined to object</strong>
+</p>
+
+<p>
+<strong>jQuery</strong> modificarDomicilio <a href="http://localhost/entregacajadiario/app/nuevo_ventas/domixsalir_edit.js" class="urlextern" title="http://localhost/entregacajadiario/app/nuevo_ventas/domixsalir_edit.js" rel="ugc nofollow">http://localhost/entregacajadiario/app/nuevo_ventas/domixsalir_edit.js</a>:&lt;anonymous&gt; <a href="http://localhost/entregacajadiario/app/nuevo_ventas/domixsalir_edit.js" class="urlextern" title="http://localhost/entregacajadiario/app/nuevo_ventas/domixsalir_edit.js" rel="ugc nofollow">http://localhost/entregacajadiario/app/nuevo_ventas/domixsalir_edit.js</a>:
+</p>
+
+<p>
+<strong>jQuery</strong> &lt;anonymous&gt; <a href="http://localhost/entregacajadiario/app/nuevo_ventas/domixsalir_edit.js:66" class="urlextern" title="http://localhost/entregacajadiario/app/nuevo_ventas/domixsalir_edit.js:66" rel="ugc nofollow">http://localhost/entregacajadiario/app/nuevo_ventas/domixsalir_edit.js:66</a>
+jquery-3.6.1.min.js:2:1280
+</p>
+
+<p>
+====
+</p>
+
+<p>
+al parecer tiene que ver con el paso de los datos al ajax.. voy a revisar
+</p>
+
+<p>
+los datos no estan pasando al ajax..
+</p>
+
+</div>

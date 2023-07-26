@@ -1,0 +1,31 @@
+===== Para el día de hoy: =====
+
+
+Revisar y adecuar el proceso de edición de un registro
+
+Llevo varios días intentando que funcione:
+
+Hoy voy a comenzar revisando los tipos de datos que recolecta la base de datos.
+
+Pero también necesito tener claro el proceso para precisar lugares error.
+
+
+**Primero:** revisar el estado actual de envío de datos a la base para guardar:
+
+Al pulsar el botón Guardar Modificaciones en el modal, aparece el siguiente error:
+
+
+**Uncaught TypeError: can't convert undefined to object**
+
+**jQuery** modificarDomicilio http://localhost/entregacajadiario/app/nuevo_ventas/domixsalir_edit.js:<anonymous> http://localhost/entregacajadiario/app/nuevo_ventas/domixsalir_edit.js:
+
+**jQuery** <anonymous> http://localhost/entregacajadiario/app/nuevo_ventas/domixsalir_edit.js:66
+jquery-3.6.1.min.js:2:1280
+
+====
+
+al parecer tiene que ver con el paso de los datos al ajax.. voy a revisar
+
+
+los datos no estan pasando al ajax..
+

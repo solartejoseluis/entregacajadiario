@@ -16,7 +16,7 @@ switch ($_GET['accion']) {
             DOMICILIOS.btn_domi_interno,
             DOMICILIOS.btn_domi_externo,
             DOMICILIOS.inyectologia
-            FROM DOMICILIOS 
+            FROM DOMICILIOS
             INNER JOIN USERS
             ON DOMICILIOS.trans_interno_id=USERS.user_id
             INNER JOIN BARRIOS 
@@ -33,7 +33,7 @@ switch ($_GET['accion']) {
 
 
     case 'modificar_domicilio':
-        $sql = "UPDATE DOMICILIOS SET(
+    $sql = "UPDATE DOMICILIOS SET
       barrio_id= '$_POST[barrio_id]',
       numero_factura= '$_POST[numero_factura]',
       trans_interno_id= '$_POST[trans_interno_id]',
@@ -44,18 +44,18 @@ switch ($_GET['accion']) {
       inyectologia= '$_POST[inyectologia]',
       observaciones= '$_POST[observaciones]'
       WHERE domicilio_id=$_GET[domicilio_id]
-    )";
+    ";
         $response = $pdo->exec($sql);
         echo json_encode($response);
         break;
 
 
-    case 'consultar_domi_por_salir':
+     case 'consultar_domi_por_salir':
         $sql = "SELECT
 			DOMICILIOS.domicilio_id,
-            BARRIOS.barrio_id,
-            USERS.user_id,
-            DOMI_EXTERNOS.domi_externo_id,
+            DOMICILIOS.barrio_id,
+            DOMICILIOS.trans_interno_id,
+            DOMICILIOS.trans_externo_id,
             DOMICILIOS.valor_domi_externo,
             DOMICILIOS.valor_venta,
             DOMICILIOS.numero_factura,
@@ -64,12 +64,6 @@ switch ($_GET['accion']) {
             DOMICILIOS.observaciones,
             DOMICILIOS.turno_id
             FROM DOMICILIOS 
-            INNER JOIN USERS
-            ON DOMICILIOS.trans_interno_id=USERS.user_id
-            INNER JOIN BARRIOS 
-            ON DOMICILIOS.barrio_id=BARRIOS.barrio_id
-            INNER JOIN DOMI_EXTERNOS
-            ON DOMICILIOS.trans_externo_id = DOMI_EXTERNOS.domi_externo_id
             WHERE domicilio_id=$_GET[domicilio_id]
         ";
         $stmt = $pdo->prepare($sql);

@@ -2,21 +2,22 @@
 //CICLO VER/EDITAR DOMI por SALIR
 //----------------------------------
 
-function listarRegistroDomiPorSalir(domicilio_id) {
+function listarRegistroDomiPorSalir(registro) {
   $.ajax({
     type: "GET",
     url:
-      "domixsalir_mdl.php?accion=consultar_domi_por_salir&domicilio_id=" + domicilio_id,
+      "domixsalir_mdl.php?accion=consultar_domi_por_salir&domicilio_id=" +
+      registro.domicilio_id,
     data: "",
     success: function (datos) {
       $("#npt_edit_domicilio_id").val(datos[0].domicilio_id);
       $("#slct_edit_barrio").val(datos[0].barrio_id);
       $("#npt_edit_barrio_id").val(datos[0].barrio_id);
       $("#npt_edit_factura").val(datos[0].numero_factura);
-      $("#slct_edit_transportador").val(datos[0].user_id);
-      $("#npt_edit_transportador_id").val(datos[0].barrio_id);
-      $("#slct_edit_domi_externo").val(datos[0].domi_externo_id);
-      $("#npt_edit_domi_externo_id").val(datos[0].domi_externo_id);
+      $("#slct_edit_transportador").val(datos[0].trans_interno_id);
+      $("#npt_edit_transportador_id").val(datos[0].trans_interno_id);
+      $("#slct_edit_trans_externo").val(datos[0].trans_externo_id);
+      $("#npt_edit_trans_externo_id").val(datos[0].trans_externo_id);
       $("#npt_edit_valor_domi_externo").val(datos[0].valor_domi_externo);
       $("#npt_edit_valor_domi_externo_base").val(datos[0].valor_domi_externo);
       $("#npt_edit_valor_producto").val(datos[0].valor_venta);
@@ -28,25 +29,33 @@ function listarRegistroDomiPorSalir(domicilio_id) {
       $("#mdl_edit_domi_interno_por_salir").modal("show");
     },
     error: function () {
-      alert("Problema en recuperarRegistro");
+      alert("Problema en recuperar");
     },
   });
 }
 
-//TOMA EL VALOR DEL SELECT Y PONERLO EN INPUT
+// AL CAMBIAR PASA EL VALOR DE SELECT AL INPUT
 $("#slct_edit_barrio").change(function () {
   $("#npt_edit_barrio_id").val($(this).val());
 });
 
-$("#slct_edit_domi_externo").change(function () {
-  $("#npt_edit_domi_externo_id").val($(this).val());
+$("#slct_edit_trans_externo").change(function () {
+  $("#npt_edit_trans_externo_id").val($(this).val());
 });
 
 $("#slct_edit_transportador").change(function () {
   $("#npt_edit_transportador_id").val($(this).val());
 });
 
-//Boton Editar Inyectologia
+$("#npt_edit_valor_domi_externo").change(function () {
+  $("#npt_edit_valor_domi_externo_base").val($(this).val());
+});
+
+$("#npt_edit_valor_producto").change(function () {
+  $("#npt_edit_valor_producto_base").val($(this).val());
+});
+
+//BOTON INYECTOLOGIA
 $("#bloque_edit_inyectologia").on(
   "click",
   "#btn_edit_inyectologia",
@@ -62,19 +71,20 @@ $("#bloque_edit_inyectologia").on(
   }
 );
 
-
 $("#btn_modificar_domi").on("click", function () {
-  let registro = recolectarDatosFormularioEdit();
+  $("#mdl_domi_por_salir").modal("hide");
+  let registro = recolectarEditDomi();
   modificarDomicilio(registro);
 });
 
-function recolectarDatosFormularioEdit() {
+
+function recolectarEditDomi() {
   let registro = {
     domicilio_id: $("#npt_edit_domicilio_id").val(),
     barrio_id: $("#npt_edit_barrio_id").val(),
     numero_factura: $("#npt_edit_factura").val(),
     trans_interno_id: $("#npt_edit_transportador_id").val(),
-    trans_externo_id: $("npt_edit_domi_externo_id").val(),
+    trans_externo_id: $("#npt_edit_trans_externo_id").val(),
     valor_domi_externo: $("#npt_edit_valor_domi_externo_base").val(),
     valor_venta: $("#npt_edit_valor_producto_base").val(),
     hora_salida: $("#npt_edit_hora_salida").val(),
@@ -91,6 +101,7 @@ function modificarDomicilio(registro) {
     url:
       "domixsalir_mdl.php?accion=modificar_domicilio&domicilio_id=" +
       registro.domicilio_id,
+    dataSrc: "",
     data: registro,
     success: function (msg) {
       $("#tbl_domi_por_salir").DataTable().ajax.reload();
@@ -100,4 +111,3 @@ function modificarDomicilio(registro) {
     },
   });
 }
-// FIN CICLO EDITAR REGISTRO

@@ -92,7 +92,8 @@ switch ($_GET['accion']) {
         user_password='$_POST[user_edit_password]',
         user_perfil=$_POST[user_edit_perfil],
         user_vendedor=$_POST[user_edit_vendedor]
-        WHERE user_id=$_GET[user_edit_id]";
+        WHERE user_id=$_GET[user_edit_id]
+        ";
         $response = $pdo->exec($sql);
         echo json_encode($response);
         break;
