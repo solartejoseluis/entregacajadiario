@@ -302,7 +302,7 @@ function recolectaDatosMdlNuevoDomi() {
 function guardarDomicilio(registro) {
   $.ajax({
     type: "POST",
-    url: "domi_mdl.php?accion=guardar_domicilio",
+    url: "domi_new_mdl.php?accion=guardar_domicilio",
     data: registro,
 
     success: function (msg) {
@@ -311,7 +311,7 @@ function guardarDomicilio(registro) {
     },
 
     error: function () {
-      alert("problema en: guardarDomicilio");
+      alert("problema en: guardar_domicilio");
     },
   });
 }

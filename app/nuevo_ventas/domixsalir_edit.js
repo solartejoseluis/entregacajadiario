@@ -77,6 +77,17 @@ $("#btn_modificar_domi").on("click", function () {
   modificarDomicilio(registro);
 });
 
+  // rellena hora salida
+  $("#btn_edit_hora_salida").on("click", function () {
+    let hora_actual = moment().format("HH:mm");
+    $("#npt_edit_hora_salida").val(hora_actual);
+  });
+  $("#btn_edit_hora_salida_cancel").on(
+  "click",
+  function () {
+    $("#npt_edit_hora_salida").val("0");
+  }
+);
 
 function recolectarEditDomi() {
   let registro = {

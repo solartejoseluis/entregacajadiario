@@ -270,7 +270,6 @@
               <table class="table display compact" id="tbl_domi_por_salir">
                 <thead>
                   <tr>
-                    <td>id</td>
                     <td>Creado</td>
                     <td>Barrio</td>
                     <td>Interno</td>
@@ -278,13 +277,14 @@
                     <td>Venta</td>
                     <td>Iny</td>
                     <td></td>
+                    <td></td>
                   </tr>
                 </thead>
               </table>
             </section>
           </div>
 
-          <h5>EN ENTREGA</h5>
+    <h5> EN ENTREGA</h5>
           <div class="row">
             <section class="table-responsive" id="tabla">
               <table class="table display compact" id="tbl_domi_en_curso">
@@ -296,6 +296,7 @@
                     <td>Venta</td>
                     <td>Salió</td>
                     <td>Iny</td>
+                    <td></td>
                     <td></td>
                   </tr>
                 </thead>
@@ -1149,7 +1150,7 @@
                   type="button"
                   id="btn_hora_salida"
                 >
-                  H.Salida
+                  Hora De Salida
                 </button>
                 <input
                   type="text"
@@ -1252,7 +1253,10 @@
           </div>
           <div class="modal-body">
             <form id="frm_edit_domi_interno_por_salir">
-              <div class="col-md-9 input-group input-group-sm mb-2">
+              <div
+                class="col-md-9 input-group input-group-sm mb-2"
+                style="display: none"
+              >
                 <span class="input-group-text" id="inputGroup-sizing-sm"
                   >id:</span
                 >
@@ -1362,9 +1366,9 @@
                 <button
                   class="btn btn-primary"
                   type="button"
-                  id="btn_hora_salida"
+                  id="btn_edit_hora_salida"
                 >
-                  H.Salida
+                  Hora De Salida
                 </button>
                 <input
                   type="text"
@@ -1373,6 +1377,13 @@
                   id="npt_edit_hora_salida"
                   disabled
                 />
+                <button
+                  class="btn btn-secondary"
+                  type="button"
+                  id="btn_edit_hora_salida_cancel"
+                >
+                  x
+                </button>
               </div>
 
               <div
@@ -1412,7 +1423,10 @@
                   id="npt_edit_observaciones"
                 />
               </div>
-              <div class="col-md-9 input-group input-group-sm mb-2">
+              <div
+                class="col-md-9 input-group input-group-sm mb-2"
+                style="display: none"
+              >
                 <span class="input-group-text" id="inputGroup-sizing-sm"
                   >Turno:</span
                 >
@@ -1428,25 +1442,34 @@
           </div>
           <!-- footer modal nueva venta -->
           <div class="modal-footer">
-            <button
-              type="submit"
-              class="btn btn-primary btnModificarDomi"
-              id="btn_modificar_domi"
-            >
-              Modificar Datos
-            </button>
+            <div class="row">
+              <div class="col-md-3">
+                <button
+                  type="submit"
+                  class="btn btn-outline-danger btn-sm"
+                  id="btn_eliminar_domi"
+                >
+                  Eliminar
+                </button>
+              </div>
+              <div class="col-md-9">
+                <button
+                  type="submit"
+                  class="btn btn-primary btnModificarDomi"
+                  id="btn_modificar_domi"
+                >
+                  Guardar Cambios
+                </button>
 
-            <button type="submit" class="btn btn-danger" id="btn_eliminar_domi">
-              Eliminar
-            </button>
-
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Cancelar
-            </button>
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Cancelar
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1481,7 +1504,7 @@
               type="button"
               class="btn btn-danger"
               data-bs-dismiss="modal"
-              id="btn_confirma_eliminar"
+              id="btn_confirma_eliminar_domi"
             >
               Confirma Eliminar
             </button>
@@ -1506,12 +1529,13 @@
       style="overflow: hidden"
       id="mdl_domi_entregados"
     >
-      <div class="modal-dialog modal-xl">
+      <div class="modal-dialog modal-xl modal-dialog-scrollable">
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5">
               DOMICILIOS ENTREGADOS <span id="fecha_hoy"> 5 DE MAYO 2023</span>
             </h1>
+             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <!-- contenido del modal body -->
@@ -1520,8 +1544,6 @@
                 <table class="table" id="tbl_domi_entregados">
                   <thead>
                     <tr>
-                      <td>Id</td>
-                      <td>creado</td>
                       <td>Barrio</td>
                       <td>Interno</td>
                       <td>Externo</td>
@@ -1755,12 +1777,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/es-us.min.js"></script>
     <!-- scripts de la aplicacion -->
     <script src="ventas_home_ctrl.js"></script>
-    <script src="domi_create.js"></script>
+    <script src="domi_new.js"></script>
     <script src="domixsalir_edit.js"></script>
     <script src="domixsalir_del.js"></script>
     <script src="domi_en_curso.js"></script>
     <script src="domi_entregados.js"></script>
-    <script src="gestion_create.js"></script>
+    <script src="gestion_new.js"></script>
     <script src="gestion_edit.js"></script>
     <script src="gestion_del.js"></script>
     <script src="sidebar.js"></script>

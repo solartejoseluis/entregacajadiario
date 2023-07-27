@@ -5,7 +5,7 @@ require "../00_connect/pdo.php";
 
 switch ($_GET['accion']) {
 
-    case 'listar_domi_por_salir':
+    case 'listar_domi_en_curso':
         $sql = "SELECT
             DATE_FORMAT(DOMICILIOS.hora_creado, '%H:%i') AS hora_creado,
             DOMICILIOS.domicilio_id,
@@ -15,6 +15,7 @@ switch ($_GET['accion']) {
             DOMICILIOS.valor_venta,
             DOMICILIOS.btn_domi_interno,
             DOMICILIOS.btn_domi_externo,
+            DOMICILIOS.hora_salida,
             DOMICILIOS.inyectologia
             FROM DOMICILIOS
             INNER JOIN USERS
@@ -23,7 +24,7 @@ switch ($_GET['accion']) {
             ON DOMICILIOS.barrio_id=BARRIOS.barrio_id
             INNER JOIN DOMI_EXTERNOS
             ON DOMICILIOS.trans_externo_id = DOMI_EXTERNOS.domi_externo_id
-            WHERE (hora_salida = 0);
+            WHERE (hora_salida != 0) AND (hora_llegada = 0);
             ";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
@@ -50,16 +51,16 @@ switch ($_GET['accion']) {
         break;
 
 
-        case 'define_hora_salida':
+        case 'define_hora_llegada':
             $sql = "UPDATE DOMICILIOS SET
-            hora_salida=DATE_FORMAT(NOW(),'%H:%i')
+            hora_llegada=DATE_FORMAT(NOW(),'%H:%i')
             WHERE domicilio_id=$_GET[domicilio_id]
             ";
                 $response = $pdo->exec($sql);
                 echo json_encode($response);
                 break;
 
-     case 'consultar_domi_por_salir':
+     case 'consultar_domi_en_curso':
         $sql = "SELECT
 			DOMICILIOS.domicilio_id,
             DOMICILIOS.barrio_id,
