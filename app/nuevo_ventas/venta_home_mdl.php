@@ -32,18 +32,16 @@ switch ($_GET['accion']) {
         VENTAS.venta_valor_venta,
         USERS.user_nombre,
         VENTAS.venta_utilidad,
-        VENTAS.turno_iid
+        VENTAS.turno_id
         FROM VENTAS
         INNER JOIN USERS
         ON VENTAS.user_id=USERS.user_id
-        WHERE turno_id=$_GET[turno_id]
         ";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($result);
         break;
-
 
 
     case 'guardar_venta':
@@ -342,10 +340,6 @@ switch ($_GET['accion']) {
         break;
 
 
-
-
-
-        
     case 'listar_domi_entregados':
         $sql = "SELECT
 			DOMICILIOS.domicilio_id,
@@ -375,9 +369,4 @@ switch ($_GET['accion']) {
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($result);
         break;
-
-
-
-
-
 };

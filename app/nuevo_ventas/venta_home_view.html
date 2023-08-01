@@ -284,7 +284,7 @@
             </section>
           </div>
 
-    <h5> EN ENTREGA</h5>
+          <h5>EN ENTREGA</h5>
           <div class="row">
             <section class="table-responsive" id="tabla">
               <table class="table display compact" id="tbl_domi_en_curso">
@@ -308,10 +308,9 @@
         <!-- SECCION GESTIONES -->
         <section class="container col-md-6">
           <h3>AREA DE GESTIONES</h3>
-          <h5>Últimos 5 Gestiones Hoy</h5>
           <div class="row">
             <section class="table-responsive" id="tabla">
-              <table class="table" id="tbl_domicilios">
+              <table class="table display compact" id="tbl_gestiones">
                 <thead>
                   <tr>
                     <td>Producto</td>
@@ -320,8 +319,6 @@
                     <td>Valor Venta</td>
                     <td>Vendedor</td>
                     <td>Utilidad</td>
-                    <td></td>
-                    <td></td>
                     <td></td>
                   </tr>
                 </thead>
@@ -339,9 +336,9 @@
     </div>
     <!-- final seccion contenido de la pagina -->
 
-    <!-- -------------------------->
+    <!-- --------------------->
     <!-- MODAL NUEVA GESTIÓN-->
-    <!-- ------------------------->
+    <!-- --------------------->
     <div
       class="modal fade"
       data-bs-backdrop="static"
@@ -351,7 +348,8 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5">NUEVA GESTION</h1>
+            <h1 class="modal-title fs-5">
+              NUEVA GESTION</h1>
           </div>
           <div class="modal-body">
             <form id="frm_nueva_venta">
@@ -359,6 +357,43 @@
               <div class="row">
                 <input type="hidden" class="form-control" id="npt_venta_id" />
               </div>
+              <!--   VENDEDOR -->
+              <div
+                class="selectVendedor col-md-9 input-group input-group-sm mb-2"
+              >
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >Vendedor Suri:</span
+                >
+                <select
+                  class="form-select form-select-sm"
+                  id="slct_vendedor"
+                ></select>
+                <input
+                  type="hidden"
+                  class="form-control"
+                  id="npt_vendedor_id"
+                />
+              </div>
+
+
+              <div
+                class="selectBarrio col-md-9 input-group input-group-sm mb-2"
+              >
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >Barrio:</span
+                >
+                <select
+                  class="form-select form-select-sm"
+                  id="slct_barrio"
+                ></select>
+                <input type="hidden" class="form-control" id="npt_barrio_id" />
+              </div>
+
+
+
+
+
+
               <!-- PRODUCTO -->
               <div class="col-md-9 input-group input-group-sm mb-2">
                 <span class="input-group-text" id="inputGroup-sizing-sm"
@@ -438,23 +473,6 @@
                   disabled
                 />
               </div>
-              <!--   VENDEDOR -->
-              <div
-                class="selectVendedor col-md-9 input-group input-group-sm mb-2"
-              >
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Vendedor:</span
-                >
-                <select
-                  class="form-select form-select-sm"
-                  id="slct_vendedor"
-                ></select>
-                <input
-                  type="hidden"
-                  class="form-control"
-                  id="npt_vendedor_id"
-                />
-              </div>
             </form>
           </div>
           <div class="modal-footer">
@@ -474,20 +492,22 @@
     </div>
     <!-- Final Modal Nueva Gestion -->
 
-    <!-- ---------------------------------- -->
+    <!-- ---------------------->
     <!-- MODAL EDITAR GESTION-->
-    <!-- ---------------------------------- -->
+    <!-- ---------------------->
     <div
       class="modal fade"
       data-bs-backdrop="static"
       id="mdl_edit_ventas"
       tabindex="-1"
     >
-      <div class="modal-dialog modal-lg">
+      <div class="modal-dialog">
         <div class="modal-content">
           <!-- cabecera del modal de edicion -->
           <div class="modal-header">
-            <h1 class="modal-title fs-5">EDITAR REGISTRO</h1>
+            <h1 class="modal-title fs-5">
+              EDITAR GESTION</h1>
+
             <button
               type="button"
               class="btn-close"
@@ -506,113 +526,120 @@
                   id="nptEdit-venta_id"
                 />
               </div>
-              <!-- EDITAR PRODUCTO -->
-              <div class="row mb-3">
-                <div class="col-md-3 ms-auto">
-                  <label
-                    for="nptEdit_venta_nombre_producto"
-                    class="col-form-label"
-                    >Producto:</label
-                  >
-                </div>
-                <div class="col-md-9 ms-auto">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="nptEdit_venta_nombre_producto"
-                    placeholder="Digite Nombre del producto"
-                    onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()"
-                  />
-                </div>
-              </div>
-              <!--  EDITAR PROVEEDOR -->
-              <div class="row mb-3">
-                <div class="col-md-3 ms-auto">
-                  <label
-                    for="nptEdit_venta_nombre_proveedor"
-                    class="col-form-label"
-                    >Proveedor:</label
-                  >
-                </div>
-                <div class="col-md-9 ms-auto">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="nptEdit_venta_nombre_proveedor"
-                    placeholder="Digite Nombre proveedor"
-                    onKeyUp="document.getElementById(this.id).value=document.getElementById(this.id).value.toUpperCase()"
-                  />
-                </div>
-              </div>
-              <!-- EDITAR COSTO PRODUCTO -->
-              <div class="row mb-3">
-                <div class="col-md-3 ms-auto">
-                  <label
-                    for="nptEdit_venta_costo_producto"
-                    class="col-form-label"
-                    >Costo Prod:</label
-                  >
-                </div>
-                <div class="col-md-9 ms-auto">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="nptEdit_venta_costo_producto"
-                    placeholder="Digite Costo de producto"
-                  />
-                </div>
-              </div>
-              <!-- EDITAR VALOR VENTA -->
-              <div class="row mb-3">
-                <div class="col-md-3 ms-auto">
-                  <label for="nptEdit_venta_valor_venta" class="col-form-label">
-                    Valor Venta:</label
-                  >
-                </div>
-                <div class="col-md-9 ms-auto">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="nptEdit_venta_valor_venta"
-                    placeholder="Digite valor venta"
-                  />
-                </div>
-              </div>
+
+
               <!--  EDITAR VENDEDOR -->
-              <div class="row mb-3">
-                <div class="col-md-3 ms-auto">
-                  <label for="nptEdit_user_nombre" class="col-form-label"
-                    >Vendedor:</label
-                  >
-                </div>
-                <div class="col-md-9 ms-auto">
-                  <input
-                    type="hidden"
-                    class="form-control"
-                    id="nptEdit-user_id"
-                  />
-                  <div class="selectUser">
-                    <!-- <input class="form-control" id="nptEdit_user_nombre"> -->
-                    <select class="form-select" id="slctEdit-user"></select>
-                  </div>
-                </div>
+
+              <!--   VENDEDOR -->
+              <div
+                class="selectVendedor col-md-9 input-group input-group-sm mb-2"
+              >
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >Vendedor Suri:</span
+                >
+                <select
+                  class="form-select form-select-sm"
+                  id="slctEdit_user"
+                ></select>
+                <input
+                  type="hidden"
+                  class="form-control"
+                  id="nptEdit_user_id"
+                />
               </div>
+
+
+              <!-- EDITAR PRODUCTO -->
+              <!-- PRODUCTO -->
+              <div class="col-md-9 input-group input-group-sm mb-2">
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >Producto</span
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nptEdit_venta_nombre_producto"
+                />
+              </div>
+
+              <!--  EDITAR PROVEEDOR -->
+              <!-- PROVEEDOR -->
+              <div class="col-md-9 input-group input-group-sm mb-2">
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >Proveedor</span
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nptEdit_venta_nombre_proveedor"
+                  placeholder="Digita Proveedor"
+                />
+              </div>
+
+
+              <!-- EDITAR COSTO PRODUCTO -->
+
+              <!-- COSTO PRODUCTO -->
+              <div class="col-md-9 input-group input-group-sm mb-2">
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >Costo Producto</span
+                >
+                <input
+                  type="hidden"
+                  class="form-control"
+                  id="npt_venta_costo_producto_base"
+                />
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nptEdit_venta_costo_producto"
+                  placeholder="Digita Costo"
+                />
+              </div>
+
+
+
+              <!-- EDITAR VALOR VENTA -->
+              <!-- VALOR VENTA -->
+              <div class="col-md-9 input-group input-group-sm mb-2">
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >Valor Venta</span
+                >
+                <input
+                  type="hidden"
+                  class="form-control"
+                  id="npt_venta_valor_venta_base"
+                />
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nptEdit_venta_valor_venta"
+                  placeholder="Digita Valor Venta"
+                />
+              </div>
+
+
               <!-- EDITAR UTILIDAD -->
-              <div class="row mb-3">
-                <div class="col-md-3 ms-auto">
-                  <label for="nptEdit_venta_utilidad" class="col-form-label"
-                    >Utilidad:</label
-                  >
-                </div>
-                <div class="col-md-9 ms-auto">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="nptEdit_venta_utilidad"
-                    disabled
-                  />
-                </div>
+              <!-- UTILIDAD -->
+              <div class="col-md-9 input-group input-group-sm mb-2">
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >Utilidad</span
+                >
+                <input
+                  type="hidden"
+                  class="form-control"
+                  id="npt_venta_utilidad_base"
+                />
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nptEdit_venta_utilidad"
+                  disabled
+                />
               </div>
+
+
+
             </form>
           </div>
           <!-- final modal body editar-->
@@ -632,9 +659,9 @@
       </div>
     </div>
     <!--  fin modal Editar Gestión -->
-    <!-- ---------------------------------- -->
+    <!-- -------------------->
     <!-- MODAL CERRAR TURNO-->
-    <!-- ---------------------------------- -->
+    <!-- -------------------->
     <div
       class="modal fade"
       data-bs-backdrop="static"
@@ -742,9 +769,9 @@
     </div>
     <!-- FIN MODAL CERRAR TURNO -->
 
-    <!-- ------------------------------- -->
+    <!-- -------------------->
     <!-- MODAL CERRAR FINAL-->
-    <!-- ------------------------------- -->
+    <!-- -------------------->
     <div
       class="modal fade"
       data-bs-backdrop="static"
@@ -857,6 +884,7 @@
       </div>
     </div>
     <!-- FINALIZA MODAL CERRAR FINAL -->
+
     <!-- -------------------------->
     <!-- MODAL GESTIONES/PRODUCTOS-->
     <!-- ------------------------->
@@ -905,6 +933,7 @@
       </div>
     </div>
     <!-- FIN MODAL mis gestiones / detalle de productos -->
+
     <!-- -------------------------->
     <!-- MODAL GESTIONES/DIA-->
     <!-- ------------------------->
@@ -949,9 +978,9 @@
     </div>
     <!-- FIN MODAL mis gestiones / detalle de productos -->
 
-    <!-- -------------------------->
-    <!-- MODAL PRODUCTOS/GESTIONES DEL MES-->
-    <!-- ------------------------->
+    <!-- ------------------------------------>
+    <!-- MODAL PRODUCTOS/GESTIONES DEL MES -->
+    <!-- ------------------------------------>
     <div class="modal fade" tabindex="1" id="mdl_gestiones_mes_todos">
       <div class="modal-dialog modal-xl modal-dialog modal-fullscreen">
         <div class="modal-content">
@@ -997,11 +1026,12 @@
         </div>
       </div>
     </div>
-    <!-- final modal productos/gestiones del mes -->
+    <!-- Final modal productos/gestiones del mes -->
 
-    <!-- -------------------------->
-    <!-- MODAL NUEVO DOMICILIO-->
-    <!-- ------------------------->
+    <!-- ------------------------>
+    <!-- MODAL NUEVO DOMICILIO -->
+    <!-- ------------------------>
+
     <div
       class="modal fade"
       data-bs-backdrop="static"
@@ -1234,9 +1264,9 @@
     </div>
     <!-- final modal nuevo domicilio -->
 
-    <!-- ------------------------------------------------------- -->
+    <!-- ---------------------------------->
     <!-- MODAL VER/EDITAR DOMI POR SALIR -->
-    <!-- ------------------------------------------------------- -->
+    <!-- ---------------------------------->
     <div
       class="modal fade"
       data-bs-backdrop="static"
@@ -1535,7 +1565,12 @@
             <h1 class="modal-title fs-5">
               DOMICILIOS ENTREGADOS <span id="fecha_hoy"> 5 DE MAYO 2023</span>
             </h1>
-             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
           <div class="modal-body">
             <!-- contenido del modal body -->
@@ -1777,6 +1812,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/es-us.min.js"></script>
     <!-- scripts de la aplicacion -->
     <script src="ventas_home_ctrl.js"></script>
+    <script src="menus_ctrl.js"></script>
     <script src="domi_new.js"></script>
     <script src="domixsalir_edit.js"></script>
     <script src="domixsalir_del.js"></script>

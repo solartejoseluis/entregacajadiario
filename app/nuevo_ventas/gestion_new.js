@@ -25,7 +25,7 @@
     $("#npt_turno_id_actual").val("300");
   }
 
-  // validaciones al digitar
+  // Validaciones al digitar
   $("#npt_venta_nombre_producto").keyup(function () {
     $("#npt_venta_nombre_producto").css("background-color", "#dbe5f0");
     $("#npt_venta_nombre_producto").val($(this).val().toUpperCase());
@@ -137,7 +137,6 @@
       $("#mdl_ventas").modal("hide");
       let registro = recolectaDatosMdlNuevaGestion();
       guardarRegistro(registro);
-      // cargaPantallaPrincipal();
     }
   });
 
@@ -160,11 +159,9 @@
       url: "venta_home_mdl.php?accion=guardar_venta",
       data: registro,
 
-      // success: function (msg) {
-      //   // listadoVentas.ajax.reload();
-      //   $("#tblVentas").DataTable().ajax.reload();
-      //   cargaPantallaPrincipal();
-      // },
+     success: function (msg) {
+        $("#tbl_gestiones").DataTable().ajax.reload();
+     },
 
       error: function () {
         alert("problema en: guardarRegistro");

@@ -1,10 +1,10 @@
   //----------------------
   //CICLO EDITAR gestion
   //----------------------
-  function recuperarRegistro(venta_id) {
+  function recuperarRegistro(registro) {
     $.ajax({
       type: "GET",
-      url: "venta_home_mdl.php?accion=consultar_venta&venta_id=" + venta_id,
+      url: "gestion_mdl.php?accion=consultar_venta&venta_id=" + registro.venta_id,
       data: "",
       success: function (datos) {
         $("#nptEdit-venta_id").val(datos[0].venta_id);
@@ -15,9 +15,9 @@
         $("#nptEdit_venta_costo_producto").val(datos[0].venta_costo_producto);
         $("#nptEdit_venta_valor_venta").val(datos[0].venta_valor_venta);
         $("#nptEdit_user_nombre").val(datos[0].user_nombre);
-        $("#nptEdit-user_id").val(datos[0].user_id);
 
         $("#slctEdit-user").val(datos[0].user_id);
+        $("#nptEdit-user_id").val(datos[0].user_id);
 
         $("#nptEdit_venta_utilidad").val(datos[0].venta_utilidad);
         $("#mdl_edit_ventas").modal("show");
@@ -28,10 +28,27 @@
     });
   }
 
-  // //TOMA EL VALOR DEL SELECT Y PONERLO EN INPUT
-  // $("#slctEdit-user").change(function () {
-  //   $("#nptEdit-user_id").val($(this).val());
-  // });
+
+  //carga el select vendedores
+  $(document).ready(function () {
+    $.ajax({
+      type: "POST",
+      url: "select_vendedor_mdl.php",
+      success: function (response) {
+        $(".selectUser select").html(response).fadeIn();
+      },
+    });
+  });
+  // asigna valor select vendedor al input
+  $("#slctEdit_vendedor").change(function () {
+    $("#nptEdit_vendedor_id").val($(this).val());
+  });
+
+
+  // TOMA EL VALOR DEL SELECT Y PONERLO EN INPUT
+  $("#slctEdit-user").change(function () {
+  $("#nptEdit-user_id").val($(this).val());
+});
 
   $("#btn_confirm_edit").click(function () {
     //GUARDA LOS DATOS MODIFICADOS
