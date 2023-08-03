@@ -14,10 +14,10 @@
         );
         $("#nptEdit_venta_costo_producto").val(datos[0].venta_costo_producto);
         $("#nptEdit_venta_valor_venta").val(datos[0].venta_valor_venta);
-        $("#nptEdit_user_nombre").val(datos[0].user_nombre);
+        $("#nptEdit_vendedor_nombres").val(datos[0].user_nombre);
 
-        $("#slctEdit-user").val(datos[0].user_id);
-        $("#nptEdit-user_id").val(datos[0].user_id);
+        $("#slctEdit_vendedor").val(datos[0].user_id);
+        $("#nptEdit_vendedor_id").val(datos[0].user_id);
 
         $("#nptEdit_venta_utilidad").val(datos[0].venta_utilidad);
         $("#mdl_edit_ventas").modal("show");
@@ -35,7 +35,7 @@
       type: "POST",
       url: "select_vendedor_mdl.php",
       success: function (response) {
-        $(".selectUser select").html(response).fadeIn();
+        $(".selectVendedor select").html(response).fadeIn();
       },
     });
   });
@@ -53,20 +53,19 @@
   $("#btn_confirm_edit").click(function () {
     //GUARDA LOS DATOS MODIFICADOS
     $("#mdl_edit_ventas").modal("hide");
-    let registro = recolectarDatosFormularioEdit();
+    let registro = recolectarDatosFrmGestiones();
     modificarRegistro(registro);
   });
 
-  function recolectarDatosFormularioEdit() {
+  function recolectarDatosFrmGestiones() {
     let registro = {
-      domicilio_id: $("#npt_domicilio_id"),
       venta_id: $("#nptEdit-venta_id").val(),
       venta_nombre_producto: $("#nptEdit_venta_nombre_producto").val(),
       venta_nombre_proveedor: $("#nptEdit_venta_nombre_proveedor").val(),
       venta_costo_producto: $("#nptEdit_venta_costo_producto").val(),
       venta_valor_venta: $("#nptEdit_venta_valor_venta").val(),
       user_nombre: $("#nptEdit_user_nombre").val(),
-      user_id: $("#nptEdit-user_id").val(),
+      user_id: $("#nptEdit_vendedor_id").val(),
       venta_utilidad: $("#nptEdit_venta_utilidad").val(),
     };
     return registro;
@@ -76,12 +75,12 @@
     $.ajax({
       type: "POST",
       url:
-        "venta_home_mdl.php?accion=modificar_venta&venta_id=" +
+        "gestion_mdl.php?accion=modificar_venta&venta_id=" +
         registro.venta_id,
       data: registro,
       success: function (msg) {
         // listadoVentas.ajax.reload();
-        $("#tblVentas").DataTable().ajax.reload();
+        $("#tbl_gestiones").DataTable().ajax.reload();
         cargaPantallaPrincipal();
       },
       error: function () {

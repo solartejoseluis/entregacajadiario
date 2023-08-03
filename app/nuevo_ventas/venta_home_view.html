@@ -348,8 +348,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5">
-              NUEVA GESTION</h1>
+            <h1 class="modal-title fs-5">NUEVA GESTION</h1>
           </div>
           <div class="modal-body">
             <form id="frm_nueva_venta">
@@ -374,25 +373,6 @@
                   id="npt_vendedor_id"
                 />
               </div>
-
-
-              <div
-                class="selectBarrio col-md-9 input-group input-group-sm mb-2"
-              >
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Barrio:</span
-                >
-                <select
-                  class="form-select form-select-sm"
-                  id="slct_barrio"
-                ></select>
-                <input type="hidden" class="form-control" id="npt_barrio_id" />
-              </div>
-
-
-
-
-
 
               <!-- PRODUCTO -->
               <div class="col-md-9 input-group input-group-sm mb-2">
@@ -505,8 +485,7 @@
         <div class="modal-content">
           <!-- cabecera del modal de edicion -->
           <div class="modal-header">
-            <h1 class="modal-title fs-5">
-              EDITAR GESTION</h1>
+            <h1 class="modal-title fs-5">EDITAR GESTION</h1>
 
             <button
               type="button"
@@ -527,7 +506,6 @@
                 />
               </div>
 
-
               <!--  EDITAR VENDEDOR -->
 
               <!--   VENDEDOR -->
@@ -539,15 +517,14 @@
                 >
                 <select
                   class="form-select form-select-sm"
-                  id="slctEdit_user"
+                  id="slctEdit_vendedor"
                 ></select>
                 <input
                   type="hidden"
                   class="form-control"
-                  id="nptEdit_user_id"
+                  id="nptEdit_vendedor_id"
                 />
               </div>
-
 
               <!-- EDITAR PRODUCTO -->
               <!-- PRODUCTO -->
@@ -576,7 +553,6 @@
                 />
               </div>
 
-
               <!-- EDITAR COSTO PRODUCTO -->
 
               <!-- COSTO PRODUCTO -->
@@ -597,8 +573,6 @@
                 />
               </div>
 
-
-
               <!-- EDITAR VALOR VENTA -->
               <!-- VALOR VENTA -->
               <div class="col-md-9 input-group input-group-sm mb-2">
@@ -618,7 +592,6 @@
                 />
               </div>
 
-
               <!-- EDITAR UTILIDAD -->
               <!-- UTILIDAD -->
               <div class="col-md-9 input-group input-group-sm mb-2">
@@ -637,28 +610,92 @@
                   disabled
                 />
               </div>
-
-
-
             </form>
           </div>
           <!-- final modal body editar-->
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" id="btn_confirm_edit">
-              Confirma Modificar
+            <div class="row">
+              <div class="col-md-3">
+                <button
+                  type="submit"
+                  class="btn btn-outline-danger btn-sm"
+                  id="btn_eliminar_gestion"
+                >
+                  Eliminar
+                </button>
+              </div>
+              <div class="col-md-9">
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  id="btn_confirm_edit"
+                >
+                  Guarda Cambios
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Cancelar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--  fin modal Editar Gestión -->
+
+
+
+    <!-- ----------------------- -->
+    <!-- MODAL CONFIRMA ELIMINAR GESTION -->
+    <!-- ----------------------- -->
+
+    <div
+      class="modal fade"
+      data-bs-backdrop="static"
+      style="overflow: hidden"
+      id="mdl_confirma_eliminar_gestion"
+    >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">CONFIRMA ELIMINAR GESTION</h1>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-12">
+                <p>Está segur@ que Quiere Eliminar esta venta?</p>
+                <p>No podrá ser recuperado</p>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-bs-dismiss="modal"
+              id="btn_confirma_eliminar_gestion"
+            >
+              Confirma Eliminar
             </button>
             <button
               type="button"
               class="btn btn-secondary"
               data-bs-dismiss="modal"
             >
-              Cancelar
+              Cerrar
             </button>
           </div>
         </div>
       </div>
     </div>
-    <!--  fin modal Editar Gestión -->
+
+
+
+
     <!-- -------------------->
     <!-- MODAL CERRAR TURNO-->
     <!-- -------------------->
@@ -1507,7 +1544,7 @@
     <!-- final modal VER EDITAR domicilio -->
 
     <!-- ----------------------- -->
-    <!-- MODAL CONFIRMA ELIMINAR -->
+    <!-- MODAL CONFIRMA ELIMINAR DOMICILIO -->
     <!-- ----------------------- -->
 
     <div

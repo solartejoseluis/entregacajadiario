@@ -91,5 +91,4 @@ switch ($_GET['accion']) {
         echo json_encode($response);
         break;
 
-
 };
