@@ -308,6 +308,9 @@
         <!-- SECCION GESTIONES -->
         <section class="container col-md-6">
           <h3>AREA DE GESTIONES</h3>
+          <button type="button" class="btn btn-success" id="btn_nueva_gestion">
+            Nueva Gestión
+          </button>
           <div class="row">
             <section class="table-responsive" id="tabla">
               <table class="table display compact" id="tbl_gestiones">
@@ -315,8 +318,8 @@
                   <tr>
                     <td>Producto</td>
                     <td>Proveedor</td>
-                    <td>Costo Producto</td>
-                    <td>Valor Venta</td>
+                    <td>costo</td>
+                    <td>Venta</td>
                     <td>Vendedor</td>
                     <td>Utilidad</td>
                     <td></td>
@@ -325,11 +328,6 @@
               </table>
             </section>
           </div>
-
-          <button type="button" class="btn btn-success" id="btn_nueva_gestion">
-            Nueva Gestión
-          </button>
-          <button type="button" class="btn btn-success">Listado</button>
         </section>
         <!-- finaliza seccion de gestiones -->
       </div>
@@ -457,7 +455,7 @@
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary" id="btn_confirm_add">
-              Confirma Agregar
+            Agregar
             </button>
             <button
               type="button"
@@ -478,7 +476,7 @@
     <div
       class="modal fade"
       data-bs-backdrop="static"
-      id="mdl_edit_ventas"
+      id="mdl_edit_gestion"
       tabindex="-1"
     >
       <div class="modal-dialog">
@@ -496,13 +494,23 @@
           </div>
           <!-- cuerpo del modal de edicion -->
           <div class="modal-body">
-            <form id="frm_edit_ventas">
+            <div class="mb-2 gap-2 d-md-flex justify-content-md-end">
+              <button
+                type="submit"
+                class="btn btn-outline-danger btn-sm"
+                id="btn_eliminar_gestion"
+              >
+                Eliminar
+              </button>
+            </div>
+
+            <form id="frm_edit_gestion">
               <!-- EDITAR VENTAS_ID -->
               <div class="row">
                 <input
                   type="hidden"
                   class="form-control"
-                  id="nptEdit-venta_id"
+                  id="nptEdit_venta_id"
                 />
               </div>
 
@@ -563,7 +571,7 @@
                 <input
                   type="hidden"
                   class="form-control"
-                  id="npt_venta_costo_producto_base"
+                  id="nptEdit_venta_costo_producto_base"
                 />
                 <input
                   type="text"
@@ -582,7 +590,7 @@
                 <input
                   type="hidden"
                   class="form-control"
-                  id="npt_venta_valor_venta_base"
+                  id="nptEdit_venta_valor_venta_base"
                 />
                 <input
                   type="text"
@@ -592,7 +600,6 @@
                 />
               </div>
 
-              <!-- EDITAR UTILIDAD -->
               <!-- UTILIDAD -->
               <div class="col-md-9 input-group input-group-sm mb-2">
                 <span class="input-group-text" id="inputGroup-sizing-sm"
@@ -601,7 +608,7 @@
                 <input
                   type="hidden"
                   class="form-control"
-                  id="npt_venta_utilidad_base"
+                  id="nptEdit_venta_utilidad_base"
                 />
                 <input
                   type="text"
@@ -615,22 +622,14 @@
           <!-- final modal body editar-->
           <div class="modal-footer">
             <div class="row">
-              <div class="col-md-3">
-                <button
-                  type="submit"
-                  class="btn btn-outline-danger btn-sm"
-                  id="btn_eliminar_gestion"
-                >
-                  Eliminar
-                </button>
-              </div>
-              <div class="col-md-9">
+              <div class="col-md-3 div_vacio_para_espacio"></div>
+              <div class="col-md-9 gap-2 d-md-flex justify-content-md-end">
                 <button
                   type="submit"
                   class="btn btn-primary"
                   id="btn_confirm_edit"
                 >
-                  Guarda Cambios
+                  Guardar
                 </button>
                 <button
                   type="button"
@@ -646,8 +645,6 @@
       </div>
     </div>
     <!--  fin modal Editar Gestión -->
-
-
 
     <!-- ----------------------- -->
     <!-- MODAL CONFIRMA ELIMINAR GESTION -->
@@ -667,7 +664,7 @@
           <div class="modal-body">
             <div class="row">
               <div class="col-md-12">
-                <p>Está segur@ que Quiere Eliminar esta venta?</p>
+                <p>Está segur@ que Quiere Eliminar esta Gestión?</p>
                 <p>No podrá ser recuperado</p>
               </div>
             </div>
@@ -679,7 +676,7 @@
               data-bs-dismiss="modal"
               id="btn_confirma_eliminar_gestion"
             >
-              Confirma Eliminar
+              Eliminar
             </button>
             <button
               type="button"
@@ -692,9 +689,6 @@
         </div>
       </div>
     </div>
-
-
-
 
     <!-- -------------------->
     <!-- MODAL CERRAR TURNO-->
@@ -1286,7 +1280,7 @@
               class="btn btn-primary"
               id="btn_guardar_nuevo_domicilio"
             >
-              Confirma Agregar
+              Agregar
             </button>
             <button
               type="button"
@@ -1573,7 +1567,7 @@
               data-bs-dismiss="modal"
               id="btn_confirma_eliminar_domi"
             >
-              Confirma Eliminar
+            Eliminar
             </button>
             <button
               type="button"
@@ -1810,7 +1804,7 @@
           <!-- footer modal venta acumulada -->
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary" id="btn_confirm_add">
-              Confirma Agregar
+              Agregar
             </button>
             <button
               type="button"

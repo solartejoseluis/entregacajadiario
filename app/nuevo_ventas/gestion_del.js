@@ -15,32 +15,27 @@
   $("#btn_confirma_eliminar_gestion").on(
     "click",
     function () {
-    let domicilioId = $("#npt_edit_domicilio_id").val()
-    DelDomiPorSalir(domicilioId);
+    let ventaId = $("#nptEdit_venta_id").val()
+    delGestion(ventaId);
         $("#mdl_confirma_eliminar_gestion").modal("hide");
     }
   );
 
-  function DelDomiPorSalir(domicilio_id) {
+  function delGestion(venta_id) {
     $.ajax({
       type: "GET",
-      url: "domixsalir_mdl.php?accion=borrar_domi&domicilio_id=" + domicilio_id,
+      url: "gestion_mdl.php?accion=borrar_venta&venta_id=" + venta_id,
       data: "",
       success: function (msg) {
-        $("#tbl_domi_por_salir").DataTable().ajax.reload();
-        $("#mdl_domi_por_salir").modal("hide");
+        $("#tbl_gestiones").DataTable().ajax.reload();
+        $("#mdl_confirma_eliminar_gestion").modal("hide");
+        $("#mdl_edit_gestion").modal("hide");
       },
       error: function () {
         alert("Problema en borrar gestion");
       },
     });
   }
-
-
-
-
-
-
 
 //----------------------
   // CICLO BORRAR gestion

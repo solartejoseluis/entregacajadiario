@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   datatablesDomiPorSalir();
   datatablesDomiEnCurso();
-  datatablesGestiones();
+ datatablesGestiones();
 
   var turno_id = "";
   var user_id = "";
@@ -71,13 +71,13 @@ function datatablesDomiPorSalir() {
       {
         targets: 6,
         defaultContent:
-          "<button class='btn btn-primary btn-sm btnVerDomiPorSalir' id='btn_ver_domi_por_salir'><i class='fa-solid fa-pen'></i></button>",
+          "<button class='btn btn-primary btn-sm btnVerDomiPorSalir'><i class='fa-solid fa-pen'></i></button>",
         data: null,
       },
       {
         targets: 7,
         defaultContent:
-          "<button class='btn btn-outline-primary btn-sm btnHoraSalida' id='btn_hora_salida'>Sale</button>",
+          "<button class='btn btn-outline-primary btn-sm btnHoraSalida'>Sale</button>",
         data: null,
       },
     ],

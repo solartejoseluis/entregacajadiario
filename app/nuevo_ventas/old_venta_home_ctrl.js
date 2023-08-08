@@ -891,8 +891,8 @@ document.addEventListener("DOMContentLoaded", function () {
   $("#npt_valor_producto").on("blur", function () {
     $("#npt_valor_producto").css("background-color", "#dbe5f0");
     const value = this.value.replace(/\$|\./g, "");
-    if (value === "") {
       // validacion para evitar que se muestre NaN en el input al quitar foco
+    if (value === "") {
       return false;
     } else {
       //Las validaciones que necesitas hacer

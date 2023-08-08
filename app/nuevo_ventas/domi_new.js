@@ -44,32 +44,35 @@
   // FORMATO Y VALIDACION AUTOMATICO AL DIGITAR
 
   // solo deja ingresar numeros al input
-  $(document).ready(function () {
-    $("#npt_factura, #npt_valor_domi_externo, #npt_valor_producto").on(
-      "input",
-      function (evt) {
-        $(this).val(
-          $(this)
-            .val()
-            .replace(/[^0-9]/g, "")
-        );
-      }
-    );
-  });
+$(document).ready(function () {
+  $("#npt_factura, #npt_valor_domi_externo, #npt_valor_producto").on(
+    "input",
+    function (evt) {
+      $(this).val(
+        $(this)
+          .val()
+          .replace(/[^0-9]/g, "")
+      );
+    }
+  );
+});
 
-  $("#npt_factura").on("blur", function () {
+
+  
+  $("#npt_factura").on("change", function () {
     $("#npt_factura").css("background-color", "#dbe5f0");
   });
 
-  $("#npt_valor_producto").on("blur", function () {
-    $("#npt_valor_producto").css("background-color", "#dbe5f0");
-    const value = this.value.replace(/\$|\./g, "");
+  $("#npt_valor_producto").on("change", function () {
+   const value = this.value.replace(/\$|\./g, "");
     if (value === "") {
       // validacion para evitar que se muestre NaN en el input al quitar foco
       return false;
     } else {
-      //Las validaciones que necesitas hacer
+    $("#npt_valor_producto").css("background-color", "#dbe5f0");
       let valor_base = this.value;
+      $("#npt_valor_producto_base").val(valor_base);
+      
       //conversion del valor al formato moneda con parseFloat
       this.value = parseFloat(value).toLocaleString("es-CO", {
         style: "currency",
@@ -77,19 +80,19 @@
         maximumFractionDigits: 0,
         minimumFractionDigits: 0,
       });
-      $("#npt_valor_producto_base").val(valor_base);
     }
   });
 
-  $("#npt_valor_domi_externo").on("blur", function () {
-    $("#npt_valor_domi_externo").css("background-color", "#dbe5f0");
+  $("#npt_valor_domi_externo").on("change", function () {
     const value = this.value.replace(/\$|\./g, "");
     if (value === "") {
       // validacion para evitar que se muestre NaN en el input al quitar foco
       return false;
     } else {
+    $("#npt_valor_domi_externo").css("background-color", "#dbe5f0");
       //Las validaciones que necesitas hacer
       let valor_base = this.value;
+      $("#npt_valor_domi_externo_base").val(valor_base);
       //conversion del valor al formato moneda con parseFloat
       this.value = parseFloat(value).toLocaleString("es-CO", {
         style: "currency",
@@ -97,7 +100,6 @@
         maximumFractionDigits: 0,
         minimumFractionDigits: 0,
       });
-      $("#npt_valor_domi_externo_base").val(valor_base);
     }
   });
 
@@ -120,6 +122,7 @@
   // asigna valor select barrio al input
   $("#slct_barrio").change(function () {
     $("#npt_barrio_id").val($(this).val());
+    $("#slct_barrio").css("background-color", "#dbe5f0");
   });
 
   //Carga el select de transportador.
@@ -135,6 +138,7 @@
   // asigna valor del select transportador al input
   $("#slct_transportador").change(function () {
     $("#npt_transportador_id").val($(this).val());
+    $("#slct_transportador").css("background-color", "#dbe5f0");
   });
 
   //carga el select domi externo
@@ -150,6 +154,7 @@
   // asigna valor select domi externo al input
   $("#slct_domi_externo").change(function () {
     $("#npt_domi_externo_id").val($(this).val());
+    $("#slct_domi_externo").css("background-color", "#dbe5f0");
   });
 
   //carga el select vendedores
@@ -165,6 +170,7 @@
   // asigna valor select vendedor al input
   $("#slct_vendedor").change(function () {
     $("#npt_vendedor_id").val($(this).val());
+    $("#slct_vendedor").css("background-color", "#dbe5f0");
   });
 
   // boton domi interno
