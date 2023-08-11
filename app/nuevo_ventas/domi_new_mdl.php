@@ -5,6 +5,20 @@ require "../00_connect/pdo.php";
 
 switch ($_GET['accion']) {
 
+    case 'cargar_comuna':
+        $sql = "SELECT
+            BARRIOS.barrio_comuna,
+            BARRIOS.barrio_recomendacion
+            FROM  BARRIOS
+            WHERE barrio_id = $_GET[barrio_id];
+            ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
+
+
   case 'guardar_domicilio':
     $sql = "INSERT INTO DOMICILIOS(
       barrio_id,

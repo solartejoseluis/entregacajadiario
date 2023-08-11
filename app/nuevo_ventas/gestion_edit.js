@@ -20,6 +20,7 @@ function recuperarRegistro(registro) {
       $("#nptEdit_venta_valor_venta").val(datos[0].venta_valor_venta);
       $("#nptEdit_venta_valor_venta_base").val(datos[0].venta_valor_venta);
       $("#nptEdit_venta_utilidad").val(datos[0].venta_utilidad);
+      $("#nptEdit_venta_utilidad_base").val(datos[0].venta_utilidad);
       $("#mdl_edit_gestion").modal("show");
     },
     error: function () {
@@ -47,7 +48,7 @@ $("#slctEdit-user").change(function () {
   $("#nptEdit-user_id").val($(this).val());
 });
 
-// validaciones y formato al digital
+// validaciones y formato al digitar
 
 // cambia de color el fondo y Convierte a mayusculas
 $("#slctEdit_vendedor").on("change", function () {

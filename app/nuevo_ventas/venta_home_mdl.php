@@ -22,7 +22,60 @@ switch ($_GET['accion']) {
         echo json_encode($result);
         break;
 
-    case 'listar_ventas':
+    case 'carga_dttbl_domi_por_salir':
+        $sql = "SELECT
+            DATE_FORMAT(DOMICILIOS.hora_creado, '%H:%i') AS hora_creado,
+            DOMICILIOS.domicilio_id,
+            BARRIOS.barrio_nombre,
+            USERS.user_nombre,
+            DOMI_EXTERNOS.domi_externo_nombre,
+            DOMICILIOS.valor_venta,
+            DOMICILIOS.btn_domi_interno,
+            DOMICILIOS.btn_domi_externo,
+            DOMICILIOS.inyectologia
+            FROM DOMICILIOS
+            INNER JOIN USERS
+            ON DOMICILIOS.trans_interno_id=USERS.user_id
+            INNER JOIN BARRIOS 
+            ON DOMICILIOS.barrio_id=BARRIOS.barrio_id
+            INNER JOIN DOMI_EXTERNOS
+            ON DOMICILIOS.trans_externo_id = DOMI_EXTERNOS.domi_externo_id
+            WHERE (hora_salida = 0);
+            ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
+
+                    case 'carga_dttbl_domi_en_curso':
+        $sql = "SELECT
+            DATE_FORMAT(DOMICILIOS.hora_creado, '%H:%i') AS hora_creado,
+            DOMICILIOS.domicilio_id,
+            BARRIOS.barrio_nombre,
+            USERS.user_nombre,
+            DOMI_EXTERNOS.domi_externo_nombre,
+            DOMICILIOS.valor_venta,
+            DOMICILIOS.btn_domi_interno,
+            DOMICILIOS.btn_domi_externo,
+            DOMICILIOS.hora_salida,
+            DOMICILIOS.inyectologia
+            FROM DOMICILIOS
+            INNER JOIN USERS
+            ON DOMICILIOS.trans_interno_id=USERS.user_id
+            INNER JOIN BARRIOS 
+            ON DOMICILIOS.barrio_id=BARRIOS.barrio_id
+            INNER JOIN DOMI_EXTERNOS
+            ON DOMICILIOS.trans_externo_id = DOMI_EXTERNOS.domi_externo_id
+            WHERE (hora_salida != 0) AND (hora_llegada = 0);
+            ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
+
+    case 'carga_dttbl_gestiones':
         // ENVIA LOS DATOS AL DATATABLES
         $sql = "SELECT 
         VENTAS.venta_id,
@@ -32,7 +85,8 @@ switch ($_GET['accion']) {
         VENTAS.venta_valor_venta,
         USERS.user_nombre,
         VENTAS.venta_utilidad,
-        VENTAS.turno_id
+        VENTAS.turno_id,
+        VENTAS.venta_tipo
         FROM VENTAS
         INNER JOIN USERS
         ON VENTAS.user_id=USERS.user_id
@@ -43,28 +97,6 @@ switch ($_GET['accion']) {
         echo json_encode($result);
         break;
 
-
-    case 'guardar_venta':
-        $sql = "INSERT INTO VENTAS(
-        venta_nombre_producto,
-        venta_nombre_proveedor,
-        venta_costo_producto,
-        venta_valor_venta,
-        venta_utilidad,
-        user_id,
-        turno_id
-      )VALUES (
-        '$_POST[venta_nombre_producto]',
-        '$_POST[venta_nombre_proveedor]',
-        $_POST[venta_costo_producto],
-        $_POST[venta_valor_venta],
-        $_POST[venta_utilidad],
-        $_POST[vendedor_id],
-        $_POST[turno_id_actual]
-    )";
-        $response = $pdo->exec($sql);
-        echo json_encode($response);
-        break;
 
     case 'borrar_venta':
         $sql = "DELETE FROM VENTAS WHERE venta_id=$_GET[venta_id]";

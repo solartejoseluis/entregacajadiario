@@ -3,12 +3,12 @@
 //-----------------------------
 $("#menu_nueva_gestion, #btn_nueva_gestion").click(function () {
   limpiarModalGestiones();
-  $("#mdl_ventas").modal("show");
+  $("#mdl_new_gestion").modal("show");
 });
 
 function limpiarModalGestiones() {
   $(
-    "#npt_venta_nombre_producto, #npt_venta_id, #npt_venta_nombre_producto, #npt_venta_nombre_proveedor, #npt_venta_costo_producto,#npt_venta_valor_venta,#npt_venta_utilidad"
+    "#slct_vendedor, #npt_venta_nombre_producto, #npt_venta_id, #npt_venta_nombre_producto, #npt_venta_nombre_proveedor, #npt_venta_costo_producto,#npt_venta_valor_venta,#npt_venta_utilidad"
   ).css("background-color", "");
 
   $("#npt_venta_id").val("");
@@ -23,6 +23,7 @@ function limpiarModalGestiones() {
   $("#slct_vendedor").val("0");
   $("#npt_vendedor_id").val("");
   $("#npt_turno_id_actual").val("300");
+  $("#npt_venta_tipo").val("");
 }
 
 // Validaciones al digitar
@@ -136,15 +137,15 @@ $(document).ready(function () {
 
 // fin operaciones en modal Nueva Gestión
 
-// confirma agregar gestion
-$("#btn_confirm_add").click(function () {
+// confirma agregar gestion local
+$("#btn_save_punto_fisico").click(function () {
   //VALIDACION DE DATOS DEL MODAL NUEVO
   let valida_nombre_producto = $("#npt_venta_nombre_producto").val();
   let valida_nombre_proveedor = $("#npt_venta_nombre_proveedor").val();
   let valida_venta_costo_producto = $("#npt_venta_costo_producto_base").val();
   let valida_venta_valor_venta = $("#npt_venta_valor_venta_base").val();
   let valida_vendedor_id = $("#npt_vendedor_id").val();
-  let valida_venta_utilidad = $("#npt_venta_utilidad_base").val();
+  $("#npt_venta_tipo").val("LOCAL");
   // compara datos de variables contra vacio y muestra un alert
   if (valida_vendedor_id.trim() == "") {
     alert("elija vendedor");
@@ -168,9 +169,49 @@ $("#btn_confirm_add").click(function () {
     return false; // fin validacion formulario nuevo
   } else {
     //ejecutar Si todo fue validado
-    $("#mdl_ventas").modal("hide");
+    $("#mdl_new_gestion").modal("hide");
     let registro = recolectaDatosMdlNuevaGestion();
-    guardarRegistro(registro);
+    guardarNuevaGestion(registro);
+  }
+});
+
+// boton enviar domicilio
+$("#btn_enviar_domi").click(function () {
+  //VALIDACION DE DATOS DEL MODAL NUEVO
+  let valida_nombre_producto = $("#npt_venta_nombre_producto").val();
+  let valida_nombre_proveedor = $("#npt_venta_nombre_proveedor").val();
+  let valida_venta_costo_producto = $("#npt_venta_costo_producto_base").val();
+  let valida_venta_valor_venta = $("#npt_venta_valor_venta_base").val();
+  let valida_vendedor_id = $("#npt_vendedor_id").val();
+  $("#npt_venta_tipo").val("DOMI");
+
+  // compara datos de variables contra vacio y muestra un alert
+  if (valida_vendedor_id.trim() == "") {
+    alert("elija vendedor");
+    $("#slct_vendedor").focus();
+    return false;
+  } else if (valida_nombre_producto.trim() == "") {
+    alert("Digitar nombre producto.");
+    $("#npt_venta_nombre_producto").focus();
+    return false;
+  } else if (valida_nombre_proveedor.trim() == "") {
+    alert("Digite nombre proveedor");
+    $("#npt_venta_nombre_proveedor").focus();
+    return false;
+  } else if (valida_venta_costo_producto.trim() == "") {
+    alert("Digite costo producto");
+    $("#npt_venta_costo_producto").focus();
+    return false;
+  } else if (valida_venta_valor_venta.trim() == "") {
+    alert("Digite valor venta");
+    $("#npt_venta_valor_venta").focus();
+    return false; // fin validacion formulario nuevo
+  } else {
+    //ejecutar Si todo fue validado
+    $("#mdl_new_gestion").modal("hide");
+    let registro = recolectaDatosMdlNuevaGestion();
+    guardarNuevaGestion(registro);
+    trasladaMdlNewDomi(registro);
   }
 });
 
@@ -181,16 +222,26 @@ function recolectaDatosMdlNuevaGestion() {
     venta_costo_producto: $("#npt_venta_costo_producto_base").val(),
     venta_valor_venta: $("#npt_venta_valor_venta_base").val(),
     venta_utilidad: $("#npt_venta_utilidad_base").val(),
-    vendedor_id: $("#npt_vendedor_id").val(),
-    turno_id_actual: $("#npt_turno_id_actual").val(),
+    user_id: $("#npt_vendedor_id").val(),
+    turno_id: $("#npt_turno_id_actual").val(),
+    venta_tipo: $("#npt_venta_tipo").val(),
   };
   return registro;
 }
 
-function guardarRegistro(registro) {
+function trasladaMdlNewDomi(registro) {
+  limpiarModalDomicilios(); // viene de domi_new.js
+  $("#mdl_domicilios").modal("show");
+  $("#bloque_factura").hide();
+  $("#npt_valor_producto").val(registro.venta_valor_venta);
+  $("#npt_valor_producto_base").val(registro.venta_valor_venta);
+  $("#npt_factura").val("NO");
+}
+
+function guardarNuevaGestion(registro) {
   $.ajax({
     type: "POST",
-    url: "venta_home_mdl.php?accion=guardar_venta",
+    url: "gestion_mdl.php?accion=guardar_nueva_gestion",
     data: registro,
 
     success: function (msg) {
@@ -198,7 +249,7 @@ function guardarRegistro(registro) {
     },
 
     error: function () {
-      alert("problema en: guardarRegistro");
+      alert("problema en: guardarNuevaGestion()");
     },
   });
 }

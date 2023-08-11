@@ -55,3 +55,8 @@ body {
         white-space: nowrap;
         -webkit-overflow-scrolling: touch;
       }
+
+
+     #title_barrio, #title_comuna, #title_recomendacion{
+        background-color:  	#9DE093;
+      }
