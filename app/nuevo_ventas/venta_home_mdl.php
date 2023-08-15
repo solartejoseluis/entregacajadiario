@@ -48,7 +48,7 @@ switch ($_GET['accion']) {
         echo json_encode($result);
         break;
 
-                    case 'carga_dttbl_domi_en_curso':
+    case 'carga_dttbl_domi_en_curso':
         $sql = "SELECT
             DATE_FORMAT(DOMICILIOS.hora_creado, '%H:%i') AS hora_creado,
             DOMICILIOS.domicilio_id,
@@ -189,9 +189,20 @@ switch ($_GET['accion']) {
         echo json_encode($result);
         break;
 
-    case 'consultar_utilidad_turno':
+    case 'total_utilidad_gestiones':
         $sql = "SELECT
-            SUM(venta_utilidad)  AS utilidad_turno,
+            SUM(venta_utilidad)  AS sumatoria_gestiones
+            FROM VENTAS
+            WHERE turno_id=$_GET[turno_id]";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
+
+
+    case 'cuenta_de_gestiones':
+        $sql = "SELECT
             COUNT(venta_utilidad) AS ventas_turno
             FROM VENTAS
             WHERE turno_id=$_GET[turno_id]";

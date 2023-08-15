@@ -4,60 +4,114 @@
 $("#menu_cerrar_turno").click(function () {
   limpiarDatosModalCerrar();
   $("#mdl_cerrar_turno").modal("show");
+  let turno_id = 300;
+  calculaTotalGestiones(turno_id);
 });
 
 function limpiarDatosModalCerrar() {
-  // mostrar ocultar elementos
+  // ocultar elementos
   $("#grupo_sobrante").hide();
   $("#grupo_faltante").hide();
   // normaliza fondos
-  $("#npt_turno_saldo_caja, #npt_turno_total_utilidad,#npt_turno_total_entrega, #slct_descuadre, #npt_turno_entrega_final").css("background-color", "");
+  $("#npt_saldo_caja, #npt_total_gestiones,#npt_saldo_final, #slct_descuadre, #npt_entrega_final").css("background-color", "");
   //limpiar input
   $("#npt_turno_saldo_caja_base").val("");
-  $("#npt_turno_saldo_caja").val("");
-  $("#npt_turno_total_utilidad_base").val("");
-  $("#npt_turno_total_utilidad").val("");
-  $("#npt_turno_total_entrega_base").val("");
-  $("#npt_turno_total_entrega").val("");
+  $("#npt_saldo_caja").val("");
+  $("#npt_total_gestiones_base").val("");
+  $("#npt_total_gestiones").val("");
+  $("#npt_saldo_final_base").val("");
+  $("#npt_saldo_final").val("");
   $("#slct_descuadre").val("");
   $("#npt_descuadre_id").val("");
   $("#npt_sobrante_base").val("");
   $("#npt_sobrante").val("");
   $("#npt_faltante_base").val("");
   $("#npt_faltante").val("");
-  $("#npt_turno_entrega_final_base").val("");
-  $("#npt_turno_entrega_final").val("");
+  $("#npt_entrega_final_base").val("");
+  $("#npt_entrega_final").val("");
 }
 
 
-// validaciones y formato al digitar
+//  CALCULA TOTAL GESTIONES
+function calculaTotalGestiones(turno_id) {
+  $.ajax({
+    type: "GET",
+    url: "venta_home_mdl.php?accion=total_utilidad_gestiones",
+    data: { turno_id: turno_id },
+    success: function (datos) {
+      $("#npt_total_gestiones_base").val(Number(datos[0].sumatoria_gestiones));
+      let valor_base = $("#npt_total_gestiones_base").val();
+      //dar formato  al valor y mostrarlo en el input utilidad
+      let valor_formato = Number(valor_base)
+        .toLocaleString("es-CO", {
+          style: "currency",
+          currency: "COP",
+          maximumFractionDigits: 0,
+          minimumFractionDigits: 0,
+        }
+        );
+      $("#npt_total_gestiones").val(valor_formato);
+      $("#npt_total_gestiones").css("background-color", "#dbe5f0");
+    },
+    error: function () {
+      alert("Problema en total utilidad gestiones");
+    },
+  });
+}
+
+// CALCULA SALDO FINAL Y DA FORMATO
+
+$("#npt_saldo_caja").on("change", function () {
+  const value = this.value.replace(/\$|\./g, "");
+  $("#npt_saldo_caja_base").val(value);
+
+  let totalCaja = $("#npt_saldo_caja_base").val();
+  // alert("total caja "+totalCaja)
+  let totalGestiones = $("#npt_total_gestiones_base").val();
+  // alert("total caja "+totalGestiones)
+  let saldoFinal = Number(totalCaja) + Number(totalGestiones);
+  $("#npt_saldo_final_base").val(saldoFinal);
+
+  //dar formato  al valor y mostrarlo en el input utilidad
+  let valor_formato = Number(saldoFinal)
+    .toLocaleString("es-CO", {
+      style: "currency",
+      currency: "COP",
+      maximumFractionDigits: 0,
+      minimumFractionDigits: 0,
+    }
+    );
+  $("#npt_saldo_final").val(valor_formato);
+  $("#npt_saldo_final").css("background-color", "#dbe5f0");
+
+});
+
+
+
+
+// VALIDACIONES Y FORMATO AL DIGITAR
 
 // solo deja ingresar numeros al input
 $(document).ready(function () {
-  $("#npt_turno_saldo_caja, #npt_turno_total_utilidad, #npt_sobrante, #npt_faltante")
+  $("#npt_saldo_caja, #npt_sobrante, #npt_faltante")
     .on("input", function (evt) {
       $(this).val($(this).val().replace(/[^0-9]./g, ""));
     });
 });
 
-
-// cambia de color el fondo y Convierte a mayusculas
-
-
-
-
-$("#npt_turno_saldo_caja").on("change", function () {
+// FORMATO AUTOMATICO AL NPT SALDO CAJA
+$("#npt_saldo_caja").on("change", function () {
   const value = this.value.replace(/\$|\./g, "");
   if (value === "") {
     // validacion para evitar que se muestre NaN en el input al quitar foco
     return false;
   } else {
-    $("#npt_turno_saldo_caja").css("background-color", "#dbe5f0");
+    $("#npt_saldo_caja").css("background-color", "#dbe5f0");
     //pasar el valor solo numeros al npt_base
     let valor_base = this.value;
     $("#npt_venta_valor_venta_base").val(valor_base);
     //conversion del valor al formato moneda con parseFloat
-    this.value = parseFloat(value).toLocaleString("es-CO", {
+    this.value = Number(value).toLocaleString("es-CO", {
       style: "currency",
       currency: "COP",
       maximumFractionDigits: 0,
@@ -67,46 +121,7 @@ $("#npt_turno_saldo_caja").on("change", function () {
 });
 
 
-$("#npt_turno_total_utilidad").on("change", function () {
-  const value = this.value.replace(/\$|\./g, "");
-  if (value === "") {
-    // validacion para evitar que se muestre NaN en el input al quitar foco
-    return false;
-  } else {
-    $("#npt_turno_total_utilidad").css("background-color", "#dbe5f0");
-    //pasar el valor solo numeros al npt_base
-    let valor_base = this.value;
-    $("#npt_venta_total_utilidad_base").val(valor_base);
-    //conversion del valor al formato moneda con parseFloat
-    this.value = parseFloat(value).toLocaleString("es-CO", {
-      style: "currency",
-      currency: "COP",
-      maximumFractionDigits: 0,
-      minimumFractionDigits: 0,
-    });
-  }
-});
-
-$("#npt_turno_total_entrega").on("change", function () {
-  const value = this.value.replace(/\$|\./g, "");
-  if (value === "") {
-    // validacion para evitar que se muestre NaN en el input al quitar foco
-    return false;
-  } else {
-    $("#npt_turno_total_entrega").css("background-color", "#dbe5f0");
-    //pasar el valor solo numeros al npt_base
-    let valor_base = this.value;
-    $("#npt_venta_total_entrega_base").val(valor_base);
-    //conversion del valor al formato moneda con parseFloat
-    this.value = parseFloat(value).toLocaleString("es-CO", {
-      style: "currency",
-      currency: "COP",
-      maximumFractionDigits: 0,
-      minimumFractionDigits: 0,
-    });
-  }
-});
-
+// INPUT SOBRANTE Y CALCULOS
 $("#npt_sobrante").on("change", function () {
   const value = this.value.replace(/\$|\./g, "");
   if (value === "") {
@@ -124,9 +139,25 @@ $("#npt_sobrante").on("change", function () {
       maximumFractionDigits: 0,
       minimumFractionDigits: 0,
     });
+    // calculo para el input entrega final
+    let inputSaldoFinal = $("#npt_saldo_final_base").val();
+    let SumaFinalSobrante = Number(inputSaldoFinal) + Number(valor_base)
+    //conversion del valor al formato moneda
+    let valorFormato = Number(SumaFinalSobrante).toLocaleString("es-CO", {
+      style: "currency",
+      currency: "COP",
+      maximumFractionDigits: 0,
+      minimumFractionDigits: 0,
+    });
+    $("#npt_entrega_final").val(valorFormato);
+    $("#npt_entrega_final").css("background-color", "#dbe5f0");
+    $("#npt_entrega_final_base").val(SumaFinalSobrante);
+    return false;
   }
 });
 
+
+// INPUT FALTANTE Y CALCULOS
 $("#npt_faltante").on("change", function () {
   const value = this.value.replace(/\$|\./g, "");
   if (value === "") {
@@ -136,7 +167,7 @@ $("#npt_faltante").on("change", function () {
     $("#npt_faltante").css("background-color", "#dbe5f0");
     //pasar el valor solo numeros al npt_base
     let valor_base = this.value;
-    $("#npt_sobrante_base").val(valor_base);
+    $("#npt_faltante_base").val(valor_base);
     //conversion del valor al formato moneda con parseFloat
     this.value = parseFloat(value).toLocaleString("es-CO", {
       style: "currency",
@@ -144,9 +175,25 @@ $("#npt_faltante").on("change", function () {
       maximumFractionDigits: 0,
       minimumFractionDigits: 0,
     });
+    // calculo para el input entrega final
+    let inputSaldoFinal = $("#npt_saldo_final_base").val();
+    let restaFinalFaltante = Number(inputSaldoFinal) - Number(valor_base)
+    //conversion del valor al formato moneda
+    let valorFormato = Number(restaFinalFaltante).toLocaleString("es-CO", {
+      style: "currency",
+      currency: "COP",
+      maximumFractionDigits: 0,
+      minimumFractionDigits: 0,
+    });
+    $("#npt_entrega_final").val(valorFormato);
+    $("#npt_entrega_final").css("background-color", "#dbe5f0");
+    $("#npt_entrega_final_base").val(restaFinalFaltante);
+    return false;
   }
 });
 
+
+// COMPORTAMIENTO DEL SELECT DESCUADRE
 $("#slct_descuadre").on("change", function () {
   $("#npt_descuadre_id").val($(this).val());
   $("#slct_descuadre").css("background-color", "#dbe5f0");
@@ -154,63 +201,45 @@ $("#slct_descuadre").on("change", function () {
   if (descuadreId == "2") {
     $("#npt_sobrante").val("");
     $("#npt_faltante").val("");
+    $("#npt_entrega_final").val("");
+    $("#npt_entrega_final_base").val("");
+    $("#npt_sobrante").css("background-color", "");
+    $("#npt_faltante").css("background-color", "");
+    $("#npt_entrega_final").css("background-color", "");
     $("#grupo_sobrante").show();
     $("#grupo_faltante").hide();
+
   } else if (descuadreId == "3") {
     $("#npt_sobrante").val("");
     $("#npt_faltante").val("");
+    $("#npt_entrega_final").val("");
+    $("#npt_entrega_final_base").val("");
+    $("#npt_sobrante").css("background-color", "");
+    $("#npt_faltante").css("background-color", "");
+    $("#npt_entrega_final").css("background-color", "");
     $("#grupo_sobrante").hide();
     $("#grupo_faltante").show();
-  } else {
+  } else if (descuadreId == "1") {
     $("#npt_sobrante").val("");
     $("#npt_faltante").val("");
     $("#grupo_sobrante").hide();
     $("#grupo_faltante").hide();
+    let inputSaldoFinal = $("#npt_saldo_final").val();
+    $("#npt_entrega_final").val(inputSaldoFinal);
     return false;
   }
 });
 
 
-//CICLO CALCULO UTILIDAD
-
-$("#npt_turno_saldo_caja").focusout(function () {
-  $.ajax({
-    type: "GET",
-    url: "venta_home_mdl.php?accion=consultar_utilidad_turno",
-    data: { turno_id: turno_id },
-    success: function (datos) {
-      let valorCero = 0;
-      let totalUtilidad = 0;
-      $("#npt_turno_total_utilidad").val(datos[0].utilidad_turno);
-      if ($("#npt_turno_total_utilidad").val() === "") {
-        alert("Aviso:la utilidad de este turno es CERO");
-        $("#npt_turno_total_utilidad").val(valorCero);
-        totalUtilidad = valorCero;
-      } else {
-        totalUtilidad = $("#npt_turno_total_utilidad").val();
-      }
-      let totalSaldo = $("#npt_turno_saldo_caja").val();
-      //let entrega =
-      //parseFloat(totalSaldo.replace(/\$|\./g, "")) +
-      //parseFloat(totalUtilidad.replace(/\$|\./g, ""));
-      let entrega = parseFloat(totalSaldo) + parseFloat(totalUtilidad);
-      $("#npt_turno_total_entrega").val(entrega);
-    },
-    error: function () {
-      alert("Problema en cargar datos utilidad turno");
-    },
-  });
-});
-
 // BOTON CONFIRMA CIERRE DEL TURNO
 $("#btn_confirma_cerrar_turno").click(function () {
   //VALIDACION DE DATOS DEL MODAL
-  let valida_saldo_caja = $("#npt_turno_saldo_caja").val();
+  let valida_saldo_caja = $("#npt_saldo_caja").val();
   let valida_descuadre = $("#npt_turno_descuadre").val();
   // compara datos de variables contra vacio y muestra un alert
   if (valida_saldo_caja.trim() == "") {
     alert("digite valor saldo.");
-    $("#npt_turno_saldo_caja").focus();
+    $("#npt_saldo_caja").focus();
     return false;
   } else if (valida_descuadre.trim() == "") {
     alert("Digite Valor De Descuadre");
@@ -228,9 +257,9 @@ $("#btn_confirma_cerrar_turno").click(function () {
 function recolectarDatosFormularioCerrar() {
   let registro = {
     //turno_id_actual: $("#npt_turno_id_actual").val(),
-    turno_saldo_caja: $("#npt_turno_saldo_caja").val(),
+    turno_saldo_caja: $("#npt_saldo_caja").val(),
     turno_total_utilidad: $("#npt_turno_total_utilidad").val(),
-    turno_total_entrega: $("#npt_turno_total_entrega").val(),
+    turno_total_entrega: $("#npt_saldo_final").val(),
     turno_descuadre: $("#npt_turno_descuadre").val(),
   };
   return registro;
@@ -248,7 +277,6 @@ function guardarRegistroCerrar(registro) {
     },
   });
 }
-// fin ciclo cerrar turno
 
 //CICLO FINALIZA CERRAR
 $("#btn_final_turno").click(function () {
@@ -273,7 +301,6 @@ function comprobarCierreDelTurno() {
     },
   });
 }
-// fin ciclo finalizar cerrar
 
 //CALCULA UTILIDAD MODAL EDITAR GESTION
 $("#nptEdit_venta_valor_venta").focusout(function () {

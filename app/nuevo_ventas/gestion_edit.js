@@ -29,7 +29,7 @@ function recuperarRegistro(registro) {
   });
 }
 
-//carga el select vendedores
+//CARGA EL SELECT VENDEDORES
 $(document).ready(function () {
   $.ajax({
     type: "POST",
@@ -122,37 +122,37 @@ $("#nptEdit_venta_valor_venta").on("change", function () {
   }
 });
 
-//calculo de la  utilidad modal edicion
-$("#nptEdit_venta_costo_producto ,#nptEdit_venta_valor_venta").on(
-  "change",
-  function () {
-  let nptEditVentaValorVenta = $("#nptEdit_venta_valor_venta").val();
-  let nptEditVentaCostoProducto = $("#nptEdit_venta_costo_producto").val();
-    // const value = this.value.replace(/\$|\./g, "");
-    if (nptEditVentaValorVenta === "" || nptEditVentaCostoProducto === "") {
-      // validacion para evitar que se muestre NaN en el input al quitar foco
-      return false;
-    } else {
-      // calculo de la utilidad
-      let costo = $("#nptEdit_venta_costo_producto_base").val();
-      let valor_venta = $("#nptEdit_venta_valor_venta_base").val();
-      let utilidad = parseFloat(valor_venta) - parseFloat(costo);
-      $("#nptEdit_venta_utilidad_base").val(utilidad);
-      $("#nptEdit_venta_utilidad").val(utilidad);
-      //dar formato  al valor y mostrarlo en el input utilidad
-      let utilidad_formato = utilidad.toLocaleString("es-CO", {
-        style: "currency",
-        currency: "COP",
-        maximumFractionDigits: 0,
-        minimumFractionDigits: 0,
-      });
-      $("#nptEdit_venta_utilidad").val(utilidad_formato);
-      $("#nptEdit_venta_utilidad").css("background-color", "#dbe5f0");
-      valor_base01 = 0;
-      valor_base02 = 0;
-    }
-  }
-);
+// //calculo de la  utilidad modal edicion
+// $("#nptEdit_venta_costo_producto ,#nptEdit_venta_valor_venta").on(
+//   "change",
+//   function () {
+//   let nptEditVentaValorVenta = $("#nptEdit_venta_valor_venta").val();
+//   let nptEditVentaCostoProducto = $("#nptEdit_venta_costo_producto").val();
+//     // const value = this.value.replace(/\$|\./g, "");
+//     if (nptEditVentaValorVenta === "" || nptEditVentaCostoProducto === "") {
+//       // validacion para evitar que se muestre NaN en el input al quitar foco
+//       return false;
+//     } else {
+//       // calculo de la utilidad
+//       let costo = $("#nptEdit_venta_costo_producto_base").val();
+//       let valor_venta = $("#nptEdit_venta_valor_venta_base").val();
+//       let utilidad = parseFloat(valor_venta) - parseFloat(costo);
+//       $("#nptEdit_venta_utilidad_base").val(utilidad);
+//       $("#nptEdit_venta_utilidad").val(utilidad);
+//       //dar formato  al valor y mostrarlo en el input utilidad
+//       let utilidad_formato = utilidad.toLocaleString("es-CO", {
+//         style: "currency",
+//         currency: "COP",
+//         maximumFractionDigits: 0,
+//         minimumFractionDigits: 0,
+//       });
+//       $("#nptEdit_venta_utilidad").val(utilidad_formato);
+//       $("#nptEdit_venta_utilidad").css("background-color", "#dbe5f0");
+//       valor_base01 = 0;
+//       valor_base02 = 0;
+//     }
+//   }
+// );
 
 // BOTON GUARDA MODIFICACIONES
 $("#btn_confirm_edit").click(function () {
@@ -190,4 +190,3 @@ function modificarRegistro(registro) {
     },
   });
 }
-// FIN CICLO EDITAR gestion
