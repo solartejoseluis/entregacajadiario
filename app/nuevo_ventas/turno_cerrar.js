@@ -5,6 +5,7 @@ $("#menu_cerrar_turno").click(function () {
   limpiarDatosModalCerrar();
   $("#mdl_cerrar_turno").modal("show");
   let turno_id = 300;
+  $("#npt_turno_id_actual").val(turno_id);
   calculaTotalGestiones(turno_id);
 });
 
@@ -230,37 +231,43 @@ $("#slct_descuadre").on("change", function () {
   }
 });
 
-
 // BOTON CONFIRMA CIERRE DEL TURNO
 $("#btn_confirma_cerrar_turno").click(function () {
   //VALIDACION DE DATOS DEL MODAL
-  let valida_saldo_caja = $("#npt_saldo_caja").val();
-  let valida_descuadre = $("#npt_turno_descuadre").val();
+  let valida_saldo_caja = $("#npt_saldo_caja_base").val();
+  let valida_descuadre = $("#npt_descuadre_id").val();
+  let valida_entrega = $("#npt_entrega_final_base").val();
   // compara datos de variables contra vacio y muestra un alert
   if (valida_saldo_caja.trim() == "") {
     alert("digite valor saldo.");
     $("#npt_saldo_caja").focus();
     return false;
   } else if (valida_descuadre.trim() == "") {
-    alert("Digite Valor De Descuadre");
-    $("#npt_turno_descuadre").focus();
+    alert("Elija una opción de descuadre");
+    $("#slct_descuadre").focus();
+    return false;
+    } else if (valida_entrega.trim() == "") {
+    alert("digite un valor de descuadre");
     return false;
   } else {
     let registro = recolectarDatosFormularioCerrar();
     guardarRegistroCerrar(registro);
     $("#mdl_cerrar_turno").modal("hide");
-    comprobarCierreDelTurno();
-    $("#mdl_cerrar_final").modal("show");
+    // comprobarCierreDelTurno();
+    // $("#mdl_cerrar_final").modal("show");
   }
 });
 
 function recolectarDatosFormularioCerrar() {
   let registro = {
-    //turno_id_actual: $("#npt_turno_id_actual").val(),
-    turno_saldo_caja: $("#npt_saldo_caja").val(),
-    turno_total_utilidad: $("#npt_turno_total_utilidad").val(),
-    turno_total_entrega: $("#npt_saldo_final").val(),
-    turno_descuadre: $("#npt_turno_descuadre").val(),
+    turno_id: $("#npt_turno_id_actual").val(),
+    turno_saldo_caja: $("#npt_saldo_caja_base").val(),
+    turno_total_utilidad: $("#npt_total_gestiones_base").val(),
+    turno_total_entrega: $("#npt_saldo_final_base").val(),
+    turno_descuadre: $("#npt_descuadre_id").val(),
+    turno_sobrante: $("#npt_sobrante_base").val(),
+    turno_faltante: $("#npt_faltante_base").val(),
+    turno_entrega_final: $("#npt_entrega_final_base").val(),
   };
   return registro;
 }
@@ -269,7 +276,7 @@ function guardarRegistroCerrar(registro) {
   $.ajax({
     type: "POST",
     url:
-      "venta_home_mdl.php?accion=guardar_cierre_turno&turno_id=" + turno_id,
+      "venta_home_mdl.php?accion=guardar_cierre_turno&turno_id=" + registro.turno_id,
     data: registro,
     success: function (msg) { },
     error: function () {
