@@ -41,6 +41,12 @@ function limpiarModalDomicilios() {
   $("#npt_observaciones").val("");
   $("#npt_confirm_btn").val("0");
   $("#npt_turno_id_actual").val("300");
+
+
+  $("#bloque_factura").show();  
+    //pone actributo que activa el input
+  $("#npt_valor_producto").prop("disabled",null);
+
 }
 
 // FORMATO Y VALIDACION AUTOMATICO AL DIGITAR

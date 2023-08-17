@@ -235,7 +235,49 @@ function trasladaMdlNewDomi(registro) {
   $("#bloque_factura").hide();
   $("#npt_valor_producto").val(registro.venta_valor_venta);
   $("#npt_valor_producto_base").val(registro.venta_valor_venta);
+
+  // atributo para desactivar el input de valor producto desde la gestion.
+  $("#npt_valor_producto").prop("disabled", true);
   $("#npt_factura").val("NO");
+
+  // limpieza general del modal:
+  //oculta o muestra campos al inicio
+  $("#btn_domi_interno").show();
+  $("#btn_domi_interno").removeClass("btn-secondary");
+  $("#btn_domi_interno").addClass("btn-primary");
+  $("#btn_domi_externo").show();
+  $("#btn_domi_externo").removeClass("btn-secondary");
+  $("#btn_domi_externo").addClass("btn-primary");
+  $("#bloque_inyectologia").hide();
+  $("#bloque_transportador").hide();
+  $("#bloque_domi_externo, #bloque_valor_domi_externo").hide();
+  $("#bloque_hora_salida").hide();
+  $("#bloque_observaciones").hide();
+  $("#mdl_domicilios").modal("show");
+  //limpia los campos
+  $(
+    "#npt_factura,#npt_valor_domi_externo,#npt_valor_producto,#npt_hora_salida,#npt_observaciones"
+  ).css("background-color", "");
+  $("#slct_barrio").select2("val", "0"); //select
+  $("#npt_barrio_id").val("");
+  $("#npt_barrio_comuna").val("");
+  $("#npt_barrio_recomendacion").val("");
+  // $("#npt_factura").val("");
+  $("#slct_domi_externo").val("0"); //select
+  $("#npt_domi_externo_id").val("0");
+  $("#npt_btn_domi_interno").val("0");
+  $("#npt_valor_domi_externo").val("");
+  $("#npt_valor_domi_externo_base").val("0");
+  $("#npt_btn_domi_externo").val("0");
+  $("#slct_transportador").val("0"); //select
+  $("#npt_transportador_id").val("0");
+  // $("#npt_valor_producto").val("");
+  $("#npt_hora_salida").val("0");
+  $("#npt_hora_llegada").val("0");
+  $("#npt_inyectologia").val("");
+  $("#npt_observaciones").val("");
+  $("#npt_confirm_btn").val("0");
+  $("#npt_turno_id_actual").val("300");
 }
 
 function guardarNuevaGestion(registro) {
