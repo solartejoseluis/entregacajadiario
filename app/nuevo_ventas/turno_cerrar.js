@@ -88,8 +88,6 @@ $("#npt_saldo_caja").on("change", function () {
 });
 
 
-
-
 // VALIDACIONES Y FORMATO AL DIGITAR
 
 // solo deja ingresar numeros al input
@@ -227,6 +225,7 @@ $("#slct_descuadre").on("change", function () {
     $("#grupo_faltante").hide();
     let inputSaldoFinal = $("#npt_saldo_final").val();
     $("#npt_entrega_final").val(inputSaldoFinal);
+    $("#npt_entrega_final_base").val(inputSaldoFinal);
     return false;
   }
 });
@@ -243,11 +242,11 @@ $("#btn_confirma_cerrar_turno").click(function () {
     $("#npt_saldo_caja").focus();
     return false;
   } else if (valida_descuadre.trim() == "") {
-    alert("Elija una opción de descuadre");
+    alert("valor de descuadre en cero");
     $("#slct_descuadre").focus();
     return false;
     } else if (valida_entrega.trim() == "") {
-    alert("digite un valor de descuadre");
+    alert("valor de entrega en cero");
     return false;
   } else {
     let registro = recolectarDatosFormularioCerrar();
