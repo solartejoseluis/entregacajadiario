@@ -197,11 +197,12 @@ $("#slct_descuadre").on("change", function () {
   $("#npt_descuadre_id").val($(this).val());
   $("#slct_descuadre").css("background-color", "#dbe5f0");
   let descuadreId = $("#npt_descuadre_id").val();
-  if (descuadreId == "2") {
+    if (descuadreId == "2") {
     $("#npt_sobrante").val("");
     $("#npt_faltante").val("");
+    $("#npt_faltante_base").val("0");
     $("#npt_entrega_final").val("");
-    $("#npt_entrega_final_base").val("");
+    $("#npt_entrega_final_base").val("0");
     $("#npt_sobrante").css("background-color", "");
     $("#npt_faltante").css("background-color", "");
     $("#npt_entrega_final").css("background-color", "");
@@ -210,6 +211,7 @@ $("#slct_descuadre").on("change", function () {
 
   } else if (descuadreId == "3") {
     $("#npt_sobrante").val("");
+    $("#npt_sobrante_base").val("0");
     $("#npt_faltante").val("");
     $("#npt_entrega_final").val("");
     $("#npt_entrega_final_base").val("");
@@ -220,12 +222,15 @@ $("#slct_descuadre").on("change", function () {
     $("#grupo_faltante").show();
   } else if (descuadreId == "1") {
     $("#npt_sobrante").val("");
+    $("#npt_sobrante_base").val("0");
     $("#npt_faltante").val("");
+    $("#npt_faltante_base").val("0");
     $("#grupo_sobrante").hide();
     $("#grupo_faltante").hide();
     let inputSaldoFinal = $("#npt_saldo_final").val();
+    let inputSaldoFinalBase = $("#npt_saldo_final_base").val();
     $("#npt_entrega_final").val(inputSaldoFinal);
-    $("#npt_entrega_final_base").val(inputSaldoFinal);
+    $("#npt_entrega_final_base").val(inputSaldoFinalBase);
     return false;
   }
 });
