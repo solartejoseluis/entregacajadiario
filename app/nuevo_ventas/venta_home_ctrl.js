@@ -3,8 +3,8 @@ document.addEventListener("DOMContentLoaded", function () {
   datatablesDomiEnCurso();
   datatablesGestiones();
 
-  var turno_id = "";
-  var user_id = "";
+  var turno_id = "300";
+  var user_id = "1";
 
   // CARGA LA FECHA ACTUAL y CUADRO PRINCIPAL DE PAGINA
   // function getTime() {
@@ -27,8 +27,31 @@ document.addEventListener("DOMContentLoaded", function () {
   //   $("#mes_actual1").html(mes_actual);
   // }
 
-  
-// CARGA ELEMENTOS DE INICIO PAGINA
+  // SIDEBAR
+  $("#lnk_gestiones_mes_vendedor").on("click", function () {
+    $("#mdl_gestiones_mes_vendedor").modal("show");
+    dttbl_mes_vendedor(turno_id, user_id);
+  });
+
+  $("#lnk_gestiones_agrupadas_por_dia").on("click", function () {
+    $("#mdl_gestiones_agrupadas_por_dia").modal("show");
+    dttbl_gestiones_agrupadas_por_dia(turno_id,user_id);
+  });
+
+  $("#lnk_gestiones_mes_todos").on("click", function () {
+    $("#mdl_gestiones_mes_todos").modal("show");
+    dttbl_mes_todos(turno_id,user_id);
+  });
+
+  $("#lnk_gestiones_mes_vendedor").on("click", function () {
+    $("#mdl_gestiones_mes_vendedor").modal("show");
+  });
+
+  $("#lnk_gestiones_mes_vendedor").on("click", function () {
+    $("#mdl_gestiones_mes_vendedor").modal("show");
+  });
+
+  // CARGA ELEMENTOS DE INICIO PAGINA
   function cargarAcceso() {
     $.ajax({
       type: "POST",
@@ -278,14 +301,104 @@ function datatablesGestiones() {
   });
 
   // boton ver/editar domi en curso
-  $("#tbl_gestiones").on(
-    "click",
-    "button.btnVerGestion",
-    function () {
-      let registro = listadoGestiones.row($(this).parents("tr")).data();
-      recuperarRegistro(registro);
-      $("#mdl_edit_ventas").modal("show");
-    }
-  );
+  $("#tbl_gestiones").on("click", "button.btnVerGestion", function () {
+    let registro = listadoGestiones.row($(this).parents("tr")).data();
+    recuperarRegistro(registro);
+    $("#mdl_edit_ventas").modal("show");
+  });
 }
-// fin datatables gestiones 
+// fin datatables gestiones
+
+// DTTB MDL GESTIONES MES VENDEDOR
+function dttbl_mes_vendedor(turno_id, user_id) {
+  var listado = $("#tbl_gestiones_mes_vendedor").DataTable({
+    ajax: {
+      url: "venta_home_mdl.php?accion=listar_ventas_mes_vendedor",
+      dataSrc: "",
+      data: { turno_id: turno_id, user_id: user_id },
+    },
+    columns: [
+      { data: "venta_id" },
+      { data: "FECHA" },
+      { data: "DIA" },
+      { data: "HORA" },
+      { data: "venta_nombre_producto" },
+      { data: "venta_nombre_proveedor" },
+      { data: "venta_costo_producto" },
+      { data: "venta_valor_venta" },
+      { data: "venta_utilidad" },
+    ],
+    columnDefs: [],
+    order: [[1, "asc"]],
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+    },
+    fixedHeader: true,
+    // scrollY: "400px",
+    // scrollCollapse: true,
+    paging: false,
+    destroy: true,
+  });
+}
+
+// DTTB MDL GESTIONES AGRUPADAS POR DIA
+function dttbl_gestiones_agrupadas_por_dia(turno_id, user_id) {
+  var listado = $("#tbl_gestiones_agrupadas_por_dia").DataTable({
+    ajax: {
+      url: "venta_home_mdl.php?accion=listar_ventas_agrupadas_por_dia_vendedor",
+      dataSrc: "",
+      data: { turno_id: turno_id, user_id: user_id },
+    },
+    columns: [
+      { data: "FECHA" },
+      { data: "DIA" },
+      { data: "UTILIDAD" },
+      { data: "NUM_GESTIONES" },
+    ],
+    columnDefs: [],
+    order: [[0, "asc"]],
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+    },
+
+    fixedHeader: true,
+    // scrollY: "400px",
+    // scrollCollapse: true,
+    paging: false,
+    destroy: true,
+  });
+}
+
+
+//DTTB MDL MES TODOS
+function dttbl_mes_todos(turno_id,user_id) {
+    var listado = $("#tbl_gestiones_mes_todos").DataTable({
+      ajax: {
+        url: "venta_home_mdl.php?accion=listar_ventas_mes_todos",
+        dataSrc: "",
+        data: { turno_id: turno_id, user_id:user_id },
+      },
+      columns: [
+        { data: "venta_id" },
+        { data: "FECHA" },
+        { data: "DIA" },
+        { data: "HORA" },
+        { data: "venta_nombre_producto" },
+        { data: "venta_nombre_proveedor" },
+        { data: "venta_costo_producto" },
+        { data: "venta_valor_venta" },
+        { data: "user_nombre" },
+        { data: "venta_utilidad" },
+      ],
+      columnDefs: [],
+      order: [[1, 'asc']],
+      language: {
+        url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+      },
+       fixedHeader: true,
+        // scrollY: "400px",
+        // scrollCollapse: true,
+       paging: false,
+       destroy: true,
+    });
+  }

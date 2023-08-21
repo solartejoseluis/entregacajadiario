@@ -46,29 +46,76 @@
           class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark"
           style="width: 280px"
         >
-          <a
+          <!-- <a
             href="#"
             class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
           >
             <span class="fs-4">Gestión del Turno</span>
           </a>
           <hr />
-          <ul class="nav nav-pills flex-column mb-auto">
+          <ul class="nav nav-pills flex-column mb-auto"> -->
+            <p>GESTIONES</p>
+
+            <!-- LINK GESTIONES MES VENDEDOR -->
             <li class="nav-item">
-              <a href="#" class="nav-link text-white">
+              <a
+                href="#"
+                class="nav-link text-white"
+                id="lnk_gestiones_mes_vendedor"
+              >
                 <i
                   class="fa-solid fa-temperature-three-quarters"
                   style="color: #ffffff"
-                ></i>
-                Temp./Hum.
+                >
+                </i>
+                Mes/Vendedor
               </a>
             </li>
+
+
+            <!-- LINK GESTIONES POR DIA -->
+            <li class="nav-item">
+              <a
+                href="#"
+                class="nav-link text-white"
+                id="lnk_gestiones_agrupadas_por_dia"
+              >
+                <i
+                  class="fa-solid fa-temperature-three-quarters"
+                  style="color: #ffffff"
+                >
+                </i>
+               Por Día/Vendedor.
+              </a>
+            </li>
+
+            <!-- LINK GESTIONES ESTE MES -->
+            <li class="nav-item">
+              <a
+                href="#"
+                class="nav-link text-white"
+                id="lnk_gestiones_mes_todos"
+              >
+                <i
+                  class="fa-solid fa-temperature-three-quarters"
+                  style="color: #ffffff"
+                >
+                </i>
+                Todas/Mes.
+              </a>
+            </li>
+        <p>OTROS INFORMES</p>
+
+            <!-- LINK CUADRE DE CAJA -->
             <li>
               <a href="#" class="nav-link text-white">
-                <i class="fa-solid fa-cash-register" style="color: #ffffff"></i>
-                Cuadres de Caja
+                <i class="fa-solid fa-cash-register" style="color: #ffffff">
+                </i>
+                Cuadres De Caja
               </a>
             </li>
+
+            <!-- LINK ULTIMOS TURNOS -->
             <li>
               <a href="#" class="nav-link text-white">
                 <i
@@ -78,12 +125,16 @@
                 Ultimos Turnos
               </a>
             </li>
+
+            <!-- LINK PRODUCTOS -->
             <li>
               <a href="#" class="nav-link text-white">
                 <i class="fa-brands fa-product-hunt" style="color: #ffffff"></i>
                 Productos
               </a>
             </li>
+
+            <!-- LINK VENTA ACUMULADA -->
             <li>
               <a id="link_venta_acumulada" href="#" class="nav-link text-white">
                 <i
@@ -94,20 +145,25 @@
               </a>
             </li>
             <p>Mi Mes</p>
+            <!--LINK MIS PRODUCTOS -->
             <li>
               <a href="#" class="nav-link text-white">
-                <i class="fa-solid fa-truck-field" style="color: #ffffff"></i>
+                <i class="fa-solid fa-truck-field" style="color: #ffffff"> </i>
                 Mis productos
               </a>
             </li>
+
+            <!-- LINK GESTIONES POR DIA -->
             <li>
               <a href="#" class="nav-link text-white">
-                <i class="fa-solid fa-truck-field" style="color: #ffffff"></i>
+                <i class="fa-solid fa-truck-field" style="color: #ffffff"> </i>
                 Gestiones/Dia
               </a>
             </li>
           </ul>
           <hr />
+
+          <!-- SECCION DEL USUARIO -->
           <div class="dropdown">
             <a
               href="#"
@@ -134,6 +190,7 @@
               <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
             </ul>
           </div>
+          <!-- final seccion del usuario -->
         </div>
 
         <div class="b-example-divider b-example-vr"></div>
@@ -464,7 +521,7 @@
         </div>
       </div>
     </div>
-    <!-- Final Modal Nueva Gestion -->
+    <!-- Fin Modal Nueva Gestion -->
 
     <!-- MODAL EDITAR GESTION-->
     <div
@@ -952,7 +1009,7 @@
         </div>
       </div>
     </div>
-    <!-- finaliza modal cerrar final -->
+    <!-- fin modal cerrar final -->
 
     <!-- MODAL NUEVO DOMICILIO -->
     <div
@@ -1549,7 +1606,7 @@
     </div>
     <!-- fin modal domicilios entregados -->
 
-    <!-- MODAL GESTIONES/PRODUCTOS-->
+    <!-- MODAL GESTIONES DEL MES POR VENDEDOR-->
     <div class="modal fade" id="mdl_gestiones_mes_vendedor">
       <div class="modal-dialog modal-xl modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
@@ -1594,9 +1651,9 @@
         </div>
       </div>
     </div>
-    <!-- fin modal mis gestiones/productos -->
+    <!-- fin modal gestiones del mes por vendedor -->
 
-    <!-- MODAL GESTIONES/DIA-->
+    <!-- MODAL TODAS LAS GESTIONES AGRUPADAS POR DIA-->
     <div class="modal fade" id="mdl_gestiones_agrupadas_por_dia">
       <div class="modal-dialog modal-xl modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
@@ -1636,10 +1693,9 @@
         </div>
       </div>
     </div>
-    <!-- fin modal gestiones/dia -->
+    <!-- fin modal todas las gestiones agrupadas por dia -->
 
-    <!-- MODAL PRODUCTOS/GESTIONES DEL MES -->
-
+    <!-- MODAL TODAS LAS GESTIONES DEL MES -->
     <div class="modal fade" id="mdl_gestiones_mes_todos">
       <div class="modal-dialog modal-xl modal-dialog modal-fullscreen">
         <div class="modal-content">
@@ -1685,14 +1741,14 @@
         </div>
       </div>
     </div>
-    <!-- Final modal productos/gestiones del mes -->
+    <!-- fin modal todas las gestiones del mes -->
 
     <!-- MODAL VENTA ACUMULADA-->
     <div
       class="modal fade"
+      id="mdl_venta_acumulada"
       data-bs-backdrop="static"
       style="overflow: hidden"
-      id="mdl_venta_acumulada"
     >
       <div class="modal-dialog modal-xl">
         <div class="modal-content">
