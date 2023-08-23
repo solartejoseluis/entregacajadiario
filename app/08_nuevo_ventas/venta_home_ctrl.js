@@ -2,9 +2,52 @@ document.addEventListener("DOMContentLoaded", function () {
   datatablesDomiPorSalir();
   datatablesDomiEnCurso();
   datatablesGestiones();
+  cargarAcceso();
+  consultarDatosTurnoActual();
 
-  var turno_id = "300";
-  var user_id = "1";
+  var turno_id = "";
+  var user_id = "";
+
+
+  function cargarAcceso() {
+    $.ajax({
+      type: "POST",
+      async: false, // hacer que sea asincronico para sarle tiempo a ajax para cargar variable
+      url: "venta_home_mdl.php?accion=consultar_acceso",
+      data: "",
+      success: function (datos) {
+        $("#npt_turno_id_actual").val(datos[0].turno_id);
+        $("#npt_user_id_actual").val(datos[0].user_id);
+        //He tomado el valor del input
+        turno_id = $("#npt_turno_id_actual").val();
+        user_id = $("#npt_user_id_actual").val();
+      },
+      error: function () {
+        alert("Problema en cargar acceso");
+      },
+    });
+  }
+
+  function consultarDatosTurnoActual(turno_id) {
+    $.ajax({
+      type: "GET",
+      async: false, //necesario
+      url: "venta_home_mdl.php?accion=consultarDatosTurnoActual",
+      data: { turno_id: turno_id },
+      success: function (datos) {
+        //$("#npt_turno_id_actual").val(datos[0].turno_id_actual);
+        $("#npt_user_nombre").html(datos[0].user_nombre);
+        $("#npt_user_nombre1").html(datos[0].user_nombre);
+        $("#npt_user_apellido").html(datos[0].user_apellido);
+        $("#npt_user_apellido1").html(datos[0].user_apellido);
+        $("#npt_jornada_nombre").html(datos[0].jornada_nombre);
+      },
+      error: function () {
+        alert("Problema en consultar datos turno actual");
+      },
+    });
+  }
+
 
   // CARGA LA FECHA ACTUAL y CUADRO PRINCIPAL DE PAGINA
   // function getTime() {

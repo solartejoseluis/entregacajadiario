@@ -33,7 +33,7 @@ function actualDate() {
   $(document).ready(function() {
       $.ajax({
           type: "POST",
-          url: "../00_selects/getUser.php",
+          url: "get_user_responsable_turno.php",
           success: function(response) {
               $('.selectResponsable select').html(response).fadeIn();
           }
@@ -51,7 +51,7 @@ function actualDate() {
   $(document).ready(function() {
       $.ajax({
           type: "POST",
-          url: "../00_selects/getJornada.php",
+          url: "get_jornada.php",
           success: function(response) {
               $('.selectJornada select').html(response).fadeIn();
           }

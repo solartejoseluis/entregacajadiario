@@ -1,6 +1,6 @@
 <?php
 session_start();
-//RECOGER LOS DATOS DE SECION EN VARIABLES
+//RECOGER LOS DATOS DE SESION EN VARIABLES
 $turno_fecha_creado = $_SESSION['fecha_creado'];
 $turno_responsable_id = $_SESSION['responsable_id'];
 $turno_jornada_id = $_SESSION['jornada_id'];

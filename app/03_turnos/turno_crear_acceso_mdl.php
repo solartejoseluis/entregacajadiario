@@ -13,5 +13,5 @@ require "../00_connect/pdo.php";
       $turno_responsable_id)";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
-echo '<meta http-equiv="REFRESH"content="0;url=../02_ventas/venta_home_view.html">';
+echo '<meta http-equiv="REFRESH"content="0;url=../08_nuevo_ventas/venta_home_view.html">';
 ?>

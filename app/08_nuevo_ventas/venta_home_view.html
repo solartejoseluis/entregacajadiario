@@ -39,6 +39,7 @@
     <!-- INICIO SIDEBAR -->
     <div id="mySidebar" class="sidebar">
       <input type="hidden" class="form-control" id="npt_turno_id_actual" />
+      <input type="hidden" class="form-control" id="npt_user_id_actual" />
 
       <button class="btn_close">x</button>
       <main class="d-flex flex-nowrap">
@@ -52,8 +53,9 @@
           >
             <span class="fs-4">Gestión del Turno</span>
           </a>
-          <hr />
-          <ul class="nav nav-pills flex-column mb-auto"> -->
+          <hr />-->
+
+          <ul class="nav nav-pills flex-column mb-auto">
             <p>GESTIONES</p>
 
             <!-- LINK GESTIONES MES VENDEDOR -->
@@ -72,7 +74,6 @@
               </a>
             </li>
 
-
             <!-- LINK GESTIONES POR DIA -->
             <li class="nav-item">
               <a
@@ -85,7 +86,7 @@
                   style="color: #ffffff"
                 >
                 </i>
-               Por Día/Vendedor.
+                Por Día/Vendedor.
               </a>
             </li>
 
@@ -104,19 +105,20 @@
                 Todas/Mes.
               </a>
             </li>
-        <p>OTROS INFORMES</p>
+
+            <!-- <p>OTROS INFORMES</p> -->
 
             <!-- LINK CUADRE DE CAJA -->
-            <li>
+            <!-- <li>
               <a href="#" class="nav-link text-white">
                 <i class="fa-solid fa-cash-register" style="color: #ffffff">
                 </i>
                 Cuadres De Caja
               </a>
-            </li>
+            </li> -->
 
             <!-- LINK ULTIMOS TURNOS -->
-            <li>
+            <!-- <li>
               <a href="#" class="nav-link text-white">
                 <i
                   class="fa-solid fa-users-viewfinder"
@@ -124,18 +126,18 @@
                 ></i>
                 Ultimos Turnos
               </a>
-            </li>
+            </li> -->
 
             <!-- LINK PRODUCTOS -->
-            <li>
+            <!-- <li>
               <a href="#" class="nav-link text-white">
                 <i class="fa-brands fa-product-hunt" style="color: #ffffff"></i>
                 Productos
               </a>
-            </li>
+            </li> -->
 
             <!-- LINK VENTA ACUMULADA -->
-            <li>
+            <!-- <li>
               <a id="link_venta_acumulada" href="#" class="nav-link text-white">
                 <i
                   class="fa-solid fa-file-invoice-dollar"
@@ -143,23 +145,25 @@
                 ></i>
                 Venta Acumulada
               </a>
-            </li>
-            <p>Mi Mes</p>
+            </li> -->
+
+            <!-- <p>Mi Mes</p> -->
+
             <!--LINK MIS PRODUCTOS -->
-            <li>
+            <!-- <li>
               <a href="#" class="nav-link text-white">
                 <i class="fa-solid fa-truck-field" style="color: #ffffff"> </i>
                 Mis productos
               </a>
-            </li>
+            </li> -->
 
             <!-- LINK GESTIONES POR DIA -->
-            <li>
+            <!-- <li>
               <a href="#" class="nav-link text-white">
                 <i class="fa-solid fa-truck-field" style="color: #ffffff"> </i>
                 Gestiones/Dia
               </a>
-            </li>
+            </li> -->
           </ul>
           <hr />
 
@@ -181,12 +185,12 @@
               <strong>Usuario</strong>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-              <li><a class="dropdown-item" href="#">Nuevo proyecto...</a></li>
-              <li><a class="dropdown-item" href="#">configuración</a></li>
-              <li><a class="dropdown-item" href="#">Perfil</a></li>
-              <li>
+              <!-- <li><a class="dropdown-item" href="#">Nuevo proyecto...</a></li> -->
+              <!-- <li><a class="dropdown-item" href="#">configuración</a></li> -->
+              <!-- <li><a class="dropdown-item" href="#">Perfil</a></li> -->
+              <!-- <li>
                 <hr class="dropdown-divider" />
-              </li>
+              </li> -->
               <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
             </ul>
           </div>
@@ -206,6 +210,7 @@
           <div class="container-fluid" id="contenido_navbar">
             <button class="btn_open">☰</button>
             <a class="navbar-brand" href="#">HOJA DEL TURNO</a>
+
             <button
               class="navbar-toggler"
               type="button"
@@ -215,8 +220,9 @@
               aria-expanded="false"
               aria-label="Toggle navigation"
             >
-              <span class="navbar-toggler-icon"></span>
+              <span class="navbar-toggler-icon">boton</span>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarCollapse">
               <ul class="navbar-nav me-auto mb-2 mb-md-0">
                 <li class="nav-item dropdown">
@@ -277,7 +283,10 @@
                 </li>
               </ul>
             </div>
+            <!--fin del navbar collapse-->
+            <span>NOMBRES Y APELLIDOS</span>
           </div>
+          <!--finaliza el contenido del navbar-->
         </nav>
       </nav>
       <!-- finaliza navbar -->
@@ -1697,7 +1706,7 @@
 
     <!-- MODAL TODAS LAS GESTIONES DEL MES -->
     <div class="modal fade" id="mdl_gestiones_mes_todos">
-      <div class="modal-dialog modal-xl modal-dialog modal-fullscreen">
+      <div class="modal-dialog modal-xl modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5">TODAS LAS GESTIONES DEL MES</h1>
@@ -1771,129 +1780,7 @@
                       class="table table-sm table-bordered table-hover border-primary"
                       id=""
                     >
-                      <thead>
-                        <tr>
-                          <th scope="col">Vendedor</th>
-                          <th colspan="2" scope="col">Ene</th>
-                          <th colspan="2" scope="col">Feb</th>
-                          <th colspan="2" scope="col">Mar</th>
-                          <th colspan="2" scope="col">Abr</th>
-                          <th colspan="2" scope="col">May</th>
-                          <th colspan="2" scope="col">Jun</th>
-                          <th colspan="2" scope="col">Jul</th>
-                          <th colspan="2" scope="col">Ago</th>
-                          <th colspan="2" scope="col">Sep</th>
-                          <th colspan="2" scope="col">Oct</th>
-                          <th colspan="2" scope="col">Nov</th>
-                          <th colspan="2" scope="col">Dic</th>
-                        </tr>
-                        <tr>
-                          <th scope="col">nombre</th>
-                          <th scope="col">Ges</th>
-                          <th scope="col">Util</th>
-                          <th scope="col">Ges</th>
-                          <th scope="col">Util</th>
-                          <th scope="col">Ges</th>
-                          <th scope="col">Util</th>
-                          <th scope="col">Ges</th>
-                          <th scope="col">Util</th>
-                          <th scope="col">Ges</th>
-                          <th scope="col">Util</th>
-                          <th scope="col">Ges</th>
-                          <th scope="col">Util</th>
-                          <th scope="col">Ges</th>
-                          <th scope="col">Util</th>
-                          <th scope="col">Ges</th>
-                          <th scope="col">Util</th>
-                          <th scope="col">Ges</th>
-                          <th scope="col">Util</th>
-                          <th scope="col">Ges</th>
-                          <th scope="col">Util</th>
-                          <th scope="col">Ges</th>
-                          <th scope="col">Util</th>
-                          <th scope="col">Ges</th>
-                          <th scope="col">Util</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>
-                            <p id=""></p>
-                          </td>
-                          <td>
-                            <p id="ene_ges">5</p>
-                          </td>
-                          <td>
-                            <p id="ene_util">$100.000</p>
-                          </td>
-                          <td>
-                            <p id="feb_ges">6</p>
-                          </td>
-                          <td>
-                            <p id="feb_util">$200.000</p>
-                          </td>
-                          <td>
-                            <p id="mar_ges">8</p>
-                          </td>
-                          <td>
-                            <p id="mar_util">$540.000</p>
-                          </td>
-                          <td>
-                            <p id="abr_ges">10</p>
-                          </td>
-                          <td>
-                            <p id="abr_util">$100.000</p>
-                          </td>
-                          <td>
-                            <p id="may_ges">30</p>
-                          </td>
-                          <td>
-                            <p id="may_util">$80.000</p>
-                          </td>
-                          <td>
-                            <p id="Jun_ges">12</p>
-                          </td>
-                          <td>
-                            <p id="jun_util">$70.000</p>
-                          </td>
-                          <td>
-                            <p id="jul_ges">11</p>
-                          </td>
-                          <td>
-                            <p id="jul_util">$85.000</p>
-                          </td>
-                          <td>
-                            <p id="ago_ges">20</p>
-                          </td>
-                          <td>
-                            <p id="ago_util">$67.000</p>
-                          </td>
-                          <td>
-                            <p id="sep_ges">2</p>
-                          </td>
-                          <td>
-                            <p id="sep_util">$50.000</p>
-                          </td>
-                          <td>
-                            <p id="oct_ges">15</p>
-                          </td>
-                          <td>
-                            <p id="oct_util">$40.000</p>
-                          </td>
-                          <td>
-                            <p id="nov_ges">16</p>
-                          </td>
-                          <td>
-                            <p id="nov_util">$24.000</p>
-                          </td>
-                          <td>
-                            <p id="dic_ges">17</p>
-                          </td>
-                          <td>
-                            <p id="dic_util">$10.000</p>
-                          </td>
-                        </tr>
-                      </tbody>
+                      <!-- contenido de la tabla -->
                     </table>
                   </div>
                 </section>
