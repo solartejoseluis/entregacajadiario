@@ -22,6 +22,28 @@ switch ($_GET['accion']) {
         echo json_encode($result);
         break;
 
+    case 'consultarDatosTurnoActual':
+        $sql = "SELECT
+            TURNOS.turno_id AS turno_id_actual,
+            TURNOS.turno_jornada,
+            TURNOS.turno_responsable,
+            USERS.user_nombre,
+            USERS.user_apellido,
+            JORNADAS.jornada_nombre
+            FROM TURNOS
+            INNER JOIN USERS
+            ON USERS.user_id=TURNOS.turno_responsable
+            INNER JOIN JORNADAS
+            ON JORNADAS.jornada_id=TURNOS.turno_jornada
+            WHERE turno_id=$_GET[turno_id]";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
+
+
+
     case 'carga_dttbl_domi_por_salir':
         $sql = "SELECT
             DATE_FORMAT(DOMICILIOS.hora_creado, '%H:%i') AS hora_creado,
@@ -258,25 +280,7 @@ switch ($_GET['accion']) {
         echo json_encode($response);
         break;
 
-    case 'consultarDatosTurnoActual':
-        $sql = "SELECT
-            TURNOS.turno_id AS turno_id_actual,
-            TURNOS.turno_jornada,
-            TURNOS.turno_responsable,
-            USERS.user_nombre,
-            USERS.user_apellido,
-            JORNADAS.jornada_nombre
-            FROM TURNOS
-            INNER JOIN USERS
-            ON USERS.user_id=TURNOS.turno_responsable
-            INNER JOIN JORNADAS
-            ON JORNADAS.jornada_id=TURNOS.turno_jornada
-            WHERE turno_id=$_GET[turno_id]";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($result);
-        break;
+
 
     case 'consultar_acumulado':
         $sql = "SELECT

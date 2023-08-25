@@ -206,7 +206,7 @@
     <div class="container-fluid bg-light" id="contenido">
       <!-- NAVBAR -->
       <nav class="row">
-        <nav class="navbar navbar-expand-md navbar-dark bg-primary mb-4">
+        <nav class="navbar navbar-expand-md navbar-dark" id="nav_principal">
           <div class="container-fluid" id="contenido_navbar">
             <button class="btn_open">☰</button>
             <a class="navbar-brand" href="#">HOJA DEL TURNO</a>
@@ -284,96 +284,121 @@
               </ul>
             </div>
             <!--fin del navbar collapse-->
-            <span>NOMBRES Y APELLIDOS</span>
+            <span id="subtitulo_navbar">Jornada:&nbsp</span>
+            <span class="navbar-brand" id="spn_jornada_nombre"></span>
+            <span id="subtitulo_navbar">A Cargo De:&nbsp</span>
+            <span class="navbar-brand" id="spn_user_nombre"></span>
+            <span class="navbar-brand" id="spn_user_apellido"></span>
           </div>
           <!--finaliza el contenido del navbar-->
         </nav>
       </nav>
       <!-- finaliza navbar -->
 
-      <!-- ENCABEZADO PAGINA -->
+      <!-- INICIO BARRA INFORMATIVA  -->
       <div class="row">
-        <section class="col-md-4">
-          <h4>VIERNES,5 DE MAYO DE 2023</h4>
-        </section>
-        <section class="col-md-4">
-          <h4>RESPONSABLE DE TURNO: YULY DIAZ</h4>
-        </section>
-        <section class="col-md-4">
-          <h4>SECCION DERECHA</h4>
-        </section>
+        <nav class="navbar navbar-expand-md" id="barra_informativa">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">INFO:</a>
+            <div class="collapse navbar-collapse" id="navbarText">
+              <div class="ms-4">
+                <span class="navbar-text"id="info_mes"> Gestiones Mes </span>
+                <span id="info_mes">&nbsp87</span>
+              </div>
+              <div class="ms-4">
+              <span class="navbar-text"id="info_mes"> Utilidad Mes </span>
+              <span id="info_mes">&nbsp$120.400</span>
+              </div>
+              <div class="ms-4">
+              <span class="navbar-text" id="info_mes"> Ganancia Mes </span>
+              <span id="info_mes">&nbsp$65.000</span>
+              </div>
+              <div class="ms-4">
+              <span class="navbar-text" id="info_hoy"> Utilidad Hoy </span>
+              <span id="info_hoy">&nbsp87</span>
+              </div>
+              <div class="ms-4">
+              <span class="navbar-text" id="info_hoy"> Gestiones Hoy </span>
+              <span id="info_hoy">&nbsp87</span>
+              </div>
+            </div>
+          </div>
+        </nav>
       </div>
-      <!-- finaliza encabezado -->
+      <!-- FINAL BARRA INFORMATIVA -->
 
       <div class="row">
         <!-- SECCION DOMICILIOS -->
         <section class="container col-md-6">
-          <h3>AREA DE DOMICILIOS</h3>
+          <h3>DOMICILIOS</h3>
           <button
             type="button"
             class="btn btn-primary"
             id="btn_nuevo_domicilio"
           >
-            Nuevo Domicilio
+            Nuevo Domi
           </button>
-          <button
-            type="button"
-            class="btn btn-primary"
-            id="btn_domi_entregados"
-          >
+          <button type="button" class="btn btn-outline-primary" id="btn_domi_entregados">
             Entregados
           </button>
 
-          <h5>PENDIENTES POR SALIR</h5>
-          <div class="row">
-            <section class="table-responsive" id="tabla">
-              <table class="table display compact" id="tbl_domi_por_salir">
-                <thead>
-                  <tr>
-                    <td>Creado</td>
-                    <td>Barrio</td>
-                    <td>Interno</td>
-                    <td>Externo</td>
-                    <td>Venta</td>
-                    <td>Iny</td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                </thead>
-              </table>
-            </section>
-          </div>
+          <!-- final del row -->
+          <h5 id="titulos_dttbl_domicilios">DOMICILIOS PENDIENTES POR SALIR</h5>
+          <section class="table-responsive" id="tabla">
+            <table
+              class="table display compact cell-border"
+              id="tbl_domi_por_salir"
+            >
+              <thead>
+                <tr>
+                  <td>Creado</td>
+                  <td>Barrio</td>
+                  <td>D/Int</td>
+                  <td>D/Ext</td>
+                  <td>Venta</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </thead>
+            </table>
+          </section>
 
-          <h5>EN ENTREGA</h5>
-          <div class="row">
-            <section class="table-responsive" id="tabla">
-              <table class="table display compact" id="tbl_domi_en_curso">
-                <thead>
-                  <tr>
-                    <td>Barrio</td>
-                    <td>Interno</td>
-                    <td>Externo</td>
-                    <td>Venta</td>
-                    <td>Salió</td>
-                    <td>Iny</td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                </thead>
-              </table>
-            </section>
-          </div>
+          <h5 id="titulos_dttbl_domicilios">DOMICILIOS EN ENTREGA</h5>
+          <section class="table-responsive" id="tabla">
+            <table
+              class="table display compact cell-border"
+              id="tbl_domi_en_curso"
+            >
+              <thead>
+                <tr>
+                  <td>Barrio</td>
+                  <td>Interno</td>
+                  <td>Externo</td>
+                  <td>Venta</td>
+                  <td>Salió</td>
+                  <td>Iny</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </thead>
+            </table>
+          </section>
         </section>
         <!-- finaliza seccion de  domicilios -->
+
         <!-- SECCION GESTIONES -->
         <section class="container col-md-6">
-          <h3>AREA DE GESTIONES</h3>
+          <h3>GESTIONES</h3>
           <button type="button" class="btn btn-success" id="btn_nueva_gestion">
             Nueva Gestión
           </button>
+          <h5 id="titulos_dttbl_gestiones">GESTIONES DEL TURNO</h5>
           <div class="row">
             <section class="table-responsive" id="tabla">
-              <table class="table display compact" id="tbl_gestiones">
+              <table
+                class="table display compact cell-border"
+                id="tbl_gestiones"
+              >
                 <thead>
                   <tr>
                     <td>Producto</td>
@@ -509,12 +534,12 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" id="btn_enviar_domi">
+            <button type="submit" class="btn btn-success" id="btn_enviar_domi">
               Enviar Domicilio
             </button>
             <button
               type="submit"
-              class="btn btn-primary"
+              class="btn btn-outline-success"
               id="btn_save_punto_fisico"
             >
               Punto Físico

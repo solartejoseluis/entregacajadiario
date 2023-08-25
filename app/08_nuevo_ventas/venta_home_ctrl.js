@@ -1,12 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
+  var turno_id = "";
+  var user_id = "";
+
   datatablesDomiPorSalir();
   datatablesDomiEnCurso();
   datatablesGestiones();
   cargarAcceso();
-  consultarDatosTurnoActual();
+  consultarDatosTurnoActual(turno_id);
 
-  var turno_id = "";
-  var user_id = "";
+
 
 
   function cargarAcceso() {
@@ -37,10 +39,10 @@ document.addEventListener("DOMContentLoaded", function () {
       success: function (datos) {
         //$("#npt_turno_id_actual").val(datos[0].turno_id_actual);
         $("#npt_user_nombre").html(datos[0].user_nombre);
-        $("#npt_user_nombre1").html(datos[0].user_nombre);
         $("#npt_user_apellido").html(datos[0].user_apellido);
-        $("#npt_user_apellido1").html(datos[0].user_apellido);
-        $("#npt_jornada_nombre").html(datos[0].jornada_nombre);
+        $("#spn_user_nombre").html(datos[0].user_nombre);
+        $("#spn_user_apellido").html(datos[0].user_apellido);
+        $("#spn_jornada_nombre").html(datos[0].jornada_nombre);
       },
       error: function () {
         alert("Problema en consultar datos turno actual");
@@ -114,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 }); // cierre del addEventListener del inicio de pagina
 
-// DATATABLES DOMI POR SALIR
+// DTTBL DOMI POR SALIR
 function datatablesDomiPorSalir() {
   var listadoDomiPorSalir = $("#tbl_domi_por_salir").DataTable({
     ajax: {
@@ -128,19 +130,18 @@ function datatablesDomiPorSalir() {
       { data: "user_nombre" },
       { data: "domi_externo_nombre" },
       { data: "valor_venta" },
-      { data: "inyectologia" },
       { data: null, orderable: false },
       { data: null, orderable: false },
     ],
     columnDefs: [
       {
-        targets: 6,
+        targets: 5,
         defaultContent:
-          "<button class='btn btn-primary btn-sm btnVerDomiPorSalir'><i class='fa-solid fa-pen'></i></button>",
+          "<button class='btn btn-outline-primary btn-sm btnVerDomiPorSalir'><i class='fa-solid fa-pen'></i></button>",
         data: null,
       },
       {
-        targets: 7,
+        targets: 6,
         defaultContent:
           "<button class='btn btn-outline-primary btn-sm btnHoraSalida'>Sale</button>",
         data: null,
@@ -211,7 +212,7 @@ function datatablesDomiPorSalir() {
 }
 // final datatables domi por salir
 
-// DATATABLES DOMI EN CURSO
+// DTTBL DOMI EN CURSO
 function datatablesDomiEnCurso() {
   let listadoDomiEnCurso = $("#tbl_domi_en_curso").DataTable({
     ajax: {
@@ -232,7 +233,7 @@ function datatablesDomiEnCurso() {
       {
         targets: 6,
         defaultContent:
-          "<button class='btn btn-primary btn-sm btnVerDomiEnCurso'><i class='fa-solid fa-pen'></i></button>",
+          "<button class='btn btn-outline-primary btn-sm btnVerDomiEnCurso'><i class='fa-solid fa-pen'></i></button>",
         data: null,
       },
       {
@@ -307,7 +308,7 @@ function datatablesDomiEnCurso() {
 }
 // fin datatables domi en curso
 
-// DATATABLES GESTIONES
+// DTTBL GESTIONES
 function datatablesGestiones() {
   let listadoGestiones = $("#tbl_gestiones").DataTable({
     ajax: {
@@ -329,7 +330,7 @@ function datatablesGestiones() {
       {
         targets: 7,
         defaultContent:
-          "<button class='btn btn-primary btn-sm btnVerGestion'><i class='fa-solid fa-pen'></i></button>",
+          "<button class='btn btn-outline-success btn-sm btnVerGestion'><i class='fa-solid fa-pen'></i></button>",
         data: null,
       },
     ],
@@ -352,7 +353,7 @@ function datatablesGestiones() {
 }
 // fin datatables gestiones
 
-// DTTB MDL GESTIONES MES VENDEDOR
+// DTTBL MDL GESTIONES MES VENDEDOR
 function dttbl_mes_vendedor(turno_id, user_id) {
   var listado = $("#tbl_gestiones_mes_vendedor").DataTable({
     ajax: {
@@ -384,7 +385,7 @@ function dttbl_mes_vendedor(turno_id, user_id) {
   });
 }
 
-// DTTB MDL GESTIONES AGRUPADAS POR DIA
+// DTTBL MDL GESTIONES AGRUPADAS POR DIA
 function dttbl_gestiones_agrupadas_por_dia(turno_id, user_id) {
   var listado = $("#tbl_gestiones_agrupadas_por_dia").DataTable({
     ajax: {
@@ -412,8 +413,7 @@ function dttbl_gestiones_agrupadas_por_dia(turno_id, user_id) {
   });
 }
 
-
-//DTTB MDL MES TODOS
+//DTTBL MDL MES TODOS
 function dttbl_mes_todos(turno_id,user_id) {
     var listado = $("#tbl_gestiones_mes_todos").DataTable({
       ajax: {
