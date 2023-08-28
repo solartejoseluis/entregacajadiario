@@ -72,6 +72,22 @@ document.addEventListener("DOMContentLoaded", function () {
   //   $("#mes_actual1").html(mes_actual);
   // }
 
+  // CARGA LA FECHA ACTUAL y CUADRO PRINCIPAL DE PAGINA
+  function getTime() {
+    var today = moment();
+    date = today.format("LLLL");
+    document.getElementById("hoy_moment").innerHTML =
+      `<span>${date}</span>`;
+  }
+  setInterval(function () {
+    getTime();
+  }, 1000);
+
+  function mesActual() {
+    let mes_actual = moment().format("MMMM-YYYY");
+    $("#mes_actual1").html(mes_actual);
+  }
+
   // SIDEBAR
   $("#lnk_gestiones_mes_vendedor").on("click", function () {
     $("#mdl_gestiones_mes_vendedor").modal("show");
@@ -80,12 +96,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   $("#lnk_gestiones_agrupadas_por_dia").on("click", function () {
     $("#mdl_gestiones_agrupadas_por_dia").modal("show");
-    dttbl_gestiones_agrupadas_por_dia(turno_id,user_id);
+    dttbl_gestiones_agrupadas_por_dia(turno_id, user_id);
   });
 
   $("#lnk_gestiones_mes_todos").on("click", function () {
     $("#mdl_gestiones_mes_todos").modal("show");
-    dttbl_mes_todos(turno_id,user_id);
+    dttbl_mes_todos(turno_id, user_id);
   });
 
   $("#lnk_gestiones_mes_vendedor").on("click", function () {
@@ -414,34 +430,34 @@ function dttbl_gestiones_agrupadas_por_dia(turno_id, user_id) {
 }
 
 //DTTBL MDL MES TODOS
-function dttbl_mes_todos(turno_id,user_id) {
-    var listado = $("#tbl_gestiones_mes_todos").DataTable({
-      ajax: {
-        url: "venta_home_mdl.php?accion=listar_ventas_mes_todos",
-        dataSrc: "",
-        data: { turno_id: turno_id, user_id:user_id },
-      },
-      columns: [
-        { data: "venta_id" },
-        { data: "FECHA" },
-        { data: "DIA" },
-        { data: "HORA" },
-        { data: "venta_nombre_producto" },
-        { data: "venta_nombre_proveedor" },
-        { data: "venta_costo_producto" },
-        { data: "venta_valor_venta" },
-        { data: "user_nombre" },
-        { data: "venta_utilidad" },
-      ],
-      columnDefs: [],
-      order: [[1, 'asc']],
-      language: {
-        url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
-      },
-       fixedHeader: true,
-        // scrollY: "400px",
-        // scrollCollapse: true,
-       paging: false,
-       destroy: true,
-    });
-  }
+function dttbl_mes_todos(turno_id, user_id) {
+  var listado = $("#tbl_gestiones_mes_todos").DataTable({
+    ajax: {
+      url: "venta_home_mdl.php?accion=listar_ventas_mes_todos",
+      dataSrc: "",
+      data: { turno_id: turno_id, user_id: user_id },
+    },
+    columns: [
+      { data: "venta_id" },
+      { data: "FECHA" },
+      { data: "DIA" },
+      { data: "HORA" },
+      { data: "venta_nombre_producto" },
+      { data: "venta_nombre_proveedor" },
+      { data: "venta_costo_producto" },
+      { data: "venta_valor_venta" },
+      { data: "user_nombre" },
+      { data: "venta_utilidad" },
+    ],
+    columnDefs: [],
+    order: [[1, 'asc']],
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+    },
+    fixedHeader: true,
+    // scrollY: "400px",
+    // scrollCollapse: true,
+    paging: false,
+    destroy: true,
+  });
+}

@@ -1,53 +1,35 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Entrega Diaria</title>
-    <!-- CDN boostrap 5.2.2 css -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
-      crossorigin="anonymous"
-    />
-    <!-- CDN datatables 1.13.2 css -->
-    <link
-      rel="stylesheet"
-      href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.datatables.net/1.13.1/css/dataTables.jqueryui.min.css"
-    />
-    <!-- fontawesome icons version 6 -->
-    <script
-      src="https://kit.fontawesome.com/382e1ebb20.js"
-      crossorigin="anonymous"
-    ></script>
-    <!-- estilos personalizados -->
-    <link rel="stylesheet" href="ventas.css" />
-    <link rel="stylesheet" href="sidebar.css" />
-    <!-- select2 -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
-      rel="stylesheet"
-    />
-  </head>
 
-  <body>
-    <!-- INICIO SIDEBAR -->
-    <div id="mySidebar" class="sidebar">
-      <input type="hidden" class="form-control" id="npt_turno_id_actual" />
-      <input type="hidden" class="form-control" id="npt_user_id_actual" />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Entrega Diaria</title>
+  <!-- CDN boostrap 5.2.2 css -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
+  <!-- CDN datatables 1.13.2 css -->
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" />
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.jqueryui.min.css" />
+  <!-- fontawesome icons version 6 -->
+  <script src="https://kit.fontawesome.com/382e1ebb20.js" crossorigin="anonymous"></script>
+  <!-- estilos personalizados -->
+  <link rel="stylesheet" href="ventas.css" />
+  <link rel="stylesheet" href="sidebar.css" />
+  <!-- select2 -->
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+</head>
 
-      <button class="btn_close">x</button>
-      <main class="d-flex flex-nowrap">
-        <div
-          class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark"
-          style="width: 280px"
-        >
-          <!-- <a
+<body>
+  <!-- INICIO SIDEBAR -->
+  <div id="mySidebar" class="sidebar">
+    <input type="hidden" class="form-control" id="npt_turno_id_actual" />
+    <input type="hidden" class="form-control" id="npt_user_id_actual" />
+
+    <button class="btn_close">x</button>
+    <main class="d-flex flex-nowrap">
+      <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px">
+        <!-- <a
             href="#"
             class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
           >
@@ -55,61 +37,40 @@
           </a>
           <hr />-->
 
-          <ul class="nav nav-pills flex-column mb-auto">
-            <p>GESTIONES</p>
+        <ul class="nav nav-pills flex-column mb-auto">
+          <p>GESTIONES</p>
 
-            <!-- LINK GESTIONES MES VENDEDOR -->
-            <li class="nav-item">
-              <a
-                href="#"
-                class="nav-link text-white"
-                id="lnk_gestiones_mes_vendedor"
-              >
-                <i
-                  class="fa-solid fa-temperature-three-quarters"
-                  style="color: #ffffff"
-                >
-                </i>
-                Mes/Vendedor
-              </a>
-            </li>
+          <!-- LINK GESTIONES MES VENDEDOR -->
+          <li class="nav-item">
+            <a href="#" class="nav-link text-white" id="lnk_gestiones_mes_vendedor">
+              <i class="fa-solid fa-temperature-three-quarters" style="color: #ffffff">
+              </i>
+              Mes/Vendedor
+            </a>
+          </li>
 
-            <!-- LINK GESTIONES POR DIA -->
-            <li class="nav-item">
-              <a
-                href="#"
-                class="nav-link text-white"
-                id="lnk_gestiones_agrupadas_por_dia"
-              >
-                <i
-                  class="fa-solid fa-temperature-three-quarters"
-                  style="color: #ffffff"
-                >
-                </i>
-                Por Día/Vendedor.
-              </a>
-            </li>
+          <!-- LINK GESTIONES POR DIA -->
+          <li class="nav-item">
+            <a href="#" class="nav-link text-white" id="lnk_gestiones_agrupadas_por_dia">
+              <i class="fa-solid fa-temperature-three-quarters" style="color: #ffffff">
+              </i>
+              Por Día/Vendedor.
+            </a>
+          </li>
 
-            <!-- LINK GESTIONES ESTE MES -->
-            <li class="nav-item">
-              <a
-                href="#"
-                class="nav-link text-white"
-                id="lnk_gestiones_mes_todos"
-              >
-                <i
-                  class="fa-solid fa-temperature-three-quarters"
-                  style="color: #ffffff"
-                >
-                </i>
-                Todas/Mes.
-              </a>
-            </li>
+          <!-- LINK GESTIONES ESTE MES -->
+          <li class="nav-item">
+            <a href="#" class="nav-link text-white" id="lnk_gestiones_mes_todos">
+              <i class="fa-solid fa-temperature-three-quarters" style="color: #ffffff">
+              </i>
+              Todas/Mes.
+            </a>
+          </li>
 
-            <!-- <p>OTROS INFORMES</p> -->
+          <!-- <p>OTROS INFORMES</p> -->
 
-            <!-- LINK CUADRE DE CAJA -->
-            <!-- <li>
+          <!-- LINK CUADRE DE CAJA -->
+          <!-- <li>
               <a href="#" class="nav-link text-white">
                 <i class="fa-solid fa-cash-register" style="color: #ffffff">
                 </i>
@@ -117,8 +78,8 @@
               </a>
             </li> -->
 
-            <!-- LINK ULTIMOS TURNOS -->
-            <!-- <li>
+          <!-- LINK ULTIMOS TURNOS -->
+          <!-- <li>
               <a href="#" class="nav-link text-white">
                 <i
                   class="fa-solid fa-users-viewfinder"
@@ -128,16 +89,16 @@
               </a>
             </li> -->
 
-            <!-- LINK PRODUCTOS -->
-            <!-- <li>
+          <!-- LINK PRODUCTOS -->
+          <!-- <li>
               <a href="#" class="nav-link text-white">
                 <i class="fa-brands fa-product-hunt" style="color: #ffffff"></i>
                 Productos
               </a>
             </li> -->
 
-            <!-- LINK VENTA ACUMULADA -->
-            <!-- <li>
+          <!-- LINK VENTA ACUMULADA -->
+          <!-- <li>
               <a id="link_venta_acumulada" href="#" class="nav-link text-white">
                 <i
                   class="fa-solid fa-file-invoice-dollar"
@@ -147,1724 +108,1046 @@
               </a>
             </li> -->
 
-            <!-- <p>Mi Mes</p> -->
+          <!-- <p>Mi Mes</p> -->
 
-            <!--LINK MIS PRODUCTOS -->
-            <!-- <li>
+          <!--LINK MIS PRODUCTOS -->
+          <!-- <li>
               <a href="#" class="nav-link text-white">
                 <i class="fa-solid fa-truck-field" style="color: #ffffff"> </i>
                 Mis productos
               </a>
             </li> -->
 
-            <!-- LINK GESTIONES POR DIA -->
-            <!-- <li>
+          <!-- LINK GESTIONES POR DIA -->
+          <!-- <li>
               <a href="#" class="nav-link text-white">
                 <i class="fa-solid fa-truck-field" style="color: #ffffff"> </i>
                 Gestiones/Dia
               </a>
             </li> -->
-          </ul>
-          <hr />
+        </ul>
+        <hr />
 
-          <!-- SECCION DEL USUARIO -->
-          <div class="dropdown">
-            <a
-              href="#"
-              class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              <img
-                src="https://github.com/mdo.png"
-                alt=""
-                width="32"
-                height="32"
-                class="rounded-circle me-2"
-              />
-              <strong>Usuario</strong>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-              <!-- <li><a class="dropdown-item" href="#">Nuevo proyecto...</a></li> -->
-              <!-- <li><a class="dropdown-item" href="#">configuración</a></li> -->
-              <!-- <li><a class="dropdown-item" href="#">Perfil</a></li> -->
-              <!-- <li>
+        <!-- SECCION DEL USUARIO -->
+        <div class="dropdown">
+          <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2" />
+            <strong>Usuario</strong>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+            <!-- <li><a class="dropdown-item" href="#">Nuevo proyecto...</a></li> -->
+            <!-- <li><a class="dropdown-item" href="#">configuración</a></li> -->
+            <!-- <li><a class="dropdown-item" href="#">Perfil</a></li> -->
+            <!-- <li>
                 <hr class="dropdown-divider" />
               </li> -->
-              <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+            <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+          </ul>
+        </div>
+        <!-- final seccion del usuario -->
+      </div>
+
+      <div class="b-example-divider b-example-vr"></div>
+    </main>
+  </div>
+  <!-- fin sidebar -->
+
+  <!-- CONTENIDO PAGINA -->
+  <div class="container-fluid bg-light" id="contenido">
+    <!-- NAVBAR -->
+    <nav class="row">
+      <nav class="navbar navbar-expand-md navbar-dark" id="nav_principal">
+        <div class="container-fluid" id="contenido_navbar">
+          <button class="btn_open">☰</button>
+          <a class="navbar-brand ms-2" href="#">HOJA DEL TURNO</a>
+
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon">boton</span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+              <li class="nav-item dropdown">
+                <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">DOMICILIOS</a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" id="menu_nuevo_domicilio" href="#">Nuevo Domicilio...</a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">GESTIONES</a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" id="menu_nueva_gestion" href="#">Nueva Gestión...</a>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">TURNOS</a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" id="menu_cerrar_turno" href="#">Cerrar Turno...</a>
+                  </li>
+                </ul>
+              </li>
             </ul>
           </div>
-          <!-- final seccion del usuario -->
+          <!--fin del navbar collapse-->
+          <span id="subtitulo_navbar">Jornada:&nbsp</span>
+          <span class="navbar-brand" id="spn_jornada_nombre"></span>
+          <span id="subtitulo_navbar">A Cargo De:&nbsp</span>
+          <span class="navbar-brand" id="spn_user_nombre"></span>
+          <span class="navbar-brand" id="spn_user_apellido"></span>
         </div>
-
-        <div class="b-example-divider b-example-vr"></div>
-      </main>
-    </div>
-    <!-- fin sidebar -->
-
-    <!-- CONTENIDO PAGINA -->
-    <div class="container-fluid bg-light" id="contenido">
-      <!-- NAVBAR -->
-      <nav class="row">
-        <nav class="navbar navbar-expand-md navbar-dark" id="nav_principal">
-          <div class="container-fluid" id="contenido_navbar">
-            <button class="btn_open">☰</button>
-            <a class="navbar-brand" href="#">HOJA DEL TURNO</a>
-
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarCollapse"
-              aria-controls="navbarCollapse"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span class="navbar-toggler-icon">boton</span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-              <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                <li class="nav-item dropdown">
-                  <a
-                    class="nav-link active dropdown-toggle"
-                    href="#"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                    >DOMICILIOS</a
-                  >
-                  <ul class="dropdown-menu">
-                    <li>
-                      <a
-                        class="dropdown-item"
-                        id="menu_nuevo_domicilio"
-                        href="#"
-                        >Nuevo Domicilio...</a
-                      >
-                    </li>
-                  </ul>
-                </li>
-
-                <li class="nav-item dropdown">
-                  <a
-                    class="nav-link active dropdown-toggle"
-                    href="#"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                    >GESTIONES</a
-                  >
-                  <ul class="dropdown-menu">
-                    <li>
-                      <a class="dropdown-item" id="menu_nueva_gestion" href="#"
-                        >Nueva Gestión...</a
-                      >
-                    </li>
-                  </ul>
-                </li>
-
-                <li class="nav-item dropdown">
-                  <a
-                    class="nav-link active dropdown-toggle"
-                    href="#"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                    >TURNOS</a
-                  >
-                  <ul class="dropdown-menu">
-                    <li>
-                      <a class="dropdown-item" id="menu_cerrar_turno" href="#"
-                        >Cerrar Turno...</a
-                      >
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-            <!--fin del navbar collapse-->
-            <span id="subtitulo_navbar">Jornada:&nbsp</span>
-            <span class="navbar-brand" id="spn_jornada_nombre"></span>
-            <span id="subtitulo_navbar">A Cargo De:&nbsp</span>
-            <span class="navbar-brand" id="spn_user_nombre"></span>
-            <span class="navbar-brand" id="spn_user_apellido"></span>
-          </div>
-          <!--finaliza el contenido del navbar-->
-        </nav>
+        <!--finaliza el contenido del navbar-->
       </nav>
-      <!-- finaliza navbar -->
+    </nav>
+    <!-- finaliza navbar -->
 
-      <!-- INICIO BARRA INFORMATIVA  -->
-      <div class="row">
-        <nav class="navbar navbar-expand-md" id="barra_informativa">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="#">INFO:</a>
-            <div class="collapse navbar-collapse" id="navbarText">
-              <div class="ms-4">
-                <span class="navbar-text"id="info_mes"> Gestiones Mes </span>
-                <span id="info_mes">&nbsp87</span>
-              </div>
-              <div class="ms-4">
-              <span class="navbar-text"id="info_mes"> Utilidad Mes </span>
+    <!-- INICIO BARRA INFORMATIVA  -->
+    <div class="row">
+      <nav class="navbar navbar-expand-md" id="barra_informativa">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">INFO:</a>
+          <div class="collapse navbar-collapse" id="navbarText">
+            <div class="ms-4">
+              <span class="navbar-text" id="info_mes"> Gestiones Mes </span>
+              <span id="info_mes">&nbsp87</span>
+            </div>
+            <div class="ms-4">
+              <span class="navbar-text" id="info_mes"> Utilidad Mes </span>
               <span id="info_mes">&nbsp$120.400</span>
-              </div>
-              <div class="ms-4">
+            </div>
+            <div class="ms-4">
               <span class="navbar-text" id="info_mes"> Ganancia Mes </span>
               <span id="info_mes">&nbsp$65.000</span>
-              </div>
-              <div class="ms-4">
+            </div>
+            <div class="ms-4">
               <span class="navbar-text" id="info_hoy"> Utilidad Hoy </span>
               <span id="info_hoy">&nbsp87</span>
-              </div>
-              <div class="ms-4">
+            </div>
+            <div class="ms-4">
               <span class="navbar-text" id="info_hoy"> Gestiones Hoy </span>
               <span id="info_hoy">&nbsp87</span>
-              </div>
+            </div>
+            <div class="ms-4">
+              <span class="navbar-text" id="hoy_moment"></span>
             </div>
           </div>
-        </nav>
-      </div>
-      <!-- FINAL BARRA INFORMATIVA -->
+        </div>
+      </nav>
+    </div>
+    <!-- FINAL BARRA INFORMATIVA -->
 
-      <div class="row">
-        <!-- SECCION DOMICILIOS -->
-        <section class="container col-md-6">
-          <h3>DOMICILIOS</h3>
-          <button
-            type="button"
-            class="btn btn-primary"
-            id="btn_nuevo_domicilio"
-          >
-            Nuevo Domi
-          </button>
-          <button type="button" class="btn btn-outline-primary" id="btn_domi_entregados">
-            Entregados
-          </button>
+    <div class="row">
+      <!-- SECCION DOMICILIOS -->
+      <section class="container col-md-6">
+        <h3>DOMICILIOS</h3>
+        <button type="button" class="btn btn-primary" id="btn_nuevo_domicilio">
+          Nuevo Domi
+        </button>
+        <button type="button" class="btn btn-outline-primary" id="btn_domi_entregados">
+          Entregados
+        </button>
 
-          <!-- final del row -->
-          <h5 id="titulos_dttbl_domicilios">DOMICILIOS PENDIENTES POR SALIR</h5>
-          <section class="table-responsive" id="tabla">
-            <table
-              class="table display compact cell-border"
-              id="tbl_domi_por_salir"
-            >
-              <thead>
-                <tr>
-                  <td>Creado</td>
-                  <td>Barrio</td>
-                  <td>D/Int</td>
-                  <td>D/Ext</td>
-                  <td>Venta</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              </thead>
-            </table>
-          </section>
-
-          <h5 id="titulos_dttbl_domicilios">DOMICILIOS EN ENTREGA</h5>
-          <section class="table-responsive" id="tabla">
-            <table
-              class="table display compact cell-border"
-              id="tbl_domi_en_curso"
-            >
-              <thead>
-                <tr>
-                  <td>Barrio</td>
-                  <td>Interno</td>
-                  <td>Externo</td>
-                  <td>Venta</td>
-                  <td>Salió</td>
-                  <td>Iny</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              </thead>
-            </table>
-          </section>
+        <!-- final del row -->
+        <h5 id="titulos_dttbl_domicilios">DOMICILIOS PENDIENTES POR SALIR</h5>
+        <section class="table-responsive" id="tabla">
+          <table class="table display compact cell-border" id="tbl_domi_por_salir">
+            <thead>
+              <tr>
+                <td>Creado</td>
+                <td>Barrio</td>
+                <td>D/Int</td>
+                <td>D/Ext</td>
+                <td>Venta</td>
+                <td></td>
+                <td></td>
+              </tr>
+            </thead>
+          </table>
         </section>
-        <!-- finaliza seccion de  domicilios -->
 
-        <!-- SECCION GESTIONES -->
-        <section class="container col-md-6">
-          <h3>GESTIONES</h3>
-          <button type="button" class="btn btn-success" id="btn_nueva_gestion">
-            Nueva Gestión
+        <h5 id="titulos_dttbl_domicilios">DOMICILIOS EN ENTREGA</h5>
+        <section class="table-responsive" id="tabla">
+          <table class="table display compact cell-border" id="tbl_domi_en_curso">
+            <thead>
+              <tr>
+                <td>Barrio</td>
+                <td>Interno</td>
+                <td>Externo</td>
+                <td>Venta</td>
+                <td>Salió</td>
+                <td>Iny</td>
+                <td></td>
+                <td></td>
+              </tr>
+            </thead>
+          </table>
+        </section>
+      </section>
+      <!-- finaliza seccion de  domicilios -->
+
+      <!-- SECCION GESTIONES -->
+      <section class="container col-md-6">
+        <h3>GESTIONES</h3>
+        <button type="button" class="btn btn-success" id="btn_nueva_gestion">
+          Nueva Gestión
+        </button>
+        <h5 id="titulos_dttbl_gestiones">GESTIONES DEL TURNO</h5>
+        <div class="row">
+          <section class="table-responsive" id="tabla">
+            <table class="table display compact cell-border" id="tbl_gestiones">
+              <thead>
+                <tr>
+                  <td>Producto</td>
+                  <td>Proveedor</td>
+                  <td>Costo</td>
+                  <td>Venta</td>
+                  <td>Vendió</td>
+                  <td>Gana</td>
+                  <td>Tipo</td>
+                  <td></td>
+                </tr>
+              </thead>
+            </table>
+          </section>
+        </div>
+      </section>
+      <!-- finaliza seccion de gestiones -->
+    </div>
+  </div>
+  <!-- final contenido pagina -->
+
+  <!-- MODAL NUEVA GESTIÓN-->
+  <div class="modal fade" data-bs-backdrop="static" id="mdl_new_gestion">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">NUEVA GESTION</h1>
+        </div>
+        <div class="modal-body">
+          <form id="frm_nueva_venta">
+            <!-- NPT OCULTOS EN EL MODAL -->
+            <div class="row">
+              <input type="hidden" class="form-control" id="npt_venta_id" />
+              <input type="hidden" class="form-control" id="npt_venta_tipo" />
+            </div>
+            <!--   VENDEDOR -->
+            <div class="selectVendedor col-md-9 input-group input-group-sm mb-2">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Vendedor Suri:</span>
+              <select class="form-select form-select-sm" id="slct_vendedor"></select>
+              <input type="hidden" class="form-control" id="npt_vendedor_id" />
+            </div>
+
+            <!-- PRODUCTO -->
+            <div class="col-md-9 input-group input-group-sm mb-2">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Producto</span>
+              <input type="text" class="form-control" id="npt_venta_nombre_producto" placeholder="Digita el Producto" />
+            </div>
+
+            <!-- PROVEEDOR -->
+            <div class="col-md-9 input-group input-group-sm mb-2">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Proveedor</span>
+              <input type="text" class="form-control" id="npt_venta_nombre_proveedor" placeholder="Digita Proveedor" />
+            </div>
+
+            <!-- COSTO PRODUCTO -->
+            <div class="col-md-9 input-group input-group-sm mb-2">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Costo Producto</span>
+              <input type="hidden" class="form-control" id="npt_venta_costo_producto_base" />
+              <input type="text" class="form-control" id="npt_venta_costo_producto" placeholder="Digita Costo" />
+            </div>
+
+            <!-- VALOR VENTA -->
+            <div class="col-md-9 input-group input-group-sm mb-2">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Valor Venta</span>
+              <input type="hidden" class="form-control" id="npt_venta_valor_venta_base" />
+              <input type="text" class="form-control" id="npt_venta_valor_venta" placeholder="Digita Valor Venta" />
+            </div>
+
+            <!-- UTILIDAD -->
+            <div class="col-md-9 input-group input-group-sm mb-2">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Utilidad</span>
+              <input type="hidden" class="form-control" id="npt_venta_utilidad_base" />
+              <input type="text" class="form-control" id="npt_venta_utilidad" disabled />
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success" id="btn_enviar_domi">
+            Enviar Domicilio
           </button>
-          <h5 id="titulos_dttbl_gestiones">GESTIONES DEL TURNO</h5>
+          <button type="submit" class="btn btn-outline-success" id="btn_save_punto_fisico">
+            Punto Físico
+          </button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            X
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Fin Modal Nueva Gestion -->
+
+  <!-- MODAL EDITAR GESTION-->
+  <div class="modal fade" data-bs-backdrop="static" id="mdl_edit_gestion" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- cabecera del modal de edicion -->
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">EDITAR GESTION</h1>
+
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <!-- cuerpo del modal de edicion -->
+        <div class="modal-body">
+          <div class="mb-2 gap-2 d-md-flex justify-content-md-end">
+            <button type="submit" class="btn btn-outline-danger btn-sm" id="btn_eliminar_gestion">
+              Eliminar
+            </button>
+          </div>
+
+          <form id="frm_edit_gestion">
+            <!-- EDITAR VENTAS_ID -->
+            <div class="row">
+              <input type="hidden" class="form-control" id="nptEdit_venta_id" />
+            </div>
+
+            <!--  EDITAR VENDEDOR -->
+
+            <!--   VENDEDOR -->
+            <div class="selectVendedor col-md-9 input-group input-group-sm mb-2">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Vendedor Suri:</span>
+              <select class="form-select form-select-sm" id="slctEdit_vendedor"></select>
+              <input type="hidden" class="form-control" id="nptEdit_vendedor_id" />
+            </div>
+
+            <!-- EDITAR PRODUCTO -->
+            <!-- PRODUCTO -->
+            <div class="col-md-9 input-group input-group-sm mb-2">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Producto</span>
+              <input type="text" class="form-control" id="nptEdit_venta_nombre_producto" />
+            </div>
+
+            <!--  EDITAR PROVEEDOR -->
+            <!-- PROVEEDOR -->
+            <div class="col-md-9 input-group input-group-sm mb-2">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Proveedor</span>
+              <input type="text" class="form-control" id="nptEdit_venta_nombre_proveedor"
+                placeholder="Digita Proveedor" />
+            </div>
+
+            <!-- EDITAR COSTO PRODUCTO -->
+
+            <!-- COSTO PRODUCTO -->
+            <div class="col-md-9 input-group input-group-sm mb-2">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Costo Producto</span>
+              <input type="hidden" class="form-control" id="nptEdit_venta_costo_producto_base" />
+              <input type="text" class="form-control" id="nptEdit_venta_costo_producto" placeholder="Digita Costo" />
+            </div>
+
+            <!-- EDITAR VALOR VENTA -->
+            <!-- VALOR VENTA -->
+            <div class="col-md-9 input-group input-group-sm mb-2">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Valor Venta</span>
+              <input type="hidden" class="form-control" id="nptEdit_venta_valor_venta_base" />
+              <input type="text" class="form-control" id="nptEdit_venta_valor_venta" placeholder="Digita Valor Venta" />
+            </div>
+
+            <!-- UTILIDAD -->
+            <div class="col-md-9 input-group input-group-sm mb-2">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Utilidad</span>
+              <input type="hidden" class="form-control" id="nptEdit_venta_utilidad_base" />
+              <input type="text" class="form-control" id="nptEdit_venta_utilidad" disabled />
+            </div>
+          </form>
+        </div>
+        <!-- final modal body editar-->
+        <div class="modal-footer">
           <div class="row">
-            <section class="table-responsive" id="tabla">
-              <table
-                class="table display compact cell-border"
-                id="tbl_gestiones"
-              >
+            <div class="col-md-3 div_vacio_para_espacio"></div>
+            <div class="col-md-9 gap-2 d-md-flex justify-content-md-end">
+              <button type="submit" class="btn btn-primary" id="btn_confirm_edit">
+                Guardar
+              </button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                X
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  fin modal Editar Gestión -->
+
+  <!-- MODAL CONFIRMA ELIMINAR GESTION -->
+  <div class="modal fade" data-bs-backdrop="static" style="overflow: hidden" id="mdl_confirma_eliminar_gestion">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">CONFIRMA ELIMINAR GESTION</h1>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12">
+              <p>Está segur@ que Quiere Eliminar esta Gestión?</p>
+              <p>No podrá ser recuperado</p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btn_confirma_eliminar_gestion">
+            Eliminar
+          </button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- fin modal confirma eliminar gestion -->
+
+  <!-- MODAL CERRAR TURNO-->
+  <div class="modal fade" data-bs-backdrop="static" id="mdl_cerrar_turno">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">CERRAR TURNO</h1>
+        </div>
+        <div class="modal-body">
+          <form id="frm_cerrar_turno">
+            <div class="row">
+              <input type="hidden" class="form-control" id="npt_turno_id" />
+            </div>
+
+            <!--CAJA -->
+            <div class="col-md-9 input-group input-group-sm mb-2">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Caja:
+              </span>
+              <input type="hidden" class="form-control" id="npt_saldo_caja_base" />
+              <input type="text" class="form-control" id="npt_saldo_caja" placeholder="Total Caja Principal" />
+            </div>
+
+            <!-- GESTIONES -->
+            <div class="col-md-9 input-group input-group-sm mb-2">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Gestiones:
+              </span>
+              <input type="hidden" class="form-control" id="npt_total_gestiones_base" />
+              <input type="text" class="form-control" id="npt_total_gestiones" placeholder="Total De Gestiones"
+                disabled />
+            </div>
+
+            <!--  SALDO FINAL -->
+            <div class="col-md-9 input-group input-group-sm mb-2">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Saldo Final:
+              </span>
+              <input type="hidden" class="form-control" id="npt_saldo_final_base" />
+              <input type="text" class="form-control" id="npt_saldo_final" disabled />
+            </div>
+
+            <!-- SELECT DESCUADRE -->
+            <div class="selectDescuadre col-md-9 input-group input-group-sm mb-2">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Descuadre:</span>
+
+              <select class="form-select form-select-sm" id="slct_descuadre">
+                <option selected></option>
+                <option value="1">Ninguno</option>
+                <option value="2">Sobra</option>
+                <option value="3">Falta</option>
+              </select>
+              <input type="hidden" class="form-control" id="npt_descuadre_id" />
+            </div>
+
+            <!-- SOBRANTE -->
+            <div class="col-md-9 input-group input-group-sm mb-2" id="grupo_sobrante">
+              <span class="input-group-text" id="inputGroup-sizing-sm">sobra:
+              </span>
+              <input type="hidden" class="form-control" id="npt_sobrante_base" />
+              <input type="text" class="form-control" id="npt_sobrante" />
+            </div>
+
+            <!--  FALTANTE -->
+            <div class="col-md-9 input-group input-group-sm mb-2" id="grupo_faltante">
+              <span class="input-group-text" id="inputGroup-sizing-sm">falta:
+              </span>
+              <input type="hidden" class="form-control" id="npt_faltante_base" />
+              <input type="text" class="form-control" id="npt_faltante" />
+            </div>
+
+            <!-- ENTREGA FINAL -->
+            <div class="col-md-9 input-group input-group-sm mb-2">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Entrega Final:
+              </span>
+              <input type="hidden" class="form-control" id="npt_entrega_final_base" />
+              <input type="text" class="form-control" id="npt_entrega_final" disabled />
+            </div>
+          </form>
+          <!-- FIN FORM DEL MODAL -->
+        </div>
+        <!-- FOOTER DEL MODAL -->
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-danger" id="btn_confirma_cerrar_turno">
+            Realizar Cierre
+          </button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            X
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- fin modal cerrar turno -->
+
+  <!-- MODAL CERRAR FINAL-->
+  <div class="modal fade" data-bs-backdrop="static" id="mdl_cerrar_final">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">CONFIRMA CERRAR</h1>
+          <button type="button" class="btn_confirma_cerrar" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="frm_cerrar_final">
+            <!-- EDITAR VENTAS_ID -->
+            <div class="row">
+              <input type="hidden" class="form-control" id="npt_turno_id" disabled />
+            </div>
+            <!-- SALDO DE CAJA PRINCIPAL -->
+            <div class="row mb-3">
+              <div class="col-md-3 ms-auto">
+                <label for="npt_final_saldo_caja" class="col-form-label">Saldo De Caja Principal:</label>
+              </div>
+              <div class="col-md-9 ms-auto">
+                <input type="text" class="form-control" id="npt_final_saldo_caja" disabled />
+              </div>
+            </div>
+            <!--  TOTAL UTILIDAD -->
+            <div class="row mb-3">
+              <div class="col-md-3 ms-auto">
+                <label for="npt_final_total_utilidad" class="col-form-label">Total Utilidad del Turno:</label>
+              </div>
+              <div class="col-md-9 ms-auto calculoUtilidad">
+                <input type="text" class="form-control utilidad" id="npt_final_total_utilidad" disabled />
+              </div>
+            </div>
+            <!--  TOTAL ENTREGA -->
+            <div class="row mb-3">
+              <div class="col-md-3 ms-auto">
+                <label for="npt_final_total_entrega" class="col-form-label">Total Entrega:</label>
+              </div>
+              <div class="col-md-9 ms-auto">
+                <input type="text" class="form-control" id="npt_final_total_entrega" disabled />
+              </div>
+            </div>
+            <!-- DESCUADRE -->
+            <div class="row mb-3">
+              <div class="col-md-3 ms-auto">
+                <label for="npt_final_descuadre" class="col-form-label">Valor de Descuadre:</label>
+              </div>
+              <div class="col-md-9 ms-auto">
+                <input type="text" class="form-control" id="npt_final_descuadre" disabled />
+              </div>
+            </div>
+          </form>
+          <!-- finaliza formulario del modal cerrar final -->
+        </div>
+        <!-- footer del modal -->
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-danger" id="btn_final_turno">
+            Cerrar y Salir
+          </button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            X
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- fin modal cerrar final -->
+
+  <!-- MODAL NUEVO DOMICILIO -->
+  <div class="modal fade" data-bs-backdrop="static" style="overflow: hidden" id="mdl_domicilios">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">NUEVO DOMICILIO</h1>
+        </div>
+        <div class="modal-body">
+          <form id="frm_nuevo_domicilio">
+            <div class="selectBarrio col-md-9 input-group input-group-sm mb-2">
+              <span class="input-group-text" id="title_barrio">Barrio:</span>
+              <select class="form-select form-select-sm" id="slct_barrio"></select>
+              <input type="hidden" class="form-control" id="npt_barrio_id" />
+            </div>
+
+            <div class="col-md-9 input-group input-group-sm mb-2">
+              <span class="input-group-text" id="title_comuna">Comuna:</span>
+              <input type="text" class="form-control" id="npt_barrio_comuna" disabled />
+            </div>
+
+            <div class="col-md-9 input-group input-group-sm mb-2">
+              <span class="input-group-text" id="title_recomendacion">Recomendación:</span>
+              <input type="text" class="form-control" id="npt_barrio_recomendacion" disabled />
+            </div>
+
+            <div class="col-md-9 input-group input-group-sm mb-2" id="bloque_factura">
+              <span class="input-group-text" id="inputGroup-sizing-sm"># Factura:</span>
+              <input type="text" class="form-control" id="npt_factura" placeholder="Número de Factura" />
+            </div>
+
+            <div class="col-md-9 input-group input-group-sm mb-2" id="bloque_valor_venta">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Valor Venta:</span>
+              <input type="text" class="form-control" id="npt_valor_producto" placeholder="valor de la venta" />
+              <input type="hidden" class="form-control" id="npt_valor_producto_base" />
+            </div>
+            <div class="mb-2">
+              <input type="hidden" class="form-control" id="npt_confirm_btn" />
+              <button type="button" class="btn btn-primary btn-sm" id="btn_domi_interno">
+                Domi Interno
+              </button>
+              <input type="hidden" class="form-control" id="npt_btn_domi_interno" />
+              <button type="button" class="btn btn-primary btn-sm" id="btn_domi_externo">
+                Domi Externo
+              </button>
+              <input type="hidden" class="form-control" id="npt_btn_domi_externo" />
+            </div>
+            <div class="selectDomiExterno col-md-9 input-group input-group-sm mb-2" id="bloque_domi_externo">
+              <span class="input-group-text" id="inputGroup-sizing-sm">transporte_externo:</span>
+              <select class="form-select" id="slct_domi_externo"></select>
+              <input type="hidden" class="form-control" id="npt_domi_externo_id" />
+            </div>
+            <div class="col-md-9 input-group input-group-sm mb-2" id="bloque_valor_domi_externo">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Valor Servicio:</span>
+              <input type="text" class="form-control" id="npt_valor_domi_externo" placeholder="valor domi externo" />
+              <input type="hidden" class="form-control" id="npt_valor_domi_externo_base" />
+            </div>
+
+            <div class="selectTransportador col-md-9 input-group input-group-sm mb-2" id="bloque_transportador">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Asignado a:</span>
+              <select class="form-select" id="slct_transportador"></select>
+              <input type="hidden" class="form-control" id="npt_transportador_id" />
+            </div>
+
+            <div class="input-group input-group input-group-sm mb-2" id="bloque_hora_salida">
+              <button class="btn btn-primary" type="button" id="btn_hora_salida">
+                Hora De Salida
+              </button>
+              <input type="text" class="form-control" placeholder="hora de salida" id="npt_hora_salida" disabled />
+              <input type="hidden" class="form-control" placeholder="hora de llegada" id="npt_hora_llegada" disabled />
+            </div>
+
+            <div class="input-group input-group input-group-sm mb-2" id="bloque_inyectologia">
+              <button class="btn btn-primary" type="button" id="btn_inyectologia">
+                Inyectología
+              </button>
+              <input type="text" class="form-control" placeholder="pulse para asignar" id="npt_inyectologia" disabled />
+              <button class="btn btn-secondary" type="button" id="btn_inyectologia_cancel">
+                x
+              </button>
+            </div>
+
+            <div class="col-md-9 input-group input-group-sm mb-2" id="bloque_observaciones">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Observaciones:</span>
+              <input type="text" class="form-control" id="npt_observaciones" placeholder="observaciones" />
+            </div>
+          </form>
+          <!-- finaliza formulario modal nuevo domicilio -->
+        </div>
+        <!-- footer modal nueva venta -->
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" id="btn_guardar_nuevo_domicilio">
+            Agregar
+          </button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            X
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- final modal nuevo domicilio -->
+
+  <!-- MODAL EDITAR DOMI POR SALIR -->
+  <div class="modal fade" data-bs-backdrop="static" style="overflow: hidden" id="mdl_domi_por_salir">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">EDITAR DOMICILIO</h1>
+        </div>
+        <div class="modal-body">
+          <div class="mb-2 gap-2 d-md-flex justify-content-md-end">
+            <button type="submit" class="btn btn-outline-danger btn-sm" id="btn_eliminar_domi">
+              Eliminar
+            </button>
+          </div>
+
+          <form id="frm_edit_domi_interno_por_salir">
+            <div class="col-md-9 input-group input-group-sm mb-2" style="display: none">
+              <span class="input-group-text" id="inputGroup-sizing-sm">id:</span>
+              <input type="text" class="form-control" id="npt_edit_domicilio_id" disabled />
+            </div>
+
+            <div class="selectBarrio col-md-9 input-group input-group-sm mb-2">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Barrio:</span>
+              <select class="form-select form-select-sm" id="slct_edit_barrio"></select>
+              <input type="hidden" class="form-control" id="npt_edit_barrio_id" />
+            </div>
+
+            <div class="col-md-9 input-group input-group-sm mb-2">
+              <span class="input-group-text" id="inputGroup-sizing-sm"># Factura:</span>
+              <input type="text" class="form-control" id="npt_edit_factura" />
+            </div>
+
+            <div class="selectDomiExterno col-md-9 input-group input-group-sm mb-2" id="bloque_edit_domi_externo">
+              <span class="input-group-text" id="inputGroup-sizing-sm">transporte_externo:</span>
+              <select class="form-select" id="slct_edit_trans_externo"></select>
+              <input type="hidden" class="form-control" id="npt_edit_trans_externo_id" />
+            </div>
+            <div class="col-md-9 input-group input-group-sm mb-2" id="bloque_edit_valor_domi_externo">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Valor Servicio:</span>
+              <input type="text" class="form-control" id="npt_edit_valor_domi_externo" />
+              <input type="hidden" class="form-control" id="npt_edit_valor_domi_externo_base" />
+            </div>
+
+            <div class="selectTransportador col-md-9 input-group input-group-sm mb-2" id="bloque_edit_transportador">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Tr.Interno:</span>
+              <select class="form-select" id="slct_edit_transportador"></select>
+              <input type="hidden" class="form-control" id="npt_edit_transportador_id" />
+            </div>
+
+            <div class="col-md-9 input-group input-group-sm mb-2">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Valor Venta:</span>
+              <input type="text" class="form-control" id="npt_edit_valor_producto" />
+              <input type="hidden" class="form-control" id="npt_edit_valor_producto_base" />
+            </div>
+
+            <div class="input-group input-group input-group-sm mb-2">
+              <button class="btn btn-primary" type="button" id="btn_edit_hora_salida">
+                Hora De Salida
+              </button>
+              <input type="text" class="form-control" placeholder="hora de salida" id="npt_edit_hora_salida" disabled />
+              <button class="btn btn-secondary" type="button" id="btn_edit_hora_salida_cancel">
+                x
+              </button>
+            </div>
+
+            <div class="input-group input-group input-group-sm mb-2" id="bloque_edit_inyectologia">
+              <button class="btn btn-primary" type="button" id="btn_edit_inyectologia">
+                Inyectología
+              </button>
+              <input type="text" class="form-control" placeholder="hora de salida" id="npt_edit_inyectologia"
+                disabled />
+              <button class="btn btn-secondary" type="button" id="btn_edit_inyectologia_cancel">
+                x
+              </button>
+            </div>
+
+            <div class="col-md-9 input-group input-group-sm mb-2">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Observaciones:</span>
+              <input type="text" class="form-control" id="npt_edit_observaciones" />
+            </div>
+            <div class="col-md-9 input-group input-group-sm mb-2" style="display: none">
+              <span class="input-group-text" id="inputGroup-sizing-sm">Turno:</span>
+              <input type="text" class="form-control" id="npt_edit_turno_id" disabled />
+            </div>
+          </form>
+          <!-- finaliza formulario modal nuevo domicilio -->
+        </div>
+        <!-- footer modal nueva venta -->
+        <div class="modal-footer">
+          <div class="row">
+            <div class="col-md-3 div_vacio_para_espacio"></div>
+            <div class="col-md-9 col-md-9 gap-2 d-md-flex justify-content-md-end">
+              <button type="submit" class="btn btn-primary btnModificarDomi" id="btn_modificar_domi">
+                Guardar
+              </button>
+
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                X
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- final modal editar domicilio -->
+
+  <!-- MODAL CONFIRMA ELIMINAR DOMICILIO -->
+  <div class="modal fade" data-bs-backdrop="static" style="overflow: hidden" id="mdl_confirma_eliminar">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">CONFIRMA ELIMINAR</h1>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12">
+              <p>Está segur@ que Quiere Eliminar este Domicilio?</p>
+              <p>No podrá ser recuperado</p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btn_confirma_eliminar_domi">
+            Eliminar
+          </button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- fin modal confirma eliminar domicilio -->
+
+  <!-- MODAL DOMICILIOS ENTREGADOS -->
+  <div class="modal fade" data-bs-backdrop="static" style="overflow: hidden" id="mdl_domi_entregados">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">
+            DOMICILIOS ENTREGADOS <span id="fecha_hoy"> 5 DE MAYO 2023</span>
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- contenido del modal body -->
+          <div class="row">
+            <div class="col-md-12">
+              <table class="table display compact" id="tbl_domi_entregados">
                 <thead>
                   <tr>
-                    <td>Producto</td>
-                    <td>Proveedor</td>
-                    <td>Costo</td>
+                    <td>Barrio</td>
+                    <td>Interno</td>
+                    <td>Externo</td>
+                    <td>Ext/val</td>
                     <td>Venta</td>
-                    <td>Vendió</td>
-                    <td>Gana</td>
-                    <td>Tipo</td>
-                    <td></td>
+                    <td>Factura</td>
+                    <td>Salió</td>
+                    <td>Llegó</td>
+                    <td>Iny</td>
+                    <td>Obs</td>
+                    <td>Turno</td>
                   </tr>
                 </thead>
               </table>
-            </section>
-          </div>
-        </section>
-        <!-- finaliza seccion de gestiones -->
-      </div>
-    </div>
-    <!-- final contenido pagina -->
-
-    <!-- MODAL NUEVA GESTIÓN-->
-    <div class="modal fade" data-bs-backdrop="static" id="mdl_new_gestion">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5">NUEVA GESTION</h1>
-          </div>
-          <div class="modal-body">
-            <form id="frm_nueva_venta">
-              <!-- NPT OCULTOS EN EL MODAL -->
-              <div class="row">
-                <input type="hidden" class="form-control" id="npt_venta_id" />
-                <input type="hidden" class="form-control" id="npt_venta_tipo" />
-              </div>
-              <!--   VENDEDOR -->
-              <div
-                class="selectVendedor col-md-9 input-group input-group-sm mb-2"
-              >
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Vendedor Suri:</span
-                >
-                <select
-                  class="form-select form-select-sm"
-                  id="slct_vendedor"
-                ></select>
-                <input
-                  type="hidden"
-                  class="form-control"
-                  id="npt_vendedor_id"
-                />
-              </div>
-
-              <!-- PRODUCTO -->
-              <div class="col-md-9 input-group input-group-sm mb-2">
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Producto</span
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="npt_venta_nombre_producto"
-                  placeholder="Digita el Producto"
-                />
-              </div>
-
-              <!-- PROVEEDOR -->
-              <div class="col-md-9 input-group input-group-sm mb-2">
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Proveedor</span
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="npt_venta_nombre_proveedor"
-                  placeholder="Digita Proveedor"
-                />
-              </div>
-
-              <!-- COSTO PRODUCTO -->
-              <div class="col-md-9 input-group input-group-sm mb-2">
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Costo Producto</span
-                >
-                <input
-                  type="hidden"
-                  class="form-control"
-                  id="npt_venta_costo_producto_base"
-                />
-                <input
-                  type="text"
-                  class="form-control"
-                  id="npt_venta_costo_producto"
-                  placeholder="Digita Costo"
-                />
-              </div>
-
-              <!-- VALOR VENTA -->
-              <div class="col-md-9 input-group input-group-sm mb-2">
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Valor Venta</span
-                >
-                <input
-                  type="hidden"
-                  class="form-control"
-                  id="npt_venta_valor_venta_base"
-                />
-                <input
-                  type="text"
-                  class="form-control"
-                  id="npt_venta_valor_venta"
-                  placeholder="Digita Valor Venta"
-                />
-              </div>
-
-              <!-- UTILIDAD -->
-              <div class="col-md-9 input-group input-group-sm mb-2">
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Utilidad</span
-                >
-                <input
-                  type="hidden"
-                  class="form-control"
-                  id="npt_venta_utilidad_base"
-                />
-                <input
-                  type="text"
-                  class="form-control"
-                  id="npt_venta_utilidad"
-                  disabled
-                />
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-success" id="btn_enviar_domi">
-              Enviar Domicilio
-            </button>
-            <button
-              type="submit"
-              class="btn btn-outline-success"
-              id="btn_save_punto_fisico"
-            >
-              Punto Físico
-            </button>
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              X
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Fin Modal Nueva Gestion -->
-
-    <!-- MODAL EDITAR GESTION-->
-    <div
-      class="modal fade"
-      data-bs-backdrop="static"
-      id="mdl_edit_gestion"
-      tabindex="-1"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <!-- cabecera del modal de edicion -->
-          <div class="modal-header">
-            <h1 class="modal-title fs-5">EDITAR GESTION</h1>
-
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <!-- cuerpo del modal de edicion -->
-          <div class="modal-body">
-            <div class="mb-2 gap-2 d-md-flex justify-content-md-end">
-              <button
-                type="submit"
-                class="btn btn-outline-danger btn-sm"
-                id="btn_eliminar_gestion"
-              >
-                Eliminar
-              </button>
-            </div>
-
-            <form id="frm_edit_gestion">
-              <!-- EDITAR VENTAS_ID -->
-              <div class="row">
-                <input
-                  type="hidden"
-                  class="form-control"
-                  id="nptEdit_venta_id"
-                />
-              </div>
-
-              <!--  EDITAR VENDEDOR -->
-
-              <!--   VENDEDOR -->
-              <div
-                class="selectVendedor col-md-9 input-group input-group-sm mb-2"
-              >
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Vendedor Suri:</span
-                >
-                <select
-                  class="form-select form-select-sm"
-                  id="slctEdit_vendedor"
-                ></select>
-                <input
-                  type="hidden"
-                  class="form-control"
-                  id="nptEdit_vendedor_id"
-                />
-              </div>
-
-              <!-- EDITAR PRODUCTO -->
-              <!-- PRODUCTO -->
-              <div class="col-md-9 input-group input-group-sm mb-2">
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Producto</span
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="nptEdit_venta_nombre_producto"
-                />
-              </div>
-
-              <!--  EDITAR PROVEEDOR -->
-              <!-- PROVEEDOR -->
-              <div class="col-md-9 input-group input-group-sm mb-2">
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Proveedor</span
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="nptEdit_venta_nombre_proveedor"
-                  placeholder="Digita Proveedor"
-                />
-              </div>
-
-              <!-- EDITAR COSTO PRODUCTO -->
-
-              <!-- COSTO PRODUCTO -->
-              <div class="col-md-9 input-group input-group-sm mb-2">
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Costo Producto</span
-                >
-                <input
-                  type="hidden"
-                  class="form-control"
-                  id="nptEdit_venta_costo_producto_base"
-                />
-                <input
-                  type="text"
-                  class="form-control"
-                  id="nptEdit_venta_costo_producto"
-                  placeholder="Digita Costo"
-                />
-              </div>
-
-              <!-- EDITAR VALOR VENTA -->
-              <!-- VALOR VENTA -->
-              <div class="col-md-9 input-group input-group-sm mb-2">
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Valor Venta</span
-                >
-                <input
-                  type="hidden"
-                  class="form-control"
-                  id="nptEdit_venta_valor_venta_base"
-                />
-                <input
-                  type="text"
-                  class="form-control"
-                  id="nptEdit_venta_valor_venta"
-                  placeholder="Digita Valor Venta"
-                />
-              </div>
-
-              <!-- UTILIDAD -->
-              <div class="col-md-9 input-group input-group-sm mb-2">
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Utilidad</span
-                >
-                <input
-                  type="hidden"
-                  class="form-control"
-                  id="nptEdit_venta_utilidad_base"
-                />
-                <input
-                  type="text"
-                  class="form-control"
-                  id="nptEdit_venta_utilidad"
-                  disabled
-                />
-              </div>
-            </form>
-          </div>
-          <!-- final modal body editar-->
-          <div class="modal-footer">
-            <div class="row">
-              <div class="col-md-3 div_vacio_para_espacio"></div>
-              <div class="col-md-9 gap-2 d-md-flex justify-content-md-end">
-                <button
-                  type="submit"
-                  class="btn btn-primary"
-                  id="btn_confirm_edit"
-                >
-                  Guardar
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  X
-                </button>
-              </div>
             </div>
           </div>
         </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Cerrar
+          </button>
+        </div>
       </div>
     </div>
-    <!--  fin modal Editar Gestión -->
+  </div>
+  <!-- fin modal domicilios entregados -->
 
-    <!-- MODAL CONFIRMA ELIMINAR GESTION -->
-    <div
-      class="modal fade"
-      data-bs-backdrop="static"
-      style="overflow: hidden"
-      id="mdl_confirma_eliminar_gestion"
-    >
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5">CONFIRMA ELIMINAR GESTION</h1>
-          </div>
-          <div class="modal-body">
+  <!-- MODAL GESTIONES DEL MES POR VENDEDOR-->
+  <div class="modal fade" id="mdl_gestiones_mes_vendedor">
+    <div class="modal-dialog modal-xl modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">MIS GESTIONES DEL MES</h1>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <!-- inicia datatables del modal  -->
             <div class="row">
               <div class="col-md-12">
-                <p>Está segur@ que Quiere Eliminar esta Gestión?</p>
-                <p>No podrá ser recuperado</p>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-danger"
-              data-bs-dismiss="modal"
-              id="btn_confirma_eliminar_gestion"
-            >
-              Eliminar
-            </button>
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Cerrar
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- fin modal confirma eliminar gestion -->
-
-    <!-- MODAL CERRAR TURNO-->
-    <div class="modal fade" data-bs-backdrop="static" id="mdl_cerrar_turno">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5">CERRAR TURNO</h1>
-          </div>
-          <div class="modal-body">
-            <form id="frm_cerrar_turno">
-              <div class="row">
-                <input type="hidden" class="form-control" id="npt_turno_id" />
-              </div>
-
-              <!--CAJA -->
-              <div class="col-md-9 input-group input-group-sm mb-2">
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Caja:
-                </span>
-                <input
-                  type="hidden"
-                  class="form-control"
-                  id="npt_saldo_caja_base"
-                />
-                <input
-                  type="text"
-                  class="form-control"
-                  id="npt_saldo_caja"
-                  placeholder="Total Caja Principal"
-                />
-              </div>
-
-              <!-- GESTIONES -->
-              <div class="col-md-9 input-group input-group-sm mb-2">
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Gestiones:
-                </span>
-                <input
-                  type="hidden"
-                  class="form-control"
-                  id="npt_total_gestiones_base"
-                />
-                <input
-                  type="text"
-                  class="form-control"
-                  id="npt_total_gestiones"
-                  placeholder="Total De Gestiones"
-                  disabled
-                />
-              </div>
-
-              <!--  SALDO FINAL -->
-              <div class="col-md-9 input-group input-group-sm mb-2">
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Saldo Final:
-                </span>
-                <input
-                  type="hidden"
-                  class="form-control"
-                  id="npt_saldo_final_base"
-                />
-                <input
-                  type="text"
-                  class="form-control"
-                  id="npt_saldo_final"
-                  disabled
-                />
-              </div>
-
-              <!-- SELECT DESCUADRE -->
-              <div
-                class="selectDescuadre col-md-9 input-group input-group-sm mb-2"
-              >
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Descuadre:</span
-                >
-
-                <select class="form-select form-select-sm" id="slct_descuadre">
-                  <option selected></option>
-                  <option value="1">Ninguno</option>
-                  <option value="2">Sobra</option>
-                  <option value="3">Falta</option>
-                </select>
-                <input
-                  type="hidden"
-                  class="form-control"
-                  id="npt_descuadre_id"
-                />
-              </div>
-
-              <!-- SOBRANTE -->
-              <div
-                class="col-md-9 input-group input-group-sm mb-2"
-                id="grupo_sobrante"
-              >
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >sobra:
-                </span>
-                <input
-                  type="hidden"
-                  class="form-control"
-                  id="npt_sobrante_base"
-                />
-                <input type="text" class="form-control" id="npt_sobrante" />
-              </div>
-
-              <!--  FALTANTE -->
-              <div
-                class="col-md-9 input-group input-group-sm mb-2"
-                id="grupo_faltante"
-              >
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >falta:
-                </span>
-                <input
-                  type="hidden"
-                  class="form-control"
-                  id="npt_faltante_base"
-                />
-                <input type="text" class="form-control" id="npt_faltante" />
-              </div>
-
-              <!-- ENTREGA FINAL -->
-              <div class="col-md-9 input-group input-group-sm mb-2">
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Entrega Final:
-                </span>
-                <input
-                  type="hidden"
-                  class="form-control"
-                  id="npt_entrega_final_base"
-                />
-                <input
-                  type="text"
-                  class="form-control"
-                  id="npt_entrega_final"
-                  disabled
-                />
-              </div>
-            </form>
-            <!-- FIN FORM DEL MODAL -->
-          </div>
-          <!-- FOOTER DEL MODAL -->
-          <div class="modal-footer">
-            <button
-              type="submit"
-              class="btn btn-danger"
-              id="btn_confirma_cerrar_turno"
-            >
-              Realizar Cierre
-            </button>
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              X
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- fin modal cerrar turno -->
-
-    <!-- MODAL CERRAR FINAL-->
-    <div class="modal fade" data-bs-backdrop="static" id="mdl_cerrar_final">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5">CONFIRMA CERRAR</h1>
-            <button
-              type="button"
-              class="btn_confirma_cerrar"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <form id="frm_cerrar_final">
-              <!-- EDITAR VENTAS_ID -->
-              <div class="row">
-                <input
-                  type="hidden"
-                  class="form-control"
-                  id="npt_turno_id"
-                  disabled
-                />
-              </div>
-              <!-- SALDO DE CAJA PRINCIPAL -->
-              <div class="row mb-3">
-                <div class="col-md-3 ms-auto">
-                  <label for="npt_final_saldo_caja" class="col-form-label"
-                    >Saldo De Caja Principal:</label
-                  >
-                </div>
-                <div class="col-md-9 ms-auto">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="npt_final_saldo_caja"
-                    disabled
-                  />
-                </div>
-              </div>
-              <!--  TOTAL UTILIDAD -->
-              <div class="row mb-3">
-                <div class="col-md-3 ms-auto">
-                  <label for="npt_final_total_utilidad" class="col-form-label"
-                    >Total Utilidad del Turno:</label
-                  >
-                </div>
-                <div class="col-md-9 ms-auto calculoUtilidad">
-                  <input
-                    type="text"
-                    class="form-control utilidad"
-                    id="npt_final_total_utilidad"
-                    disabled
-                  />
-                </div>
-              </div>
-              <!--  TOTAL ENTREGA -->
-              <div class="row mb-3">
-                <div class="col-md-3 ms-auto">
-                  <label for="npt_final_total_entrega" class="col-form-label"
-                    >Total Entrega:</label
-                  >
-                </div>
-                <div class="col-md-9 ms-auto">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="npt_final_total_entrega"
-                    disabled
-                  />
-                </div>
-              </div>
-              <!-- DESCUADRE -->
-              <div class="row mb-3">
-                <div class="col-md-3 ms-auto">
-                  <label for="npt_final_descuadre" class="col-form-label"
-                    >Valor de Descuadre:</label
-                  >
-                </div>
-                <div class="col-md-9 ms-auto">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="npt_final_descuadre"
-                    disabled
-                  />
-                </div>
-              </div>
-            </form>
-            <!-- finaliza formulario del modal cerrar final -->
-          </div>
-          <!-- footer del modal -->
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-danger" id="btn_final_turno">
-              Cerrar y Salir
-            </button>
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              X
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- fin modal cerrar final -->
-
-    <!-- MODAL NUEVO DOMICILIO -->
-    <div
-      class="modal fade"
-      data-bs-backdrop="static"
-      style="overflow: hidden"
-      id="mdl_domicilios"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5">NUEVO DOMICILIO</h1>
-          </div>
-          <div class="modal-body">
-            <form id="frm_nuevo_domicilio">
-              <div
-                class="selectBarrio col-md-9 input-group input-group-sm mb-2"
-              >
-                <span class="input-group-text" id="title_barrio">Barrio:</span>
-                <select
-                  class="form-select form-select-sm"
-                  id="slct_barrio"
-                ></select>
-                <input type="hidden" class="form-control" id="npt_barrio_id" />
-              </div>
-
-              <div class="col-md-9 input-group input-group-sm mb-2">
-                <span class="input-group-text" id="title_comuna">Comuna:</span>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="npt_barrio_comuna"
-                  disabled
-                />
-              </div>
-
-              <div class="col-md-9 input-group input-group-sm mb-2">
-                <span class="input-group-text" id="title_recomendacion"
-                  >Recomendación:</span
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="npt_barrio_recomendacion"
-                  disabled
-                />
-              </div>
-
-              <div
-                class="col-md-9 input-group input-group-sm mb-2"
-                id="bloque_factura"
-              >
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  ># Factura:</span
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="npt_factura"
-                  placeholder="Número de Factura"
-                />
-              </div>
-
-              <div
-                class="col-md-9 input-group input-group-sm mb-2"
-                id="bloque_valor_venta"
-              >
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Valor Venta:</span
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="npt_valor_producto"
-                  placeholder="valor de la venta"
-                />
-                <input
-                  type="hidden"
-                  class="form-control"
-                  id="npt_valor_producto_base"
-                />
-              </div>
-              <div class="mb-2">
-                <input
-                  type="hidden"
-                  class="form-control"
-                  id="npt_confirm_btn"
-                />
-                <button
-                  type="button"
-                  class="btn btn-primary btn-sm"
-                  id="btn_domi_interno"
-                >
-                  Domi Interno
-                </button>
-                <input
-                  type="hidden"
-                  class="form-control"
-                  id="npt_btn_domi_interno"
-                />
-                <button
-                  type="button"
-                  class="btn btn-primary btn-sm"
-                  id="btn_domi_externo"
-                >
-                  Domi Externo
-                </button>
-                <input
-                  type="hidden"
-                  class="form-control"
-                  id="npt_btn_domi_externo"
-                />
-              </div>
-              <div
-                class="selectDomiExterno col-md-9 input-group input-group-sm mb-2"
-                id="bloque_domi_externo"
-              >
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >transporte_externo:</span
-                >
-                <select class="form-select" id="slct_domi_externo"></select>
-                <input
-                  type="hidden"
-                  class="form-control"
-                  id="npt_domi_externo_id"
-                />
-              </div>
-              <div
-                class="col-md-9 input-group input-group-sm mb-2"
-                id="bloque_valor_domi_externo"
-              >
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Valor Servicio:</span
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="npt_valor_domi_externo"
-                  placeholder="valor domi externo"
-                />
-                <input
-                  type="hidden"
-                  class="form-control"
-                  id="npt_valor_domi_externo_base"
-                />
-              </div>
-
-              <div
-                class="selectTransportador col-md-9 input-group input-group-sm mb-2"
-                id="bloque_transportador"
-              >
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Asignado a:</span
-                >
-                <select class="form-select" id="slct_transportador"></select>
-                <input
-                  type="hidden"
-                  class="form-control"
-                  id="npt_transportador_id"
-                />
-              </div>
-
-              <div
-                class="input-group input-group input-group-sm mb-2"
-                id="bloque_hora_salida"
-              >
-                <button
-                  class="btn btn-primary"
-                  type="button"
-                  id="btn_hora_salida"
-                >
-                  Hora De Salida
-                </button>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="hora de salida"
-                  id="npt_hora_salida"
-                  disabled
-                />
-                <input
-                  type="hidden"
-                  class="form-control"
-                  placeholder="hora de llegada"
-                  id="npt_hora_llegada"
-                  disabled
-                />
-              </div>
-
-              <div
-                class="input-group input-group input-group-sm mb-2"
-                id="bloque_inyectologia"
-              >
-                <button
-                  class="btn btn-primary"
-                  type="button"
-                  id="btn_inyectologia"
-                >
-                  Inyectología
-                </button>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="pulse para asignar"
-                  id="npt_inyectologia"
-                  disabled
-                />
-                <button
-                  class="btn btn-secondary"
-                  type="button"
-                  id="btn_inyectologia_cancel"
-                >
-                  x
-                </button>
-              </div>
-
-              <div
-                class="col-md-9 input-group input-group-sm mb-2"
-                id="bloque_observaciones"
-              >
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Observaciones:</span
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="npt_observaciones"
-                  placeholder="observaciones"
-                />
-              </div>
-            </form>
-            <!-- finaliza formulario modal nuevo domicilio -->
-          </div>
-          <!-- footer modal nueva venta -->
-          <div class="modal-footer">
-            <button
-              type="submit"
-              class="btn btn-primary"
-              id="btn_guardar_nuevo_domicilio"
-            >
-              Agregar
-            </button>
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              X
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- final modal nuevo domicilio -->
-
-    <!-- MODAL EDITAR DOMI POR SALIR -->
-    <div
-      class="modal fade"
-      data-bs-backdrop="static"
-      style="overflow: hidden"
-      id="mdl_domi_por_salir"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5">EDITAR DOMICILIO</h1>
-          </div>
-          <div class="modal-body">
-            <div class="mb-2 gap-2 d-md-flex justify-content-md-end">
-              <button
-                type="submit"
-                class="btn btn-outline-danger btn-sm"
-                id="btn_eliminar_domi"
-              >
-                Eliminar
-              </button>
-            </div>
-
-            <form id="frm_edit_domi_interno_por_salir">
-              <div
-                class="col-md-9 input-group input-group-sm mb-2"
-                style="display: none"
-              >
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >id:</span
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="npt_edit_domicilio_id"
-                  disabled
-                />
-              </div>
-
-              <div
-                class="selectBarrio col-md-9 input-group input-group-sm mb-2"
-              >
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Barrio:</span
-                >
-                <select
-                  class="form-select form-select-sm"
-                  id="slct_edit_barrio"
-                ></select>
-                <input
-                  type="hidden"
-                  class="form-control"
-                  id="npt_edit_barrio_id"
-                />
-              </div>
-
-              <div class="col-md-9 input-group input-group-sm mb-2">
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  ># Factura:</span
-                >
-                <input type="text" class="form-control" id="npt_edit_factura" />
-              </div>
-
-              <div
-                class="selectDomiExterno col-md-9 input-group input-group-sm mb-2"
-                id="bloque_edit_domi_externo"
-              >
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >transporte_externo:</span
-                >
-                <select
-                  class="form-select"
-                  id="slct_edit_trans_externo"
-                ></select>
-                <input
-                  type="hidden"
-                  class="form-control"
-                  id="npt_edit_trans_externo_id"
-                />
-              </div>
-              <div
-                class="col-md-9 input-group input-group-sm mb-2"
-                id="bloque_edit_valor_domi_externo"
-              >
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Valor Servicio:</span
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="npt_edit_valor_domi_externo"
-                />
-                <input
-                  type="hidden"
-                  class="form-control"
-                  id="npt_edit_valor_domi_externo_base"
-                />
-              </div>
-
-              <div
-                class="selectTransportador col-md-9 input-group input-group-sm mb-2"
-                id="bloque_edit_transportador"
-              >
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Tr.Interno:</span
-                >
-                <select
-                  class="form-select"
-                  id="slct_edit_transportador"
-                ></select>
-                <input
-                  type="hidden"
-                  class="form-control"
-                  id="npt_edit_transportador_id"
-                />
-              </div>
-
-              <div class="col-md-9 input-group input-group-sm mb-2">
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Valor Venta:</span
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="npt_edit_valor_producto"
-                />
-                <input
-                  type="hidden"
-                  class="form-control"
-                  id="npt_edit_valor_producto_base"
-                />
-              </div>
-
-              <div class="input-group input-group input-group-sm mb-2">
-                <button
-                  class="btn btn-primary"
-                  type="button"
-                  id="btn_edit_hora_salida"
-                >
-                  Hora De Salida
-                </button>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="hora de salida"
-                  id="npt_edit_hora_salida"
-                  disabled
-                />
-                <button
-                  class="btn btn-secondary"
-                  type="button"
-                  id="btn_edit_hora_salida_cancel"
-                >
-                  x
-                </button>
-              </div>
-
-              <div
-                class="input-group input-group input-group-sm mb-2"
-                id="bloque_edit_inyectologia"
-              >
-                <button
-                  class="btn btn-primary"
-                  type="button"
-                  id="btn_edit_inyectologia"
-                >
-                  Inyectología
-                </button>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="hora de salida"
-                  id="npt_edit_inyectologia"
-                  disabled
-                />
-                <button
-                  class="btn btn-secondary"
-                  type="button"
-                  id="btn_edit_inyectologia_cancel"
-                >
-                  x
-                </button>
-              </div>
-
-              <div class="col-md-9 input-group input-group-sm mb-2">
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Observaciones:</span
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="npt_edit_observaciones"
-                />
-              </div>
-              <div
-                class="col-md-9 input-group input-group-sm mb-2"
-                style="display: none"
-              >
-                <span class="input-group-text" id="inputGroup-sizing-sm"
-                  >Turno:</span
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="npt_edit_turno_id"
-                  disabled
-                />
-              </div>
-            </form>
-            <!-- finaliza formulario modal nuevo domicilio -->
-          </div>
-          <!-- footer modal nueva venta -->
-          <div class="modal-footer">
-            <div class="row">
-              <div class="col-md-3 div_vacio_para_espacio"></div>
-              <div
-                class="col-md-9 col-md-9 gap-2 d-md-flex justify-content-md-end"
-              >
-                <button
-                  type="submit"
-                  class="btn btn-primary btnModificarDomi"
-                  id="btn_modificar_domi"
-                >
-                  Guardar
-                </button>
-
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  X
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- final modal editar domicilio -->
-
-    <!-- MODAL CONFIRMA ELIMINAR DOMICILIO -->
-    <div
-      class="modal fade"
-      data-bs-backdrop="static"
-      style="overflow: hidden"
-      id="mdl_confirma_eliminar"
-    >
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5">CONFIRMA ELIMINAR</h1>
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-md-12">
-                <p>Está segur@ que Quiere Eliminar este Domicilio?</p>
-                <p>No podrá ser recuperado</p>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-danger"
-              data-bs-dismiss="modal"
-              id="btn_confirma_eliminar_domi"
-            >
-              Eliminar
-            </button>
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Cerrar
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- fin modal confirma eliminar domicilio -->
-
-    <!-- MODAL DOMICILIOS ENTREGADOS -->
-    <div
-      class="modal fade"
-      data-bs-backdrop="static"
-      style="overflow: hidden"
-      id="mdl_domi_entregados"
-    >
-      <div class="modal-dialog modal-xl modal-dialog-scrollable">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5">
-              DOMICILIOS ENTREGADOS <span id="fecha_hoy"> 5 DE MAYO 2023</span>
-            </h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <!-- contenido del modal body -->
-            <div class="row">
-              <div class="col-md-12">
-                <table class="table display compact" id="tbl_domi_entregados">
+                <table class="table" id="tbl_gestiones_mes_vendedor">
                   <thead>
                     <tr>
-                      <td>Barrio</td>
-                      <td>Interno</td>
-                      <td>Externo</td>
-                      <td>Ext/val</td>
-                      <td>Venta</td>
-                      <td>Factura</td>
-                      <td>Salió</td>
-                      <td>Llegó</td>
-                      <td>Iny</td>
-                      <td>Obs</td>
-                      <td>Turno</td>
+                      <td>ID</td>
+                      <td>FECHA</td>
+                      <td>DIA</td>
+                      <td>HORA</td>
+                      <td>PRODUCTO</td>
+                      <td>PROVEEDOR</td>
+                      <td>PRECIO COSTO</td>
+                      <td>PRECIO VENTA</td>
+                      <td>UTILIDAD</td>
                     </tr>
                   </thead>
                 </table>
               </div>
             </div>
+            <!-- finaliza datatables del modal -->
           </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Cerrar
-            </button>
-          </div>
+        </div>
+        <!-- inicia footer modal -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Cerrar
+          </button>
         </div>
       </div>
     </div>
-    <!-- fin modal domicilios entregados -->
+  </div>
+  <!-- fin modal gestiones del mes por vendedor -->
 
-    <!-- MODAL GESTIONES DEL MES POR VENDEDOR-->
-    <div class="modal fade" id="mdl_gestiones_mes_vendedor">
-      <div class="modal-dialog modal-xl modal-dialog modal-dialog-scrollable">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5">MIS GESTIONES DEL MES</h1>
+  <!-- MODAL TODAS LAS GESTIONES AGRUPADAS POR DIA-->
+  <div class="modal fade" id="mdl_gestiones_agrupadas_por_dia">
+    <div class="modal-dialog modal-xl modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">GESTIONES AGRUPADAS POR DIA</h1>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <!-- inicia datatables del modal  -->
+            <div class="row">
+              <div class="col-md-12">
+                <table class="table" id="tbl_gestiones_agrupadas_por_dia">
+                  <thead>
+                    <tr>
+                      <td>FECHA</td>
+                      <td>DIA</td>
+                      <td>UTILIDAD</td>
+                      <td>NUM GESTIONES</td>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+            </div>
+            <!-- finaliza datatables del modal -->
           </div>
-          <div class="modal-body">
-            <div class="container-fluid">
-              <!-- inicia datatables del modal  -->
-              <div class="row">
-                <div class="col-md-12">
-                  <table class="table" id="tbl_gestiones_mes_vendedor">
-                    <thead>
-                      <tr>
-                        <td>ID</td>
-                        <td>FECHA</td>
-                        <td>DIA</td>
-                        <td>HORA</td>
-                        <td>PRODUCTO</td>
-                        <td>PROVEEDOR</td>
-                        <td>PRECIO COSTO</td>
-                        <td>PRECIO VENTA</td>
-                        <td>UTILIDAD</td>
-                      </tr>
-                    </thead>
+        </div>
+        <!-- inicia footer modal nueva venta -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- fin modal todas las gestiones agrupadas por dia -->
+
+  <!-- MODAL TODAS LAS GESTIONES DEL MES -->
+  <div class="modal fade" id="mdl_gestiones_mes_todos">
+    <div class="modal-dialog modal-xl modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">TODAS LAS GESTIONES DEL MES</h1>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <!-- inicia datatables del modal  -->
+            <div class="row">
+              <div class="col-md-12">
+                <table class="table" id="tbl_gestiones_mes_todos">
+                  <thead>
+                    <tr>
+                      <td>ID</td>
+                      <td>FECHA</td>
+                      <td>DIA</td>
+                      <td>HORA</td>
+                      <td>PRODUCTO</td>
+                      <td>PROVEEDOR</td>
+                      <td>PRECIO COSTO</td>
+                      <td>PRECIO VENTA</td>
+                      <td>VENDEDOR</td>
+                      <td>UTILIDAD</td>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+            </div>
+            <!-- finaliza datatables del modal -->
+          </div>
+        </div>
+        <!-- inicia el footer  -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- fin modal todas las gestiones del mes -->
+
+  <!-- MODAL VENTA ACUMULADA-->
+  <div class="modal fade" id="mdl_venta_acumulada" data-bs-backdrop="static" style="overflow: hidden">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">VENTA ACUMULADA</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <section class="row">
+              <section class="col-md-12">
+                <h5>VENTAS TOTALES 2023</h5>
+                <div class="table-responsive">
+                  <table class="table table-sm table-bordered table-hover border-primary" id="">
+                    <!-- contenido de la tabla -->
                   </table>
                 </div>
-              </div>
-              <!-- finaliza datatables del modal -->
-            </div>
-          </div>
-          <!-- inicia footer modal -->
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Cerrar
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- fin modal gestiones del mes por vendedor -->
-
-    <!-- MODAL TODAS LAS GESTIONES AGRUPADAS POR DIA-->
-    <div class="modal fade" id="mdl_gestiones_agrupadas_por_dia">
-      <div class="modal-dialog modal-xl modal-dialog modal-dialog-scrollable">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5">GESTIONES AGRUPADAS POR DIA</h1>
-          </div>
-          <div class="modal-body">
-            <div class="container-fluid">
-              <!-- inicia datatables del modal  -->
-              <div class="row">
-                <div class="col-md-12">
-                  <table class="table" id="tbl_gestiones_agrupadas_por_dia">
-                    <thead>
-                      <tr>
-                        <td>FECHA</td>
-                        <td>DIA</td>
-                        <td>UTILIDAD</td>
-                        <td>NUM GESTIONES</td>
-                      </tr>
-                    </thead>
-                  </table>
-                </div>
-              </div>
-              <!-- finaliza datatables del modal -->
-            </div>
-          </div>
-          <!-- inicia footer modal nueva venta -->
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Cerrar
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- fin modal todas las gestiones agrupadas por dia -->
-
-    <!-- MODAL TODAS LAS GESTIONES DEL MES -->
-    <div class="modal fade" id="mdl_gestiones_mes_todos">
-      <div class="modal-dialog modal-xl modal-dialog modal-dialog-scrollable">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5">TODAS LAS GESTIONES DEL MES</h1>
-          </div>
-          <div class="modal-body">
-            <div class="container-fluid">
-              <!-- inicia datatables del modal  -->
-              <div class="row">
-                <div class="col-md-12">
-                  <table class="table" id="tbl_gestiones_mes_todos">
-                    <thead>
-                      <tr>
-                        <td>ID</td>
-                        <td>FECHA</td>
-                        <td>DIA</td>
-                        <td>HORA</td>
-                        <td>PRODUCTO</td>
-                        <td>PROVEEDOR</td>
-                        <td>PRECIO COSTO</td>
-                        <td>PRECIO VENTA</td>
-                        <td>VENDEDOR</td>
-                        <td>UTILIDAD</td>
-                      </tr>
-                    </thead>
-                  </table>
-                </div>
-              </div>
-              <!-- finaliza datatables del modal -->
-            </div>
-          </div>
-          <!-- inicia el footer  -->
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Cerrar
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- fin modal todas las gestiones del mes -->
-
-    <!-- MODAL VENTA ACUMULADA-->
-    <div
-      class="modal fade"
-      id="mdl_venta_acumulada"
-      data-bs-backdrop="static"
-      style="overflow: hidden"
-    >
-      <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5">VENTA ACUMULADA</h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <div class="container-fluid">
-              <section class="row">
-                <section class="col-md-12">
-                  <h5>VENTAS TOTALES 2023</h5>
-                  <div class="table-responsive">
-                    <table
-                      class="table table-sm table-bordered table-hover border-primary"
-                      id=""
-                    >
-                      <!-- contenido de la tabla -->
-                    </table>
-                  </div>
-                </section>
-                <!-- FINAL CUADRO DE ACUMULADOS -->
               </section>
-            </div>
+              <!-- FINAL CUADRO DE ACUMULADOS -->
+            </section>
           </div>
-          <!-- footer modal venta acumulada -->
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" id="btn_confirm_add">
-              Agregar
-            </button>
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              X
-            </button>
-          </div>
+        </div>
+        <!-- footer modal venta acumulada -->
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" id="btn_confirm_add">
+            Agregar
+          </button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            X
+          </button>
         </div>
       </div>
     </div>
-    <!-- final modal venta acumulada -->
+  </div>
+  <!-- final modal venta acumulada -->
 
-    <!-- SCRIPTS -->
-    <!-- CDN jquery 3.6.1 js -->
-    <script
-      src="https://code.jquery.com/jquery-3.6.1.min.js"
-      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
-      crossorigin="anonymous"
-    ></script>
-    <!-- CDN bootstrap 5.2.2 js -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-      crossorigin="anonymous"
-    ></script>
-    <!-- CDN datatables 1.12.1 js -->
-    <!-- <script src="https://cdn.datatables.net/v/zf/dt-1.12.1/datatables.min.js"></script> -->
-    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.1/js/dataTables.jqueryui.min.js"></script>
-    <!-- manejar de formatos de tiempo con moment.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/es-us.min.js"></script>
-    <!-- scripts de la aplicacion -->
-    <script src="venta_home_ctrl.js"></script>
-    <script src="menus_ctrl.js"></script>
-    <script src="domi_new.js"></script>
-    <script src="domixsalir_edit.js"></script>
-    <script src="domixsalir_del.js"></script>
-    <script src="domi_en_curso.js"></script>
-    <script src="domi_entregados.js"></script>
-    <script src="gestion_new.js"></script>
-    <script src="gestion_edit.js"></script>
-    <script src="gestion_del.js"></script>
-    <script src="sidebar.js"></script>
-    <script src="turno_cerrar.js"></script>
-    <!-- select2 -->
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-  </body>
+  <!-- SCRIPTS -->
+  <!-- CDN jquery 3.6.1 js -->
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+  <!-- CDN bootstrap 5.2.2 js -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
+  <!-- CDN datatables 1.12.1 js -->
+  <!-- <script src="https://cdn.datatables.net/v/zf/dt-1.12.1/datatables.min.js"></script> -->
+  <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.1/js/dataTables.jqueryui.min.js"></script>
+  <!-- manejar de formatos de tiempo con moment.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/es-us.min.js"></script>
+  <!-- scripts de la aplicacion -->
+  <script src="venta_home_ctrl.js"></script>
+  <script src="menus_ctrl.js"></script>
+  <script src="domi_new.js"></script>
+  <script src="domixsalir_edit.js"></script>
+  <script src="domixsalir_del.js"></script>
+  <script src="domi_en_curso.js"></script>
+  <script src="domi_entregados.js"></script>
+  <script src="gestion_new.js"></script>
+  <script src="gestion_edit.js"></script>
+  <script src="gestion_del.js"></script>
+  <script src="sidebar.js"></script>
+  <script src="turno_cerrar.js"></script>
+  <!-- select2 -->
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+</body>
+
 </html>

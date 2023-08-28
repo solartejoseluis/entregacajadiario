@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 18-08-2023 a las 22:28:32
--- Versión del servidor: 10.4.27-MariaDB
--- Versión de PHP: 8.2.0
+-- Tiempo de generación: 29-08-2023 a las 01:10:35
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -136,7 +136,23 @@ INSERT INTO `ACCESOS` (`acceso_id`, `turno_id`, `user_id`, `fecha_hora_creado`) 
 (213, 337, 1, '2023-03-30 17:51:03'),
 (214, 338, 1, '2023-03-31 12:18:45'),
 (215, 339, 2, '2023-03-31 17:53:21'),
-(216, 340, 2, '2023-04-17 21:22:14');
+(216, 340, 2, '2023-04-17 21:22:14'),
+(217, 341, 30, '2023-08-22 13:00:07'),
+(218, 342, 30, '2023-08-22 13:43:59'),
+(219, 343, 30, '2023-08-23 20:54:43'),
+(220, 344, 30, '2023-08-23 22:06:47'),
+(221, 345, 1, '2023-08-23 22:10:21'),
+(222, 346, 30, '2023-08-23 22:13:27'),
+(223, 347, 30, '2023-08-23 22:13:52'),
+(224, 348, 30, '2023-08-24 20:01:28'),
+(225, 349, 30, '2023-08-24 20:04:07'),
+(226, 350, 1, '2023-08-24 20:15:50'),
+(227, 351, 1, '2023-08-25 19:32:13'),
+(228, 352, 1, '2023-08-25 20:58:42'),
+(229, 353, 1, '2023-08-25 21:37:20'),
+(230, 354, 1, '2023-08-25 23:21:21'),
+(231, 355, 30, '2023-08-28 19:33:50'),
+(232, 356, 30, '2023-08-28 19:53:41');
 
 -- --------------------------------------------------------
 
@@ -359,7 +375,12 @@ INSERT INTO `DOMICILIOS` (`domicilio_id`, `hora_creado`, `barrio_id`, `numero_fa
 (98, '2023-08-17 17:15:11', 2, 'NO', 1, 28, 0, 0, 0, 5000, '12:05', '12:15', '', '', 300),
 (99, '2023-08-17 17:15:13', 5, 'NO', 1, 4, 0, 0, 0, 10000, '12:15', '12:15', '', '', 300),
 (100, '2023-08-17 17:15:10', 1, '6600', 1, 4, 0, 0, 0, 10000, '12:10', '12:15', '', '', 300),
-(101, '2023-08-17 17:15:09', 3, 'NO', 1, 4, 0, 0, 0, 50000, '12:15', '12:15', '', '', 300);
+(101, '2023-08-17 17:15:09', 3, 'NO', 1, 4, 0, 0, 0, 50000, '12:15', '12:15', '', '', 300),
+(102, '2023-08-22 15:07:43', 2, 'NO', 1, 4, 0, 0, 0, 35000, '10:06', '10:07', '', '', 300),
+(103, '2023-08-28 19:35:00', 3, '67850', 0, 0, 1, 3, 4500, 38900, '17:20', '14:35', '', '', 300),
+(104, '2023-08-28 19:37:09', 40, '4444', 1, 4, 0, 0, 0, 70000, '14:35', '14:37', '', '', 300),
+(105, '2023-08-28 19:37:10', 94, '5555', 1, 4, 0, 0, 0, 20000, '14:37', '14:37', '', '', 300),
+(106, '2023-08-28 20:06:57', 29, 'NO', 1, 4, 0, 0, 0, 10000, '15:06', '0', '', '', 300);
 
 -- --------------------------------------------------------
 
@@ -399,8 +420,8 @@ CREATE TABLE `JORNADAS` (
 --
 
 INSERT INTO `JORNADAS` (`jornada_id`, `jornada_nombre`) VALUES
-(1, 'SEMANA 7:00am - 1:00pm'),
-(2, 'SEMANA 1:00pm 10:00pm'),
+(1, 'SEMANA 7:00am - 2:00pm'),
+(2, 'SEMANA 2:00pm 10:00pm'),
 (3, 'SÁBADO 7:00am - 2:00pm'),
 (4, 'SÁBADO 2:00pm - 10:00pm'),
 (5, 'DOM / FEST 8:00am - 10:00pm');
@@ -430,26 +451,6 @@ INSERT INTO `PERFILES` (`perfil_id`, `perfil_nombre`, `perfil_descripcion`) VALU
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ROL_VENDEDOR`
---
-
-CREATE TABLE `ROL_VENDEDOR` (
-  `rol_vendedor_id` int(5) NOT NULL,
-  `rol_vendedor_descripcion` varchar(5) NOT NULL,
-  `rol_vendedor_codigo` int(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `ROL_VENDEDOR`
---
-
-INSERT INTO `ROL_VENDEDOR` (`rol_vendedor_id`, `rol_vendedor_descripcion`, `rol_vendedor_codigo`) VALUES
-(1, 'NO', 20),
-(2, 'SI', 200);
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `TURNOS`
 --
 
@@ -474,7 +475,23 @@ CREATE TABLE `TURNOS` (
 --
 
 INSERT INTO `TURNOS` (`turno_id`, `turno_fecha_creado`, `turno_jornada`, `turno_responsable`, `turno_saldo_caja`, `turno_total_utilidad`, `turno_total_entrega`, `turno_descuadre`, `turno_creacion_timestamp`, `turno_fechahora_cierre`, `turno_sobrante`, `turno_faltante`, `turno_entrega_final`) VALUES
-(300, '2023-03-10', 1, 1, 394300, 0, 394300, 0, '2023-03-10 12:08:27', '2023-03-10 17:52:13', 0, 0, 0);
+(300, '2023-03-10', 1, 1, 600000, 20000, 620000, 2, '2023-03-10 12:08:27', '2023-08-28 19:35:27', 4000, 0, 624000),
+(341, '2023-08-22', 1, 30, NULL, NULL, NULL, NULL, '2023-08-22 13:00:07', NULL, NULL, NULL, NULL),
+(342, '2023-08-22', 2, 30, NULL, NULL, NULL, NULL, '2023-08-22 13:43:59', NULL, NULL, NULL, NULL),
+(343, '2023-08-23', 1, 30, NULL, NULL, NULL, NULL, '2023-08-23 20:54:43', NULL, NULL, NULL, NULL),
+(344, '2023-08-23', 2, 30, NULL, NULL, NULL, NULL, '2023-08-23 22:06:47', NULL, NULL, NULL, NULL),
+(345, '2023-08-23', 2, 1, NULL, NULL, NULL, NULL, '2023-08-23 22:10:21', NULL, NULL, NULL, NULL),
+(346, '2023-08-23', 1, 30, NULL, NULL, NULL, NULL, '2023-08-23 22:13:26', NULL, NULL, NULL, NULL),
+(347, '2023-08-23', 1, 30, NULL, NULL, NULL, NULL, '2023-08-23 22:13:52', NULL, NULL, NULL, NULL),
+(348, '2023-08-24', 1, 30, NULL, NULL, NULL, NULL, '2023-08-24 20:01:28', NULL, NULL, NULL, NULL),
+(349, '2023-08-24', 1, 30, NULL, NULL, NULL, NULL, '2023-08-24 20:04:07', NULL, NULL, NULL, NULL),
+(350, '2023-08-24', 2, 1, NULL, NULL, NULL, NULL, '2023-08-24 20:15:50', NULL, NULL, NULL, NULL),
+(351, '2023-08-25', 2, 1, NULL, NULL, NULL, NULL, '2023-08-25 19:32:13', NULL, NULL, NULL, NULL),
+(352, '2023-08-25', 2, 1, NULL, NULL, NULL, NULL, '2023-08-25 20:58:42', NULL, NULL, NULL, NULL),
+(353, '2023-08-25', 2, 1, NULL, NULL, NULL, NULL, '2023-08-25 21:37:20', NULL, NULL, NULL, NULL),
+(354, '2023-08-25', 3, 1, NULL, NULL, NULL, NULL, '2023-08-25 23:21:21', NULL, NULL, NULL, NULL),
+(355, '2023-08-28', 2, 30, NULL, NULL, NULL, NULL, '2023-08-28 19:33:50', NULL, NULL, NULL, NULL),
+(356, '2023-08-28', 2, 30, NULL, NULL, NULL, NULL, '2023-08-28 19:53:41', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -487,25 +504,27 @@ CREATE TABLE `USERS` (
   `user_nombre` varchar(50) NOT NULL,
   `user_apellido` varchar(50) NOT NULL,
   `user_user` varchar(20) NOT NULL,
-  `user_password` varchar(10) NOT NULL,
+  `user_password` varchar(15) NOT NULL,
   `user_perfil` int(5) NOT NULL,
-  `user_vendedor` int(5) NOT NULL,
-  `user_transportador` varchar(2) NOT NULL
+  `user_vendedor` varchar(2) NOT NULL,
+  `user_transportador` varchar(2) NOT NULL,
+  `user_coordina_turno` varchar(2) NOT NULL,
+  `user_apoyo_turno` varchar(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `USERS`
 --
 
-INSERT INTO `USERS` (`user_id`, `user_nombre`, `user_apellido`, `user_user`, `user_password`, `user_perfil`, `user_vendedor`, `user_transportador`) VALUES
-(0, '--', '--', '--', '--', 4, 1, '--'),
-(1, 'YULY', 'DIAZ', 'yudiaz', 'yudiaz', 1, 2, 'NO'),
-(2, 'LORENA', 'BUENO', 'lobueno', 'lobueno', 1, 2, 'NO'),
-(3, 'KAROL', 'PULIDO', 'kapulido', 'kapulido', 2, 2, 'NO'),
-(4, 'MARINO', 'VICTORIA VELAZCO', 'mavictoria', 'mavictoria', 4, 2, 'SI'),
-(7, 'CRISTIAN', 'MONSALVE', 'crimonsalve', 'etica2020', 2, 1, 'NO'),
-(8, 'SYSTEM', 'ADMIN_DEL_SISTEMA', 'system', 'system2020', 3, 1, 'NO'),
-(28, 'WINDI', 'SARRIA QUINTERO', 'wisarria', 'wisarria', 4, 1, 'SI');
+INSERT INTO `USERS` (`user_id`, `user_nombre`, `user_apellido`, `user_user`, `user_password`, `user_perfil`, `user_vendedor`, `user_transportador`, `user_coordina_turno`, `user_apoyo_turno`) VALUES
+(0, '--', '--', '--', '--', 4, 'NO', 'NO', 'NO', 'NO'),
+(1, 'YULY', 'DIAZ', 'yudiaz', 'yudiaz', 1, 'SI', 'NO', 'SI', 'NO'),
+(3, 'KAROL', 'PULIDO', 'kapulido', 'kapulido', 2, 'SI', 'NO', 'NO', 'NO'),
+(4, 'MARINO', 'VICTORIA VELAZCO', 'mavictoria', 'mavictoria', 4, 'SI', 'SI', 'NO', 'NO'),
+(7, 'CRISTIAN', 'MONSALVE', 'crimonsalve', 'etica2020', 2, 'NO', 'NO', 'NO', 'NO'),
+(8, 'SYSTEM', 'ADMIN_DEL_SISTEMA', 'system', 'system2020', 3, 'NO', 'NO', 'NO', 'NO'),
+(28, 'WINDI', 'SARRIA QUINTERO', 'wisarria', 'wisarria', 4, 'NO', 'SI', 'NO', 'NO'),
+(30, 'ROSI', 'TORREALBA', 'torrealbar', '1122', 1, 'SI', 'NO', 'SI', 'NO');
 
 -- --------------------------------------------------------
 
@@ -531,11 +550,12 @@ CREATE TABLE `VENTAS` (
 --
 
 INSERT INTO `VENTAS` (`venta_id`, `venta_fecha`, `venta_nombre_producto`, `venta_nombre_proveedor`, `venta_costo_producto`, `venta_valor_venta`, `venta_utilidad`, `user_id`, `turno_id`, `venta_tipo`) VALUES
-(489, '2023-08-10 21:10:34', 'PAÑAL', 'MARIA', 5000, 10000, 5000, 2, 300, 'DOMI'),
-(493, '2023-08-17 15:30:57', 'GALLINAS', 'POLLO', 4000, 10000, 6000, 1, 300, 'DOMI'),
-(494, '2023-08-17 16:45:44', 'ELEFANTE', 'TOTO', 300, 1000, 700, 1, 300, 'DOMI'),
-(496, '2023-08-17 16:56:49', 'OO', 'OO', 10000, 20000, 10000, 1, 300, 'DOMI'),
-(497, '2023-08-17 16:59:54', 'RR', 'RR', 2000, 5000, 3000, 1, 300, 'DOMI');
+(489, '2023-08-10 21:10:34', 'PAÑAL', 'MARIA', 5000, 10000, 5000, 1, 300, 'DOMI'),
+(502, '2023-08-22 15:00:43', 'WARFARINA', 'JOSE', 25000, 35000, 10000, 1, 300, 'DOMI'),
+(504, '2023-08-28 19:34:48', 'PRUDUTO', 'TOTO', 5000, 10000, 5000, 1, 300, 'LOCAL'),
+(505, '2023-08-28 19:55:00', 'ASPIRINA VERDE', 'BAYER', 3000, 10000, 7000, 30, 300, 'DOMI'),
+(506, '2023-08-28 21:43:09', 'AGUA BRISA', 'PROVEEDOR', 5000, 10000, 5000, 30, 300, 'LOCAL'),
+(507, '2023-08-28 22:04:31', 'ACIDMANTLE', 'TOPO', 3000, 10000, 7000, 3, 300, 'LOCAL');
 
 --
 -- Índices para tablas volcadas
@@ -582,12 +602,6 @@ ALTER TABLE `PERFILES`
   ADD PRIMARY KEY (`perfil_id`);
 
 --
--- Indices de la tabla `ROL_VENDEDOR`
---
-ALTER TABLE `ROL_VENDEDOR`
-  ADD PRIMARY KEY (`rol_vendedor_id`);
-
---
 -- Indices de la tabla `TURNOS`
 --
 ALTER TABLE `TURNOS`
@@ -600,8 +614,7 @@ ALTER TABLE `TURNOS`
 --
 ALTER TABLE `USERS`
   ADD PRIMARY KEY (`user_id`),
-  ADD KEY `perfil_id` (`user_perfil`),
-  ADD KEY `rol_vendedor_id` (`user_vendedor`);
+  ADD KEY `perfil_id` (`user_perfil`);
 
 --
 -- Indices de la tabla `VENTAS`
@@ -619,7 +632,7 @@ ALTER TABLE `VENTAS`
 -- AUTO_INCREMENT de la tabla `ACCESOS`
 --
 ALTER TABLE `ACCESOS`
-  MODIFY `acceso_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=217;
+  MODIFY `acceso_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=233;
 
 --
 -- AUTO_INCREMENT de la tabla `BARRIOS`
@@ -631,7 +644,7 @@ ALTER TABLE `BARRIOS`
 -- AUTO_INCREMENT de la tabla `DOMICILIOS`
 --
 ALTER TABLE `DOMICILIOS`
-  MODIFY `domicilio_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `domicilio_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
 
 --
 -- AUTO_INCREMENT de la tabla `DOMI_EXTERNOS`
@@ -652,28 +665,22 @@ ALTER TABLE `PERFILES`
   MODIFY `perfil_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT de la tabla `ROL_VENDEDOR`
---
-ALTER TABLE `ROL_VENDEDOR`
-  MODIFY `rol_vendedor_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
 -- AUTO_INCREMENT de la tabla `TURNOS`
 --
 ALTER TABLE `TURNOS`
-  MODIFY `turno_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=341;
+  MODIFY `turno_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=357;
 
 --
 -- AUTO_INCREMENT de la tabla `USERS`
 --
 ALTER TABLE `USERS`
-  MODIFY `user_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `user_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de la tabla `VENTAS`
 --
 ALTER TABLE `VENTAS`
-  MODIFY `venta_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=501;
+  MODIFY `venta_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=508;
 
 --
 -- Restricciones para tablas volcadas
@@ -699,8 +706,7 @@ ALTER TABLE `TURNOS`
 -- Filtros para la tabla `USERS`
 --
 ALTER TABLE `USERS`
-  ADD CONSTRAINT `USERS_ibfk_1` FOREIGN KEY (`user_perfil`) REFERENCES `PERFILES` (`perfil_id`),
-  ADD CONSTRAINT `USERS_ibfk_2` FOREIGN KEY (`user_vendedor`) REFERENCES `ROL_VENDEDOR` (`rol_vendedor_id`);
+  ADD CONSTRAINT `USERS_ibfk_1` FOREIGN KEY (`user_perfil`) REFERENCES `PERFILES` (`perfil_id`);
 
 --
 -- Filtros para la tabla `VENTAS`
