@@ -4,9 +4,7 @@
 $("#menu_cerrar_turno").click(function () {
   limpiarDatosModalCerrar();
   $("#mdl_cerrar_turno").modal("show");
-  let turno_id = 300;
-  $("#npt_turno_id_actual").val(turno_id);
-  calculaTotalGestiones(turno_id);
+  calculaTotalGestiones();
 });
 
 function limpiarDatosModalCerrar() {
@@ -34,7 +32,9 @@ function limpiarDatosModalCerrar() {
 
 
 //  CALCULA TOTAL GESTIONES
-function calculaTotalGestiones(turno_id) {
+function calculaTotalGestiones() {
+  turno_id = $("#npt_turno_id_actual").val();
+  user_id = $("#npt_user_id_actual").val();
   $.ajax({
     type: "GET",
     url: "venta_home_mdl.php?accion=total_utilidad_gestiones",
@@ -236,7 +236,7 @@ $("#slct_descuadre").on("change", function () {
 });
 
 // BOTON CONFIRMA CIERRE DEL TURNO
-$("#btn_confirma_cerrar_turno").click(function () {
+$("#btn_cerrar_turno").click(function () {
   //VALIDACION DE DATOS DEL MODAL
   let valida_saldo_caja = $("#npt_saldo_caja_base").val();
   let valida_descuadre = $("#npt_descuadre_id").val();
@@ -255,10 +255,10 @@ $("#btn_confirma_cerrar_turno").click(function () {
     return false;
   } else {
     let registro = recolectarDatosFormularioCerrar();
-    guardarRegistroCerrar(registro);
-    $("#mdl_cerrar_turno").modal("hide");
+    guardarTurnoCerrar(registro);
+    // $("#mdl_cerrar_turno").modal("hide");
     // comprobarCierreDelTurno();
-    // $("#mdl_cerrar_final").modal("show");
+    $("#mdl_confirma_cerrar_turno").modal("show");
   }
 });
 
@@ -276,7 +276,7 @@ function recolectarDatosFormularioCerrar() {
   return registro;
 }
 
-function guardarRegistroCerrar(registro) {
+function guardarTurnoCerrar(registro) {
   $.ajax({
     type: "POST",
     url:
@@ -290,28 +290,29 @@ function guardarRegistroCerrar(registro) {
 }
 
 //CICLO FINALIZA CERRAR
-$("#btn_final_turno").click(function () {
-  $("#mdl_cerrar_final").modal("hide");
+$("#btn_confirma_cerrar_turno").click(function () {
+  $("#mdl_cerrar_turno").modal("hide");
+  $("#mdl_confirma_cerrar_turno").modal("hide");
   alert("El Turno Ha sido Cerrado");
   $(location).attr("href", "../01_login/login_view.html");
 });
 
-function comprobarCierreDelTurno() {
-  $.ajax({
-    type: "GET",
-    url: "venta_home_mdl.php?accion=consultar_turno_cerrado",
-    data: { turno_id: turno_id },
-    success: function (datos) {
-      $("#npt_final_saldo_caja").val(datos[0].turno_saldo_caja);
-      $("#npt_final_total_utilidad").val(datos[0].turno_total_utilidad);
-      $("#npt_final_total_entrega").val(datos[0].turno_total_entrega);
-      $("#npt_final_descuadre").val(datos[0].turno_descuadre);
-    },
-    error: function () {
-      alert("problema en: guardar Cierre turno");
-    },
-  });
-}
+// function comprobarCierreDelTurno() {
+//   $.ajax({
+//     type: "GET",
+//     url: "venta_home_mdl.php?accion=consultar_turno_cerrado",
+//     data: { turno_id: turno_id },
+//     success: function (datos) {
+//       $("#npt_final_saldo_caja").val(datos[0].turno_saldo_caja);
+//       $("#npt_final_total_utilidad").val(datos[0].turno_total_utilidad);
+//       $("#npt_final_total_entrega").val(datos[0].turno_total_entrega);
+//       $("#npt_final_descuadre").val(datos[0].turno_descuadre);
+//     },
+//     error: function () {
+//       alert("problema en: guardar Cierre turno");
+//     },
+//   });
+// }
 
 //CALCULA UTILIDAD MODAL EDITAR GESTION
 $("#nptEdit_venta_valor_venta").focusout(function () {

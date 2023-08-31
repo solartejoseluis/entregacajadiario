@@ -22,8 +22,9 @@ function limpiarModalGestiones() {
   $("#npt_venta_utilidad_base").val("");
   $("#slct_vendedor").val("0");
   $("#npt_vendedor_id").val("");
-  $("#npt_turno_id_actual").val("300");
   $("#npt_venta_tipo").val("");
+$("#npt_turno_id_modal").val($("#npt_turno_id_actual").val());
+
 }
 
 // Validaciones al digitar
@@ -134,7 +135,6 @@ $(document).ready(function () {
     }
   );
 });
-
 // fin operaciones en modal Nueva Gestión
 
 // confirma agregar gestion local
@@ -172,6 +172,7 @@ $("#btn_save_punto_fisico").click(function () {
     $("#mdl_new_gestion").modal("hide");
     let registro = recolectaDatosMdlNuevaGestion();
     guardarNuevaGestion(registro);
+    actualizaPantallaPrincipal();
   }
 });
 
@@ -212,6 +213,7 @@ $("#btn_enviar_domi").click(function () {
     let registro = recolectaDatosMdlNuevaGestion();
     guardarNuevaGestion(registro);
     trasladaMdlNewDomi(registro);
+    actualizaPantallaPrincipal();
   }
 });
 
@@ -223,7 +225,7 @@ function recolectaDatosMdlNuevaGestion() {
     venta_valor_venta: $("#npt_venta_valor_venta_base").val(),
     venta_utilidad: $("#npt_venta_utilidad_base").val(),
     user_id: $("#npt_vendedor_id").val(),
-    turno_id: $("#npt_turno_id_actual").val(),
+    turno_id: $("#npt_turno_id_modal").val(),
     venta_tipo: $("#npt_venta_tipo").val(),
   };
   return registro;
@@ -277,7 +279,7 @@ function trasladaMdlNewDomi(registro) {
   $("#npt_inyectologia").val("");
   $("#npt_observaciones").val("");
   $("#npt_confirm_btn").val("0");
-  $("#npt_turno_id_actual").val("300");
+  $("#npt_turno_id_actual").val("");
 }
 
 function guardarNuevaGestion(registro) {
@@ -295,5 +297,4 @@ function guardarNuevaGestion(registro) {
     },
   });
 }
-
 // FIN CICLO AGREGAR NUEVA gestion

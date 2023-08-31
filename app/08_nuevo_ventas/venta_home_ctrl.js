@@ -1,140 +1,101 @@
 document.addEventListener("DOMContentLoaded", function () {
-  var turno_id = "";
-  var user_id = "";
+  actualizaPantallaPrincipal();
+});
 
+function actualizaPantallaPrincipal() {
+  cargarAcceso();
   datatablesDomiPorSalir();
   datatablesDomiEnCurso();
   datatablesGestiones();
-  cargarAcceso();
-  consultarDatosTurnoActual(turno_id);
+  consultarDatosTurnoActual();
+  acumuladoMesUsuarioActual();
+  acumuladoTurnoUsuarioActual();
+}
 
-
-
-
-  function cargarAcceso() {
-    $.ajax({
-      type: "POST",
-      async: false, // hacer que sea asincronico para sarle tiempo a ajax para cargar variable
-      url: "venta_home_mdl.php?accion=consultar_acceso",
-      data: "",
-      success: function (datos) {
-        $("#npt_turno_id_actual").val(datos[0].turno_id);
-        $("#npt_user_id_actual").val(datos[0].user_id);
-        //He tomado el valor del input
-        turno_id = $("#npt_turno_id_actual").val();
-        user_id = $("#npt_user_id_actual").val();
-      },
-      error: function () {
-        alert("Problema en cargar acceso");
-      },
-    });
-  }
-
-  function consultarDatosTurnoActual(turno_id) {
-    $.ajax({
-      type: "GET",
-      async: false, //necesario
-      url: "venta_home_mdl.php?accion=consultarDatosTurnoActual",
-      data: { turno_id: turno_id },
-      success: function (datos) {
-        //$("#npt_turno_id_actual").val(datos[0].turno_id_actual);
-        $("#npt_user_nombre").html(datos[0].user_nombre);
-        $("#npt_user_apellido").html(datos[0].user_apellido);
-        $("#spn_user_nombre").html(datos[0].user_nombre);
-        $("#spn_user_apellido").html(datos[0].user_apellido);
-        $("#spn_jornada_nombre").html(datos[0].jornada_nombre);
-      },
-      error: function () {
-        alert("Problema en consultar datos turno actual");
-      },
-    });
-  }
-
-
-  // CARGA LA FECHA ACTUAL y CUADRO PRINCIPAL DE PAGINA
-  // function getTime() {
-  //   var today = moment();
-
-  //   time = today.format("LT");
-  //   //date = today.format('dddd, MMMM, YYYY');
-  //   date = today.format("LL");
-  //   document.getElementById("hoy_moment").innerHTML =
-  //     `<br>` +
-  //     `<h1 class='large'>${time}</h1>` +
-  //     `<span class='dark'>${date}</span>`;
-  // }
-  // setInterval(function () {
-  //   getTime();
-  // }, 1000);
-
-  // function mesActual() {
-  //   let mes_actual = moment().format("MMMM-YYYY");
-  //   $("#mes_actual1").html(mes_actual);
-  // }
-
-  // CARGA LA FECHA ACTUAL y CUADRO PRINCIPAL DE PAGINA
-  function getTime() {
-    var today = moment();
-    date = today.format("LLLL");
-    document.getElementById("hoy_moment").innerHTML =
-      `<span>${date}</span>`;
-  }
-  setInterval(function () {
-    getTime();
-  }, 1000);
-
-  function mesActual() {
-    let mes_actual = moment().format("MMMM-YYYY");
-    $("#mes_actual1").html(mes_actual);
-  }
-
-  // SIDEBAR
-  $("#lnk_gestiones_mes_vendedor").on("click", function () {
-    $("#mdl_gestiones_mes_vendedor").modal("show");
-    dttbl_mes_vendedor(turno_id, user_id);
+function cargarAcceso() {
+  $.ajax({
+    type: "POST",
+    async: false, // hacer que sea asincronico para sarle tiempo a ajax para cargar variable
+    url: "venta_home_mdl.php?accion=consultar_acceso",
+    data: "",
+    success: function (datos) {
+      $("#npt_turno_id_actual").val(datos[0].turno_id);
+      $("#npt_user_id_actual").val(datos[0].user_id);
+      //He tomado el valor del input
+      turno_id = $("#npt_turno_id_actual").val();
+      user_id = $("#npt_user_id_actual").val();
+    },
+    error: function () {
+      alert("Problema en cargar acceso");
+    },
   });
+}
 
-  $("#lnk_gestiones_agrupadas_por_dia").on("click", function () {
-    $("#mdl_gestiones_agrupadas_por_dia").modal("show");
-    dttbl_gestiones_agrupadas_por_dia(turno_id, user_id);
+function consultarDatosTurnoActual() {
+  turno_id = $("#npt_turno_id_actual").val();
+  user_id = $("#npt_user_id_actual").val();
+  $.ajax({
+    type: "GET",
+    async: false, //necesario
+    url: "venta_home_mdl.php?accion=consultarDatosTurnoActual",
+    data: { turno_id: turno_id },
+    success: function (datos) {
+      //$("#npt_turno_id_actual").val(datos[0].turno_id_actual);
+      $("#npt_user_nombre").html(datos[0].user_nombre);
+      $("#npt_user_apellido").html(datos[0].user_apellido);
+      $("#spn_user_nombre").html(datos[0].user_nombre);
+      $("#spn_user_apellido").html(datos[0].user_apellido);
+      $("#spn_jornada_nombre").html(datos[0].jornada_nombre);
+    },
+    error: function () {
+      alert("Problema en consultar datos turno actual");
+    },
   });
+}
 
-  $("#lnk_gestiones_mes_todos").on("click", function () {
-    $("#mdl_gestiones_mes_todos").modal("show");
-    dttbl_mes_todos(turno_id, user_id);
-  });
+// CARGA LA FECHA ACTUAL y CUADRO PRINCIPAL DE PAGINA
+function getTime() {
+  var today = moment();
+  date = today.format("LLLL");
+  document.getElementById("hoy_moment").innerHTML =
+    `<span>${date}</span>`;
+}
+setInterval(function () {
+  getTime();
+}, 1000);
 
-  $("#lnk_gestiones_mes_vendedor").on("click", function () {
-    $("#mdl_gestiones_mes_vendedor").modal("show");
-  });
+function mesActual() {
+  let mes_actual = moment().format("MMMM-YYYY");
+  $("#mes_actual1").html(mes_actual);
+}
 
-  $("#lnk_gestiones_mes_vendedor").on("click", function () {
-    $("#mdl_gestiones_mes_vendedor").modal("show");
-  });
+// SIDEBAR
+$("#lnk_gestiones_mes_vendedor").on("click", function () {
+  $("#mdl_gestiones_mes_vendedor").modal("show");
+  dttbl_mes_vendedor(turno_id, user_id);
+});
 
-  // CARGA ELEMENTOS DE INICIO PAGINA
-  function cargarAcceso() {
-    $.ajax({
-      type: "POST",
-      async: false,
-      url: "venta_home_mdl.php?accion=consultar_acceso",
-      data: "",
-      success: function (datos) {
-        $("#npt_turno_id_actual").val(datos[0].turno_id);
-        $("#npt_user_id_actual").val(datos[0].user_id);
-        turno_id = $("#npt_turno_id_actual").val();
-        user_id = $("#npt_user_id_actual").val();
-      },
-      error: function () {
-        alert("Problema en cargar acceso");
-      },
-    });
-  }
-}); // cierre del addEventListener del inicio de pagina
+$("#lnk_gestiones_agrupadas_por_dia").on("click", function () {
+  $("#mdl_gestiones_agrupadas_por_dia").modal("show");
+  dttbl_gestiones_agrupadas_por_dia(turno_id, user_id);
+});
+
+$("#lnk_gestiones_mes_todos").on("click", function () {
+  $("#mdl_gestiones_mes_todos").modal("show");
+  dttbl_mes_todos(turno_id, user_id);
+});
+
+$("#lnk_gestiones_mes_vendedor").on("click", function () {
+  $("#mdl_gestiones_mes_vendedor").modal("show");
+});
+
+$("#lnk_gestiones_mes_vendedor").on("click", function () {
+  $("#mdl_gestiones_mes_vendedor").modal("show");
+});
 
 // DTTBL DOMI POR SALIR
 function datatablesDomiPorSalir() {
-  var listadoDomiPorSalir = $("#tbl_domi_por_salir").DataTable({
+  let listadoDomiPorSalir = $("#tbl_domi_por_salir").DataTable({
     ajax: {
       url: "venta_home_mdl.php?accion=carga_dttbl_domi_por_salir",
       dataSrc: "",
@@ -210,7 +171,7 @@ function datatablesDomiPorSalir() {
 
   function defineHoraSalida(registro) {
     $.ajax({
-      type: "POST",
+      type: "GET",
       url:
         "domixsalir_mdl.php?accion=define_hora_salida&domicilio_id=" +
         registro.domicilio_id,
@@ -226,10 +187,11 @@ function datatablesDomiPorSalir() {
     });
   }
 }
-// final datatables domi por salir
+// final DTTBL domi por salir
 
 // DTTBL DOMI EN CURSO
 function datatablesDomiEnCurso() {
+
   let listadoDomiEnCurso = $("#tbl_domi_en_curso").DataTable({
     ajax: {
       url: "venta_home_mdl.php?accion=carga_dttbl_domi_en_curso",
@@ -322,17 +284,20 @@ function datatablesDomiEnCurso() {
     });
   }
 }
-// fin datatables domi en curso
+// fin dttbl domi en curso
 
 // DTTBL GESTIONES
 function datatablesGestiones() {
+  turno_id = $("#npt_turno_id_actual").val();
+  user_id = $("#npt_user_id_actual").val();
   let listadoGestiones = $("#tbl_gestiones").DataTable({
     ajax: {
-      url: "venta_home_mdl.php?accion=carga_dttbl_gestiones",
+      url: "venta_home_mdl.php?accion=carga_dttbl_gestiones&turno_id=" + turno_id,
       dataSrc: "",
       data: "",
     },
     columns: [
+      { data: "venta_id" },
       { data: "venta_nombre_producto" },
       { data: "venta_nombre_proveedor" },
       { data: "venta_costo_producto" },
@@ -344,13 +309,13 @@ function datatablesGestiones() {
     ],
     columnDefs: [
       {
-        targets: 7,
+        targets: 8,
         defaultContent:
           "<button class='btn btn-outline-success btn-sm btnVerGestion'><i class='fa-solid fa-pen'></i></button>",
         data: null,
       },
     ],
-    order: [[4, "asc"]],
+    order: [[5, "asc"]],
     info: false,
     language: {
       url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
@@ -360,7 +325,7 @@ function datatablesGestiones() {
     destroy: true,
   });
 
-  // boton ver/editar domi en curso
+  // boton editar gestion
   $("#tbl_gestiones").on("click", "button.btnVerGestion", function () {
     let registro = listadoGestiones.row($(this).parents("tr")).data();
     recuperarRegistro(registro);
@@ -461,3 +426,125 @@ function dttbl_mes_todos(turno_id, user_id) {
     destroy: true,
   });
 }
+
+
+// CARGAS EN PANTALLA PRINCIPAL
+
+function cargarDatosUtilidadVendedor1() {
+  $.ajax({
+    type: "GET",
+    url: "venta_home_mdl.php?accion=consultar_utilidad_vendedor1",
+    data: { turno_id: turno_id },
+    success: function (datos) {
+      $("#utilidadVendedor1").html(datos[0].utilidad_vendedor1);
+      $("#ventasVendedor1").html(datos[0].ventas_vendedor1);
+    },
+    error: function () {
+      alert("Problema en consultarUtilidadVendedor1");
+    },
+  });
+}
+
+function cargarDatosUtilidadVendedor2() {
+  $.ajax({
+    type: "GET",
+    url: "venta_home_mdl.php?accion=consultar_utilidad_vendedor2",
+    data: { turno_id: turno_id },
+    success: function (datos) {
+      $("#utilidadVendedor2").html(datos[0].utilidad_vendedor2);
+      $("#ventasVendedor2").html(datos[0].ventas_vendedor2);
+    },
+    error: function () {
+      alert("Problema en consultarUtilidadVendedor2");
+    },
+  });
+}
+
+function cargarDatosUtilidadVendedor3() {
+  $.ajax({
+    type: "GET",
+    url: "venta_home_mdl.php?accion=consultar_utilidad_vendedor3",
+    data: { turno_id: turno_id },
+    success: function (datos) {
+      $("#utilidadVendedor3").html(datos[0].utilidad_vendedor3);
+      $("#ventasVendedor3").html(datos[0].ventas_vendedor3);
+    },
+    error: function () {
+      alert("Problema en consultarUtilidadVendedor3");
+    },
+  });
+}
+
+function cargarDatosUtilidadVendedor4() {
+  $.ajax({
+    type: "GET",
+    url: "venta_home_mdl.php?accion=consultar_utilidad_vendedor4",
+    data: { turno_id: turno_id },
+    success: function (datos) {
+      $("#utilidadVendedor4").html(datos[0].utilidad_vendedor4);
+      $("#ventasVendedor4").html(datos[0].ventas_vendedor4);
+    },
+    error: function () {
+      alert("Problema en consultarUtilidadVendedor4");
+    },
+  });
+}
+
+function utilidadTurno() {
+  $.ajax({
+    type: "GET",
+    url: "venta_home_mdl.php?accion=consultar_utilidad_turno",
+    data: { turno_id: turno_id },
+    success: function (datos) {
+      $("#p_utilidad_turno").html(datos[0].utilidad_turno);
+      $("#p_turno_numero_ventas").html(datos[0].ventas_turno);
+    },
+    error: function () {
+      alert("Problema en cargar datos utilidad turno");
+    },
+  });
+}
+
+function acumuladoMesUsuarioActual() {
+  $.ajax({
+    type: "GET",
+    url: "venta_home_mdl.php?accion=acumulado_mes_usuario_actual",
+    data: { user_id: user_id },
+    success: function (datos) {
+      $(".cuenta_nmr_gestiones").html(datos[0].cuenta_nmr_gestiones);
+      $(".acumulado_utilidad").html(datos[0].acumulado_utilidad);
+      $(".acumulado_ganancia").html(datos[0].acumulado_ganancia);
+    },
+    error: function () {
+      alert("Problema en cargar acumulado mes");
+    },
+  });
+}
+
+
+function acumuladoTurnoUsuarioActual() {
+  $.ajax({
+    type: "GET",
+    url: "venta_home_mdl.php?accion=acumulado_turno_usuario_actual",
+    data: { user_id: user_id, turno_id: turno_id },
+    success: function (datos) {
+      $(".cuenta_nmr_gestiones_turno").html(datos[0].cuenta_nmr_gestiones_turno);
+      $(".acumulado_utilidad_turno").html(datos[0].acumulado_utilidad_turno);
+      $(".acumulado_ganancia_turno").html(datos[0].acumulado_ganancia_turno);
+    },
+    error: function () {
+      alert("Problema en cargar acumulado turno");
+    },
+  });
+}
+
+
+// CICLO CERRAR SESION
+$("#lnk_cerrar_sesion").on("click", function () {
+  $("#mdl_confirma_cerrar_sesion").modal("show");
+});
+
+$("#btn_confirma_cerrar_sesion").on("click", function () {
+  // $("#mdl_confirma_cerrar_sesion").modal("show");
+  $(location).attr("href", "../01_login/login_view.html");
+});

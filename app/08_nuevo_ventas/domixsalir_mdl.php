@@ -6,7 +6,7 @@ require "../00_connect/pdo.php";
 switch ($_GET['accion']) {
 
     case 'modificar_domicilio':
-    $sql = "UPDATE DOMICILIOS SET
+        $sql = "UPDATE DOMICILIOS SET
       barrio_id= '$_POST[barrio_id]',
       numero_factura= '$_POST[numero_factura]',
       trans_interno_id= '$_POST[trans_interno_id]',
@@ -22,17 +22,15 @@ switch ($_GET['accion']) {
         echo json_encode($response);
         break;
 
+    case 'define_hora_salida':
+        $sql = "UPDATE DOMICILIOS 
+            SET hora_salida=DATE_FORMAT(NOW(),'%H:%i')
+            WHERE domicilio_id=$_GET[domicilio_id]";
+        $response = $pdo->exec($sql);
+        echo json_encode($response);
+        break;
 
-        case 'define_hora_salida':
-            $sql = "UPDATE DOMICILIOS SET
-            hora_salida=DATE_FORMAT(NOW(),'%H:%i')
-            WHERE domicilio_id=$_GET[domicilio_id]
-            ";
-                $response = $pdo->exec($sql);
-                echo json_encode($response);
-                break;
-
-     case 'consultar_domi_por_salir':
+    case 'consultar_domi_por_salir':
         $sql = "SELECT
 			DOMICILIOS.domicilio_id,
             DOMICILIOS.barrio_id,
@@ -46,8 +44,7 @@ switch ($_GET['accion']) {
             DOMICILIOS.observaciones,
             DOMICILIOS.turno_id
             FROM DOMICILIOS 
-            WHERE domicilio_id=$_GET[domicilio_id]
-        ";
+            WHERE domicilio_id=$_GET[domicilio_id]";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);

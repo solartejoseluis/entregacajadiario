@@ -30,6 +30,7 @@
         $("#tbl_gestiones").DataTable().ajax.reload();
         $("#mdl_confirma_eliminar_gestion").modal("hide");
         $("#mdl_edit_gestion").modal("hide");
+          actualizaPantallaPrincipal();
       },
       error: function () {
         alert("Problema en borrar gestion");

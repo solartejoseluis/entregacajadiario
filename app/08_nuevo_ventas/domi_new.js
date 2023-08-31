@@ -333,8 +333,10 @@ function guardarDomicilio(registro) {
     data: registro,
 
     success: function (msg) {
-      $("#tbl_domi_por_salir").DataTable().ajax.reload();
-      $("#tbl_domi_en_curso").DataTable().ajax.reload();
+      // $("#tbl_domi_por_salir").DataTable().ajax.reload();
+      // $("#tbl_domi_en_curso").DataTable().ajax.reload();
+      // actualizaPantallaPrincipal();
+       location.reload();
     },
 
     error: function () {

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Entrega Diaria</title>
+  <title>HOJA DEL TURNO</title>
   <!-- CDN boostrap 5.2.2 css -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
@@ -142,7 +142,7 @@
             <!-- <li>
                 <hr class="dropdown-divider" />
               </li> -->
-            <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+            <li><a class="dropdown-item" id="lnk_cerrar_sesion">Cerrar Sesión</a></li>
           </ul>
         </div>
         <!-- final seccion del usuario -->
@@ -162,10 +162,9 @@
           <button class="btn_open">☰</button>
           <a class="navbar-brand ms-2" href="#">HOJA DEL TURNO</a>
 
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
             <span class="navbar-toggler-icon">boton</span>
-          </button>
+          </button> -->
 
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
@@ -216,27 +215,33 @@
     <div class="row">
       <nav class="navbar navbar-expand-md" id="barra_informativa">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">INFO:</a>
+          <a class="navbar-brand" href="#"> MES:</a>
           <div class="collapse navbar-collapse" id="navbarText">
             <div class="ms-4">
-              <span class="navbar-text" id="info_mes"> Gestiones Mes </span>
-              <span id="info_mes">&nbsp87</span>
+              <!-- <span class="mesActual" id="info_mes">&nbsp</span> -->
+              <span class="navbar-text" id="info_mes"> Ges:</span>
+              <span class="cuenta_nmr_gestiones" id="info_mes">&nbsp</span>
             </div>
             <div class="ms-4">
-              <span class="navbar-text" id="info_mes"> Utilidad Mes </span>
-              <span id="info_mes">&nbsp$120.400</span>
+              <span class="navbar-text" id="info_mes"> Uti:</span>
+              <span class="acumulado_utilidad" id="info_mes">&nbsp</span>
             </div>
             <div class="ms-4">
-              <span class="navbar-text" id="info_mes"> Ganancia Mes </span>
-              <span id="info_mes">&nbsp$65.000</span>
+              <span class="navbar-text" id="info_mes"> Gan:</span>
+              <span class="acumulado_ganancia" id="info_mes">&nbsp</span>
+            </div>
+            <a class="navbar-brand ms-4" href="#"> ESTE TURNO:</a>
+            <div class="ms-4">
+              <span class="navbar-text" id="info_turno"> Ges:</span>
+              <span class="cuenta_nmr_gestiones_turno" id="info_turno">&nbsp</span>
             </div>
             <div class="ms-4">
-              <span class="navbar-text" id="info_hoy"> Utilidad Hoy </span>
-              <span id="info_hoy">&nbsp87</span>
+              <span class="navbar-text" id="info_turno"> Uti:</span>
+              <span class="acumulado_utilidad_turno" id="info_turno">&nbsp</span>
             </div>
             <div class="ms-4">
-              <span class="navbar-text" id="info_hoy"> Gestiones Hoy </span>
-              <span id="info_hoy">&nbsp87</span>
+              <span class="navbar-text" id="info_turno"> Gan:</span>
+              <span class="acumulado_ganancia_turno" id="info_turno">&nbsp</span>
             </div>
             <div class="ms-4">
               <span class="navbar-text" id="hoy_moment"></span>
@@ -246,6 +251,10 @@
       </nav>
     </div>
     <!-- FINAL BARRA INFORMATIVA -->
+
+    <div class="ms-4">
+      <span class="navbar-text" id="hoy_moment"></span>
+    </div>
 
     <div class="row">
       <!-- SECCION DOMICILIOS -->
@@ -308,6 +317,7 @@
             <table class="table display compact cell-border" id="tbl_gestiones">
               <thead>
                 <tr>
+                  <td>id</td>
                   <td>Producto</td>
                   <td>Proveedor</td>
                   <td>Costo</td>
@@ -338,6 +348,7 @@
           <form id="frm_nueva_venta">
             <!-- NPT OCULTOS EN EL MODAL -->
             <div class="row">
+              <input type="hidden" class="form-control" id="npt_turno_id_modal" />
               <input type="hidden" class="form-control" id="npt_venta_id" />
               <input type="hidden" class="form-control" id="npt_venta_tipo" />
             </div>
@@ -597,7 +608,7 @@
         </div>
         <!-- FOOTER DEL MODAL -->
         <div class="modal-footer">
-          <button type="submit" class="btn btn-danger" id="btn_confirma_cerrar_turno">
+          <button type="submit" class="btn btn-danger" id="btn_cerrar_turno">
             Realizar Cierre
           </button>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
@@ -609,14 +620,45 @@
   </div>
   <!-- fin modal cerrar turno -->
 
+  <!-- MODAL CONFIRMA CERRAR TURNO -->
+  <div class="modal fade" data-bs-backdrop="static" style="overflow: hidden" id="mdl_confirma_cerrar_turno">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">CONFIRMA CERRAR TURNO</h1>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12">
+              <h5>Va a cerrar el turno</h5>
+              <p>si los datos son correctos pulse CONFIRMAR CERRAR</p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btn_confirma_cerrar_turno">
+            CONFIRMAR CERRAR
+          </button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            X
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- fin modal confirma cerrar sesion -->
+
+
+
   <!-- MODAL CERRAR FINAL-->
   <div class="modal fade" data-bs-backdrop="static" id="mdl_cerrar_final">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5">CONFIRMA CERRAR</h1>
-          <button type="button" class="btn_confirma_cerrar" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <h3>El turno ha sido cerrado</h3>
+        <h5>Los datos Almacenados Fueron:</h5>
         <div class="modal-body">
           <form id="frm_cerrar_final">
             <!-- EDITAR VENTAS_ID -->
@@ -1117,6 +1159,39 @@
     </div>
   </div>
   <!-- final modal venta acumulada -->
+
+
+  <!-- MODAL CONFIRMA CERRAR SESION -->
+  <div class="modal fade" data-bs-backdrop="static" style="overflow: hidden" id="mdl_confirma_cerrar_sesion">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">CONFIRMA CERRAR SESION</h1>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12">
+              <h5> Va cerrar la sesión</h5>
+              <p>Tendra que volver a ingresar usuario y clave</p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btn_confirma_cerrar_sesion">
+            Cerrar Sesión
+          </button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            X
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- fin modal confirma cerrar sesion -->
+
+
+
+
 
   <!-- SCRIPTS -->
   <!-- CDN jquery 3.6.1 js -->

@@ -4,7 +4,6 @@ header('Content-Type: application/json');
 require "../00_connect/pdo.php";
 
 switch ($_GET['accion']) {
-
     case 'consultar_acceso':
         // se ordenan descendente por turno_id y solo se muestra el primer registro
         $sql = "SELECT 
@@ -62,8 +61,7 @@ switch ($_GET['accion']) {
             ON DOMICILIOS.barrio_id=BARRIOS.barrio_id
             INNER JOIN DOMI_EXTERNOS
             ON DOMICILIOS.trans_externo_id = DOMI_EXTERNOS.domi_externo_id
-            WHERE (hora_salida = 0);
-            ";
+            WHERE (hora_salida = 0)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -112,7 +110,7 @@ switch ($_GET['accion']) {
         FROM VENTAS
         INNER JOIN USERS
         ON VENTAS.user_id=USERS.user_id
-        ";
+        WHERE turno_id=$_GET[turno_id]";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -140,8 +138,7 @@ switch ($_GET['accion']) {
         FROM VENTAS
         INNER JOIN USERS
         ON VENTAS.user_id=USERS.user_id
-        WHERE venta_id=$_GET[venta_id]
-    ";
+        WHERE venta_id=$_GET[venta_id]";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -241,11 +238,11 @@ switch ($_GET['accion']) {
         turno_jornada,
         turno_responsable
         )
-    VALUES (
+        VALUES (
         '$_POST[fecha_actual]',
         $_POST[jornada_id],
         $_POST[responsable_id]
-    )";
+        )";
         $response = $pdo->exec($sql);
         echo json_encode($response);
         break;
@@ -261,11 +258,10 @@ switch ($_GET['accion']) {
             turno_sobrante = '$_POST[turno_sobrante]',
             turno_faltante = '$_POST[turno_faltante]',
             turno_entrega_final = '$_POST[turno_entrega_final]'
-    WHERE turno_id = $_GET[turno_id]";
+        WHERE turno_id = $_GET[turno_id]";
         $response = $pdo->exec($sql);
         echo json_encode($response);
         break;
-
 
     case 'guardar_turno':
         $sql = "INSERT INTO TURNOS(
@@ -282,16 +278,28 @@ switch ($_GET['accion']) {
 
 
 
-    case 'consultar_acumulado':
+    case 'acumulado_mes_usuario_actual':
         $sql = "SELECT
-            MONTH(venta_fecha) AS mes_actual,
             SUM(venta_utilidad) AS acumulado_utilidad,
-            COUNT(venta_utilidad) AS cuenta_num_gestiones,
+            COUNT(venta_utilidad) AS cuenta_nmr_gestiones,
             ROUND(SUM(venta_utilidad)/2,0) AS acumulado_ganancia
             FROM VENTAS
             WHERE (MONTH(venta_fecha) = (MONTH(CURRENT_DATE())))
-            AND (user_id=$_GET[user_id])
-            ";
+            AND (user_id=$_GET[user_id])";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
+
+    case 'acumulado_turno_usuario_actual':
+        $sql = "SELECT
+            SUM(venta_utilidad) AS acumulado_utilidad_turno,
+            COUNT(venta_utilidad) AS cuenta_nmr_gestiones_turno,
+            ROUND(SUM(venta_utilidad)/2,0) AS acumulado_ganancia_turno
+            FROM VENTAS
+            WHERE (turno_id=$_GET[turno_id])
+            AND (user_id=$_GET[user_id])";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -344,7 +352,7 @@ switch ($_GET['accion']) {
         $sql = "SELECT 
         DATE_FORMAT(venta_fecha,'%Y-%m-%d') AS FECHA,
         CONCAT(ELT(WEEKDAY(venta_fecha)+ 1, 
-    'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom')) AS DIA,
+        'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom')) AS DIA,
 		SUM(venta_utilidad) AS UTILIDAD,
 		COUNT(venta_id) AS NUM_GESTIONES
         FROM VENTAS
@@ -362,13 +370,12 @@ switch ($_GET['accion']) {
         break;
 
     case 'listar_ventas_mes_todos':
-        // ENVIA LOS DATOS AL DATATABLES
         $sql = "SELECT 
         VENTAS.venta_id,
         VENTAS.venta_fecha,
         DATE_FORMAT(venta_fecha,'%Y-%m-%d') AS FECHA,
         CONCAT(ELT(WEEKDAY(venta_fecha)+ 1, 
-    'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom')) AS DIA,
+        'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom')) AS DIA,
         DATE_FORMAT(venta_fecha,'%H-%i') AS HORA,
         VENTAS.venta_nombre_producto,
         VENTAS.venta_nombre_proveedor,
@@ -381,7 +388,7 @@ switch ($_GET['accion']) {
         FROM VENTAS
         INNER JOIN USERS
         ON VENTAS.user_id=USERS.user_id
-        WHERE (MONTH(venta_fecha) = (MONTH(CURRENT_DATE())))
+        WHERE (MONTH(venta_fecha) = DATE_SUB((MONTH(CURRENT_DATE()))),INTERVAL 2 MONTH))
         ";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
