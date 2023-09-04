@@ -5,7 +5,7 @@ require "../00_connect/pdo.php";
 
 switch ($_GET['accion']) {
 
-    case 'listar_ventas':
+    case 'listar_gestiones':
         $sql = "SELECT
           ELT(MONTH(venta_fecha), 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre') AS mes,
           MONTH(venta_fecha) AS mes_actual,

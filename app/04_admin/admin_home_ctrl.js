@@ -1,10 +1,23 @@
 document.addEventListener("DOMContentLoaded", function () {
   $(document).ready(function () {
-    ejecutarDatatables();
+    dttblGestionesInforme();
   });
 
-  function ejecutarDatatables() {
-    // seccion de  exportacion
+
+  // CARGA LA FECHA ACTUAL y CUADRO PRINCIPAL DE PAGINA
+  function getTime() {
+    var today = moment();
+    date = today.format("LLLL");
+    document.getElementById("hoy_moment").innerHTML =
+      `<span>${date}</span>`;
+  }
+  setInterval(function () {
+    getTime();
+  }, 1000);
+
+
+
+  function dttblGestionesInforme() {
     var buttonCommon = {
       exportOptions: {
         format: {
@@ -16,13 +29,14 @@ document.addEventListener("DOMContentLoaded", function () {
       },
     };
 
-    var listado = $("#tbl_ventas").DataTable({
+    var listado = $("#tbl_gestiones").DataTable({
       ajax: {
-        url: "admin_home_mdl.php?accion=listar_ventas",
+        url: "admin_home_mdl.php?accion=listar_gestiones",
         dataSrc: "",
         data: "",
       },
       columns: [
+        { data: "mes_actual" },
         { data: "mes" },
         { data: "año" },
         { data: "acumulado_utilidad" },
@@ -38,51 +52,51 @@ document.addEventListener("DOMContentLoaded", function () {
         $.extend(true, {}, buttonCommon, {
           extend: "copyHtml5",
           exportOptions: {
-            columns: [0, 1, 2, 3],
+            columns: [1, 2, 3, 4],
           },
         }),
         $.extend(true, {}, buttonCommon, {
           extend: "excelHtml5",
           exportOptions: {
-            columns: [0, 1, 2, 3],
+            columns: [1, 2, 3, 4],
           },
         }),
         $.extend(true, {}, buttonCommon, {
           extend: "pdfHtml5",
           exportOptions: {
-            columns: [0, 1, 2, 3],
+            columns: [1, 2, 3, 4],
           },
         }),
       ],
 
       columnDefs: [
         {
-          targets: 2,
+          targets: 3,
           render: $.fn.dataTable.render.number(".", ",", 0, "$"),
         },
         {
-          targets: 4,
+          targets: 5,
           defaultContent:
             "<button class='btn btn-primary btn-sm btn_ver_turnos' id='btn_ver_turnos'>Turnos</button>",
           data: null,
         },
 
         {
-          targets: 5,
+          targets: 6,
           defaultContent:
             "<button  class='btn btn-success btn-sm btn_ver_dias' id='btn_ver_dias'>Dias</button>",
           data: null,
         },
         {
-          targets: 6,
+          targets: 7,
           defaultContent:
             "<button  class='btn btn-warning btn-sm btn_ver_gestiones'>Gestiones</button>",
           data: null,
         },
         {
-          targets: 7,
+          targets: 8,
           defaultContent:
-            "<button  class='btn btn-danger btn-sm btn_informe_mes'>Informe</button>",
+            "<button  class='btn btn-danger btn-sm btn_informe_mes'>Informe Fin De Mes</button>",
           data: null,
         },
       ],
@@ -123,6 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
       datatables_informe_mes_turno(registro.mes_actual);
     });
   } // final funcion ejecutar datatables
+
 
   function datatables_todos_turnos(mes_actual) {
     var listado = $("#tbl_turnos").DataTable({

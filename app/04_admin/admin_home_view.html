@@ -7,45 +7,41 @@
   <title>Administrativo</title>
 
   <!-- CDN boostrap 5.2.2 css -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
   <!-- CDN datatables css-->
   <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"> -->
 
-  <link href="https://cdn.datatables.net/v/dt/dt-1.13.4/cr-1.6.2/date-1.4.0/fh-3.3.2/r-2.4.1/sc-2.1.1/sb-1.4.2/sp-2.1.2/sl-1.6.2/sr-1.2.2/datatables.min.css" rel="stylesheet"/>
- 
+  <link
+    href="https://cdn.datatables.net/v/dt/dt-1.13.4/cr-1.6.2/date-1.4.0/fh-3.3.2/r-2.4.1/sc-2.1.1/sb-1.4.2/sp-2.1.2/sl-1.6.2/sr-1.2.2/datatables.min.css"
+    rel="stylesheet" />
+
 
   <!-- estilo de los botones -->
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">
 
-<!-- estilos para las extensiones del datatables -->
-<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.dataTables.min.css">
 
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedheader/3.3.2/css/fixedHeader.dataTables.min.css"> -->
-
-
-
-
-<!-- estilos personalizados -->
-<link rel="stylesheet" href="admin.css">
+  <!-- estilos personalizados -->
+  <link rel="stylesheet" href="admin.css">
 </head>
+
 <body>
   <div class="container-fluid bg-light" id="contenido">
     <nav class="row">
       <nav class="navbar navbar-expand-md navbar-dark bg-primary mb-4">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">CONSOLIDADO DE GESTIONES</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+          <a class="navbar-brand" href="#">TABLERO DE INFORMES</a>
+
+        </div>
+        <div class="ms-1">
+          <span class="navbar-text" id="hoy_moment"></span>
         </div>
       </nav>
     </nav>
 
     <section class="row">
-      <div class="col-md-2">
-        <div id="hoy_moment"></div>
-      </div>
+
       <div class="col-md-4">
         <input type="hidden" class="" id="npt_turno_id_actual" />
         <input type="hidden" class="" id="npt_user_id_actual" />
@@ -54,17 +50,20 @@
       </div>
     </section>
 
+    <!-- DTTBL GESTIONES -->
     <section class="row">
+      <H2>INFORME DE LAS GESTIONES DEL MES</H2>
       <div class="container" id="tabla">
         <div class="row">
-          <div class="col-12">
-            <table class="table" id="tbl_ventas">
+          <div class="col-8">
+            <table class="table display compact cell-border" id="tbl_gestiones">
               <thead>
                 <tr>
+                  <td>#</td>
                   <td>MES</td>
                   <td>AÑO</td>
-                  <td>UTILIDAD MES</td>
-                  <td> # GESTIONES MES</td>
+                  <td>Util Mes</td>
+                  <td> # Gest. Mes</td>
                   <td></td>
                   <td></td>
                   <td></td>
@@ -269,155 +268,155 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-    <section class="row">
-      <article class="col-md-2">
-        <div id="hoy_moment"></div>
-      </article>
-      <article class="col-md-4">
-        <input type="hidden" class="" id="npt_turno_id_actual" />
-        <input type="hidden" class="" id="npt_user_id_actual" />
-        <span>FECHA Y DIA DEL TURNO: </span>
-        <span id="npt_turno_fecha"></span>
-        <span id="npt_turno_dia"></span><br/>
-        <span>RESPONSABLE DE TURNO: </span>
-        <span id="npt_user_nombre"></span>
-        <span id="npt_user_apellido"></span><br />
-        <span>JORNADA: </span>
-        <span id="npt_jornada_nombre"></span>
-      </article>
-    </section>
+          <section class="row">
+            <article class="col-md-2">
+              <div id="hoy_moment"></div>
+            </article>
+            <article class="col-md-4">
+              <input type="hidden" class="" id="npt_turno_id_actual" />
+              <input type="hidden" class="" id="npt_user_id_actual" />
+              <span>FECHA Y DIA DEL TURNO: </span>
+              <span id="npt_turno_fecha"></span>
+              <span id="npt_turno_dia"></span><br />
+              <span>RESPONSABLE DE TURNO: </span>
+              <span id="npt_user_nombre"></span>
+              <span id="npt_user_apellido"></span><br />
+              <span>JORNADA: </span>
+              <span id="npt_jornada_nombre"></span>
+            </article>
+          </section>
 
-    <section class="row" id="vendedores">
-      <article class="col-md-6">
-        <h3>CUADRO DE VENDEDORES</h3>
-        <div class="table-responsive">
-          <table class="table table-sm table-bordered table-hover border-primary" id="tabla_vendedores">
-            <thead>
-              <tr>
-                <th scope="col"></th>
-                <th scope="col">YULY</th>
-                <th scope="col">LORENA</th>
-                <th scope="col">KAROL</th>
-                <th scope="col">MARINO</th>
-              </tr>
-            </thead>
-            <tbody class="table-group-divider">
-              <tr>
-                <th scope="row">Num - Gestiones</th>
-                <td>
-                  <p id="ventasVendedor1"></p>
-                </td>
-                <td>
-                  <p id="ventasVendedor2"></p>
-                </td>
-                <td>
-                  <p id="ventasVendedor3"></p>
-                </td>
-                <td>
-                  <p id="ventasVendedor4"></p>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">Utilidad Hoy</th>
-                <td>
-                  <p id="utilidadVendedor1"></p>
-                </td>
-                <td>
-                  <p id="utilidadVendedor2"></p>
-                </td>
-                <td>
-                  <p id="utilidadVendedor3"></p>
-                </td>
-                <td>
-                  <p id="utilidadVendedor4"></p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <section class="row" id="vendedores">
+            <article class="col-md-6">
+              <h3>CUADRO DE VENDEDORES</h3>
+              <div class="table-responsive">
+                <table class="table table-sm table-bordered table-hover border-primary" id="tabla_vendedores">
+                  <thead>
+                    <tr>
+                      <th scope="col"></th>
+                      <th scope="col">YULY</th>
+                      <th scope="col">LORENA</th>
+                      <th scope="col">KAROL</th>
+                      <th scope="col">MARINO</th>
+                    </tr>
+                  </thead>
+                  <tbody class="table-group-divider">
+                    <tr>
+                      <th scope="row">Num - Gestiones</th>
+                      <td>
+                        <p id="ventasVendedor1"></p>
+                      </td>
+                      <td>
+                        <p id="ventasVendedor2"></p>
+                      </td>
+                      <td>
+                        <p id="ventasVendedor3"></p>
+                      </td>
+                      <td>
+                        <p id="ventasVendedor4"></p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Utilidad Hoy</th>
+                      <td>
+                        <p id="utilidadVendedor1"></p>
+                      </td>
+                      <td>
+                        <p id="utilidadVendedor2"></p>
+                      </td>
+                      <td>
+                        <p id="utilidadVendedor3"></p>
+                      </td>
+                      <td>
+                        <p id="utilidadVendedor4"></p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </article>
+            <!-- fin seccion de vendedores -->
+
+            <article class="col-md-6">
+              <h3>CUADRO DE TOTALES</h3>
+              <table class="table table-sm table-bordered table-hover border-primary" id="tabla_totales">
+                <tbody class="table-group-divider">
+                  <tr>
+                    <th scope="row">UTILIDAD HOY</th>
+                    <td>
+                      <p id="p_utilidad_turno"></p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row"># GESTIONES HOY</th>
+                    <td>
+                      <p id="p_turno_numero_ventas"></p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </article>
+          </section>
+
+          <section class="row mb-3" id="vacio">
+            <div class="col-md-6 div_vacio_espacio"></div>
+            <div class="col-md-6">
+            </div>
+          </section>
+
+          <section class="row">
+            <section class="table-responsive" id="tabla">
+              <table class="table" id="tblVentas">
+                <thead>
+                  <tr>
+                    <td>ID</td>
+                    <td>PRODUCTO</td>
+                    <td>PROVEEDOR</td>
+                    <td>PRECIO COSTO</td>
+                    <td>PRECIO VENTA</td>
+                    <td>VENDEDOR</td>
+                    <td>UTILIDAD</td>
+                  </tr>
+                </thead>
+              </table>
+            </section>
+          </section>
         </div>
-      </article>
-      <!-- fin seccion de vendedores -->
-
-      <article class="col-md-6">
-        <h3>CUADRO DE TOTALES</h3>
-        <table class="table table-sm table-bordered table-hover border-primary" id="tabla_totales">
-          <tbody class="table-group-divider">
-            <tr>
-              <th scope="row">UTILIDAD HOY</th>
-              <td>
-                <p id="p_utilidad_turno"></p>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row"># GESTIONES HOY</th>
-              <td>
-                <p id="p_turno_numero_ventas"></p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </article>
-    </section>
-
-    <section class="row mb-3" id="vacio">
-      <div class="col-md-6 div_vacio_espacio"></div>
-      <div class="col-md-6">
       </div>
-    </section>
-
-    <section class="row">
-      <section class="table-responsive" id="tabla">
-            <table class="table" id="tblVentas">
-              <thead>
-                <tr>
-                  <td>ID</td>
-                  <td>PRODUCTO</td>
-                  <td>PROVEEDOR</td>
-                  <td>PRECIO COSTO</td>
-                  <td>PRECIO VENTA</td>
-                  <td>VENDEDOR</td>
-                  <td>UTILIDAD</td>
-                </tr>
-              </thead>
-            </table>
-      </section>
-    </section>
+    </div>
   </div>
 
-  <!-- ------- -->
   <!-- SCRIPTS -->
-  <!-- ------- -->
 
   <!-- CDN jquery 3.6.1 js -->
-  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
   <!-- CDN bootstrap 5.2.2 js -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
 
-<!-- datatables con utilidades extra -->
-<!-- <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script> -->
+  <!-- datatables con utilidades extra -->
+  <!-- <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script> -->
 
-<script src="https://cdn.datatables.net/v/dt/dt-1.13.4/cr-1.6.2/date-1.4.0/fh-3.3.2/r-2.4.1/sc-2.1.1/sb-1.4.2/sp-2.1.2/sl-1.6.2/sr-1.2.2/datatables.min.js"></script>
+  <script
+    src="https://cdn.datatables.net/v/dt/dt-1.13.4/cr-1.6.2/date-1.4.0/fh-3.3.2/r-2.4.1/sc-2.1.1/sb-1.4.2/sp-2.1.2/sl-1.6.2/sr-1.2.2/datatables.min.js"></script>
 
   <!-- manejar de formatos de tiempo con moment.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/es-us.min.js"></script>
-<!-- scripts botones para datatables -->
-<script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
-<!-- responsive y fixeheader -->
-<!-- <script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
-<script scr="https://cdn.datatables.net/fixedheader/3.3.2/js/dataTables.fixedHeader.min.js"></script> -->
+  <!-- scripts botones para datatables -->
+  <script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
 
-<!-- scripts de la aplicacion -->
+
+  <!-- scripts de la aplicacion -->
   <script src="admin_home_ctrl.js"></script>
 </body>
+
 </html>
-
-
-
-

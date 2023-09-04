@@ -388,7 +388,9 @@ switch ($_GET['accion']) {
         FROM VENTAS
         INNER JOIN USERS
         ON VENTAS.user_id=USERS.user_id
-        WHERE (MONTH(venta_fecha) = DATE_SUB((MONTH(CURRENT_DATE()))),INTERVAL 2 MONTH))
+    WHERE venta_fecha
+BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL 3 MONTH) AND CURRENT_DATE();
+
         ";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
