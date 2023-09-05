@@ -1,146 +1,146 @@
 document.addEventListener("DOMContentLoaded", function () {
   $(document).ready(function () {
-    dttblGestionesInforme();
+    dttblGestionesGeneral();
+    dttblDomiciliosGeneral()
+  });
+}); //  final del addEventListener de inicio
+
+
+// CARGA LA FECHA ACTUAL y CUADRO PRINCIPAL DE PAGINA
+function getTime() {
+  var today = moment();
+  date = today.format("LLLL");
+  document.getElementById("hoy_moment").innerHTML =
+    `<span>${date}</span>`;
+}
+setInterval(function () {
+  getTime();
+}, 1000);
+
+
+function dttblGestionesGeneral() {
+  let buttonCommon = {
+    exportOptions: {
+      format: {
+        body: function (data, row, column, node) {
+          // Strip $ from salary column to make it numeric
+          return column === 2 ? data.replace(/[$,.]/g, "") : data;
+        },
+      },
+    },
+  };
+
+  let listado = $("#tbl_gestiones_general").DataTable({
+    ajax: {
+      url: "admin_home_mdl.php?accion=listar_gestiones",
+      dataSrc: "",
+      data: "",
+    },
+    columns: [
+      { data: "mes_actual" },
+      { data: "mes" },
+      { data: "año" },
+      { data: "acumulado_utilidad" },
+      { data: "cuenta_num_gestiones" },
+      { data: null, orderable: false },
+      { data: null, orderable: false },
+      { data: null, orderable: false },
+      { data: null, orderable: false },
+    ],
+
+    dom: "Bfrtip",
+    buttons: [
+      $.extend(true, {}, buttonCommon, {
+        extend: "copyHtml5",
+        exportOptions: {
+          columns: [1, 2, 3, 4],
+        },
+      }),
+      $.extend(true, {}, buttonCommon, {
+        extend: "excelHtml5",
+        exportOptions: {
+          columns: [1, 2, 3, 4],
+        },
+      }),
+      $.extend(true, {}, buttonCommon, {
+        extend: "pdfHtml5",
+        exportOptions: {
+          columns: [1, 2, 3, 4],
+        },
+      }),
+    ],
+
+    columnDefs: [
+      {
+        targets: 3,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+      {
+        targets: 5,
+        defaultContent:
+          "<button class='btn btn-primary btn-sm btn_ver_turnos' id='btn_ver_turnos'>Por Turnos</button>",
+        data: null,
+      },
+
+      {
+        targets: 6,
+        defaultContent:
+          "<button  class='btn btn-success btn-sm btn_ver_dias' id='btn_ver_dias'>Por Dias</button>",
+        data: null,
+      },
+      {
+        targets: 7,
+        defaultContent:
+          "<button  class='btn btn-warning btn-sm btn_ver_gestiones'>Gest Del Mes</button>",
+        data: null,
+      },
+      {
+        targets: 8,
+        defaultContent:
+          "<button  class='btn btn-danger btn-sm btn_informe_mes'>Informe Fin De Mes</button>",
+        data: null,
+      },
+    ],
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+    },
+    searching: false,
+    paging: false,
+    destroy: true,
+  }); // final datatables ver gestiones general
+
+  // boton ver MDL turnos
+  $("#tbl_gestiones_general tbody").on("click", "button.btn_ver_turnos", function () {
+    let registro = listado.row($(this).parents("tr")).data();
+    $("#mdl_ver_turnos").modal("show");
+    datatables_todos_turnos(registro.mes_actual);
+  });
+
+  // boton MDL ver dias
+  $("#tbl_gestiones_general tbody").on("click", "button.btn_ver_dias", function () {
+    let registro = listado.row($(this).parents("tr")).data();
+    $("#mdl_ver_dias").modal("show");
+    datatables_todos_dias(registro.mes_actual);
+  });
+
+  // boton ver MDL gestiones
+  $("#tbl_gestiones_general tbody").on("click", "button.btn_ver_gestiones", function () {
+    let registro = listado.row($(this).parents("tr")).data();
+    $("#mdl_ver_gestiones").modal("show");
+    datatables_todos_gestiones(registro.mes_actual);
+  });
+
+  // boton MDL informe mes
+  $("#tbl_gestiones_general tbody").on("click", "button.btn_informe_mes", function () {
+    let registro = listado.row($(this).parents("tr")).data();
+    $("#mdl_informe_mes").modal("show");
+    datatables_informe_mes(registro.mes_actual);
+    datatables_informe_mes_turno(registro.mes_actual);
   });
 
 
-  // CARGA LA FECHA ACTUAL y CUADRO PRINCIPAL DE PAGINA
-  function getTime() {
-    var today = moment();
-    date = today.format("LLLL");
-    document.getElementById("hoy_moment").innerHTML =
-      `<span>${date}</span>`;
-  }
-  setInterval(function () {
-    getTime();
-  }, 1000);
-
-
-
-  function dttblGestionesInforme() {
-    var buttonCommon = {
-      exportOptions: {
-        format: {
-          body: function (data, row, column, node) {
-            // Strip $ from salary column to make it numeric
-            return column === 2 ? data.replace(/[$,.]/g, "") : data;
-          },
-        },
-      },
-    };
-
-    var listado = $("#tbl_gestiones").DataTable({
-      ajax: {
-        url: "admin_home_mdl.php?accion=listar_gestiones",
-        dataSrc: "",
-        data: "",
-      },
-      columns: [
-        { data: "mes_actual" },
-        { data: "mes" },
-        { data: "año" },
-        { data: "acumulado_utilidad" },
-        { data: "cuenta_num_gestiones" },
-        { data: null, orderable: false },
-        { data: null, orderable: false },
-        { data: null, orderable: false },
-        { data: null, orderable: false },
-      ],
-
-      dom: "Bfrtip",
-      buttons: [
-        $.extend(true, {}, buttonCommon, {
-          extend: "copyHtml5",
-          exportOptions: {
-            columns: [1, 2, 3, 4],
-          },
-        }),
-        $.extend(true, {}, buttonCommon, {
-          extend: "excelHtml5",
-          exportOptions: {
-            columns: [1, 2, 3, 4],
-          },
-        }),
-        $.extend(true, {}, buttonCommon, {
-          extend: "pdfHtml5",
-          exportOptions: {
-            columns: [1, 2, 3, 4],
-          },
-        }),
-      ],
-
-      columnDefs: [
-        {
-          targets: 3,
-          render: $.fn.dataTable.render.number(".", ",", 0, "$"),
-        },
-        {
-          targets: 5,
-          defaultContent:
-            "<button class='btn btn-primary btn-sm btn_ver_turnos' id='btn_ver_turnos'>Turnos</button>",
-          data: null,
-        },
-
-        {
-          targets: 6,
-          defaultContent:
-            "<button  class='btn btn-success btn-sm btn_ver_dias' id='btn_ver_dias'>Dias</button>",
-          data: null,
-        },
-        {
-          targets: 7,
-          defaultContent:
-            "<button  class='btn btn-warning btn-sm btn_ver_gestiones'>Gestiones</button>",
-          data: null,
-        },
-        {
-          targets: 8,
-          defaultContent:
-            "<button  class='btn btn-danger btn-sm btn_informe_mes'>Informe Fin De Mes</button>",
-          data: null,
-        },
-      ],
-      language: {
-        url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
-      },
-      searching: false,
-      paging: false,
-      destroy: true,
-    });
-
-    // boton ver turnos
-    $("#tbl_ventas tbody").on("click", "button.btn_ver_turnos", function () {
-      let registro = listado.row($(this).parents("tr")).data();
-      $("#mdl_ver_turnos").modal("show");
-      datatables_todos_turnos(registro.mes_actual);
-    });
-
-    // boton ver dias
-    $("#tbl_ventas tbody").on("click", "button.btn_ver_dias", function () {
-      let registro = listado.row($(this).parents("tr")).data();
-      $("#mdl_ver_dias").modal("show");
-      datatables_todos_dias(registro.mes_actual);
-    });
-
-    // boton ver gestiones
-    $("#tbl_ventas tbody").on("click", "button.btn_ver_gestiones", function () {
-      let registro = listado.row($(this).parents("tr")).data();
-      $("#mdl_ver_gestiones").modal("show");
-      datatables_todos_gestiones(registro.mes_actual);
-    });
-
-    // boton informe mes
-    $("#tbl_ventas tbody").on("click", "button.btn_informe_mes", function () {
-      let registro = listado.row($(this).parents("tr")).data();
-      $("#mdl_informe_mes").modal("show");
-      datatables_informe_mes(registro.mes_actual);
-      datatables_informe_mes_turno(registro.mes_actual);
-    });
-  } // final funcion ejecutar datatables
-
-
   function datatables_todos_turnos(mes_actual) {
-    var listado = $("#tbl_turnos").DataTable({
+    let listado = $("#tbl_turnos").DataTable({
       ajax: {
         url:
           "admin_home_mdl.php?accion=listar_turnos_mes&mes_actual=" +
@@ -205,8 +205,6 @@ document.addEventListener("DOMContentLoaded", function () {
       paging: false,
       destroy: true,
     });
-
-
     // boton detalle_turno (SUBMODAL)
     $("#tbl_turnos tbody").on("click", "button.btn_detalle_turno", function () {
       let registro = listado.row($(this).parents("tr")).data();
@@ -216,6 +214,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   } // fin funcion datatables todos los turnos
 
+
+  // DTTBL MDL  INFORME  GESTIONES POR DIAS
   function datatables_todos_dias(mes_actual) {
     var listado = $("#tbl_dias").DataTable({
       ajax: {
@@ -282,15 +282,16 @@ document.addEventListener("DOMContentLoaded", function () {
       paging: false,
       order: [[0, "asc"]],
       destroy: true,
-    });
-  } // fin función datatables todos dias
+    }); // final dttbl mdl informe gestiones por dias
 
+  }
+
+  // DTTBL MDL TODAS LAS GESTIONES DEL MES
   function datatables_todos_gestiones(mes_actual) {
-    var listado = $("#tbl_gestiones").DataTable({
+    let listado = $("#tbl_gestiones_mes").DataTable({
       ajax: {
         url:
-          "admin_home_mdl.php?accion=listar_gestiones_mes&mes_actual=" +
-          mes_actual,
+          "admin_home_mdl.php?accion=listar_gestiones_mes&mes_actual="+mes_actual,
         dataSrc: "",
         data: "",
       },
@@ -337,6 +338,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   } // fin funcion datatables todos las gestiones
 
+  // DTTBL INFORME MES
   function datatables_informe_mes(mes_actual) {
     // seccion de  exportacion
     var buttonCommon = {
@@ -407,6 +409,7 @@ document.addEventListener("DOMContentLoaded", function () {
       destroy: true,
     });
   } // fin función datatables todos dias
+
 
   function datatables_informe_mes_turno(mes_actual) {
     var listado = $("#tbl_informe_mes_turno").DataTable({
@@ -514,115 +517,233 @@ document.addEventListener("DOMContentLoaded", function () {
         borrarRegistro(registro.venta_id);
       }
     });
-
-    // cargas en la pantalla principal SUBMODAL
-    function cargarDatosUtilidadVendedor1(turno_id) {
-      $.ajax({
-        type: "GET",
-        url:
-          "admin_home_mdl.php?accion=consultar_utilidad_vendedor1&turno_id=" +
-          turno_id,
-        data: "",
-        success: function (datos) {
-          $("#utilidadVendedor1").html(datos[0].utilidad_vendedor1);
-          $("#ventasVendedor1").html(datos[0].ventas_vendedor1);
-        },
-        error: function () {
-          alert("Problema en consultarUtilidadVendedor1");
-        },
-      });
-    }
-
-    function cargarDatosUtilidadVendedor2(turno_id) {
-      $.ajax({
-        type: "GET",
-        url:
-          "admin_home_mdl.php?accion=consultar_utilidad_vendedor2&turno_id=" +
-          turno_id,
-        data: "",
-        success: function (datos) {
-          $("#utilidadVendedor2").html(datos[0].utilidad_vendedor2);
-          $("#ventasVendedor2").html(datos[0].ventas_vendedor2);
-        },
-        error: function () {
-          alert("Problema en consultarUtilidadVendedor2");
-        },
-      });
-    }
-
-    function cargarDatosUtilidadVendedor3(turno_id) {
-      $.ajax({
-        type: "GET",
-        url:
-          "admin_home_mdl.php?accion=consultar_utilidad_vendedor3&turno_id=" +
-          turno_id,
-        data: "",
-        success: function (datos) {
-          $("#utilidadVendedor3").html(datos[0].utilidad_vendedor3);
-          $("#ventasVendedor3").html(datos[0].ventas_vendedor3);
-        },
-        error: function () {
-          alert("Problema en consultarUtilidadVendedor3");
-        },
-      });
-    }
-
-    function cargarDatosUtilidadVendedor4(turno_id) {
-      $.ajax({
-        type: "GET",
-        url:
-          "admin_home_mdl.php?accion=consultar_utilidad_vendedor4&turno_id=" +
-          turno_id,
-        data: "",
-        success: function (datos) {
-          $("#utilidadVendedor4").html(datos[0].utilidad_vendedor4);
-          $("#ventasVendedor4").html(datos[0].ventas_vendedor4);
-        },
-        error: function () {
-          alert("Problema en consultarUtilidadVendedor4");
-        },
-      });
-    }
-
-    function utilidadTurno(turno_id) {
-      $.ajax({
-        type: "GET",
-        url:
-          "admin_home_mdl.php?accion=consultar_utilidad_turno&turno_id=" +
-          turno_id,
-        data: "",
-        success: function (datos) {
-          $("#p_utilidad_turno").html(datos[0].utilidad_turno);
-          $("#p_turno_numero_ventas").html(datos[0].ventas_turno);
-        },
-        error: function () {
-          alert("Problema en cargar datos utilidad turno");
-        },
-      });
-    }
-
-    function consultarDatosTurnoActual(turno_id) {
-      $.ajax({
-        type: "GET",
-        async: false, //necesario
-        url:
-          "admin_home_mdl.php?accion=consultarDatosTurnoActual&turno_id=" +
-          turno_id,
-        data: "",
-        success: function (datos) {
-          //$("#npt_turno_id_actual").val(datos[0].turno_id_actual);
-          $("#npt_user_nombre").html(datos[0].user_nombre);
-          $("#npt_user_nombre1").html(datos[0].user_nombre);
-          $("#npt_user_apellido").html(datos[0].user_apellido);
-          $("#npt_user_apellido1").html(datos[0].user_apellido);
-          $("#npt_jornada_nombre").html(datos[0].jornada_nombre);
-          $("#npt_turno_fecha").html(datos[0].FECHA);
-          $("#npt_turno_dia").html(datos[0].DIA);
-        },
-        error: function () {
-          alert("Problema en consultar datos turno actual");
-        },
-      });
-    }
   }
-}); //  final del addEventListener de inicio
+
+} // final dttbl gestiones general
+
+
+
+
+function dttblDomiciliosGeneral() {
+  let buttonCommon = {
+    exportOptions: {
+      format: {
+        body: function (data, row, column, node) {
+          // Strip $ from salary column to make it numeric
+          return column === 2 ? data.replace(/[$,.]/g, "") : data;
+        },
+      },
+    },
+  };
+
+  let listado = $("#tbl_domicilios_general").DataTable({
+    ajax: {
+      url: "admin_home_mdl.php?accion=listar_domicilios_general",
+      dataSrc: "",
+      data: "",
+    },
+    columns: [
+      { data: "mes_actual" },
+      { data: "mes" },
+      { data: "año" },
+      { data: "sum_domi_interno" },
+      { data: "cuenta_domi_interno" },
+      { data: "sum_domi_externo" },
+      { data: "cuenta_domi_externo" },
+      { data: null, orderable: false },
+      { data: null, orderable: false },
+      { data: null, orderable: false },
+      { data: null, orderable: false },
+    ],
+
+    dom: "Bfrtip",
+    buttons: [
+      $.extend(true, {}, buttonCommon, {
+        extend: "copyHtml5",
+        exportOptions: {
+          columns: [1, 2, 3, 4],
+        },
+      }),
+      $.extend(true, {}, buttonCommon, {
+        extend: "excelHtml5",
+        exportOptions: {
+          columns: [1, 2, 3, 4],
+        },
+      }),
+      $.extend(true, {}, buttonCommon, {
+        extend: "pdfHtml5",
+        exportOptions: {
+          columns: [1, 2, 3, 4],
+        },
+      }),
+    ],
+
+    columnDefs: [
+      {
+        targets: 3,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+      {
+        targets: 7,
+        defaultContent:
+          "<button class='btn btn-primary btn-sm btn_ver_turnos' id='btn_ver_turnos'>Por Turnos</button>",
+        data: null,
+      },
+
+      {
+        targets: 8,
+        defaultContent:
+          "<button  class='btn btn-success btn-sm btn_ver_dias' id='btn_ver_dias'>Por Dias</button>",
+        data: null,
+      },
+      {
+        targets: 9,
+        defaultContent:
+          "<button  class='btn btn-warning btn-sm btn_ver_gestiones'>Gest Del Mes</button>",
+        data: null,
+      },
+      {
+        targets: 10,
+        defaultContent:
+          "<button  class='btn btn-danger btn-sm btn_informe_mes'>Informe Fin De Mes</button>",
+        data: null,
+      },
+    ],
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+    },
+    searching: false,
+    paging: false,
+    destroy: true,
+  }); // final datatables  domicilios general
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// INICIA SUB MODAL VER TURNO DE HOY
+
+
+// cargas en la pantalla principal SUBMODAL
+function cargarDatosUtilidadVendedor1(turno_id) {
+  $.ajax({
+    type: "GET",
+    url:
+      "admin_home_mdl.php?accion=consultar_utilidad_vendedor1&turno_id=" +
+      turno_id,
+    data: "",
+    success: function (datos) {
+      $("#utilidadVendedor1").html(datos[0].utilidad_vendedor1);
+      $("#ventasVendedor1").html(datos[0].ventas_vendedor1);
+    },
+    error: function () {
+      alert("Problema en consultarUtilidadVendedor1");
+    },
+  });
+}
+
+function cargarDatosUtilidadVendedor2(turno_id) {
+  $.ajax({
+    type: "GET",
+    url:
+      "admin_home_mdl.php?accion=consultar_utilidad_vendedor2&turno_id=" +
+      turno_id,
+    data: "",
+    success: function (datos) {
+      $("#utilidadVendedor2").html(datos[0].utilidad_vendedor2);
+      $("#ventasVendedor2").html(datos[0].ventas_vendedor2);
+    },
+    error: function () {
+      alert("Problema en consultarUtilidadVendedor2");
+    },
+  });
+}
+
+function cargarDatosUtilidadVendedor3(turno_id) {
+  $.ajax({
+    type: "GET",
+    url:
+      "admin_home_mdl.php?accion=consultar_utilidad_vendedor3&turno_id=" +
+      turno_id,
+    data: "",
+    success: function (datos) {
+      $("#utilidadVendedor3").html(datos[0].utilidad_vendedor3);
+      $("#ventasVendedor3").html(datos[0].ventas_vendedor3);
+    },
+    error: function () {
+      alert("Problema en consultarUtilidadVendedor3");
+    },
+  });
+}
+
+function cargarDatosUtilidadVendedor4(turno_id) {
+  $.ajax({
+    type: "GET",
+    url:
+      "admin_home_mdl.php?accion=consultar_utilidad_vendedor4&turno_id=" +
+      turno_id,
+    data: "",
+    success: function (datos) {
+      $("#utilidadVendedor4").html(datos[0].utilidad_vendedor4);
+      $("#ventasVendedor4").html(datos[0].ventas_vendedor4);
+    },
+    error: function () {
+      alert("Problema en consultarUtilidadVendedor4");
+    },
+  });
+}
+
+function utilidadTurno(turno_id) {
+  $.ajax({
+    type: "GET",
+    url:
+      "admin_home_mdl.php?accion=consultar_utilidad_turno&turno_id=" +
+      turno_id,
+    data: "",
+    success: function (datos) {
+      $("#p_utilidad_turno").html(datos[0].utilidad_turno);
+      $("#p_turno_numero_ventas").html(datos[0].ventas_turno);
+    },
+    error: function () {
+      alert("Problema en cargar datos utilidad turno");
+    },
+  });
+}
+
+function consultarDatosTurnoActual(turno_id) {
+  $.ajax({
+    type: "GET",
+    async: false, //necesario
+    url:
+      "admin_home_mdl.php?accion=consultarDatosTurnoActual&turno_id=" +
+      turno_id,
+    data: "",
+    success: function (datos) {
+      //$("#npt_turno_id_actual").val(datos[0].turno_id_actual);
+      $("#npt_user_nombre").html(datos[0].user_nombre);
+      $("#npt_user_nombre1").html(datos[0].user_nombre);
+      $("#npt_user_apellido").html(datos[0].user_apellido);
+      $("#npt_user_apellido1").html(datos[0].user_apellido);
+      $("#npt_jornada_nombre").html(datos[0].jornada_nombre);
+      $("#npt_turno_fecha").html(datos[0].FECHA);
+      $("#npt_turno_dia").html(datos[0].DIA);
+    },
+    error: function () {
+      alert("Problema en consultar datos turno actual");
+    },
+  });
+}
+

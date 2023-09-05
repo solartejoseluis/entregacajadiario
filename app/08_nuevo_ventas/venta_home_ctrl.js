@@ -10,6 +10,7 @@ function actualizaPantallaPrincipal() {
   consultarDatosTurnoActual();
   acumuladoMesUsuarioActual();
   acumuladoTurnoUsuarioActual();
+  mesActual();
 }
 
 function cargarAcceso() {
@@ -68,6 +69,14 @@ function mesActual() {
   let mes_actual = moment().format("MMMM-YYYY");
   $("#mes_actual1").html(mes_actual);
 }
+
+// CARGA EL MES ACTUAL
+function mesActual() {
+let mesActual = moment().format("MMMM-YYYY");
+$(".mesActual").html(mesActual);
+}
+
+
 
 // SIDEBAR
 $("#lnk_gestiones_mes_vendedor").on("click", function () {
@@ -538,7 +547,6 @@ function acumuladoTurnoUsuarioActual() {
   });
 }
 
-
 // CICLO CERRAR SESION
 $("#lnk_cerrar_sesion").on("click", function () {
   $("#mdl_confirma_cerrar_sesion").modal("show");
@@ -548,3 +556,54 @@ $("#btn_confirma_cerrar_sesion").on("click", function () {
   // $("#mdl_confirma_cerrar_sesion").modal("show");
   $(location).attr("href", "../01_login/login_view.html");
 });
+
+
+// -------------------------------------
+// ciclo mostrar domicilios entregados
+// -------------------------------------
+
+$("#btn_domi_entregados").on("click", function () {
+  $("#mdl_domi_entregados").modal("show");
+  datatablesDomiEntregados();
+});
+
+function datatablesDomiEntregados() {
+  turno_id = $("#npt_turno_id_actual").val();
+  user_id = $("#npt_user_id_actual").val();
+  let listado = $("#tbl_domi_entregados").DataTable({
+    ajax: {
+      url: "venta_home_mdl.php?accion=listar_domi_entregados&turno_id=" + turno_id,
+      dataSrc: "",
+      data: "",
+    },
+    columns: [
+      { data: "barrio_nombre" },
+      { data: "user_nombre" },
+      { data: "domi_externo_nombre" },
+      { data: "valor_domi_externo" },
+      { data: "valor_venta" },
+      { data: "numero_factura" },
+      { data: "hora_salida" },
+      { data: "hora_llegada" },
+      { data: "inyectologia" },
+      { data: "observaciones" },
+      { data: "turno_id" },
+    ],
+    columnDefs: [
+      // {
+      //   targets: 13,
+      //   defaultContent:
+      //     "<button class='btn btn-primary btn-sm btnVerDomiEntregado' id='btn_ver_domi_entregado'><i class='fa-solid fa-pen'></i></button>",
+      //   data: null,
+      // },
+    ],
+    order: [[6, "asc"]],
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+    },
+    info: true,
+    searching: true,
+    paging: false,
+    destroy: true,
+  });
+}

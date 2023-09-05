@@ -55,7 +55,7 @@
             <a href="#" class="nav-link text-white" id="lnk_gestiones_mes_todos">
               <i class="fa-solid fa-temperature-three-quarters" style="color: #ffffff">
               </i>
-              Todas/Mes.
+              Últimos 3 Meses.
             </a>
           </li>
         </ul>
@@ -149,6 +149,7 @@
       <nav class="navbar navbar-expand-md" id="barra_informativa">
         <div class="container-fluid">
           <a class="navbar-brand" href="#"> MES:</a>
+          <span class="mesActual" id="info_mes"></span>
           <div class="collapse navbar-collapse" id="navbarText">
             <div class="ms-4">
               <!-- <span class="mesActual" id="info_mes">&nbsp</span> -->
@@ -893,7 +894,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5">
-            DOMICILIOS ENTREGADOS <span id="fecha_hoy"> 5 DE MAYO 2023</span>
+            DOMICILIOS ENTREGADOS <span id="hoy_moment"></span>
           </h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -1148,7 +1149,7 @@
   <script src="domixsalir_edit.js"></script>
   <script src="domixsalir_del.js"></script>
   <script src="domi_en_curso.js"></script>
-  <script src="domi_entregados.js"></script>
+  <!-- <script src="domi_entregados.js"></script> -->
   <script src="gestion_new.js"></script>
   <script src="gestion_edit.js"></script>
   <script src="gestion_del.js"></script>

@@ -7,73 +7,72 @@ switch ($_GET['accion']) {
 
     case 'listar_gestiones':
         $sql = "SELECT
-          ELT(MONTH(venta_fecha), 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre') AS mes,
-          MONTH(venta_fecha) AS mes_actual,
-          YEAR(venta_fecha) AS año,
-          SUM(venta_utilidad) AS acumulado_utilidad,
-          COUNT(venta_utilidad) AS cuenta_num_gestiones
-          FROM VENTAS GROUP BY mes";
+            ELT(MONTH(venta_fecha), 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre') AS mes,
+            MONTH(venta_fecha) AS mes_actual,
+            YEAR(venta_fecha) AS año,
+            SUM(venta_utilidad) AS acumulado_utilidad,
+            COUNT(venta_utilidad) AS cuenta_num_gestiones
+            FROM VENTAS GROUP BY mes";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            echo json_encode($result);
+            break;
+
+    case 'listar_turnos_mes':
+        $sql = "SELECT
+        turno_id,
+        turno_fecha_creado,
+        ELT(WEEKDAY(turno_fecha_creado)+ 1,'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom') AS dia_semana,
+        JORNADAS.jornada_nombre,
+        USERS.user_nombre,
+        turno_saldo_caja,
+        turno_total_utilidad,
+        turno_total_entrega,
+        turno_descuadre,
+        TIME(turno_creacion_timestamp) AS hora_creado,
+        TIME(turno_fechahora_cierre) AS hora_cierre
+        FROM TURNOS
+        INNER JOIN USERS
+        ON TURNOS.turno_responsable=USERS.user_id
+        INNER JOIN JORNADAS
+        ON TURNOS.turno_jornada=JORNADAS.jornada_id
+        WHERE MONTH(turno_creacion_timestamp) =$_GET[mes_actual]
+        ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
+    case 'listar_dias_mes':
+        $sql = "SELECT
+        DATE_FORMAT(turno_fecha_creado,'%Y-%m-%d') AS turno_fecha,
+        ELT(WEEKDAY(turno_fecha_creado)+ 1,'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom') AS dia_semana,
+        SUM(turno_saldo_caja) AS suma_caja,
+        SUM(turno_total_utilidad) AS suma_total_utilidad,
+        SUM(SUM(turno_total_utilidad)) OVER (ORDER BY TURNOS.turno_fecha_creado ASC) AS acumulado_utilidad_gestiones,
+        SUM(turno_total_entrega) AS suma_total_entrega,
+        SUM(turno_descuadre) AS suma_total_descuadre,
+        SUM(SUM(turno_descuadre)) OVER (ORDER BY TURNOS.turno_fecha_creado ASC) AS acumulado_descuadre
+        FROM TURNOS
+        WHERE MONTH(turno_fecha_creado) = $_GET[mes_actual]
+        GROUP BY turno_fecha
+        ORDER BY turno_fecha ASC;
+        ";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($result);
         break;
 
-    case 'listar_turnos_mes':
-    $sql = "SELECT
-    turno_id,
-    turno_fecha_creado,
-    ELT(WEEKDAY(turno_fecha_creado)+ 1,'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom') AS dia_semana,
-    JORNADAS.jornada_nombre,
-    USERS.user_nombre,
-    turno_saldo_caja,
-    turno_total_utilidad,
-    turno_total_entrega,
-    turno_descuadre,
-    TIME(turno_creacion_timestamp) AS hora_creado,
-    TIME(turno_fechahora_cierre) AS hora_cierre
-    FROM TURNOS
-    INNER JOIN USERS
-    ON TURNOS.turno_responsable=USERS.user_id
-    INNER JOIN JORNADAS
-    ON TURNOS.turno_jornada=JORNADAS.jornada_id
-    WHERE MONTH(turno_creacion_timestamp) =$_GET[mes_actual]
-    ";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute();
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    echo json_encode($result);
-    break;
 
-case 'listar_dias_mes':
-  $sql = "SELECT
-    DATE_FORMAT(turno_fecha_creado,'%Y-%m-%d') AS turno_fecha,
-    ELT(WEEKDAY(turno_fecha_creado)+ 1,'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom') AS dia_semana,
-    SUM(turno_saldo_caja) AS suma_caja,
-    SUM(turno_total_utilidad) AS suma_total_utilidad,
-    SUM(SUM(turno_total_utilidad)) OVER (ORDER BY TURNOS.turno_fecha_creado ASC) AS acumulado_utilidad_gestiones,
-    SUM(turno_total_entrega) AS suma_total_entrega,
-    SUM(turno_descuadre) AS suma_total_descuadre,
-    SUM(SUM(turno_descuadre)) OVER (ORDER BY TURNOS.turno_fecha_creado ASC) AS acumulado_descuadre
-    FROM TURNOS
-    WHERE MONTH(turno_fecha_creado) = $_GET[mes_actual]
-    GROUP BY turno_fecha
-    ORDER BY turno_fecha ASC;
-  ";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute();
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    echo json_encode($result);
-break;
-
-
-case 'listar_gestiones_mes':
+    case 'listar_gestiones_mes':
         $sql = "SELECT
         VENTAS.venta_id,
         VENTAS.venta_fecha,
         DATE_FORMAT(venta_fecha,'%Y-%m-%d') AS FECHA,
         ELT(WEEKDAY(venta_fecha)+ 1,
-    'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom') AS DIA,
+        'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom') AS DIA,
         DATE_FORMAT(venta_fecha,'%H-%i') AS HORA,
         VENTAS.venta_nombre_producto,
         VENTAS.venta_nombre_proveedor,
@@ -86,15 +85,15 @@ case 'listar_gestiones_mes':
         INNER JOIN USERS
         ON VENTAS.user_id=USERS.user_id
         WHERE MONTH(venta_fecha)=$_GET[mes_actual]
-  ";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute();
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    echo json_encode($result);
-break;
+        ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
 
 
-case 'informe_mes':
+    case 'informe_mes':
         $sql = "SELECT
           USERS.user_nombre,
           SUM(venta_utilidad) AS acumulado_utilidad,
@@ -105,30 +104,30 @@ case 'informe_mes':
           WHERE MONTH(venta_fecha)=$_GET[mes_actual]
           GROUP BY USERS.user_nombre;
         ";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute();
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    echo json_encode($result);
-break;
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
 
 
 
-case 'informe_mes_turno':
-$sql = "SELECT
-ELT(MONTH(turno_fecha_creado), 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre') AS mes,
-SUM(turno_saldo_caja) AS suma_total_caja,
-SUM(turno_total_utilidad) AS suma_total_utilidad,
-SUM(turno_total_entrega) AS suma_total_entrega,
-SUM(turno_descuadre) AS suma_total_descuadre,
-SUM(turno_total_utilidad) DIV 2 AS suma_total_pago_vendedor
-FROM TURNOS
-WHERE MONTH(turno_fecha_creado)=$_GET[mes_actual];
-";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute();
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    echo json_encode($result);
-break;
+    case 'informe_mes_turno':
+        $sql = "SELECT
+        ELT(MONTH(turno_fecha_creado), 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre') AS mes,
+        SUM(turno_saldo_caja) AS suma_total_caja,
+        SUM(turno_total_utilidad) AS suma_total_utilidad,
+        SUM(turno_total_entrega) AS suma_total_entrega,
+        SUM(turno_descuadre) AS suma_total_descuadre,
+        SUM(turno_total_utilidad) DIV 2 AS suma_total_pago_vendedor
+        FROM TURNOS
+        WHERE MONTH(turno_fecha_creado)=$_GET[mes_actual];
+        ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
 
     case 'ver_detalle_turno':
         $sql = "SELECT 
@@ -221,7 +220,7 @@ break;
         $sql = "SELECT
             DATE_FORMAT(turno_fecha_creado,'%Y-%m-%d') AS FECHA,
             ELT(WEEKDAY(turno_fecha_creado)+ 1,
-    'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom') AS DIA,
+            'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom') AS DIA,
             TURNOS.turno_id AS turno_id_actual,
             TURNOS.turno_jornada,
             TURNOS.turno_responsable,
@@ -238,7 +237,26 @@ break;
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($result);
-    break;
+        break;
+
+    case 'listar_domicilios_general':
+        $sql = "SELECT
+            ELT(MONTH(hora_creado), 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre') AS mes,
+            MONTH(hora_creado) AS mes_actual,
+            YEAR(hora_creado) AS año,
+            SUM(valor_venta) AS sum_domi_interno,
+			COUNT(valor_venta) AS cuenta_domi_interno,
+            SUM(valor_domi_externo) AS sum_domi_externo,
+            COUNT(valor_domi_externo) AS cuenta_domi_externo
+            FROM DOMICILIOS GROUP BY mes;";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            echo json_encode($result);
+            break;
+
+
+
 
 
 };

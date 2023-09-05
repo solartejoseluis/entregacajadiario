@@ -388,8 +388,8 @@ switch ($_GET['accion']) {
         FROM VENTAS
         INNER JOIN USERS
         ON VENTAS.user_id=USERS.user_id
-    WHERE venta_fecha
-BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL 3 MONTH) AND CURRENT_DATE();
+        WHERE venta_fecha
+        BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL 3 MONTH) AND CURRENT_DATE();
 
         ";
         $stmt = $pdo->prepare($sql);
@@ -421,11 +421,12 @@ BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL 3 MONTH) AND CURRENT_DATE();
             ON DOMICILIOS.barrio_id=BARRIOS.barrio_id
             INNER JOIN DOMI_EXTERNOS
             ON DOMICILIOS.trans_externo_id = DOMI_EXTERNOS.domi_externo_id
-            WHERE (hora_salida != '0') AND (hora_llegada != '0');
-        ";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($result);
-        break;
+            WHERE (hora_salida != '0') AND (hora_llegada != '0')
+            AND (turno_id=$_GET[turno_id]);
+            ";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            echo json_encode($result);
+            break;
 };

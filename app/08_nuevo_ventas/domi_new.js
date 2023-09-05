@@ -40,7 +40,7 @@ function limpiarModalDomicilios() {
   $("#npt_inyectologia").val("");
   $("#npt_observaciones").val("");
   $("#npt_confirm_btn").val("0");
-  $("#npt_turno_id_actual").val("300");
+  // $("#npt_turno_id_actual").val("");
 
 
   $("#bloque_factura").show();  

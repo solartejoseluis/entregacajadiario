@@ -12,16 +12,11 @@
 
   <!-- CDN datatables css-->
   <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"> -->
-
   <link
     href="https://cdn.datatables.net/v/dt/dt-1.13.4/cr-1.6.2/date-1.4.0/fh-3.3.2/r-2.4.1/sc-2.1.1/sb-1.4.2/sp-2.1.2/sl-1.6.2/sr-1.2.2/datatables.min.css"
     rel="stylesheet" />
-
-
   <!-- estilo de los botones -->
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">
-
-
   <!-- estilos personalizados -->
   <link rel="stylesheet" href="admin.css">
 </head>
@@ -32,7 +27,6 @@
       <nav class="navbar navbar-expand-md navbar-dark bg-primary mb-4">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">TABLERO DE INFORMES</a>
-
         </div>
         <div class="ms-1">
           <span class="navbar-text" id="hoy_moment"></span>
@@ -41,7 +35,6 @@
     </nav>
 
     <section class="row">
-
       <div class="col-md-4">
         <input type="hidden" class="" id="npt_turno_id_actual" />
         <input type="hidden" class="" id="npt_user_id_actual" />
@@ -56,7 +49,7 @@
       <div class="container" id="tabla">
         <div class="row">
           <div class="col-8">
-            <table class="table display compact cell-border" id="tbl_gestiones">
+            <table class="table display compact cell-border" id="tbl_gestiones_general">
               <thead>
                 <tr>
                   <td>#</td>
@@ -76,7 +69,51 @@
       </div>
     </section>
 
-  </div> <!-- final del body-->
+
+
+    <!-- DTTBL  DOMICILIOS -->
+    <section class="row">
+      <H2>INFORME DOMICILIOS DEL MES</H2>
+      <div class="container" id="tabla_domicilios">
+        <div class="row">
+          <div class="col-8">
+            <table class="table display compact cell-border" id="tbl_domicilios_general">
+              <thead>
+                <tr>
+                  <td>#</td>
+                  <td>MES</td>
+                  <td>AÑO</td>
+                  <td>sum_int</td>
+                  <td>cuenta int</td>
+                  <td>sum ext</td>
+                  <td>cuenta ext</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+
+
+
+
+
+
+
+
+  </div>
+
+
+
+
+
 
   <!-- -------------------------->
   <!-- Inicia modal Ver Turnos-->
@@ -93,7 +130,7 @@
             <!-- inicia datatables del modal  -->
             <div class="row">
               <div class="col-md-12 table-responsive">
-                <table class="table" id="tbl_turnos">
+                <table class="table display compact cell-border" id="tbl_turnos">
                   <thead>
                     <tr>
                       <td>venta_id</td>
@@ -136,7 +173,7 @@
             <!-- inicia datatables del modal  -->
             <div class="row">
               <div class="col-md-12">
-                <table class="table" id="tbl_dias">
+                <table class="table display compact cell-border" id="tbl_dias">
                   <thead>
                     <tr>
                       <td>FECHA</td>
@@ -175,7 +212,7 @@
             <!-- inicia datatables del modal  -->
             <div class="row">
               <div class="col-md-12">
-                <table class="table" id="tbl_gestiones">
+                <table class="table display compact cell-border" id="tbl_gestiones_mes">
                   <thead>
                     <tr>
                       <td>ID</td>
@@ -217,7 +254,7 @@
             <!-- inicia primer datatables del modal  -->
             <div class="row">
               <div class="col-md-12">
-                <table class="table" id="tbl_informe_mes">
+                <table class="table display compact cell-border" id="tbl_informe_mes">
                   <thead>
                     <tr>
                       <td>NOMBRE</td>
