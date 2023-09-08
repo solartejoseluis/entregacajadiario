@@ -115,7 +115,8 @@ function modificarDomicilio(registro) {
     dataSrc: "",
     data: registro,
     success: function (msg) {
-      $("#tbl_domi_por_salir").DataTable().ajax.reload();
+      // $("#tbl_domi_por_salir").DataTable().ajax.reload();
+      location.reload();
     },
     error: function () {
       alert("Problema modificando");

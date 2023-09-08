@@ -4,7 +4,6 @@ header('Content-Type: application/json');
 require "../00_connect/pdo.php";
 
 switch ($_GET['accion']) {
-
     case 'listar_gestiones':
         $sql = "SELECT
             ELT(MONTH(venta_fecha), 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre') AS mes,
@@ -13,11 +12,11 @@ switch ($_GET['accion']) {
             SUM(venta_utilidad) AS acumulado_utilidad,
             COUNT(venta_utilidad) AS cuenta_num_gestiones
             FROM VENTAS GROUP BY mes";
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute();
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            echo json_encode($result);
-            break;
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
 
     case 'listar_turnos_mes':
         $sql = "SELECT
@@ -44,6 +43,8 @@ switch ($_GET['accion']) {
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($result);
         break;
+
+
     case 'listar_dias_mes':
         $sql = "SELECT
         DATE_FORMAT(turno_fecha_creado,'%Y-%m-%d') AS turno_fecha,
@@ -202,6 +203,9 @@ switch ($_GET['accion']) {
         break;
 
 
+
+
+
     case 'consultar_utilidad_turno':
         $sql = "SELECT
             SUM(venta_utilidad)  AS utilidad_turno,
@@ -241,22 +245,127 @@ switch ($_GET['accion']) {
 
     case 'listar_domicilios_general':
         $sql = "SELECT
-            ELT(MONTH(hora_creado), 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre') AS mes,
             MONTH(hora_creado) AS mes_actual,
+            ELT(MONTH(hora_creado), 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre') AS mes,
             YEAR(hora_creado) AS año,
-            SUM(valor_venta) AS sum_domi_interno,
-			COUNT(valor_venta) AS cuenta_domi_interno,
-            SUM(valor_domi_externo) AS sum_domi_externo,
-            COUNT(valor_domi_externo) AS cuenta_domi_externo
+			COUNT(valor_venta) AS cuenta_domi_total,
+            SUM(valor_venta) AS suma_domi_total
             FROM DOMICILIOS GROUP BY mes;";
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute();
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            echo json_encode($result);
-            break;
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
 
 
+    case 'listar_domicilios_internos_turnos':
+        $sql = "SELECT
+        TURNOS.turno_id,
+        TURNOS.turno_fecha_creado,
+        ELT(WEEKDAY(turno_fecha_creado)+ 1,'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom') AS dia_semana,
+        JORNADAS.jornada_nombre,
+        USERS.user_nombre,
+        COUNT(DOMICILIOS.valor_venta) AS cuenta_domi_internos,
+        SUM(DOMICILIOS.valor_venta) AS suma_domi_internos
+   		FROM TURNOS
+	    INNER JOIN USERS
+        ON TURNOS.turno_responsable=USERS.user_id
+      	INNER JOIN JORNADAS
+        ON TURNOS.turno_jornada=JORNADAS.jornada_id
+        INNER JOIN DOMICILIOS
+        ON DOMICILIOS.turno_id= TURNOS.turno_id
+		WHERE MONTH(turno_creacion_timestamp) =$_GET[mes_actual]
+        AND (DOMICILIOS.btn_domi_interno=1)
+        GROUP BY TURNOS.turno_id;
+        ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
 
 
+    case 'listar_domicilios_externos_turnos':
+        $sql = "SELECT
+        TURNOS.turno_id,
+        TURNOS.turno_fecha_creado,
+        ELT(WEEKDAY(turno_fecha_creado)+ 1,'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom') AS dia_semana,
+        JORNADAS.jornada_nombre,
+        USERS.user_nombre,
+        COUNT(DOMICILIOS.valor_venta) AS cuenta_domi_externos,
+        SUM(DOMICILIOS.valor_venta) AS suma_domi_externos
+   		FROM TURNOS
+	    INNER JOIN USERS
+        ON TURNOS.turno_responsable=USERS.user_id
+      	INNER JOIN JORNADAS
+        ON TURNOS.turno_jornada=JORNADAS.jornada_id
+        INNER JOIN DOMICILIOS
+        ON DOMICILIOS.turno_id= TURNOS.turno_id
+		WHERE MONTH(turno_creacion_timestamp) =$_GET[mes_actual]
+        AND (DOMICILIOS.btn_domi_externo=1)
+        GROUP BY TURNOS.turno_id
+        ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
 
+
+    case 'listar_domicilios_mes':
+        $sql = "SELECT
+			DOMICILIOS.domicilio_id,
+			DATE_FORMAT(DOMICILIOS.hora_creado,'%Y-%m-%d') AS fecha_creado,
+            BARRIOS.barrio_nombre,
+            USERS.user_nombre,
+            DOMI_EXTERNOS.domi_externo_nombre,
+            DOMICILIOS.valor_domi_externo,
+            DOMICILIOS.valor_venta,
+            DOMICILIOS.numero_factura,
+            DOMICILIOS.hora_salida,
+            DOMICILIOS.hora_llegada,
+            DOMICILIOS.inyectologia,
+            DOMICILIOS.observaciones,
+            DOMICILIOS.turno_id
+            FROM DOMICILIOS 
+            INNER JOIN USERS
+            ON DOMICILIOS.trans_interno_id=USERS.user_id
+            INNER JOIN BARRIOS 
+            ON DOMICILIOS.barrio_id=BARRIOS.barrio_id
+            INNER JOIN DOMI_EXTERNOS
+            ON DOMICILIOS.trans_externo_id = DOMI_EXTERNOS.domi_externo_id
+            WHERE (hora_salida != '0') AND (hora_llegada != '0')
+            AND (MONTH(hora_creado)=$_GET[mes_actual]);
+            ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
+
+    case 'listar_domicilios_dias':
+        $sql = "SELECT
+    DATE_FORMAT(hora_creado, '%d') AS dia_del_mes,
+    DATE_FORMAT(hora_creado, '%M-%d') AS fecha,
+    ELT(
+        WEEKDAY(hora_creado) + 1,
+        'Lun',
+        'Mar',
+        'Mie',
+        'Jue',
+        'Vie',
+        'Sab',
+        'Dom'
+    ) AS dia,
+    SUM(valor_venta) AS venta_total
+    FROM
+        DOMICILIOS
+    GROUP BY
+    DATE_FORMAT(hora_creado, '%d');
+            ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
 };

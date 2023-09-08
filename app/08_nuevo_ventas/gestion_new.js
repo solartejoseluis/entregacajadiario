@@ -240,7 +240,7 @@ function trasladaMdlNewDomi(registro) {
 
   // atributo para desactivar el input de valor producto desde la gestion.
   $("#npt_valor_producto").prop("disabled", true);
-  $("#npt_factura").val("NO");
+  $("#npt_factura").val("gestion");
 
   // limpieza general del modal:
   //oculta o muestra campos al inicio

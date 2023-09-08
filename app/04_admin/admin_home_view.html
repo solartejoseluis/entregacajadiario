@@ -22,104 +22,227 @@
 </head>
 
 <body>
-  <div class="container-fluid bg-light" id="contenido">
-    <nav class="row">
-      <nav class="navbar navbar-expand-md navbar-dark bg-primary mb-4">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">TABLERO DE INFORMES</a>
-        </div>
-        <div class="ms-1">
-          <span class="navbar-text" id="hoy_moment"></span>
+  <div class="container-fluid" id="contenido">
+    <header>
+      <nav class="row">
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary mb-4">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">TABLERO DE INFORMES</a>
+          </div>
+          <div class="ms-1">
+            <span class="navbar-text" id="hoy_moment"></span>
+          </div>
+        </nav>
+        <div class="col-md-4">
+          <input type="hidden" class="" id="npt_turno_id_actual" />
+          <input type="hidden" class="" id="npt_user_id_actual" />
         </div>
       </nav>
-    </nav>
+    </header>
 
+
+    <!-- DTTBL  DOMICILIOS -->
     <section class="row">
-      <div class="col-md-4">
-        <input type="hidden" class="" id="npt_turno_id_actual" />
-        <input type="hidden" class="" id="npt_user_id_actual" />
-      </div>
-      <div class="col-md-6">
+      <H2>DOMICILIOS</H2>
+      <div class="container" id="tabla_domicilios">
+        <div class="col-10">
+          <table class="table display compact cell-border" id="tbl_domicilios_general">
+            <thead>
+              <tr>
+                <td>#</td>
+                <td>Mes</td>
+                <td>Año</td>
+                <td>Cuenta Domi</td>
+                <td>Total Venta</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </thead>
+          </table>
+        </div>
       </div>
     </section>
 
     <!-- DTTBL GESTIONES -->
     <section class="row">
-      <H2>INFORME DE LAS GESTIONES DEL MES</H2>
-      <div class="container" id="tabla">
-        <div class="row">
-          <div class="col-8">
-            <table class="table display compact cell-border" id="tbl_gestiones_general">
-              <thead>
-                <tr>
-                  <td>#</td>
-                  <td>MES</td>
-                  <td>AÑO</td>
-                  <td>Util Mes</td>
-                  <td> # Gest. Mes</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              </thead>
-            </table>
-          </div>
+      <H2>GESTIONES</H2>
+      <div class="container" id="tabla_gestiones">
+        <div class="col-10">
+          <table class="table display compact cell-border" id="tbl_gestiones_general">
+            <thead>
+              <tr>
+                <td>#</td>
+                <td>Mes</td>
+                <td>Año</td>
+                <td>Gestiones/Mes</td>
+                <td>Utilidad/Mes</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </thead>
+          </table>
         </div>
       </div>
     </section>
 
+  </div>
 
+  <!-- - - - - - - - - - -->
+  <!-- SECCION DOMICILIOS -->
+  <!-- - - - - - - - - - -->
 
-    <!-- DTTBL  DOMICILIOS -->
-    <section class="row">
-      <H2>INFORME DOMICILIOS DEL MES</H2>
-      <div class="container" id="tabla_domicilios">
-        <div class="row">
-          <div class="col-8">
-            <table class="table display compact cell-border" id="tbl_domicilios_general">
-              <thead>
-                <tr>
-                  <td>#</td>
-                  <td>MES</td>
-                  <td>AÑO</td>
-                  <td>sum_int</td>
-                  <td>cuenta int</td>
-                  <td>sum ext</td>
-                  <td>cuenta ext</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              </thead>
-            </table>
+  <!-- MDL DOMICILIOS TURNOS-->
+  <div class="modal fade mdl_domicilios_turnos" tabindex="1" id="mdl_domicilios_turnos"">
+    <div class=" modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">DOMICILIOS POR TURNOS</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- <div class="container-fluid"> -->
+          <!-- inicia datatables del modal  -->
+          <div class="row">
+            <h3>INTERNOS</h3>
+            <!-- <div class="col-md-12"> -->
+              <table class="table display compact cell-border" id="tbl_domicilios_internos_turnos">
+                <thead>
+                  <tr>
+                    <td>id</td>
+                    <td>Fecha</td>
+                    <td>Dia</td>
+                    <td>Jornada</td>
+                    <td>Resp.Turno</td>
+                    <td>Num Internos</td>
+                    <td>Suma Internos</td>
+                  </tr>
+                </thead>
+              </table>
+            <!-- </div> -->
           </div>
+          <!-- finaliza datatables del modal -->
+
+
+          <!-- inicia datatables del modal  -->
+          <div class="row">
+            <h3>EXTERNOS</h3>
+            <!-- <div class="col-md-12"> -->
+              <table class="table display compact cell-border" id="tbl_domicilios_externos_turnos">
+                <thead>
+                  <tr>
+                    <td>id</td>
+                    <td>Fecha</td>
+                    <td>Dia</td>
+                    <td>Jornada</td>
+                    <td>Resp.Turno</td>
+                    <td>Num. Externos</td>
+                    <td>suma Externos</td>
+                  </tr>
+                </thead>
+              </table>
+            <!-- </div> -->
+          </div>
+          <!-- finaliza datatables del modal -->
+
+
+
+        <!-- </div> -->
+      </div>
+    </div>
+  </div>
+  </div>
+  <!-- fin mdl Domicilios turnos -->
+
+
+  <!-- MDL DOMICILIOS DIAS-->
+  <div class="modal fade mdl_domicilios_turnos" tabindex="1" id="mdl_domicilios_dias"">
+    <div class=" modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">DOMICILIOS POR DIA</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- <div class="container-fluid"> -->
+          <!-- inicia datatables del modal  -->
+          <div class="row">
+            <h3>DOMICILIOS POR DIA</h3>
+            <!-- <div class="col-md-12"> -->
+              <table class="table display compact cell-border" id="tbl_domicilios_dias">
+                <thead>
+                  <tr>
+                    <td>#</td>
+                    <td>Fecha</td>
+                    <td>Dia</td>
+                    <td>Venta del Dia</td>
+                  </tr>
+                </thead>
+              </table>
+            <!-- </div> -->
+          </div>
+        <!-- </div> -->
+      </div>
+    </div>
+  </div>
+  </div>
+  <!-- fin mdl Domicilios dias -->
+
+
+
+  <!-- MDL DOMICILIOS MES-->
+  <div class="modal fade mdl_domicilios_mes" tabindex="1" id="mdl_domicilios_mes"">
+    <div class=" modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">DOMICILIOS DEL MES</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <!-- inicia datatables del modal  -->
+          <div class="row">
+            <div class="col-md-12 table-responsive">
+              <table class="table display compact cell-border" id="tbl_domicilios_mes">
+                <thead>
+                  <tr>
+                    <td>Fecha</td>
+                    <td>Salió</td>
+                    <td>Llegó</td>
+                    <td>Barrio</td>
+                    <td>Interno</td>
+                    <td>Externo</td>
+                    <td>Ext/val</td>
+                    <td>Venta</td>
+                    <td>Factura</td>
+                    <td>Obs</td>
+                    <td>Turno</td>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+          </div>
+          <!-- finaliza datatables del modal -->
         </div>
       </div>
-    </section>
+    </div>
   </div>
-
-
-
-
-
-
-
-
-
   </div>
+  <!-- fin mdl Domicilios mes -->
 
 
 
 
+  <!-- - - - - - - - - - -->
+  <!-- SECCION GESTIONES -->
+  <!-- - - - - - - - - - -->
 
-
-  <!-- -------------------------->
-  <!-- Inicia modal Ver Turnos-->
-  <!-- ------------------------->
+  <!-- MDL GESTIONES TURNOS-->
   <div class="modal fade mdl_ver_turnos" tabindex="1" id="mdl_ver_turnos" name="mdl_ver_turnos">
-    <div class="modal-dialog modal-fullscreen">
+    <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5"> TURNOS DEL MES</h1>
@@ -156,11 +279,9 @@
       </div>
     </div>
   </div>
-  <!-- finaliza modal ver turnos -->
+  <!-- fin mdl gestiones turnos -->
 
-  <!-- -------------------------->
-  <!-- Inicia modal Ver dias-->
-  <!-- ------------------------->
+  <!-- MDL GESTIONES DIAS-->
   <div class="modal fade" tabindex="1" id="mdl_ver_dias">
     <div class="modal-dialog modal-xl modal-dialog-scrollable">
       <div class="modal-content">
@@ -195,13 +316,11 @@
       </div>
     </div>
   </div>
-  <!-- finaliza modal ver dias -->
+  <!-- fin mdl gestiones dias -->
 
-  <!-- -------------------------->
-  <!-- Inicia modal Ver gestiones-->
-  <!-- ------------------------->
+  <!-- MDL TODAS LAS GESTIONES-->
   <div class="modal fade" tabindex="1" id="mdl_ver_gestiones">
-    <div class="modal-dialog modal-fullscreen">
+    <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5"> GESTIONES DEL MES</h1>
@@ -233,15 +352,12 @@
             <!-- finaliza datatables del modal -->
           </div>
         </div>
-        <!-- inicia el footer  -->
       </div>
     </div>
   </div>
-  <!-- finaliza modal ver gestiones -->
+  <!-- fin mdl todas las gestiones -->
 
-  <!-- -------------------------->
-  <!-- Inicia modal informe mes-->
-  <!-- ------------------------->
+  <!-- MDL INFORME GESTIONES MES-->
   <div class="modal fade" tabindex="1" id="mdl_informe_mes">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
@@ -291,12 +407,9 @@
       </div>
     </div>
   </div>
-  <!-- finaliza modal ver gestiones -->
+  <!-- fin mdl gestiones mes -->
 
-
-  <!-- -------------------------->
-  <!-- Inicia modal detalle turno-->
-  <!-- ------------------------->
+  <!--  MDL DETALLE TURNO-->
   <div class="modal fade" tabindex="1" id="mdl_detalle_turno">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
@@ -422,38 +535,39 @@
       </div>
     </div>
   </div>
+  <!-- fin mdl detalle turno -->
+
+
 
   <!-- SCRIPTS -->
+  <div>
+    <!-- CDN jquery 3.6.1 js -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
-  <!-- CDN jquery 3.6.1 js -->
-  <script src="https://code.jquery.com/jquery-3.6.1.min.js"
-    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <!-- CDN bootstrap 5.2.2 js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+      crossorigin="anonymous"></script>
 
-  <!-- CDN bootstrap 5.2.2 js -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-    crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.datatables.net/v/dt/dt-1.13.4/cr-1.6.2/date-1.4.0/fh-3.3.2/r-2.4.1/sc-2.1.1/sb-1.4.2/sp-2.1.2/sl-1.6.2/sr-1.2.2/datatables.min.js"></script>
 
-  <!-- datatables con utilidades extra -->
-  <!-- <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script> -->
+    <!-- manejar de formatos de tiempo con moment.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/es-us.min.js"></script>
+    <!-- scripts botones para datatables -->
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
 
-  <script
-    src="https://cdn.datatables.net/v/dt/dt-1.13.4/cr-1.6.2/date-1.4.0/fh-3.3.2/r-2.4.1/sc-2.1.1/sb-1.4.2/sp-2.1.2/sl-1.6.2/sr-1.2.2/datatables.min.js"></script>
+    <!-- scripts de la aplicacion -->
+    <script src="admin_home_ctrl.js"></script>
+  </div>
 
-  <!-- manejar de formatos de tiempo con moment.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/locale/es-us.min.js"></script>
-  <!-- scripts botones para datatables -->
-  <script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-  <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
-  <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
-
-
-  <!-- scripts de la aplicacion -->
-  <script src="admin_home_ctrl.js"></script>
 </body>
 
 </html>

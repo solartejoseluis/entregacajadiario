@@ -8,9 +8,22 @@ color:#86B000;
 color:#06367D; /* fondo */
 }
 
-/* body {
-  background-color:#06367D;
-} */
+body{
+  background-color: #A9B2C3;
+}
+
+#contenido {
+  background-color: #A9B2C3;
+}
+
+#tbl_domicilios_general{
+  background-color: whitesmoke;
+
+}
+
+#tbl_gestiones_general{
+  background-color: whitesmoke;
+}
 
 #tblVentas{
   background-color:whitesmoke;

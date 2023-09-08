@@ -17,19 +17,94 @@ setInterval(function () {
   getTime();
 }, 1000);
 
+// DTTBL DOMICILIOS GENERAL
+function dttblDomiciliosGeneral() {
+
+  let listado = $("#tbl_domicilios_general").DataTable({
+    ajax: {
+      url: "admin_home_mdl.php?accion=listar_domicilios_general",
+      dataSrc: "",
+      data: "",
+    },
+    columns: [
+      { data: "mes_actual" },
+      { data: "mes" },
+      { data: "año" },
+      { data: "cuenta_domi_total" },
+      { data: "suma_domi_total" },
+      { data: null, orderable: false },
+      { data: null, orderable: false },
+      { data: null, orderable: false },
+      { data: null, orderable: false },
+    ],
+
+    columnDefs: [
+      {
+        targets: 4,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+
+      {
+        targets: 5,
+        defaultContent:
+          "<button class='btn btn-outline-primary btn-sm btn_domicilios_turnos' id='btn_domicilios_turnos'>Turnos</button>",
+        data: null,
+      },
+
+      {
+        targets: 6,
+        defaultContent:
+          "<button  class='btn btn-outline-primary btn-sm btn_domicilios_dias' id='btn_domicilios_dias'>Dias</button>",
+        data: null,
+      },
+      {
+        targets: 7,
+        defaultContent:
+          "<button  class='btn btn-outline-primary btn-sm btn_domicilios_mes'>Entregados</button>",
+        data: null,
+      },
+      {
+        targets: 8,
+        defaultContent:
+          "<button  class='btn btn-outline-primary btn-sm btn_domicilios_informe'>Informe</button>",
+        data: null,
+      },
+    ],
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+    },
+    searching: false,
+    info: false,
+    paging: false,
+    destroy: true,
+  }); // final datatables  domicilios general
+
+  //btn para MDL DOMICILIOS turnos
+  $("#tbl_domicilios_general tbody").on("click", "button.btn_domicilios_turnos", function () {
+    let registro = listado.row($(this).parents("tr")).data();
+    $("#mdl_domicilios_turnos").modal("show");
+    dttbl_domicilios_internos_turnos(registro.mes_actual);
+    dttbl_domicilios_externos_turnos(registro.mes_actual);
+  });
+
+    //btn para MDL DOMICILIOS dias
+  $("#tbl_domicilios_general tbody").on("click", "button.btn_domicilios_dias", function () {
+    let registro = listado.row($(this).parents("tr")).data();
+    $("#mdl_domicilios_dias").modal("show");
+    dttbl_domicilios_dias(registro.mes_actual);
+  });
+
+  //btn para MDL DOMICILIOS mes
+  $("#tbl_domicilios_general tbody").on("click", "button.btn_domicilios_mes", function () {
+    let registro = listado.row($(this).parents("tr")).data();
+    $("#mdl_domicilios_mes").modal("show");
+    dttbl_domicilios_mes(registro.mes_actual);
+  });
+
+
+} // final dttbl Domicilios General
 
 function dttblGestionesGeneral() {
-  let buttonCommon = {
-    exportOptions: {
-      format: {
-        body: function (data, row, column, node) {
-          // Strip $ from salary column to make it numeric
-          return column === 2 ? data.replace(/[$,.]/g, "") : data;
-        },
-      },
-    },
-  };
-
   let listado = $("#tbl_gestiones_general").DataTable({
     ajax: {
       url: "admin_home_mdl.php?accion=listar_gestiones",
@@ -40,64 +115,42 @@ function dttblGestionesGeneral() {
       { data: "mes_actual" },
       { data: "mes" },
       { data: "año" },
-      { data: "acumulado_utilidad" },
       { data: "cuenta_num_gestiones" },
+      { data: "acumulado_utilidad" },
       { data: null, orderable: false },
       { data: null, orderable: false },
       { data: null, orderable: false },
       { data: null, orderable: false },
-    ],
-
-    dom: "Bfrtip",
-    buttons: [
-      $.extend(true, {}, buttonCommon, {
-        extend: "copyHtml5",
-        exportOptions: {
-          columns: [1, 2, 3, 4],
-        },
-      }),
-      $.extend(true, {}, buttonCommon, {
-        extend: "excelHtml5",
-        exportOptions: {
-          columns: [1, 2, 3, 4],
-        },
-      }),
-      $.extend(true, {}, buttonCommon, {
-        extend: "pdfHtml5",
-        exportOptions: {
-          columns: [1, 2, 3, 4],
-        },
-      }),
     ],
 
     columnDefs: [
       {
-        targets: 3,
+        targets: 4,
         render: $.fn.dataTable.render.number(".", ",", 0, "$"),
       },
       {
         targets: 5,
         defaultContent:
-          "<button class='btn btn-primary btn-sm btn_ver_turnos' id='btn_ver_turnos'>Por Turnos</button>",
+          "<button class='btn btn-outline-success btn-sm btn_ver_turnos' id='btn_ver_turnos'>Turnos</button>",
         data: null,
       },
 
       {
         targets: 6,
         defaultContent:
-          "<button  class='btn btn-success btn-sm btn_ver_dias' id='btn_ver_dias'>Por Dias</button>",
+          "<button  class='btn btn-outline-success btn-sm btn_ver_dias' id='btn_ver_dias'>Dias</button>",
         data: null,
       },
       {
         targets: 7,
         defaultContent:
-          "<button  class='btn btn-warning btn-sm btn_ver_gestiones'>Gest Del Mes</button>",
+          "<button  class='btn btn-outline-success btn-sm btn_ver_gestiones'>Ges</button>",
         data: null,
       },
       {
         targets: 8,
         defaultContent:
-          "<button  class='btn btn-danger btn-sm btn_informe_mes'>Informe Fin De Mes</button>",
+          "<button  class='btn btn-outline-success btn-sm btn_informe_mes'>Informe</button>",
         data: null,
       },
     ],
@@ -105,6 +158,7 @@ function dttblGestionesGeneral() {
       url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
     },
     searching: false,
+    info: false,
     paging: false,
     destroy: true,
   }); // final datatables ver gestiones general
@@ -291,7 +345,7 @@ function dttblGestionesGeneral() {
     let listado = $("#tbl_gestiones_mes").DataTable({
       ajax: {
         url:
-          "admin_home_mdl.php?accion=listar_gestiones_mes&mes_actual="+mes_actual,
+          "admin_home_mdl.php?accion=listar_gestiones_mes&mes_actual=" + mes_actual,
         dataSrc: "",
         data: "",
       },
@@ -522,120 +576,164 @@ function dttblGestionesGeneral() {
 } // final dttbl gestiones general
 
 
+// SECCION DE DOMICILIOS
 
-
-function dttblDomiciliosGeneral() {
-  let buttonCommon = {
-    exportOptions: {
-      format: {
-        body: function (data, row, column, node) {
-          // Strip $ from salary column to make it numeric
-          return column === 2 ? data.replace(/[$,.]/g, "") : data;
-        },
-      },
-    },
-  };
-
-  let listado = $("#tbl_domicilios_general").DataTable({
+function dttbl_domicilios_internos_turnos(mes_actual) {
+  turno_id = $("#npt_turno_id_actual").val();
+  user_id = $("#npt_user_id_actual").val();
+  let listado = $("#tbl_domicilios_internos_turnos").DataTable({
     ajax: {
-      url: "admin_home_mdl.php?accion=listar_domicilios_general",
+      url: "admin_home_mdl.php?accion=listar_domicilios_internos_turnos&mes_actual=" + mes_actual,
       dataSrc: "",
       data: "",
     },
     columns: [
-      { data: "mes_actual" },
-      { data: "mes" },
-      { data: "año" },
-      { data: "sum_domi_interno" },
-      { data: "cuenta_domi_interno" },
-      { data: "sum_domi_externo" },
-      { data: "cuenta_domi_externo" },
-      { data: null, orderable: false },
-      { data: null, orderable: false },
-      { data: null, orderable: false },
-      { data: null, orderable: false },
+      { data: "turno_id" },
+      { data: "turno_fecha_creado" },
+      { data: "dia_semana" },
+      { data: "jornada_nombre" },
+      { data: "user_nombre" },
+      { data: "cuenta_domi_internos" },
+      { data: "suma_domi_internos" },
     ],
+    columnDefs: [
+      {
+        targets: 6,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
 
-    dom: "Bfrtip",
-    buttons: [
-      $.extend(true, {}, buttonCommon, {
-        extend: "copyHtml5",
-        exportOptions: {
-          columns: [1, 2, 3, 4],
-        },
-      }),
-      $.extend(true, {}, buttonCommon, {
-        extend: "excelHtml5",
-        exportOptions: {
-          columns: [1, 2, 3, 4],
-        },
-      }),
-      $.extend(true, {}, buttonCommon, {
-        extend: "pdfHtml5",
-        exportOptions: {
-          columns: [1, 2, 3, 4],
-        },
-      }),
     ],
+    order: [[1, "asc"]],
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+    },
+    info: false,
+    searching: false,
+    paging: false,
+    destroy: true,
+  });
+}
 
+function dttbl_domicilios_externos_turnos(mes_actual) {
+  turno_id = $("#npt_turno_id_actual").val();
+  user_id = $("#npt_user_id_actual").val();
+  let listado = $("#tbl_domicilios_externos_turnos").DataTable({
+    ajax: {
+      url: "admin_home_mdl.php?accion=listar_domicilios_externos_turnos&mes_actual=" + mes_actual,
+      dataSrc: "",
+      data: "",
+    },
+    columns: [
+      { data: "turno_id" },
+      { data: "turno_fecha_creado" },
+      { data: "dia_semana" },
+      { data: "jornada_nombre" },
+      { data: "user_nombre" },
+      { data: "cuenta_domi_externos" },
+      { data: "suma_domi_externos" },
+    ],
+    columnDefs: [
+      {
+        targets: 6,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+
+    ],
+    order: [[1, "asc"]],
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+    },
+    info: false,
+    searching: false,
+    paging: false,
+    destroy: true,
+  });
+}
+
+
+function dttbl_domicilios_dias(mes_actual) {
+  turno_id = $("#npt_turno_id_actual").val();
+  user_id = $("#npt_user_id_actual").val();
+  let listado = $("#tbl_domicilios_dias").DataTable({
+    ajax: {
+      url: "admin_home_mdl.php?accion=listar_domicilios_dias&mes_actual=" + mes_actual,
+      dataSrc: "",
+      data: "",
+    },
+    columns: [
+      { data: "dia_del_mes" },
+      { data: "fecha" },
+      { data: "dia" },
+      { data: "venta_total" },
+    ],
     columnDefs: [
       {
         targets: 3,
         render: $.fn.dataTable.render.number(".", ",", 0, "$"),
       },
-      {
-        targets: 7,
-        defaultContent:
-          "<button class='btn btn-primary btn-sm btn_ver_turnos' id='btn_ver_turnos'>Por Turnos</button>",
-        data: null,
-      },
 
-      {
-        targets: 8,
-        defaultContent:
-          "<button  class='btn btn-success btn-sm btn_ver_dias' id='btn_ver_dias'>Por Dias</button>",
-        data: null,
-      },
-      {
-        targets: 9,
-        defaultContent:
-          "<button  class='btn btn-warning btn-sm btn_ver_gestiones'>Gest Del Mes</button>",
-        data: null,
-      },
-      {
-        targets: 10,
-        defaultContent:
-          "<button  class='btn btn-danger btn-sm btn_informe_mes'>Informe Fin De Mes</button>",
-        data: null,
-      },
     ],
+    order: [[0, "asc"]],
     language: {
       url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
     },
+    info: false,
     searching: false,
     paging: false,
     destroy: true,
-  }); // final datatables  domicilios general
-
+  });
 }
 
 
+function dttbl_domicilios_mes(mes_actual) {
+  // turno_id = $("#npt_turno_id_actual").val();
+  // user_id = $("#npt_user_id_actual").val();
+  let listado = $("#tbl_domicilios_mes").DataTable({
+    ajax: {
+      url: "admin_home_mdl.php?accion=listar_domicilios_mes&mes_actual=" + mes_actual,
+      dataSrc: "",
+      data: "",
+    },
+    columns: [
+      { data: "fecha_creado" },
+      { data: "hora_salida" },
+      { data: "hora_llegada" },
+      { data: "barrio_nombre" },
+      { data: "user_nombre" },
+      { data: "domi_externo_nombre" },
+      { data: "valor_domi_externo" },
+      { data: "valor_venta" },
+      { data: "numero_factura" },
+      { data: "observaciones" },
+      { data: "turno_id" },
+    ],
+    columnDefs: [
+      {
+        targets: 6,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+      {
+        targets: 7,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      }
+    ],
+    order: [[0, "asc"]],
+    order: [[1, "asc"]],
+
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+    },
+    info: true,
+    searching: true,
+    paging: false,
+    destroy: true,
+  });
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// - - - - - - - - - - - - - - - - - 
 // INICIA SUB MODAL VER TURNO DE HOY
-
+// - - - - - - - - - - - - - - - - - 
 
 // cargas en la pantalla principal SUBMODAL
 function cargarDatosUtilidadVendedor1(turno_id) {
@@ -746,4 +844,3 @@ function consultarDatosTurnoActual(turno_id) {
     },
   });
 }
-
