@@ -44,6 +44,8 @@ $("#slctEdit_vendedor").change(function () {
   $("#nptEdit_vendedor_id").val($(this).val());
 });
 
+
+
 $("#slctEdit-user").change(function () {
   $("#nptEdit-user_id").val($(this).val());
 });

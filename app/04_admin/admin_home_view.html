@@ -22,7 +22,7 @@
 </head>
 
 <body>
-  <div class="container-fluid" id="contenido">
+
     <header>
       <nav class="row">
         <nav class="navbar navbar-expand-md navbar-dark bg-primary mb-4">
@@ -40,6 +40,7 @@
       </nav>
     </header>
 
+<div class="container">
 
     <!-- DTTBL  DOMICILIOS -->
     <section class="row">
@@ -90,7 +91,6 @@
     </section>
 
   </div>
-
   <!-- - - - - - - - - - -->
   <!-- SECCION DOMICILIOS -->
   <!-- - - - - - - - - - -->
@@ -178,6 +178,7 @@
                     <td>#</td>
                     <td>Fecha</td>
                     <td>Dia</td>
+                    <td>Domis del Dia</td>
                     <td>Venta del Dia</td>
                   </tr>
                 </thead>
@@ -195,7 +196,7 @@
 
   <!-- MDL DOMICILIOS MES-->
   <div class="modal fade mdl_domicilios_mes" tabindex="1" id="mdl_domicilios_mes"">
-    <div class=" modal-dialog modal-xl">
+    <div class=" modal-dialog modal-fullscreen">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5">DOMICILIOS DEL MES</h1>
@@ -210,6 +211,7 @@
                 <thead>
                   <tr>
                     <td>Fecha</td>
+                    <td>dia</td>
                     <td>Salió</td>
                     <td>Llegó</td>
                     <td>Barrio</td>
@@ -234,7 +236,87 @@
   <!-- fin mdl Domicilios mes -->
 
 
+  <!-- MDL DOMICILIOS INFORME-->
+  <div class="modal fade mdl_domicilios_informe" tabindex="1" id="mdl_domicilios_informe"">
+    <div class=" modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">DOMICILIOS INFORME</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
 
+          <!-- DTTBL DOMI INTERNOS  -->
+          <div class="row">
+            <H3>INFORME DOMI INTERNOS</H3>
+            <div class="col-md-10 table-responsive">
+              <table class="table display compact cell-border" cellspacing="0" width="100%" id="tbl_domicilios_informe_int">
+                <thead>
+                  <tr>
+                    <td>Nombres</td>
+                    <td>Cuenta Domi Int</td>
+                    <td>A Pagar Ext</td>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+          </div>
+          <!-- fin dttbl domi internos -->
+          
+          <!-- DTTBL TOTAL DOMI INTERNOS  -->
+          <div class="row">
+            <h3>TOTALES DOMI INTERNOS </h3>
+            <div class="col-md-10 table-responsive">
+              <table class="table display compact cell-border" cellspacing="0" width="100%" id="tbl_total_domi_mes_int">
+                <thead>
+                  <tr>
+                    <td>Total Domi Int</td>
+                    <td>Total A Pagar Int</td>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+          </div>
+          <!-- fin dttbl total domi internos -->
+
+
+          <!-- DTTBL DOMI EXTERNOS  -->
+          <div class="row">
+            <H3>INFORME DOMI EXTERNOS</H3>
+            <div class="col-md-10 table-responsive">
+              <table class="table display compact cell-border" cellspacing="0" width="100%" id="tbl_domicilios_informe_ext">
+                <thead>
+                  <tr>
+                    <td>Domi Ext</td>
+                    <td>Cuenta Domi Ext</td>
+                    <td>A Pagar Ext</td>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+          </div>
+          <!-- fin dttbl domi externos -->
+          
+          <!-- DTTBL TOTAL DOMI EXTERNOS  -->
+          <div class="row">
+            <h3>TOTALES DOMI EXTERNOS </h3>
+            <div class="col-md-10 table-responsive">
+              <table class="table display compact cell-border" cellspacing="0" width="100%" id="tbl_total_domi_mes_ext">
+                <thead>
+                  <tr>
+                    <td>Total Domi ext</td>
+                    <td>Total pagado ext</td>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+          </div>
+          <!-- fin dttbl total domi externos -->
+      </div>
+    </div>
+  </div>
+  </div>
+  <!-- fin mdl Domicilios informe -->
 
   <!-- - - - - - - - - - -->
   <!-- SECCION GESTIONES -->

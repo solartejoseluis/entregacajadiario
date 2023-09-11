@@ -101,6 +101,16 @@ function dttblDomiciliosGeneral() {
     dttbl_domicilios_mes(registro.mes_actual);
   });
 
+  //btn para MDL DOMICILIOS informe
+  $("#tbl_domicilios_general tbody").on("click", "button.btn_domicilios_informe", function () {
+    let registro = listado.row($(this).parents("tr")).data();
+    $("#mdl_domicilios_informe").modal("show");
+    dttbl_domicilios_informe_internos(registro.mes_actual);
+    dttbl_total_domi_mes_internos(registro.mes_actual);
+    dttbl_domicilios_informe_externos(registro.mes_actual);
+    dttbl_total_domi_mes_externos(registro.mes_actual);
+  });
+
 
 } // final dttbl Domicilios General
 
@@ -664,11 +674,12 @@ function dttbl_domicilios_dias(mes_actual) {
       { data: "dia_del_mes" },
       { data: "fecha" },
       { data: "dia" },
+      { data: "cuenta_total" },
       { data: "venta_total" },
     ],
     columnDefs: [
       {
-        targets: 3,
+        targets: 4,
         render: $.fn.dataTable.render.number(".", ",", 0, "$"),
       },
 
@@ -686,8 +697,6 @@ function dttbl_domicilios_dias(mes_actual) {
 
 
 function dttbl_domicilios_mes(mes_actual) {
-  // turno_id = $("#npt_turno_id_actual").val();
-  // user_id = $("#npt_user_id_actual").val();
   let listado = $("#tbl_domicilios_mes").DataTable({
     ajax: {
       url: "admin_home_mdl.php?accion=listar_domicilios_mes&mes_actual=" + mes_actual,
@@ -696,6 +705,7 @@ function dttbl_domicilios_mes(mes_actual) {
     },
     columns: [
       { data: "fecha_creado" },
+      { data: "dia" },
       { data: "hora_salida" },
       { data: "hora_llegada" },
       { data: "barrio_nombre" },
@@ -709,16 +719,15 @@ function dttbl_domicilios_mes(mes_actual) {
     ],
     columnDefs: [
       {
-        targets: 6,
+        targets: 7,
         render: $.fn.dataTable.render.number(".", ",", 0, "$"),
       },
       {
-        targets: 7,
+        targets: 8,
         render: $.fn.dataTable.render.number(".", ",", 0, "$"),
       }
     ],
-    order: [[0, "asc"]],
-    order: [[1, "asc"]],
+    order: [[0, "asc"],[2, "asc"] ],
 
     language: {
       url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
@@ -729,6 +738,136 @@ function dttbl_domicilios_mes(mes_actual) {
     destroy: true,
   });
 }
+
+
+
+function dttbl_domicilios_informe_internos(mes_actual) {
+  let listado = $("#tbl_domicilios_informe_int").DataTable({
+    ajax: {
+      url: "admin_home_mdl.php?accion=listar_domicilios_informe_int&mes_actual=" + mes_actual,
+      dataSrc: "",
+      data: "",
+    },
+    columns: [
+      { data: "nombres" },
+      { data: "cuenta_domi" },
+      { data: "a_pagar" },
+    ],
+    columnDefs: [
+      {
+        targets: 2,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+    ],
+    // order: [[0, "asc"]],
+    // order: [[1, "asc"]],
+
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+    },
+    info: false,
+    searching: false,
+    paging: false,
+    destroy: true,
+  });
+}
+
+
+function dttbl_total_domi_mes_internos(mes_actual) {
+  let listado = $("#tbl_total_domi_mes_int").DataTable({
+    ajax: {
+      url: "admin_home_mdl.php?accion=calcula_total_domi_mes_int&mes_actual=" + mes_actual,
+      dataSrc: "",
+      data: "",
+    },
+    columns: [
+      { data: "total_domi" },
+      { data: "total_a_pagar" },
+    ],
+    columnDefs: [
+      {
+        targets: 1,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+    ],
+    // order: [[0, "asc"]],
+    // order: [[1, "asc"]],
+
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+    },
+    info: false,
+    searching: false,
+    paging: false,
+    destroy: true,
+  });
+}
+
+
+function dttbl_domicilios_informe_externos(mes_actual) {
+  let listado = $("#tbl_domicilios_informe_ext").DataTable({
+    ajax: {
+      url: "admin_home_mdl.php?accion=listar_domicilios_informe_ext&mes_actual=" + mes_actual,
+      dataSrc: "",
+      data: "",
+    },
+    columns: [
+      { data: "nombres" },
+      { data: "cuenta_domi" },
+      { data: "a_pagar" },
+    ],
+    columnDefs: [
+      {
+        targets: 2,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+    ],
+    // order: [[0, "asc"]],
+    // order: [[1, "asc"]],
+
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+    },
+    info: false,
+    searching: false,
+    paging: false,
+    destroy: true,
+  });
+}
+
+
+function dttbl_total_domi_mes_externos(mes_actual) {
+  let listado = $("#tbl_total_domi_mes_ext").DataTable({
+    ajax: {
+      url: "admin_home_mdl.php?accion=calcula_total_domi_mes_ext&mes_actual=" + mes_actual,
+      dataSrc: "",
+      data: "",
+    },
+    columns: [
+      { data: "total_domi" },
+      { data: "total_a_pagar" },
+    ],
+    columnDefs: [
+      {
+        targets: 1,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+    ],
+    // order: [[0, "asc"]],
+    // order: [[1, "asc"]],
+
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+    },
+    info: false,
+    searching: false,
+    paging: false,
+    destroy: true,
+  });
+}
+
+
+
 
 
 // - - - - - - - - - - - - - - - - - 

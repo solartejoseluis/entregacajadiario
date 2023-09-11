@@ -316,6 +316,16 @@ switch ($_GET['accion']) {
         $sql = "SELECT
 			DOMICILIOS.domicilio_id,
 			DATE_FORMAT(DOMICILIOS.hora_creado,'%Y-%m-%d') AS fecha_creado,
+                ELT(
+            WEEKDAY(hora_creado) + 1,
+            'Lun',
+            'Mar',
+            'Mie',
+            'Jue',
+            'Vie',
+            'Sab',
+            'Dom'
+        ) AS dia,
             BARRIOS.barrio_nombre,
             USERS.user_nombre,
             DOMI_EXTERNOS.domi_externo_nombre,
@@ -345,27 +355,105 @@ switch ($_GET['accion']) {
 
     case 'listar_domicilios_dias':
         $sql = "SELECT
-    DATE_FORMAT(hora_creado, '%d') AS dia_del_mes,
-    DATE_FORMAT(hora_creado, '%M-%d') AS fecha,
-    ELT(
-        WEEKDAY(hora_creado) + 1,
-        'Lun',
-        'Mar',
-        'Mie',
-        'Jue',
-        'Vie',
-        'Sab',
-        'Dom'
-    ) AS dia,
-    SUM(valor_venta) AS venta_total
-    FROM
-        DOMICILIOS
-    GROUP BY
-    DATE_FORMAT(hora_creado, '%d');
+        DATE_FORMAT(hora_creado, '%d') AS dia_del_mes,
+        DATE_FORMAT(hora_creado, '%M-%d') AS fecha,
+        ELT(
+            WEEKDAY(hora_creado) + 1,
+            'Lun',
+            'Mar',
+            'Mie',
+            'Jue',
+            'Vie',
+            'Sab',
+            'Dom'
+        ) AS dia,
+        COUNT(valor_venta) AS cuenta_total,
+        SUM(valor_venta) AS venta_total
+        FROM
+            DOMICILIOS
+        GROUP BY
+        DATE_FORMAT(hora_creado, '%d');
             ";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($result);
         break;
+
+    case 'listar_domicilios_informe_int':
+        $sql = "SELECT
+            CONCAT(USERS.user_nombre,' ',USERS.user_apellido) AS nombres,
+            COUNT(trans_interno_id) AS cuenta_domi,
+            COUNT(trans_interno_id) * 700 AS a_pagar
+        FROM
+            DOMICILIOS
+        INNER JOIN USERS ON USERS.user_id = DOMICILIOS.trans_interno_id
+        WHERE btn_domi_interno = 1
+        AND (MONTH(hora_creado)=$_GET[mes_actual])
+        GROUP BY
+            trans_interno_id
+        ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
+
+
+    case 'calcula_total_domi_mes_int':
+        $sql = "SELECT
+            COUNT(trans_interno_id) AS total_domi,
+            COUNT(trans_interno_id) * 700 AS total_a_pagar
+        FROM
+            DOMICILIOS
+        WHERE
+            btn_domi_interno = 1
+        AND (MONTH(hora_creado)=$_GET[mes_actual])
+        ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
+
+
+   case 'listar_domicilios_informe_ext':
+        $sql = "SELECT
+            DOMI_EXTERNOS.domi_externo_nombre AS nombres,
+            COUNT(domi_externo_id) AS cuenta_domi,
+            COUNT(domi_externo_id) * 700 AS a_pagar
+        FROM
+            DOMICILIOS
+        INNER JOIN DOMI_EXTERNOS ON DOMI_EXTERNOS.domi_externo_id = DOMICILIOS.trans_externo_id
+        WHERE
+            btn_domi_externo = 1 
+            AND(
+                MONTH(hora_creado) = $_GET[mes_actual]
+            )
+        GROUP BY
+            domi_externo_id
+            ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
+
+
+    case 'calcula_total_domi_mes_ext':
+        $sql = "SELECT
+            COUNT(trans_externo_id) AS total_domi,
+            COUNT(trans_externo_id) * 700 AS total_a_pagar
+        FROM
+            DOMICILIOS
+        WHERE
+            btn_domi_externo = 1
+        AND (MONTH(hora_creado)=$_GET[mes_actual])
+        ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
+
 };
