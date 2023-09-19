@@ -120,6 +120,10 @@ function datatablesDomiPorSalir() {
       { data: null, orderable: false },
     ],
     columnDefs: [
+            {
+        targets: 4,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
       {
         targets: 5,
         defaultContent:
@@ -209,22 +213,19 @@ function datatablesDomiEnCurso() {
     },
     columns: [
       { data: "barrio_nombre" },
-      { data: "user_nombre" },
+      { data: "domi_interno_nombre" },
       { data: "domi_externo_nombre" },
       { data: "valor_venta" },
       { data: "hora_salida" },
-      { data: "inyectologia" },
       { data: null, orderable: false },
     ],
     columnDefs: [
-      {
-        targets: 6,
-        defaultContent:
-          "<button class='btn btn-outline-primary btn-sm btnVerDomiEnCurso'><i class='fa-solid fa-pen'></i></button>",
-        data: null,
+            {
+        targets: 3,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
       },
       {
-        targets: 7,
+        targets: 5,
         defaultContent:
           "<button class='btn btn-outline-danger btn-sm btnHoraLlegada' id='btn_hora_llegada'>Llega</button>",
         data: null,
@@ -317,6 +318,18 @@ function datatablesGestiones() {
       { data: null, orderable: false },
     ],
     columnDefs: [
+            {
+        targets: 3,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+            {
+        targets: 4,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+            {
+        targets: 6,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
       {
         targets: 8,
         defaultContent:
@@ -585,11 +598,14 @@ function datatablesDomiEntregados() {
       { data: "numero_factura" },
       { data: "hora_salida" },
       { data: "hora_llegada" },
-      { data: "inyectologia" },
       { data: "observaciones" },
       { data: "turno_id" },
     ],
     columnDefs: [
+            {
+        targets: 4,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
       // {
       //   targets: 13,
       //   defaultContent:

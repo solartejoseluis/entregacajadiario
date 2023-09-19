@@ -41,8 +41,6 @@ switch ($_GET['accion']) {
         echo json_encode($result);
         break;
 
-
-
     case 'carga_dttbl_domi_por_salir':
         $sql = "SELECT
             DATE_FORMAT(DOMICILIOS.hora_creado, '%H:%i') AS hora_creado,
@@ -61,7 +59,9 @@ switch ($_GET['accion']) {
             ON DOMICILIOS.barrio_id=BARRIOS.barrio_id
             INNER JOIN DOMI_EXTERNOS
             ON DOMICILIOS.trans_externo_id = DOMI_EXTERNOS.domi_externo_id
-            WHERE (hora_salida = 0)";
+            WHERE (hora_salida = 0)
+            AND turno_id=$_GET[turno_id]
+            ";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -86,13 +86,46 @@ switch ($_GET['accion']) {
             ON DOMICILIOS.barrio_id=BARRIOS.barrio_id
             INNER JOIN DOMI_EXTERNOS
             ON DOMICILIOS.trans_externo_id = DOMI_EXTERNOS.domi_externo_id
-            WHERE (hora_salida != 0) AND (hora_llegada = 0);
+            WHERE (DOMICILIOS.hora_salida != 0) AND (DOMICILIOS.hora_llegada = 0)
+            AND DOMICILIOS.turno_id=$_GET[turno_id]
             ";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($result);
         break;
+
+    case 'carga_dttbl_domi_entregados':
+        $sql = "SELECT
+			DOMICILIOS.domicilio_id,
+			DATE_FORMAT(DOMICILIOS.hora_creado,'%H:%i') AS hora_creado,
+            BARRIOS.barrio_nombre,
+            USERS.user_nombre,
+            DOMI_EXTERNOS.domi_externo_nombre,
+            DOMICILIOS.valor_domi_externo,
+            DOMICILIOS.valor_venta,
+            DOMICILIOS.numero_factura,
+            DOMICILIOS.hora_salida,
+            DOMICILIOS.hora_llegada,
+            DOMICILIOS.observaciones,
+            DOMICILIOS.turno_id
+            FROM DOMICILIOS 
+            INNER JOIN USERS
+            ON DOMICILIOS.trans_interno_id=USERS.user_id
+            INNER JOIN BARRIOS 
+            ON DOMICILIOS.barrio_id=BARRIOS.barrio_id
+            INNER JOIN DOMI_EXTERNOS
+            ON DOMICILIOS.trans_externo_id = DOMI_EXTERNOS.domi_externo_id
+            WHERE (hora_salida != '0') AND (hora_llegada != '0')
+            AND (turno_id=$_GET[turno_id]);
+            ";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            echo json_encode($result);
+            break;
+
+
 
     case 'carga_dttbl_gestiones':
         // ENVIA LOS DATOS AL DATATABLES
@@ -158,54 +191,7 @@ switch ($_GET['accion']) {
         echo json_encode($response);
         break;
 
-    case 'consultar_utilidad_vendedor1':
-        $sql = "SELECT
-            SUM(venta_utilidad) AS utilidad_vendedor1,
-            COUNT(venta_utilidad) AS ventas_vendedor1
-            FROM VENTAS WHERE (user_id = 1)
-            AND (turno_id=$_GET[turno_id])";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($result);
-        break;
-
-    case 'consultar_utilidad_vendedor2':
-        $sql = "SELECT
-            SUM(venta_utilidad)  AS utilidad_vendedor2,
-            COUNT(venta_utilidad) AS ventas_vendedor2
-            FROM VENTAS WHERE (user_id = 2)
-            AND (turno_id=$_GET[turno_id])";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($result);
-        break;
-
-
-    case 'consultar_utilidad_vendedor3':
-        $sql = "SELECT
-            SUM(venta_utilidad)  AS utilidad_vendedor3,
-            COUNT(venta_utilidad) AS ventas_vendedor3
-            FROM VENTAS WHERE (user_id = 3)
-            AND (turno_id=$_GET[turno_id])";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($result);
-        break;
-
-    case 'consultar_utilidad_vendedor4':
-        $sql = "SELECT
-            SUM(venta_utilidad)  AS utilidad_vendedor4,
-            COUNT(venta_utilidad) AS ventas_vendedor4
-            FROM VENTAS WHERE (user_id = 4)
-            AND (turno_id=$_GET[turno_id])";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($result);
-        break;
+   
 
     case 'total_utilidad_gestiones':
         $sql = "SELECT
@@ -398,33 +384,5 @@ switch ($_GET['accion']) {
         break;
 
 
-    case 'listar_domi_entregados':
-        $sql = "SELECT
-			DOMICILIOS.domicilio_id,
-			DATE_FORMAT(DOMICILIOS.hora_creado,'%H:%i') AS hora_creado,
-            BARRIOS.barrio_nombre,
-            USERS.user_nombre,
-            DOMI_EXTERNOS.domi_externo_nombre,
-            DOMICILIOS.valor_domi_externo,
-            DOMICILIOS.valor_venta,
-            DOMICILIOS.numero_factura,
-            DOMICILIOS.hora_salida,
-            DOMICILIOS.hora_llegada,
-            DOMICILIOS.observaciones,
-            DOMICILIOS.turno_id
-            FROM DOMICILIOS 
-            INNER JOIN USERS
-            ON DOMICILIOS.trans_interno_id=USERS.user_id
-            INNER JOIN BARRIOS 
-            ON DOMICILIOS.barrio_id=BARRIOS.barrio_id
-            INNER JOIN DOMI_EXTERNOS
-            ON DOMICILIOS.trans_externo_id = DOMI_EXTERNOS.domi_externo_id
-            WHERE (hora_salida != '0') AND (hora_llegada != '0')
-            AND (turno_id=$_GET[turno_id]);
-            ";
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute();
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            echo json_encode($result);
-            break;
+
 };

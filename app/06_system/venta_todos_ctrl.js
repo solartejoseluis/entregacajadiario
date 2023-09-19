@@ -350,7 +350,7 @@ user_id = $("#npt_user_id_actual").val();
         venta_id,
       data: "",
       success: function (datos) {
-        $("#nptEdit-venta_id").val(datos[0].venta_id);
+        $("#nptEdit_venta_id").val(datos[0].venta_id);
         $("#nptEdit_venta_nombre_producto").val(datos[0].venta_nombre_producto);
         $("#nptEdit_venta_nombre_proveedor").val(
           datos[0].venta_nombre_proveedor

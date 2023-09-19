@@ -37,7 +37,7 @@
             <a href="#" class="nav-link text-white" id="lnk_gestiones_mes_vendedor">
               <i class="fa-solid fa-temperature-three-quarters" style="color: #ffffff">
               </i>
-              Mes/Vendedor
+              Mes/Usuario
             </a>
           </li>
 
@@ -46,7 +46,7 @@
             <a href="#" class="nav-link text-white" id="lnk_gestiones_agrupadas_por_dia">
               <i class="fa-solid fa-temperature-three-quarters" style="color: #ffffff">
               </i>
-              Por Día/Vendedor.
+              Por Día/Usuario.
             </a>
           </li>
 
@@ -55,7 +55,7 @@
             <a href="#" class="nav-link text-white" id="lnk_gestiones_mes_todos">
               <i class="fa-solid fa-temperature-three-quarters" style="color: #ffffff">
               </i>
-              Últimos 3 Meses.
+              Últimos 3 Meses TODOS.
             </a>
           </li>
         </ul>
@@ -229,8 +229,6 @@
                 <td>Externo</td>
                 <td>Venta</td>
                 <td>Salió</td>
-                <td>Iny</td>
-                <td></td>
                 <td></td>
               </tr>
             </thead>
@@ -368,8 +366,6 @@
             </div>
 
             <!--  EDITAR VENDEDOR -->
-
-            <!--   VENDEDOR -->
             <div class="selectVendedor col-md-9 input-group input-group-sm mb-2">
               <span class="input-group-text" id="inputGroup-sizing-sm">Vendedor Suri:</span>
               <select class="form-select form-select-sm" id="slctEdit_vendedor"></select>
@@ -377,14 +373,12 @@
             </div>
 
             <!-- EDITAR PRODUCTO -->
-            <!-- PRODUCTO -->
             <div class="col-md-9 input-group input-group-sm mb-2">
               <span class="input-group-text" id="inputGroup-sizing-sm">Producto</span>
               <input type="text" class="form-control" id="nptEdit_venta_nombre_producto" />
             </div>
 
             <!--  EDITAR PROVEEDOR -->
-            <!-- PROVEEDOR -->
             <div class="col-md-9 input-group input-group-sm mb-2">
               <span class="input-group-text" id="inputGroup-sizing-sm">Proveedor</span>
               <input type="text" class="form-control" id="nptEdit_venta_nombre_proveedor"
@@ -392,8 +386,6 @@
             </div>
 
             <!-- EDITAR COSTO PRODUCTO -->
-
-            <!-- COSTO PRODUCTO -->
             <div class="col-md-9 input-group input-group-sm mb-2">
               <span class="input-group-text" id="inputGroup-sizing-sm">Costo Producto</span>
               <input type="hidden" class="form-control" id="nptEdit_venta_costo_producto_base" />
@@ -401,14 +393,13 @@
             </div>
 
             <!-- EDITAR VALOR VENTA -->
-            <!-- VALOR VENTA -->
             <div class="col-md-9 input-group input-group-sm mb-2">
               <span class="input-group-text" id="inputGroup-sizing-sm">Valor Venta</span>
               <input type="hidden" class="form-control" id="nptEdit_venta_valor_venta_base" />
               <input type="text" class="form-control" id="nptEdit_venta_valor_venta" placeholder="Digita Valor Venta" />
             </div>
 
-            <!-- UTILIDAD -->
+            <!-- EDITAR UTILIDAD -->
             <div class="col-md-9 input-group input-group-sm mb-2">
               <span class="input-group-text" id="inputGroup-sizing-sm">Utilidad</span>
               <input type="hidden" class="form-control" id="nptEdit_venta_utilidad_base" />
@@ -902,7 +893,7 @@
           <!-- contenido del modal body -->
           <div class="row">
             <div class="col-md-12">
-              <table class="table display compact" id="tbl_domi_entregados">
+              <table class="table display compact " id="tbl_domi_entregados">
                 <thead>
                   <tr>
                     <td>Barrio</td>
@@ -913,7 +904,6 @@
                     <td>Factura</td>
                     <td>Salió</td>
                     <td>Llegó</td>
-                    <td>Iny</td>
                     <td>Obs</td>
                     <td>Turno</td>
                   </tr>
@@ -1013,19 +1003,21 @@
   </div>
   <!-- fin modal todas las gestiones agrupadas por dia -->
 
-  <!-- MODAL TODAS LAS GESTIONES DEL MES -->
+  <!-- MODAL TODAS LAS GESTIONES DEL TRIMESTRE -->
   <div class="modal fade" id="mdl_gestiones_mes_todos">
-    <div class="modal-dialog modal-xl modal-dialog modal-dialog-scrollable">
+    <div class="modal-dialog modal-fullscreen modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5">TODAS LAS GESTIONES DEL MES</h1>
+          <h1 class="modal-title fs-5">GESTIONES DEL TRIMESTRE</h1>
         </div>
         <div class="modal-body">
           <div class="container-fluid">
             <!-- inicia datatables del modal  -->
             <div class="row">
+              <h5>Desde La Fecha Actual por tres Meses Atrás</h5>
+              <h5>Todas Las Gestiones De Todos Los Vendedores</h5>
               <div class="col-md-12">
-                <table class="table" id="tbl_gestiones_mes_todos">
+                <table class="table cell-border" cellspacing="0" width="100%" id="tbl_gestiones_mes_todos">
                   <thead>
                     <tr>
                       <td>ID</td>

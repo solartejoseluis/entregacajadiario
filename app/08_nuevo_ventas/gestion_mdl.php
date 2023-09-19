@@ -38,12 +38,11 @@ switch ($_GET['accion']) {
     case 'consultar_venta':
         $sql = "SELECT
         VENTAS.venta_id,
+        VENTAS.user_id,
         VENTAS.venta_nombre_producto,
         VENTAS.venta_nombre_proveedor,
         VENTAS.venta_costo_producto,
         VENTAS.venta_valor_venta,
-        VENTAS.user_id,
-        USERS.user_nombre,
         VENTAS.venta_utilidad,
         VENTAS.turno_id
         FROM VENTAS
@@ -70,5 +69,4 @@ switch ($_GET['accion']) {
         $response = $pdo->exec($sql);
         echo json_encode($response);
         break;
-
 };

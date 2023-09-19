@@ -17,32 +17,34 @@
     rel="stylesheet" />
   <!-- estilo de los botones -->
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">
-  <!-- estilos personalizados -->
+  <!-- Estilos Personalizados -->
   <link rel="stylesheet" href="admin.css">
+  <!-- Estilos para el Submodal DETALLE DE TURNO -->
+  <link rel="stylesheet" href="admin_turno_stl.css">
 </head>
 
 <body>
 
-    <header>
-      <nav class="row">
-        <nav class="navbar navbar-expand-md navbar-dark bg-primary mb-4">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="#">TABLERO DE INFORMES</a>
-          </div>
-          <div class="ms-1">
-            <span class="navbar-text" id="hoy_moment"></span>
-          </div>
-        </nav>
-        <div class="col-md-4">
-          <input type="hidden" class="" id="npt_turno_id_actual" />
-          <input type="hidden" class="" id="npt_user_id_actual" />
+  <header>
+    <nav class="row">
+      <nav class="navbar navbar-expand-md navbar-dark bg-primary mb-4">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">TABLERO DE INFORMES</a>
+        </div>
+        <div class="ms-1">
+          <span class="navbar-text" id="hoy_moment"></span>
         </div>
       </nav>
-    </header>
+      <div class="col-md-4">
+        <input type="hidden" class="" id="npt_turno_id_actual" />
+        <input type="hidden" class="" id="npt_user_id_actual" />
+      </div>
+    </nav>
+  </header>
 
-<div class="container">
+  <div class="container">
 
-    <!-- DTTBL  DOMICILIOS -->
+    <!-- DTTBL  DOMICILIOS GENERAL -->
     <section class="row">
       <H2>DOMICILIOS</H2>
       <div class="container" id="tabla_domicilios">
@@ -66,7 +68,7 @@
       </div>
     </section>
 
-    <!-- DTTBL GESTIONES -->
+    <!-- DTTBL GESTIONES GENERAL -->
     <section class="row">
       <H2>GESTIONES</H2>
       <div class="container" id="tabla_gestiones">
@@ -97,60 +99,35 @@
 
   <!-- MDL DOMICILIOS TURNOS-->
   <div class="modal fade mdl_domicilios_turnos" tabindex="1" id="mdl_domicilios_turnos"">
-    <div class=" modal-dialog modal-xl">
+    <div class=" modal-dialog modal-fullscreen">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5">DOMICILIOS POR TURNOS</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <!-- <div class="container-fluid"> -->
-          <!-- inicia datatables del modal  -->
-          <div class="row">
-            <h3>INTERNOS</h3>
-            <!-- <div class="col-md-12"> -->
-              <table class="table display compact cell-border" id="tbl_domicilios_internos_turnos">
-                <thead>
-                  <tr>
-                    <td>id</td>
-                    <td>Fecha</td>
-                    <td>Dia</td>
-                    <td>Jornada</td>
-                    <td>Resp.Turno</td>
-                    <td>Num Internos</td>
-                    <td>Suma Internos</td>
-                  </tr>
-                </thead>
-              </table>
-            <!-- </div> -->
-          </div>
-          <!-- finaliza datatables del modal -->
-
-
-          <!-- inicia datatables del modal  -->
-          <div class="row">
-            <h3>EXTERNOS</h3>
-            <!-- <div class="col-md-12"> -->
-              <table class="table display compact cell-border" id="tbl_domicilios_externos_turnos">
-                <thead>
-                  <tr>
-                    <td>id</td>
-                    <td>Fecha</td>
-                    <td>Dia</td>
-                    <td>Jornada</td>
-                    <td>Resp.Turno</td>
-                    <td>Num. Externos</td>
-                    <td>suma Externos</td>
-                  </tr>
-                </thead>
-              </table>
-            <!-- </div> -->
-          </div>
-          <!-- finaliza datatables del modal -->
-
-
-
-        <!-- </div> -->
+        <!-- inicia datatables del modal  -->
+        <div class="row">
+          <h3>INTERNOS</h3>
+          <table class="table display compact cell-border" id="tbl_domicilios_turnos">
+            <thead>
+              <tr>
+                <td>id</td>
+                <td>Fecha</td>
+                <td>Resp.Turno</td>
+                <td>Dia</td>
+                <td>Jornada</td>
+                <td>Tot/Domi</td>
+                <td>Tot/Venta Domi</td>
+                <td># Dom/Int</td>
+                <td>Pago Dom/int</td>
+                <td># Dom/Ext</td>
+                <td>Pago Dom/Ext</td>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <!-- finaliza datatables del modal -->
       </div>
     </div>
   </div>
@@ -167,32 +144,30 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <!-- <div class="container-fluid"> -->
-          <!-- inicia datatables del modal  -->
-          <div class="row">
-            <h3>DOMICILIOS POR DIA</h3>
-            <!-- <div class="col-md-12"> -->
-              <table class="table display compact cell-border" id="tbl_domicilios_dias">
-                <thead>
-                  <tr>
-                    <td>#</td>
-                    <td>Fecha</td>
-                    <td>Dia</td>
-                    <td>Domis del Dia</td>
-                    <td>Venta del Dia</td>
-                  </tr>
-                </thead>
-              </table>
-            <!-- </div> -->
-          </div>
-        <!-- </div> -->
+        <!-- inicia datatables del modal  -->
+        <div class="row">
+          <h3>DOMICILIOS POR DIA</h3>
+          <table class="table display compact cell-border" id="tbl_domicilios_dias">
+            <thead>
+              <tr>
+                <td>#</td>
+                <td>Fecha</td>
+                <td>Dia</td>
+                <td>Domis del Dia</td>
+                <td>Venta del Dia</td>
+                <td># Dom/int</td>
+                <td>Tot/Pago Int</td>
+                <td># Dom/Ext</td>
+                <td>Tot/Pago Ext</td>
+              </tr>
+            </thead>
+          </table>
+        </div>
       </div>
     </div>
   </div>
   </div>
   <!-- fin mdl Domicilios dias -->
-
-
 
   <!-- MDL DOMICILIOS MES-->
   <div class="modal fade mdl_domicilios_mes" tabindex="1" id="mdl_domicilios_mes"">
@@ -235,7 +210,6 @@
   </div>
   <!-- fin mdl Domicilios mes -->
 
-
   <!-- MDL DOMICILIOS INFORME-->
   <div class="modal fade mdl_domicilios_informe" tabindex="1" id="mdl_domicilios_informe"">
     <div class=" modal-dialog modal-xl">
@@ -246,72 +220,74 @@
       </div>
       <div class="modal-body">
 
-          <!-- DTTBL DOMI INTERNOS  -->
-          <div class="row">
-            <H3>INFORME DOMI INTERNOS</H3>
-            <div class="col-md-10 table-responsive">
-              <table class="table display compact cell-border" cellspacing="0" width="100%" id="tbl_domicilios_informe_int">
-                <thead>
-                  <tr>
-                    <td>Nombres</td>
-                    <td>Cuenta Domi Int</td>
-                    <td>A Pagar Ext</td>
-                  </tr>
-                </thead>
-              </table>
-            </div>
+        <!-- DTTBL DOMI INTERNOS  -->
+        <div class="row">
+          <H3 id="texto_domi_interno">INFORME DOMI INTERNOS</H3>
+          <div class="col-md-10 table-responsive">
+            <table class="table display compact cell-border" cellspacing="0" width="100%"
+              id="tbl_domicilios_informe_int">
+              <thead>
+                <tr>
+                  <td>Nombres</td>
+                  <td>Cuenta Domi Int</td>
+                  <td>A Pagar Int</td>
+                </tr>
+              </thead>
+            </table>
           </div>
-          <!-- fin dttbl domi internos -->
-          
-          <!-- DTTBL TOTAL DOMI INTERNOS  -->
-          <div class="row">
-            <h3>TOTALES DOMI INTERNOS </h3>
-            <div class="col-md-10 table-responsive">
-              <table class="table display compact cell-border" cellspacing="0" width="100%" id="tbl_total_domi_mes_int">
-                <thead>
-                  <tr>
-                    <td>Total Domi Int</td>
-                    <td>Total A Pagar Int</td>
-                  </tr>
-                </thead>
-              </table>
-            </div>
+        </div>
+        <!-- fin dttbl domi internos -->
+
+        <!-- DTTBL TOTAL DOMI INTERNOS  -->
+        <div class="row">
+          <h3 id="texto_domi_interno">TOTALES DOMI INTERNOS </h3>
+          <div class="col-md-10 table-responsive">
+            <table class="table display compact cell-border" cellspacing="0" width="100%" id="tbl_total_domi_mes_int">
+              <thead>
+                <tr>
+                  <td>Total Domi Int</td>
+                  <td>Total A Pagar Int</td>
+                </tr>
+              </thead>
+            </table>
           </div>
-          <!-- fin dttbl total domi internos -->
+        </div>
+        <!-- fin dttbl total domi internos -->
 
 
-          <!-- DTTBL DOMI EXTERNOS  -->
-          <div class="row">
-            <H3>INFORME DOMI EXTERNOS</H3>
-            <div class="col-md-10 table-responsive">
-              <table class="table display compact cell-border" cellspacing="0" width="100%" id="tbl_domicilios_informe_ext">
-                <thead>
-                  <tr>
-                    <td>Domi Ext</td>
-                    <td>Cuenta Domi Ext</td>
-                    <td>A Pagar Ext</td>
-                  </tr>
-                </thead>
-              </table>
-            </div>
+        <!-- DTTBL DOMI EXTERNOS  -->
+        <div class="row">
+          <H3 id="texto_domi_externo">INFORME DOMI EXTERNOS</H3>
+          <div class="col-md-10 table-responsive">
+            <table class="table display compact cell-border" cellspacing="0" width="100%"
+              id="tbl_domicilios_informe_ext">
+              <thead>
+                <tr>
+                  <td>Domi Ext</td>
+                  <td>Cuenta Domi Ext</td>
+                  <td>Pagado Ext</td>
+                </tr>
+              </thead>
+            </table>
           </div>
-          <!-- fin dttbl domi externos -->
-          
-          <!-- DTTBL TOTAL DOMI EXTERNOS  -->
-          <div class="row">
-            <h3>TOTALES DOMI EXTERNOS </h3>
-            <div class="col-md-10 table-responsive">
-              <table class="table display compact cell-border" cellspacing="0" width="100%" id="tbl_total_domi_mes_ext">
-                <thead>
-                  <tr>
-                    <td>Total Domi ext</td>
-                    <td>Total pagado ext</td>
-                  </tr>
-                </thead>
-              </table>
-            </div>
+        </div>
+        <!-- fin dttbl domi externos -->
+
+        <!-- DTTBL TOTAL DOMI EXTERNOS  -->
+        <div class="row">
+          <h3 id="texto_domi_ext">TOTALES DOMI EXTERNOS </h3>
+          <div class="col-md-10 table-responsive">
+            <table class="table display compact cell-border" cellspacing="0" width="100%" id="tbl_total_domi_mes_ext">
+              <thead>
+                <tr>
+                  <td>Total Domi ext</td>
+                  <td>Total pagado ext</td>
+                </tr>
+              </thead>
+            </table>
           </div>
-          <!-- fin dttbl total domi externos -->
+        </div>
+        <!-- fin dttbl total domi externos -->
       </div>
     </div>
   </div>
@@ -323,11 +299,11 @@
   <!-- - - - - - - - - - -->
 
   <!-- MDL GESTIONES TURNOS-->
-  <div class="modal fade mdl_ver_turnos" tabindex="1" id="mdl_ver_turnos" name="mdl_ver_turnos">
-    <div class="modal-dialog modal-xl">
+  <div class="modal fade mdl_ver_gestiones_turnos" tabindex="1" id="mdl_ver_gestiones_turnos">
+    <div class="modal-dialog modal-fullscreen">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5"> TURNOS DEL MES</h1>
+          <h1 class="modal-title fs-5"> GESTIONES POR TURNO DEL MES</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -335,20 +311,21 @@
             <!-- inicia datatables del modal  -->
             <div class="row">
               <div class="col-md-12 table-responsive">
-                <table class="table display compact cell-border" id="tbl_turnos">
+                <table class="table display compact cell-border" id="tbl_gestiones_turnos">
                   <thead>
                     <tr>
-                      <td>venta_id</td>
-                      <td>FECHA</td>
-                      <td>DIA</td>
-                      <td>JORNADA</td>
-                      <td>RESPONSABLE</td>
-                      <td>CAJA GENERAL</td>
-                      <td>UTILIDAD GESTIONES</td>
-                      <td>TOTAL ENTREGA</td>
-                      <td>DESCUADRE</td>
-                      <td>Hora CREADO</td>
-                      <td>Hora CIERRE</td>
+                      <td>Id</td>
+                      <td>Fecha</td>
+                      <td>Dia</td>
+                      <td>Jornada</td>
+                      <td>Responsable</td>
+                      <td>Caja</td>
+                      <td>Util/Gest</td>
+                      <td>Entrega</td>
+                      <td>Faltante</td>
+                      <td>Sobrante</td>
+                      <td>H/creado</td>
+                      <td>H/Cierre</td>
                       <td>Gestiones</td>
                     </tr>
                   </thead>
@@ -376,17 +353,19 @@
             <!-- inicia datatables del modal  -->
             <div class="row">
               <div class="col-md-12">
-                <table class="table display compact cell-border" id="tbl_dias">
+                <table class="table display compact cell-border" id="tbl_gestiones_dias">
                   <thead>
                     <tr>
-                      <td>FECHA</td>
-                      <td>DIA</td>
-                      <td>TOTAL CAJA</td>
-                      <td>UTILIDAD GESTIONES</td>
-                      <td>ACUM/UTL GESTIONES</td>
-                      <td>TOTAL ENTREGA</td>
-                      <td>TOTAL DESCUADRE</td>
-                      <td>ACUM. DESCUADRE</td>
+                      <td>Fecha</td>
+                      <td>Dia</td>
+                      <td>Tot/Caja</td>
+                      <td>Util/Gest</td>
+                      <td>Acum/Util Gest</td>
+                      <td>Tot/Entrega</td>
+                      <td>Tot/Faltante</td>
+                      <td>Acum/Faltante</td>
+                      <td>Tot/Sobrante</td>
+                      <td>Acum/Sobrante</td>
                     </tr>
                   </thead>
                 </table>
@@ -402,7 +381,7 @@
 
   <!-- MDL TODAS LAS GESTIONES-->
   <div class="modal fade" tabindex="1" id="mdl_ver_gestiones">
-    <div class="modal-dialog modal-xl">
+    <div class="modal-dialog modal-fullscreen">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5"> GESTIONES DEL MES</h1>
@@ -452,13 +431,13 @@
             <!-- inicia primer datatables del modal  -->
             <div class="row">
               <div class="col-md-12">
-                <table class="table display compact cell-border" id="tbl_informe_mes">
+                <table class=" table display compact" cellspacing="0" width="100%" id="tbl_gestiones_informe_mes">
                   <thead>
                     <tr>
-                      <td>NOMBRE</td>
-                      <td>UTILIDAD GLOBAL</td>
-                      <td>NUM GEST</td>
-                      <td>VALOR A PAGAR</td>
+                      <td>Vendedor</td>
+                      <td>Util/Global</td>
+                      <td>#Gest</td>
+                      <td>A Pagar</td>
                     </tr>
                   </thead>
                 </table>
@@ -468,15 +447,17 @@
             <!-- inicia segundo datatables del modal  -->
             <div class="row">
               <div class="col-md-12">
-                <table class="table" id="tbl_informe_mes_turno">
+                <h3>TOTALES DEL MES</h3>
+                <table class=" table display compact" cellspacing="0" width="100%" id="tbl_informe_gestiones_mes_turno">
                   <thead>
                     <tr>
-                      <td>MES</td>
-                      <td>TOTAL CAJA</td>
-                      <td>TOTAL UTILIDAD</td>
-                      <td>TOTAL ENTREGADO</td>
-                      <td>TOTAL DESCUADRE</td>
-                      <td>TOTAL PAGO VENDEDOR</td>
+                      <td>Mes</td>
+                      <td>Caja</td>
+                      <td>Utilidad</td>
+                      <td>Entregado</td>
+                      <td>Faltante</td>
+                      <td>Sobrante</td>
+                      <td>PagoVendedor</td>
                     </tr>
                   </thead>
                 </table>
@@ -491,135 +472,125 @@
   </div>
   <!-- fin mdl gestiones mes -->
 
-  <!--  MDL DETALLE TURNO-->
+  <!-- - - - - -->
+  <!-- MODALES -->
+  <!-- - - - - -->
+
+
+  <!-- ------------------------------------------------------------------- -->
+  <!--  INICIA SUBMODAL DETALLE TURNO-->
+  <!-- ------------------------------------------------------------------- -->
   <div class="modal fade" tabindex="1" id="mdl_detalle_turno">
-    <div class="modal-dialog modal-xl">
+    <div class="modal-dialog modal-fullscreen">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5">DETALLE DEL TURNO</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <section class="row">
-            <article class="col-md-2">
-              <div id="hoy_moment"></div>
-            </article>
-            <article class="col-md-4">
-              <input type="hidden" class="" id="npt_turno_id_actual" />
-              <input type="hidden" class="" id="npt_user_id_actual" />
-              <span>FECHA Y DIA DEL TURNO: </span>
-              <span id="npt_turno_fecha"></span>
-              <span id="npt_turno_dia"></span><br />
-              <span>RESPONSABLE DE TURNO: </span>
-              <span id="npt_user_nombre"></span>
-              <span id="npt_user_apellido"></span><br />
-              <span>JORNADA: </span>
-              <span id="npt_jornada_nombre"></span>
-            </article>
-          </section>
+          <div class="ms-4">
+            <span class="navbar-text" id="hoy_moment"></span>
+          </div>
 
-          <section class="row" id="vendedores">
-            <article class="col-md-6">
-              <h3>CUADRO DE VENDEDORES</h3>
-              <div class="table-responsive">
-                <table class="table table-sm table-bordered table-hover border-primary" id="tabla_vendedores">
+          <div class="row">
+            <!-- SECCION DOMICILIOS -->
+            <section class="container col-md-6">
+              <h3>DOMICILIOS</h3>
+              <button type="button" class="btn btn-outline-primary" id="btn_actualiza_mdl_domicilios">
+                Actualizar
+              </button>
+
+              <h5 id="titulos_dttbl_domicilios">PENDIENTES POR SALIR</h5>
+              <section class="table-responsive" id="tabla">
+                <table class="table display compact cell-border"  style="width:100%" id="tbl_domi_por_salir">
                   <thead>
                     <tr>
-                      <th scope="col"></th>
-                      <th scope="col">YULY</th>
-                      <th scope="col">LORENA</th>
-                      <th scope="col">KAROL</th>
-                      <th scope="col">MARINO</th>
+                      <td>Creado</td>
+                      <td>Barrio</td>
+                      <td>D/Int</td>
+                      <td>D/Ext</td>
+                      <td>Venta</td>
+                      <td></td>
+                      <td></td>
                     </tr>
                   </thead>
-                  <tbody class="table-group-divider">
-                    <tr>
-                      <th scope="row">Num - Gestiones</th>
-                      <td>
-                        <p id="ventasVendedor1"></p>
-                      </td>
-                      <td>
-                        <p id="ventasVendedor2"></p>
-                      </td>
-                      <td>
-                        <p id="ventasVendedor3"></p>
-                      </td>
-                      <td>
-                        <p id="ventasVendedor4"></p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Utilidad Hoy</th>
-                      <td>
-                        <p id="utilidadVendedor1"></p>
-                      </td>
-                      <td>
-                        <p id="utilidadVendedor2"></p>
-                      </td>
-                      <td>
-                        <p id="utilidadVendedor3"></p>
-                      </td>
-                      <td>
-                        <p id="utilidadVendedor4"></p>
-                      </td>
-                    </tr>
-                  </tbody>
                 </table>
-              </div>
-            </article>
-            <!-- fin seccion de vendedores -->
+              </section>
 
-            <article class="col-md-6">
-              <h3>CUADRO DE TOTALES</h3>
-              <table class="table table-sm table-bordered table-hover border-primary" id="tabla_totales">
-                <tbody class="table-group-divider">
-                  <tr>
-                    <th scope="row">UTILIDAD HOY</th>
-                    <td>
-                      <p id="p_utilidad_turno"></p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row"># GESTIONES HOY</th>
-                    <td>
-                      <p id="p_turno_numero_ventas"></p>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </article>
-          </section>
+              <h5 id="titulos_dttbl_domicilios">EN CURSO</h5>
+              <section class="table-responsive" id="tabla">
+                <table class="table display compact cell-border" style="width:100%" id="tbl_domi_en_curso">
+                  <thead>
+                    <tr>
+                      <td>Barrio</td>
+                      <td>Interno</td>
+                      <td>Externo</td>
+                      <td>Venta</td>
+                      <td>Salió</td>
+                    </tr>
+                  </thead>
+                </table>
+              </section>
 
-          <section class="row mb-3" id="vacio">
-            <div class="col-md-6 div_vacio_espacio"></div>
-            <div class="col-md-6">
-            </div>
-          </section>
+              <h5 id="titulos_dttbl_domicilios">ENTREGADOS</h5>
+              <section class="table-responsive" id="tabla">
+                <table class="table display compact cell-border" style="width:100%" id="tbl_domi_entregados">
+                  <thead>
+                    <tr>
+                    <td>Barrio</td>
+                    <td>Int</td>
+                    <td>Ext</td>
+                    <td>Ext/Val</td>
+                    <td>Venta</td>
+                    <td>Factura</td>
+                    <td>Salió</td>
+                    <td>Llegó</td>
+                    <td>Obs</td>
+                    <td>Turno</td>
+                    </tr>
+                  </thead>
+                </table>
+              </section>
 
-          <section class="row">
-            <section class="table-responsive" id="tabla">
-              <table class="table" id="tblVentas">
-                <thead>
-                  <tr>
-                    <td>ID</td>
-                    <td>PRODUCTO</td>
-                    <td>PROVEEDOR</td>
-                    <td>PRECIO COSTO</td>
-                    <td>PRECIO VENTA</td>
-                    <td>VENDEDOR</td>
-                    <td>UTILIDAD</td>
-                  </tr>
-                </thead>
-              </table>
+
             </section>
-          </section>
+            <!-- finaliza seccion de  domicilios -->
+
+            <!-- SECCION GESTIONES -->
+            <section class="container col-md-6">
+              <h3>GESTIONES</h3>
+              <!-- <button type="button" class="btn btn-success" id="btn_nueva_gestion">
+          Nueva Gestión
+        </button> -->
+              <h5 id="titulos_dttbl_gestiones">GESTIONES DEL TURNO</h5>
+              <div class="row">
+                <section class="table-responsive" id="tabla">
+                  <table class="table display compact cell-border display" style="width:100%" id="tbl_gestiones">
+                    <thead>
+                      <tr>
+                        <td>id</td>
+                        <td>Producto</td>
+                        <td>Proveedor</td>
+                        <td>Costo</td>
+                        <td>Venta</td>
+                        <td>Vendió</td>
+                        <td>Gana</td>
+                        <td>Tipo</td>
+                      </tr>
+                    </thead>
+                  </table>
+                </section>
+              </div>
+            </section>
+            <!-- finaliza seccion de gestiones -->
+          </div>
         </div>
+        <!-- final contenido pagina -->
       </div>
     </div>
   </div>
+  <!-- </div> -->
   <!-- fin mdl detalle turno -->
-
-
 
   <!-- SCRIPTS -->
   <div>
@@ -648,6 +619,8 @@
 
     <!-- scripts de la aplicacion -->
     <script src="admin_home_ctrl.js"></script>
+    <!-- scrip submodal DETALLE TURNO -->
+    <script src="admin_turno_ctrl.js"></script>
   </div>
 
 </body>

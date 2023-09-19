@@ -52,6 +52,16 @@ body{
 }
 
 
+#texto_domi_interno{
+  color: #5E8C31;
+}
+
+#texto_domi_externo{
+  color: #D92121;
+}
+
+
+
 .dataTables_scrollHeadInner{
   width:100% !important;
 }
