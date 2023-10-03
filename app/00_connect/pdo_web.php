@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 //creado el  2022-12-22
 // definición de variables
 $dsn="mysql:host=localhost;dbname=drogueriasuricen_CONTROLCAJA";

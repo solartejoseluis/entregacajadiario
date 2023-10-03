@@ -41,6 +41,27 @@ switch ($_GET['accion']) {
         echo json_encode($result);
         break;
 
+    case 'consultar_detalle_turno':
+        $sql = "SELECT
+            TURNOS.turno_id AS turno_id_actual,
+            TURNOS.turno_fecha_creado,
+            CONCAT(ELT(WEEKDAY(TURNOS.turno_fecha_creado)+ 1, 
+        'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom')) AS dia_semana,
+            JORNADAS.jornada_nombre,
+            CONCAT(USERS.user_nombre,' ',USERS.user_apellido) AS turno_nombres_responsable
+            FROM TURNOS
+            INNER JOIN USERS
+            ON USERS.user_id=TURNOS.turno_responsable
+            INNER JOIN JORNADAS
+            ON JORNADAS.jornada_id=TURNOS.turno_jornada
+            WHERE turno_id=$_GET[turno_id]";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
+
+
     case 'carga_dttbl_domi_por_salir':
         $sql = "SELECT
             DATE_FORMAT(DOMICILIOS.hora_creado, '%H:%i') AS hora_creado,
@@ -119,11 +140,11 @@ switch ($_GET['accion']) {
             WHERE (hora_salida != '0') AND (hora_llegada != '0')
             AND (turno_id=$_GET[turno_id]);
             ";
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute();
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            echo json_encode($result);
-            break;
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
 
 
 
@@ -191,7 +212,7 @@ switch ($_GET['accion']) {
         echo json_encode($response);
         break;
 
-   
+
 
     case 'total_utilidad_gestiones':
         $sql = "SELECT
@@ -382,7 +403,4 @@ switch ($_GET['accion']) {
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($result);
         break;
-
-
-
 };

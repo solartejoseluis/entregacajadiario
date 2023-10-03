@@ -7,12 +7,17 @@ $("#menu_nuevo_domicilio, #btn_nuevo_domicilio").click(function () {
 
 function limpiarModalDomicilios() {
   //oculta o muestra campos al inicio
-  $("#btn_domi_interno").show();
+  $("#btn_guardar_nuevo_domicilio").hide();
+  $("#btn_enviar_ya_domicilio").hide();
+  $("#btn_domi_interno").hide();
   $("#btn_domi_interno").removeClass("btn-secondary");
   $("#btn_domi_interno").addClass("btn-primary");
-  $("#btn_domi_externo").show();
+  $("#btn_domi_externo").hide();
   $("#btn_domi_externo").removeClass("btn-secondary");
   $("#btn_domi_externo").addClass("btn-primary");
+  $("#bloque_agregar_gestion_si_no").show();
+  $("#bloque_agregar_gestion_wait_01").hide();
+  $("#bloque_agregar_gestion_wait_02").hide();
   $("#bloque_inyectologia").hide();
   $("#bloque_transportador").hide();
   $("#bloque_domi_externo, #bloque_valor_domi_externo").hide();
@@ -26,6 +31,7 @@ function limpiarModalDomicilios() {
   $("#npt_barrio_comuna").val("");
   $("#npt_barrio_recomendacion").val("");
   $("#npt_factura").val("");
+  $("#slct_agregar_gestion_wait").val("0");
   $("#slct_domi_externo").val("0"); //select
   $("#npt_domi_externo_id").val("0");
   $("#npt_btn_domi_interno").val("0");
@@ -43,9 +49,9 @@ function limpiarModalDomicilios() {
   // $("#npt_turno_id_actual").val("");
 
 
-  $("#bloque_factura").show();  
-    //pone actributo que activa el input
-  $("#npt_valor_producto").prop("disabled",null);
+  $("#bloque_factura").show();
+  //pone actributo que activa el input
+  $("#npt_valor_producto").prop("disabled", null);
 
 }
 
@@ -199,6 +205,65 @@ $("#slct_vendedor").change(function () {
   $("#slct_vendedor").css("background-color", "#dbe5f0");
 });
 
+//carga el select de gestiones en espera
+$(document).ready(function () {
+  //activa el Select2 en el modal
+  // $("#slct_agregar_gestion_wait").select2({
+  //     dropdownParent: $("#mdl_domicilios"),
+  //     width: "100%",
+  //   });
+  $.ajax({
+    type: "POST",
+    url: "select_gestiones_en_espera_mdl.php",
+    success: function (response) {
+      $(".selectAgregarGestionWait01 select").html(response).fadeIn();
+    },
+  });
+});
+// asigna valor de slct gestiones en espera al input
+$(".selectAgregarGestionWait01 select").change(function () {
+  $("#npt_agregar_gestion_wait").val($(this).val());
+  $(".selectAgregarGestionWait01 select").css("background-color", "#dbe5f0");
+});
+
+
+// boton si agregar gestion
+$("#btn_si_agregar_gestion").click(function () {
+  // $("#btn_domi_interno").removeClass("btn-primary");
+  // $("#btn_domi_interno").addClass("btn-secondary");
+  $("#btn_domi_interno").hide();
+  $("#btn_domi_externo").hide();
+  $("#bloque_agregar_gestion_wait_01").show();
+  $("#bloque_agregar_gestion_si_no").hide();
+  // $("#bloque_domi_externo, #bloque_valor_domi_externo").hide();
+  // $("#bloque_inyectologia").show();
+  // $("#bloque_transportador").show();
+  // $("#bloque_hora_salida").show();
+  // $("#bloque_observaciones").show();
+  // $("#npt_btn_domi_interno").val("1");
+  $("#npt_agregar_gestion").val("si");
+});
+
+
+// boton no agregar gestion
+$("#btn_no_agregar_gestion").click(function () {
+  // $("#btn_domi_interno").removeClass("btn-primary");
+  // $("#btn_domi_interno").addClass("btn-secondary");
+  $("#btn_domi_interno").show();
+  $("#btn_domi_externo").show();
+  $("#bloque_agregar_gestion_wait_01").hide();
+  $("#bloque_agregar_gestion_wait_02").hide();
+  $("#bloque_agregar_gestion_si_no").hide();
+  // $("#bloque_domi_externo, #bloque_valor_domi_externo").hide();
+  // $("#bloque_inyectologia").show();
+  // $("#bloque_transportador").show();
+  // $("#bloque_hora_salida").show();
+  // $("#bloque_observaciones").show();
+  // $("#npt_btn_domi_interno").val("1");
+  $("#npt_agregar_gestion").val("NO");
+});
+
+
 // boton domi interno
 $("#btn_domi_interno").click(function () {
   $("#btn_domi_interno").removeClass("btn-primary");
@@ -207,6 +272,8 @@ $("#btn_domi_interno").click(function () {
   $("#bloque_domi_externo, #bloque_valor_domi_externo").hide();
   $("#bloque_inyectologia").show();
   $("#bloque_transportador").show();
+  $("#btn_guardar_nuevo_domicilio").show();
+  $("#btn_enviar_ya_domicilio").show();
   $("#bloque_hora_salida").show();
   $("#bloque_observaciones").show();
   $("#npt_btn_domi_interno").val("1");
@@ -219,6 +286,8 @@ $("#btn_domi_externo").click(function () {
   $("#btn_domi_interno").hide();
   $("#bloque_inyectologia").hide();
   $("#bloque_transportador").hide();
+  $("#btn_guardar_nuevo_domicilio").show();
+  $("#btn_enviar_ya_domicilio").show();
   $("#bloque_hora_salida").show();
   $("#bloque_observaciones").show();
   $("#bloque_domi_externo, #bloque_valor_domi_externo").show();
@@ -307,6 +376,79 @@ $("#btn_guardar_nuevo_domicilio").click(function () {
   }
 });
 
+
+// boton enviar ya domicilio
+$("#btn_enviar_ya_domicilio").click(function () {
+  //VALIDACION DE CAMPOS VACIOS
+  let valida_barrio_id = $("#npt_barrio_id").val();
+  let valida_factura = $("#npt_factura").val();
+  let valida_confirm_btn = $("#npt_confirm_btn").val();
+  let valida_btn_domi_interno = $("#npt_btn_domi_interno").val();
+  let valida_btn_domi_externo = $("#npt_btn_domi_externo").val();
+  let valida_domi_externo_id = $("#npt_domi_externo_id").val();
+  let valida_valor_domi_externo = $("#npt_valor_domi_externo").val();
+  let valida_transportador_id = $("#npt_transportador_id").val();
+  let valida_valor_producto = $("#npt_valor_producto").val();
+  let valida_hora_salida = $("#npt_hora_salida").val();
+  // let valida_inyectologia = $("#npt_inyectologia").val();
+  // let valida_observaciones = $("#npt_observaciones").val();
+
+  // compara datos de variables contra vacio y muestra un alert
+  if (valida_barrio_id.trim() == "") {
+    alert("elija un barrio.");
+    $("#slct_barrio").focus();
+    return false;
+  } else if (valida_factura.trim() == "") {
+    alert("digita factura.");
+    $("#npt_factura").focus();
+    return false;
+  } else if (valida_valor_producto.trim() == "") {
+    alert("digite valor venta");
+    $("#npt_valor_producto").focus();
+    return false;
+  } else if (valida_confirm_btn.trim() != "1") {
+    alert("elige Botón domi interno o externo");
+    return false;
+  } else if (
+    valida_btn_domi_interno.trim() == "1" &&
+    valida_transportador_id.trim() == "0"
+  ) {
+    //alert para validar campo vacio
+    alert("elija transportador.");
+    $("#slct_transportador").focus();
+    return false;
+  } else if (
+    valida_btn_domi_externo.trim() == "1" &&
+    valida_domi_externo_id.trim() == "0"
+  ) {
+    alert("elija trasportador domi externo.");
+    $("#slct_domi_externo").focus();
+    return false;
+  } else if (
+    valida_btn_domi_externo.trim() == "1" &&
+    valida_valor_domi_externo.trim() == ""
+  ) {
+    alert("elija valor domi externo");
+    $("#npt_valor_domi_externo").focus();
+    return false;
+  } else if (valida_hora_salida.trim() == "") {
+    alert("marque hora de salida");
+    $("#npt_hora_salida").focus();
+    return false;
+  } else {
+    //ejecutar Si todo fue validado
+    $("#mdl_domicilios").modal("hide");
+    let registro = recolectaDatosMdlNuevoDomi();
+    enviaYaDomicilio(registro);
+    // cargaPantallaPrincipal();
+  }
+});
+
+
+
+
+
+
 function recolectaDatosMdlNuevoDomi() {
   let registro = {
     barrio_id: $("#npt_barrio_id").val(),
@@ -336,7 +478,7 @@ function guardarDomicilio(registro) {
       // $("#tbl_domi_por_salir").DataTable().ajax.reload();
       // $("#tbl_domi_en_curso").DataTable().ajax.reload();
       // actualizaPantallaPrincipal();
-       location.reload();
+      location.reload();
     },
 
     error: function () {
@@ -344,5 +486,26 @@ function guardarDomicilio(registro) {
     },
   });
 }
+
+
+function enviaYaDomicilio(registro) {
+  $.ajax({
+    type: "POST",
+    url: "domi_new_mdl.php?accion=envia_ya_domicilio",
+    data: registro,
+
+    success: function (msg) {
+      // $("#tbl_domi_por_salir").DataTable().ajax.reload();
+      // $("#tbl_domi_en_curso").DataTable().ajax.reload();
+      // actualizaPantallaPrincipal();
+      location.reload();
+    },
+
+    error: function () {
+      alert("problema en: envia ya domicilio");
+    },
+  });
+}
+
 
 // FIN CICLO agregar domicilios

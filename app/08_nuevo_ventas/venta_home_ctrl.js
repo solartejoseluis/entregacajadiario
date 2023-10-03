@@ -7,6 +7,7 @@ function actualizaPantallaPrincipal() {
   datatablesDomiPorSalir();
   datatablesDomiEnCurso();
   datatablesGestiones();
+  datatablesGestionesEnEspera();
   consultarDatosTurnoActual();
   acumuladoMesUsuarioActual();
   acumuladoTurnoUsuarioActual();
@@ -295,6 +296,69 @@ function datatablesDomiEnCurso() {
   }
 }
 // fin dttbl domi en curso
+
+
+
+// DTTBL GESTIONES EN ESPERA
+function datatablesGestionesEnEspera() {
+  turno_id = $("#npt_turno_id_actual").val();
+  user_id = $("#npt_user_id_actual").val();
+  let listadoGestiones = $("#tbl_gestiones_en_espera").DataTable({
+    ajax: {
+      url: "venta_home_mdl.php?accion=carga_dttbl_gestiones_en_espera&turno_id=" + turno_id,
+      dataSrc: "",
+      data: "",
+    },
+    columns: [
+      { data: "venta_id" },
+      { data: "venta_nombre_producto" },
+      { data: "venta_nombre_proveedor" },
+      { data: "venta_costo_producto" },
+      { data: "venta_valor_venta" },
+      { data: "user_nombre" },
+      { data: "venta_utilidad" },
+      { data: "venta_tipo" },
+      { data: null, orderable: false },
+    ],
+    columnDefs: [
+            {
+        targets: 3,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+            {
+        targets: 4,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+            {
+        targets: 6,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+      {
+        targets: 8,
+        defaultContent:
+          "<button class='btn btn-outline-success btn-sm btnVerGestion'><i class='fa-solid fa-pen'></i></button>",
+        data: null,
+      },
+    ],
+    order: [[5, "asc"]],
+    info: false,
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+    },
+    searching: false,
+    paging: false,
+    destroy: true,
+  });
+
+  // boton editar gestion en espera
+  $("#tbl_gestiones_en_espera").on("click", "button.btnVerGestion", function () {
+    let registro = listadoGestiones.row($(this).parents("tr")).data();
+    recuperarRegistro(registro);
+    $("#mdl_edit_ventas").modal("show");
+  });
+}
+// fin datatables gestiones en espera
+
 
 // DTTBL GESTIONES
 function datatablesGestiones() {

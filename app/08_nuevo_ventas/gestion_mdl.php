@@ -29,6 +29,33 @@ switch ($_GET['accion']) {
         echo json_encode($response);
         break;
 
+
+
+    case 'guardar_nueva_gestion_en_espera':
+        $sql = "INSERT INTO VENTAS(
+        venta_nombre_producto,
+        venta_nombre_proveedor,
+        venta_costo_producto,
+        venta_valor_venta,
+        venta_utilidad,
+        user_id,
+        turno_id,
+        venta_tipo
+      )VALUES (
+        '$_POST[venta_nombre_producto]',
+        '$_POST[venta_nombre_proveedor]',
+        '$_POST[venta_costo_producto]',
+        '$_POST[venta_valor_venta]',
+        '$_POST[venta_utilidad]',
+        '$_POST[user_id]',
+        '$_POST[turno_id]',
+        'WAIT'
+    )";
+        $response = $pdo->exec($sql);
+        echo json_encode($response);
+        break;
+
+
     case 'borrar_venta':
         $sql = "DELETE FROM VENTAS WHERE venta_id=$_GET[venta_id]";
         $response = $pdo->exec($sql);

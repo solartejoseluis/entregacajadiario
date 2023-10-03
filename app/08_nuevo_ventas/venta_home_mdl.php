@@ -95,7 +95,6 @@ switch ($_GET['accion']) {
         break;
 
     case 'carga_dttbl_gestiones':
-        // ENVIA LOS DATOS AL DATATABLES
         $sql = "SELECT 
         VENTAS.venta_id,
         VENTAS.venta_nombre_producto,
@@ -109,13 +108,37 @@ switch ($_GET['accion']) {
         FROM VENTAS
         INNER JOIN USERS
         ON VENTAS.user_id=USERS.user_id
-        WHERE turno_id=$_GET[turno_id]";
+        WHERE turno_id=$_GET[turno_id]
+        AND NOT venta_tipo='WAIT'
+        ";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($result);
         break;
 
+    case 'carga_dttbl_gestiones_en_espera':
+        $sql = "SELECT 
+        VENTAS.venta_id,
+        VENTAS.venta_nombre_producto,
+        VENTAS.venta_nombre_proveedor,
+        VENTAS.venta_costo_producto,
+        VENTAS.venta_valor_venta,
+        USERS.user_nombre,
+        VENTAS.venta_utilidad,
+        VENTAS.turno_id,
+        VENTAS.venta_tipo
+        FROM VENTAS
+        INNER JOIN USERS
+        ON VENTAS.user_id=USERS.user_id
+        WHERE turno_id=$_GET[turno_id]
+        AND venta_tipo='WAIT'
+        ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
 
     case 'borrar_venta':
         $sql = "DELETE FROM VENTAS WHERE venta_id=$_GET[venta_id]";
@@ -422,9 +445,9 @@ switch ($_GET['accion']) {
             WHERE (hora_salida != '0') AND (hora_llegada != '0')
             AND (turno_id=$_GET[turno_id]);
             ";
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute();
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            echo json_encode($result);
-            break;
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
 };

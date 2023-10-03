@@ -9,7 +9,6 @@ function datatablesDomiPorSalir(turno_id) {
       url: "admin_turno_mdl.php?accion=carga_dttbl_domi_por_salir&turno_id=" + turno_id,
       dataSrc: "",
       data: "",
-      
     },
     columns: [
       { data: "hora_creado" },
@@ -42,7 +41,6 @@ function datatablesDomiPorSalir(turno_id) {
 
   // DTTBL DOMI EN CURSO
   function datatablesDomiEnCurso(turno_id) {
-
     let listadoDomiEnCurso = $("#tbl_domi_en_curso").DataTable({
       ajax: {
         url: "admin_turno_mdl.php?accion=carga_dttbl_domi_en_curso&turno_id=" + turno_id,
@@ -66,9 +64,10 @@ function datatablesDomiPorSalir(turno_id) {
       order: [[4, "asc"]],
       info: false,
       language: {
-        url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+       url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
       },
       searching: false,
+      info:false,
       paging: false,
       destroy: true,
     });
@@ -102,8 +101,6 @@ function datatablesDomiPorSalir(turno_id) {
 
 // DTTBL DOMI ENTREGADOS
   function datatablesDomiEntregados(turno_id) {
-    // turno_id = $("#npt_turno_id_actual").val();
-    // user_id = $("#npt_user_id_actual").val();
     let listado = $("#tbl_domi_entregados").DataTable({
       ajax: {
         url: "admin_turno_mdl.php?accion=carga_dttbl_domi_entregados&turno_id=" + turno_id,
@@ -296,69 +293,69 @@ function datatablesDomiPorSalir(turno_id) {
 
   // CARGAS EN PANTALLA PRINCIPAL
 
-  function cargarDatosUtilidadVendedor1() {
-    $.ajax({
-      type: "GET",
-      url: "admin_turno_mdl.php?accion=consultar_utilidad_vendedor1",
-      data: { turno_id: turno_id },
-      success: function (datos) {
-        $("#utilidadVendedor1").html(datos[0].utilidad_vendedor1);
-        $("#ventasVendedor1").html(datos[0].ventas_vendedor1);
-      },
-      error: function () {
-        alert("Problema en consultarUtilidadVendedor1");
-      },
-    });
-  }
+  // function cargarDatosUtilidadVendedor1() {
+  //   $.ajax({
+  //     type: "GET",
+  //     url: "admin_turno_mdl.php?accion=consultar_utilidad_vendedor1",
+  //     data: { turno_id: turno_id },
+  //     success: function (datos) {
+  //       $("#utilidadVendedor1").html(datos[0].utilidad_vendedor1);
+  //       $("#ventasVendedor1").html(datos[0].ventas_vendedor1);
+  //     },
+  //     error: function () {
+  //       alert("Problema en consultarUtilidadVendedor1");
+  //     },
+  //   });
+  // }
 
 
-  function utilidadTurno() {
-    $.ajax({
-      type: "GET",
-      url: "admin_turno_mdl.php?accion=consultar_utilidad_turno",
-      data: { turno_id: turno_id },
-      success: function (datos) {
-        $("#p_utilidad_turno").html(datos[0].utilidad_turno);
-        $("#p_turno_numero_ventas").html(datos[0].ventas_turno);
-      },
-      error: function () {
-        alert("Problema en cargar datos utilidad turno");
-      },
-    });
-  }
+  // function utilidadTurno() {
+  //   $.ajax({
+  //     type: "GET",
+  //     url: "admin_turno_mdl.php?accion=consultar_utilidad_turno",
+  //     data: { turno_id: turno_id },
+  //     success: function (datos) {
+  //       $("#p_utilidad_turno").html(datos[0].utilidad_turno);
+  //       $("#p_turno_numero_ventas").html(datos[0].ventas_turno);
+  //     },
+  //     error: function () {
+  //       alert("Problema en cargar datos utilidad turno");
+  //     },
+  //   });
+  // }
 
-  function acumuladoMesUsuarioActual() {
-    $.ajax({
-      type: "GET",
-      url: "admin_turno_mdl.php?accion=acumulado_mes_usuario_actual",
-      data: { user_id: user_id },
-      success: function (datos) {
-        $(".cuenta_nmr_gestiones").html(datos[0].cuenta_nmr_gestiones);
-        $(".acumulado_utilidad").html(datos[0].acumulado_utilidad);
-        $(".acumulado_ganancia").html(datos[0].acumulado_ganancia);
-      },
-      error: function () {
-        alert("Problema en cargar acumulado mes");
-      },
-    });
-  }
+  // function acumuladoMesUsuarioActual() {
+  //   $.ajax({
+  //     type: "GET",
+  //     url: "admin_turno_mdl.php?accion=acumulado_mes_usuario_actual",
+  //     data: { user_id: user_id },
+  //     success: function (datos) {
+  //       $(".cuenta_nmr_gestiones").html(datos[0].cuenta_nmr_gestiones);
+  //       $(".acumulado_utilidad").html(datos[0].acumulado_utilidad);
+  //       $(".acumulado_ganancia").html(datos[0].acumulado_ganancia);
+  //     },
+  //     error: function () {
+  //       alert("Problema en cargar acumulado mes");
+  //     },
+  //   });
+  // }
 
 
-  function acumuladoTurnoUsuarioActual() {
-    $.ajax({
-      type: "GET",
-      url: "admin_turno_mdl.php?accion=acumulado_turno_usuario_actual",
-      data: { user_id: user_id, turno_id: turno_id },
-      success: function (datos) {
-        $(".cuenta_nmr_gestiones_turno").html(datos[0].cuenta_nmr_gestiones_turno);
-        $(".acumulado_utilidad_turno").html(datos[0].acumulado_utilidad_turno);
-        $(".acumulado_ganancia_turno").html(datos[0].acumulado_ganancia_turno);
-      },
-      error: function () {
-        alert("Problema en cargar acumulado turno");
-      },
-    });
-  }
+  // function acumuladoTurnoUsuarioActual() {
+  //   $.ajax({
+  //     type: "GET",
+  //     url: "admin_turno_mdl.php?accion=acumulado_turno_usuario_actual",
+  //     data: { user_id: user_id, turno_id: turno_id },
+  //     success: function (datos) {
+  //       $(".cuenta_nmr_gestiones_turno").html(datos[0].cuenta_nmr_gestiones_turno);
+  //       $(".acumulado_utilidad_turno").html(datos[0].acumulado_utilidad_turno);
+  //       $(".acumulado_ganancia_turno").html(datos[0].acumulado_ganancia_turno);
+  //     },
+  //     error: function () {
+  //       alert("Problema en cargar acumulado turno");
+  //     },
+  //   });
+  // }
 
   // CICLO CERRAR SESION
   $("#lnk_cerrar_sesion").on("click", function () {
@@ -371,8 +368,4 @@ function datatablesDomiPorSalir(turno_id) {
   });
 
 
-
-  $("#btn_actualiza_mdl_domicilios").on("click", function () {
-alert("actualiza_los datos del modal domicilios");
-  });
 

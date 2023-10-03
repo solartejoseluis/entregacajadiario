@@ -239,10 +239,13 @@
 
       <!-- SECCION GESTIONES -->
       <section class="container col-md-6">
-        <h3>GESTIONES</h3>
+
+        <h3>GESTIONES DEL TURNO</h3>
         <button type="button" class="btn btn-success" id="btn_nueva_gestion">
           Nueva Gestión
         </button>
+
+
         <h5 id="titulos_dttbl_gestiones">GESTIONES DEL TURNO</h5>
         <div class="row">
           <section class="table-responsive" id="tabla">
@@ -263,8 +266,34 @@
             </table>
           </section>
         </div>
+
+
+        <h5 id="titulos_dttbl_gestiones_en_espera">GESTIONES EN ESPERA</h5>
+        <div class="row">
+          <section class="table-responsive" id="tabla">
+            <table class="table display compact cell-border" id="tbl_gestiones_en_espera">
+              <thead>
+                <tr>
+                  <td>id</td>
+                  <td>Producto</td>
+                  <td>Proveedor</td>
+                  <td>Costo</td>
+                  <td>Venta</td>
+                  <td>Vendió</td>
+                  <td>Gana</td>
+                  <td>Tipo</td>
+                  <td></td>
+                </tr>
+              </thead>
+            </table>
+          </section>
+        </div>
+
+
       </section>
       <!-- finaliza seccion de gestiones -->
+
+
     </div>
   </div>
   <!-- final contenido pagina -->
@@ -326,6 +355,9 @@
           </form>
         </div>
         <div class="modal-footer">
+          <button type="submit" class="btn btn-outline-warning" id="btn_poner_en_espera">
+            Poner En Espera
+          </button>
           <button type="submit" class="btn btn-success" id="btn_enviar_domi">
             Enviar Domicilio
           </button>
@@ -674,10 +706,22 @@
             </div>
 
             <div class="col-md-9 input-group input-group-sm mb-2" id="bloque_valor_venta">
-              <span class="input-group-text" id="inputGroup-sizing-sm">Valor Venta:</span>
+              <span class="input-group-text" id="inputGroup-sizing-sm">Valor Venta Suri:</span>
               <input type="text" class="form-control" id="npt_valor_producto" placeholder="valor de la venta" />
               <input type="hidden" class="form-control" id="npt_valor_producto_base" />
             </div>
+
+            <div class="mb-2" id="bloque_agregar_gestion_si_no">
+              <p>¿Agregar Producto De Gestión?</p>
+              <button type="button" class="btn btn-outline-success btn-sm" id="btn_si_agregar_gestion">
+                si
+              </button>
+              <button type="button" class="btn btn-outline-danger btn-sm" id="btn_no_agregar_gestion">
+                no
+              </button>
+              <input type="hidden" class="form-control" id="npt_agregar_gestion" />
+            </div>
+
             <div class="mb-2">
               <input type="hidden" class="form-control" id="npt_confirm_btn" />
               <button type="button" class="btn btn-primary btn-sm" id="btn_domi_interno">
@@ -689,11 +733,62 @@
               </button>
               <input type="hidden" class="form-control" id="npt_btn_domi_externo" />
             </div>
+
+            <!-- select bootstrap basico -->
+            <div class="selectAgregarGestionWait01 col-md-9 input-group input-group-sm mb-2"
+              id="bloque_agregar_gestion_wait_01">
+              <span class="input-group-text" id="inputGroup-sizing-sm"> + Gestión:</span>
+              <select class="form-select" id="slct_agregar_gestion_wait_01"></select>
+              <input type="hidden" class="form-control" id="npt_agregar_gestion_wait_01" />
+              <button type="submit" class="btn btn-outline-warning" id="btn_agregar_gestion_wait_01">
+                Agregar
+              </button>
+            </div>
+            <div class="selectAgregarGestionWait02 col-md-9 input-group input-group-sm mb-2"
+              id="bloque_agregar_gestion_wait_02">
+              <span class="input-group-text" id="inputGroup-sizing-sm"> + Gestión:</span>
+              <select class="form-select" id="slct_agregar_gestion_wait_01"></select>
+              <input type="hidden" class="form-control" id="npt_agregar_gestion_wait_02" />
+              <button type="submit" class="btn btn-outline-warning" id="btn_agregar_gestion_wait_02">
+                Agregar
+              </button>
+            </div>
+            <!-- codigo del select2 multiple -->
+            <!-- <label for="id_label_multiple">
+  Click this to highlight the multiple select element
+  <select class="js-example-basic-multiple js-states form-control" id="id_label_multiple" multiple="multiple"></select>
+</label> -->
+
+
+            <!-- <div class="selectBarrio col-md-9 input-group input-group-sm mb-2">
+              <span class="input-group-text" id="title_barrio">Barrio:</span>
+              <select class="form-select form-select-sm" id="slct_barrio"></select>
+              <input type="hidden" class="form-control" id="npt_barrio_id" />
+            </div> -->
+
+
+            <!-- ensayo -->
+            <!-- <div class="selectAgregarGestionWait col-md-9 input-group input-group-sm mb-2" id="bloque_agregar_gestion_wait">
+              <span class="input-group-text" id="titulo_agregar_gestion">clic para elegir gestiones en espera:</span>
+              <select 
+              class="form-select form-select-sm" 
+              id="slct_agregar_gestion_wait" 
+              multiple="multiple"
+              ></select>
+              <input type="hidden" class="form-control" id="npt_agregar_gestion_wait" />
+            </div> -->
+
+
+
+
+
             <div class="selectDomiExterno col-md-9 input-group input-group-sm mb-2" id="bloque_domi_externo">
               <span class="input-group-text" id="inputGroup-sizing-sm">transporte_externo:</span>
               <select class="form-select" id="slct_domi_externo"></select>
               <input type="hidden" class="form-control" id="npt_domi_externo_id" />
             </div>
+
+
             <div class="col-md-9 input-group input-group-sm mb-2" id="bloque_valor_domi_externo">
               <span class="input-group-text" id="inputGroup-sizing-sm">Valor Servicio:</span>
               <input type="text" class="form-control" id="npt_valor_domi_externo" placeholder="valor domi externo" />
@@ -714,16 +809,6 @@
               <input type="hidden" class="form-control" placeholder="hora de llegada" id="npt_hora_llegada" disabled />
             </div>
 
-            <!-- <div class="input-group input-group input-group-sm mb-2" id="bloque_inyectologia">
-              <button class="btn btn-primary" type="button" id="btn_inyectologia">
-                Inyectología
-              </button>
-              <input type="text" class="form-control" placeholder="pulse para asignar" id="npt_inyectologia" disabled />
-              <button class="btn btn-secondary" type="button" id="btn_inyectologia_cancel">
-                x
-              </button>
-            </div> -->
-
             <div class="col-md-9 input-group input-group-sm mb-2" id="bloque_observaciones">
               <span class="input-group-text" id="inputGroup-sizing-sm">Observaciones:</span>
               <input type="text" class="form-control" id="npt_observaciones" placeholder="observaciones" />
@@ -733,8 +818,11 @@
         </div>
         <!-- footer modal nueva venta -->
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary" id="btn_guardar_nuevo_domicilio">
-            Agregar
+          <button type="submit" class="btn btn-outline-primary" id="btn_enviar_ya_domicilio">
+            Envia Ya
+          </button>
+          <button type="submit" class="btn btn-outline-warning" id="btn_guardar_nuevo_domicilio">
+            Por Salir
           </button>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
             X
@@ -808,17 +896,6 @@
                 x
               </button>
             </div>
-
-            <!-- <div class="input-group input-group input-group-sm mb-2" id="bloque_edit_inyectologia">
-              <button class="btn btn-primary" type="button" id="btn_edit_inyectologia">
-                Inyectología
-              </button>
-              <input type="text" class="form-control" placeholder="hora de salida" id="npt_edit_inyectologia"
-                disabled />
-              <button class="btn btn-secondary" type="button" id="btn_edit_inyectologia_cancel">
-                x
-              </button>
-            </div> -->
 
             <div class="col-md-9 input-group input-group-sm mb-2">
               <span class="input-group-text" id="inputGroup-sizing-sm">Observaciones:</span>
@@ -1114,10 +1191,6 @@
     </div>
   </div>
   <!-- fin modal confirma cerrar sesion -->
-
-
-
-
 
   <!-- SCRIPTS -->
   <!-- CDN jquery 3.6.1 js -->

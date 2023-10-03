@@ -183,6 +183,7 @@ function modificarRegistro(registro) {
     success: function (msg) {
       // listadoVentas.ajax.reload();
       $("#tbl_gestiones").DataTable().ajax.reload();
+      $("#tbl_gestiones_en_espera").DataTable().ajax.reload();
     },
     error: function () {
       alert("Problema modificando");

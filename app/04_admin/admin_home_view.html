@@ -123,6 +123,7 @@
                 <td>Pago Dom/int</td>
                 <td># Dom/Ext</td>
                 <td>Pago Dom/Ext</td>
+                <td></td>
               </tr>
             </thead>
           </table>
@@ -308,6 +309,7 @@
         </div>
         <div class="modal-body">
           <div class="container-fluid">
+
             <!-- inicia datatables del modal  -->
             <div class="row">
               <div class="col-md-12 table-responsive">
@@ -326,7 +328,7 @@
                       <td>Sobrante</td>
                       <td>H/creado</td>
                       <td>H/Cierre</td>
-                      <td>Gestiones</td>
+                      <td></td>
                     </tr>
                   </thead>
                 </table>
@@ -485,24 +487,80 @@
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5">DETALLE DEL TURNO</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn btn-primary" id="btn_close_mdl_detalle_turno">
+            Volver a Listado Turnos
+          </button>
         </div>
         <div class="modal-body">
-          <div class="ms-4">
-            <span class="navbar-text" id="hoy_moment"></span>
+          <div class="row">
+
+            <div class="container col-md-4">
+              <div class="ms-4 col-md-4">
+                <span class="navbar-text" id="hoy_moment"></span>
+              </div>
+
+
+              <!-- TURNO ID -->
+              <div class="col-md-2 input-group input-group-sm mb-2">
+                <span class="input-group-text" id="inputGroup-sizing-sm"> turno Id</span>
+                <input type="text" class="form-control" id="npt_detalle_turno_id" />
+              </div>
+
+            </div>
+
+
+
+            <div class="container col-md-4">
+
+              <!-- FECHA CREADO -->
+              <div class="col-md-2 input-group input-group-sm mb-2">
+                <span class="input-group-text" id="inputGroup-sizing-sm">Fecha</span>
+                <input type="text" class="form-control" id="npt_detalle_turno_fecha_creado" />
+              </div>
+
+              <!-- DIA SEMANA -->
+              <div class="col-md-2 input-group input-group-sm mb-2">
+                <span class="input-group-text" id="inputGroup-sizing-sm">Dia</span>
+                <input type="text" class="form-control" id="npt_detalle_dia_semana" />
+              </div>
+
+            </div>
+
+
+
+            <div class="container col-md-4">
+
+
+
+              <!-- JORNADA NOMBRE -->
+              <div class="col-md-4 input-group input-group-sm mb-2">
+                <span class="input-group-text" id="inputGroup-sizing-sm">jornada</span>
+                <input type="text" class="form-control" id="npt_detalle_jornada_nombre" />
+              </div>
+
+
+              <!-- RESPONSABLE DE TURNO -->
+              <div class="col-md-4 input-group input-group-sm mb-2">
+                <span class="input-group-text" id="inputGroup-sizing-sm">Responsable</span>
+                <input type="text" class="form-control" id="npt_detalle_turno_nombres_responsable" />
+              </div>
+
+            </div>
+
+
           </div>
 
           <div class="row">
             <!-- SECCION DOMICILIOS -->
             <section class="container col-md-6">
               <h3>DOMICILIOS</h3>
-              <button type="button" class="btn btn-outline-primary" id="btn_actualiza_mdl_domicilios">
+              <!-- <button type="button" class="btn btn-outline-primary" id="btn_actualiza_mdl_domicilios">
                 Actualizar
-              </button>
+              </button> -->
 
               <h5 id="titulos_dttbl_domicilios">PENDIENTES POR SALIR</h5>
               <section class="table-responsive" id="tabla">
-                <table class="table display compact cell-border"  style="width:100%" id="tbl_domi_por_salir">
+                <table class="table display compact cell-border" style="width:100%" id="tbl_domi_por_salir">
                   <thead>
                     <tr>
                       <td>Creado</td>
@@ -537,16 +595,16 @@
                 <table class="table display compact cell-border" style="width:100%" id="tbl_domi_entregados">
                   <thead>
                     <tr>
-                    <td>Barrio</td>
-                    <td>Int</td>
-                    <td>Ext</td>
-                    <td>Ext/Val</td>
-                    <td>Venta</td>
-                    <td>Factura</td>
-                    <td>Salió</td>
-                    <td>Llegó</td>
-                    <td>Obs</td>
-                    <td>Turno</td>
+                      <td>Barrio</td>
+                      <td>Int</td>
+                      <td>Ext</td>
+                      <td>Ext/Val</td>
+                      <td>Venta</td>
+                      <td>Factura</td>
+                      <td>Salió</td>
+                      <td>Llegó</td>
+                      <td>Obs</td>
+                      <td>Turno</td>
                     </tr>
                   </thead>
                 </table>

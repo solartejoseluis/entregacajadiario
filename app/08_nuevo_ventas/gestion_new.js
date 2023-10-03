@@ -176,6 +176,51 @@ $("#btn_save_punto_fisico").click(function () {
   }
 });
 
+
+// boton poner espera la gestion
+$("#btn_poner_en_espera").click(function () {
+  //VALIDACION DE DATOS DEL MODAL NUEVO
+  let valida_nombre_producto = $("#npt_venta_nombre_producto").val();
+  let valida_nombre_proveedor = $("#npt_venta_nombre_proveedor").val();
+  let valida_venta_costo_producto = $("#npt_venta_costo_producto_base").val();
+  let valida_venta_valor_venta = $("#npt_venta_valor_venta_base").val();
+  let valida_vendedor_id = $("#npt_vendedor_id").val();
+  $("#npt_venta_tipo").val("DOMI");
+
+  // compara datos de variables contra vacio y muestra un alert
+  if (valida_vendedor_id.trim() == "") {
+    alert("elija vendedor");
+    $("#slct_vendedor").focus();
+    return false;
+  } else if (valida_nombre_producto.trim() == "") {
+    alert("Digitar nombre producto.");
+    $("#npt_venta_nombre_producto").focus();
+    return false;
+  } else if (valida_nombre_proveedor.trim() == "") {
+    alert("Digite nombre proveedor");
+    $("#npt_venta_nombre_proveedor").focus();
+    return false;
+  } else if (valida_venta_costo_producto.trim() == "") {
+    alert("Digite costo producto");
+    $("#npt_venta_costo_producto").focus();
+    return false;
+  } else if (valida_venta_valor_venta.trim() == "") {
+    alert("Digite valor venta");
+    $("#npt_venta_valor_venta").focus();
+    return false; // fin validacion formulario nuevo
+  } else {
+    //ejecutar Si todo fue validado
+    $("#mdl_new_gestion").modal("hide");
+    let registro = recolectaDatosMdlNuevaGestion();
+    guardarNuevaGestionEnEspera(registro);
+    actualizaPantallaPrincipal();
+  }
+});
+
+
+
+
+
 // boton enviar domicilio
 $("#btn_enviar_domi").click(function () {
   //VALIDACION DE DATOS DEL MODAL NUEVO
@@ -297,4 +342,24 @@ function guardarNuevaGestion(registro) {
     },
   });
 }
+
+
+function guardarNuevaGestionEnEspera(registro) {
+  $.ajax({
+    type: "POST",
+    url: "gestion_mdl.php?accion=guardar_nueva_gestion_en_espera",
+    data: registro,
+
+    success: function (msg) {
+      $("#tbl_gestiones_en_espera").DataTable().ajax.reload();
+    },
+
+    error: function () {
+      alert("problema en: guardarNuevaGestion()");
+    },
+  });
+}
+
+
+
 // FIN CICLO AGREGAR NUEVA gestion

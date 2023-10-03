@@ -70,12 +70,25 @@ body {
   margin-top: 1em;
 }
 
-#titulos_dttbl_gestiones {
-  background-color: #105434;
+#titulos_dttbl_gestiones_en_espera  {
+   background-color: #105434;
+  opacity: .5;
   color: white;
   padding-left: 5em;
   margin-top: 1em;
 }
+
+
+#titulos_dttbl_gestiones {
+   background-color: #105434;
+  color: white;
+  padding-left: 5em;
+  margin-top: 1em;
+}
+
+
+
+
 
 #subtitulo_navbar {
   color: whitesmoke;

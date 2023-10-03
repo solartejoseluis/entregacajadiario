@@ -111,12 +111,13 @@ function dttblDomiciliosGeneral() {
   });
 
 
+
 } // final dttbl Domicilios General
 
 function dttblGestionesGeneral() {
   let listado = $("#tbl_gestiones_general").DataTable({
     ajax: {
-      url: "admin_home_mdl.php?accion=listar_gestiones",
+      url: "admin_home_mdl.php?accion=listar_gestiones_general",
       dataSrc: "",
       data: "",
     },
@@ -176,7 +177,7 @@ function dttblGestionesGeneral() {
   $("#tbl_gestiones_general tbody").on("click", "button.btn_ver_gestiones_turnos", function () {
     let registro = listado.row($(this).parents("tr")).data();
     $("#mdl_ver_gestiones_turnos").modal("show");
-    datatables_todos_turnos(registro.mes_actual);
+    datatables_gestiones_todos_turnos(registro.mes_actual);
   });
 
   // boton MDL ver dias
@@ -202,7 +203,7 @@ function dttblGestionesGeneral() {
   });
 
 
-  function datatables_todos_turnos(mes_actual) {
+  function datatables_gestiones_todos_turnos(mes_actual) {
     let listado = $("#tbl_gestiones_turnos").DataTable({
       ajax: {
         url:
@@ -263,7 +264,7 @@ function dttblGestionesGeneral() {
         {
           targets: 12,
           defaultContent:
-            "<button class='btn btn-primary btn-sm btn_detalle_turno' id='btn_detalle_turno'> Ver</button>",
+            "<button class='btn btn-primary btn-sm btn_detalle_turno_gestiones' id='btn_detalle_turno_gestiones'> Ver</button>",
           data: null,
         },
       ],
@@ -278,368 +279,397 @@ function dttblGestionesGeneral() {
     });
 
     // boton detalle_turno (SUBMODAL)
-    $("#tbl_gestiones_turnos tbody").on("click", "button.btn_detalle_turno", function () {
+    $("#tbl_gestiones_turnos tbody").on("click", "button.btn_detalle_turno_gestiones", function () {
       let registro = listado.row($(this).parents("tr")).data();
       $("#mdl_detalle_turno").modal("show");
+      cargarDatosDetalleTurno(registro.turno_id);
       datatablesDomiPorSalir(registro.turno_id);
       datatablesDomiEnCurso(registro.turno_id);
       datatablesDomiEntregados(registro.turno_id);
       datatablesGestiones(registro.turno_id);
-      //  datatables_ver_detalle_turno(registro.turno_id);
-      // cargarDatosUtilidadVendedor1(registro.turno_id);
-    });
-  }
-  // fin funcion datatables todos los turnos
-
-
-  // DTTBL MDL  INFORME  GESTIONES POR DIAS
-  function datatables_todos_dias(mes_actual) {
-    var listado = $("#tbl_gestiones_dias").DataTable({
-      ajax: {
-        url:
-          "admin_home_mdl.php?accion=listar_gestiones_dias_mes&mes_actual=" + mes_actual,
-        dataSrc: "",
-        data: "",
-      },
-
-      columns: [
-        { data: "turno_fecha" },
-        { data: "dia_semana" },
-        { data: "suma_caja" },
-        { data: "suma_total_utilidad" },
-        { data: "acumulado_utilidad_gestiones" },
-        { data: "suma_total_entrega" },
-        { data: "suma_total_faltante" },
-        { data: "acumulado_faltante" },
-        { data: "suma_total_sobrante" },
-        { data: "acumulado_sobrante" },
-      ],
-      columnDefs: [
-        {
-          targets: "_all",
-          sortable: false
-        },
-
-        {
-          targets: 2,
-          render: $.fn.dataTable.render.number(".", ",", 0, "$"),
-        },
-        {
-          targets: 3,
-          createdCell: function (td) {
-            $(td).css("background-color", "#7ED4E6");
-          },
-          render: $.fn.dataTable.render.number(".", ",", 0, "$"),
-        },
-        {
-          targets: 4,
-          createdCell: function (td) {
-            $(td).css("background-color", "#7ED4E6");
-          },
-          render: $.fn.dataTable.render.number(".", ",", 0, "$"),
-        },
-        {
-          targets: 5,
-          render: $.fn.dataTable.render.number(".", ",", 0, "$"),
-        },
-        {
-          targets: 6,
-          createdCell: function (td) {
-            $(td).css("background-color", "#FFB97B");
-          },
-          render: $.fn.dataTable.render.number(".", ",", 0, "$"),
-        },
-        {
-          targets: 7,
-          createdCell: function (td) {
-            $(td).css("background-color", "#FFB97B");
-          },
-          render: $.fn.dataTable.render.number(".", ",", 0, "$"),
-        },
-        {
-          targets: 8,
-          createdCell: function (td) {
-            $(td).css("background-color", "#93DFB8");
-          },
-          render: $.fn.dataTable.render.number(".", ",", 0, "$"),
-        },
-        {
-          targets: 9,
-          createdCell: function (td) {
-            $(td).css("background-color", "#93DFB8");
-          },
-          render: $.fn.dataTable.render.number(".", ",", 0, "$"),
-        },
-      ],
-      language: {
-        url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
-      },
-      // scrollY: "800px",
-      // scrollCollapse: true,
-
-      searching: true,
-      paging: false,
-      order: [[0, "asc"]],
-      destroy: true,
-    }); // final dttbl mdl informe gestiones por dias
-
-  }
-
-  // DTTBL MDL TODAS LAS GESTIONES DEL MES
-  function datatables_todos_gestiones(mes_actual) {
-    let listado = $("#tbl_gestiones_mes").DataTable({
-      ajax: {
-        url:
-          "admin_home_mdl.php?accion=listar_gestiones_mes&mes_actual=" + mes_actual,
-        dataSrc: "",
-        data: "",
-      },
-
-      columns: [
-        { data: "venta_id" },
-        { data: "FECHA" },
-        { data: "DIA" },
-        { data: "HORA" },
-        { data: "venta_nombre_producto" },
-        { data: "venta_nombre_proveedor" },
-        { data: "venta_costo_producto" },
-        { data: "venta_valor_venta" },
-        { data: "user_nombre" },
-        { data: "venta_utilidad" },
-      ],
-      columnDefs: [
-        {
-          targets: 6,
-          render: $.fn.dataTable.render.number(".", ",", 0, "$"),
-        },
-        {
-          targets: 7,
-          render: $.fn.dataTable.render.number(".", ",", 0, "$"),
-        },
-        {
-          targets: 9,
-          render: $.fn.dataTable.render.number(".", ",", 0, "$"),
-        },
-      ],
-      order: [[0, "asc"]],
-      language: {
-        url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
-      },
-      fixedHeader: {
-        header: true,
-        footer: true,
-      },
-      scrollY: "800px",
-      scrollCollapse: true,
-      paging: false,
-      searching: true,
-      destroy: true,
-    });
-  } // fin funcion datatables todos las gestiones
-
-  // DTTBL INFORME MES
-  function datatables_informe_mes(mes_actual) {
-    // seccion de  exportacion
-    var buttonCommon = {
-      exportOptions: {
-        format: {
-          body: function (data, row, column, node) {
-            return column === 3 ? data.replace(/[$,.]/g, "") : data;
-          },
-        },
-      },
-    };
-
-    var listado = $("#tbl_gestiones_informe_mes").DataTable({
-      ajax: {
-        url: "admin_home_mdl.php?accion=informe_gestiones_mes&mes_actual=" + mes_actual,
-        dataSrc: "",
-        data: "",
-      },
-
-      dom: "Bfrtip",
-      buttons: [
-        $.extend(true, {}, buttonCommon, {
-          extend: "copyHtml5",
-        }),
-        $.extend(true, {}, buttonCommon, {
-          extend: "excelHtml5",
-          exportOptions: {
-            columns: [0, 2, 3],
-          },
-        }),
-        $.extend(true, {}, buttonCommon, {
-          extend: "pdfHtml5",
-        }),
-      ],
-
-      columns: [
-        { data: "user_nombre" },
-        { data: "acumulado_utilidad" },
-        { data: "cuenta_num_gestiones" },
-        { data: "valor_a_pagar" },
-      ],
-      columnDefs: [
-        {
-          targets: "_all",
-          sortable: false
-        },
-        {
-          targets: 1,
-          render: $.fn.dataTable.render.number(".", ",", 0, "$"),
-        },
-        {
-          targets: 1,
-          createdCell: function (td) {
-            $(td).css("background-color", "#7ED4E6");
-          },
-          render: $.fn.dataTable.render.number(".", ",", 0, "$"),
-        },
-        {
-          targets: 3,
-          createdCell: function (td) {
-            $(td).css("background-color", "#7ED4E6");
-          },
-          render: $.fn.dataTable.render.number(".", ",", 0, "$"),
-        },
-      ],
-      language: {
-        url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
-      },
-      info: false,
-      searching: false,
-      paging: false,
-
-      order: [[1, "desc"]],
-      destroy: true,
-    });
-  } // fin función datatables todos dias
-
-
-  function datatables_informe_mes_turno(mes_actual) {
-    var listado = $("#tbl_informe_gestiones_mes_turno").DataTable({
-      ajax: {
-        url:
-          "admin_home_mdl.php?accion=informe_gestiones_mes_turno&mes_actual=" +
-          mes_actual,
-        dataSrc: "",
-        data: "",
-      },
-
-      columns: [
-        { data: "mes" },
-        { data: "suma_total_caja" },
-        { data: "suma_total_utilidad" },
-        { data: "suma_total_entrega" },
-        { data: "suma_total_faltante" },
-        { data: "suma_total_sobrante" },
-        { data: "suma_total_pago_vendedor" },
-      ],
-      columnDefs: [
-        {
-          targets: "_all",
-          sortable: false
-        },
-        {
-          targets: 1,
-          createdCell: function (td) {
-            $(td).css("background-color", "#7ED4E6");
-          },
-          render: $.fn.dataTable.render.number(".", ",", 0, "$"),
-        },
-        {
-          targets: 2,
-          createdCell: function (td) {
-            $(td).css("background-color", "#7ED4E6");
-          },
-          render: $.fn.dataTable.render.number(".", ",", 0, "$"),
-        },
-        {
-          targets: 3,
-          render: $.fn.dataTable.render.number(".", ",", 0, "$"),
-        },
-        {
-          targets: 4,
-          createdCell: function (td) {
-            $(td).css("background-color", "#FFB97B");
-          },
-          render: $.fn.dataTable.render.number(".", ",", 0, "$"),
-        },
-        {
-          targets: 5,
-          createdCell: function (td) {
-            $(td).css("background-color", "#93DFB8");
-          },
-          render: $.fn.dataTable.render.number(".", ",", 0, "$"),
-        },
-        {
-          targets: 6,
-          render: $.fn.dataTable.render.number(".", ",", 0, "$"),
-        },
-      ],
-      language: {
-        url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
-      },
-      info: false,
-      searching: false,
-      paging: false,
-      destroy: true,
-    });
-  } // fin función datatables informe_mes_turno
-
-  function datatables_ver_detalle_turno(turno_id) {
-    var listadoVentas = $("#tblVentas").DataTable({
-      ajax: {
-        url: "admin_home_mdl.php?accion=ver_detalle_turno&turno_id=" + turno_id,
-        dataSrc: "",
-        data: "",
-      },
-      columns: [
-        { data: "venta_id" },
-        { data: "venta_nombre_producto" },
-        { data: "venta_nombre_proveedor" },
-        { data: "venta_costo_producto" },
-        { data: "venta_valor_venta" },
-        { data: "user_nombre" }, //nombre vendedor
-        { data: "venta_utilidad" },
-      ],
-      columnDefs: [
-      ],
-      language: {
-        url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
-      },
-      fixedHeader: true,
-      scrollY: "400px",
-      scrollCollapse: true,
-      paging: false,
-      destroy: true,
-    });
-    // FIN DATATABLES
-
-    // cargarDatosUtilidadVendedor1(turno_id);
-    // cargarDatosUtilidadVendedor2(turno_id);
-    // cargarDatosUtilidadVendedor3(turno_id);
-    // cargarDatosUtilidadVendedor4(turno_id);
-    // utilidadTurno(turno_id);
-    // consultarDatosTurnoActual(turno_id);
-
-    //boton Editar
-    $("#tblVentas tbody").on("click", "button.btnEdit", function () {
-      let registroEdit = listadoVentas.row($(this).parents("tr")).data();
-      recuperarRegistro(registroEdit.venta_id);
-    });
-
-    //boton borrar
-    $("#tblVentas tbody").on("click", "button.btnDel", function () {
-      //ACCIONA BOTON BORRAR REGISTRO DEL DATATABLES
-      if (confirm("¿Confirma la Eliminación?")) {
-        let registro = listadoVentas.row($(this).parents("tr")).data();
-        borrarRegistro(registro.venta_id);
-      }
     });
   }
 
-} // final dttbl gestiones general
+
+}
+
+
+
+
+//  CARGA LOS DATOS BASICOS EN EL MODAL
+function cargarDatosDetalleTurno(turno_id) {
+  // aqui va el código ajax que hace la consulta y carga los dato en el modal.
+  $.ajax({
+    type: "GET",
+    url: "admin_turno_mdl.php?accion=consultar_detalle_turno&turno_id=" + turno_id,
+    data: "",
+    success: function (datos) {
+      $("#npt_detalle_turno_id").val(datos[0].turno_id_actual);
+      $("#npt_detalle_turno_fecha_creado").val(datos[0].turno_fecha_creado);
+      $("#npt_detalle_dia_semana").val(datos[0].dia_semana);
+      $("#npt_detalle_jornada_nombre").val(datos[0].jornada_nombre);
+      $("#npt_detalle_turno_nombres_responsable").val(datos[0].turno_nombres_responsable);
+    },
+    error: function () {
+      alert("Problema en recuperarRegistro");
+    },
+  });
+
+}
+
+
+
+// BTN CIERRA MDL DETALLE TURNO
+$("#btn_close_mdl_detalle_turno").on("click", function () {
+  $("#mdl_detalle_turno").modal("hide");
+});
+
+
+
+// fin funcion datatables todos los turnos
+
+
+// DTTBL MDL  INFORME  GESTIONES POR DIAS
+function datatables_todos_dias(mes_actual) {
+  var listado = $("#tbl_gestiones_dias").DataTable({
+    ajax: {
+      url:
+        "admin_home_mdl.php?accion=listar_gestiones_dias_mes&mes_actual=" + mes_actual,
+      dataSrc: "",
+      data: "",
+    },
+
+    columns: [
+      { data: "turno_fecha" },
+      { data: "dia_semana" },
+      { data: "suma_caja" },
+      { data: "suma_total_utilidad" },
+      { data: "acumulado_utilidad_gestiones" },
+      { data: "suma_total_entrega" },
+      { data: "suma_total_faltante" },
+      { data: "acumulado_faltante" },
+      { data: "suma_total_sobrante" },
+      { data: "acumulado_sobrante" },
+    ],
+    columnDefs: [
+      {
+        targets: "_all",
+        sortable: false
+      },
+
+      {
+        targets: 2,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+      {
+        targets: 3,
+        createdCell: function (td) {
+          $(td).css("background-color", "#7ED4E6");
+        },
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+      {
+        targets: 4,
+        createdCell: function (td) {
+          $(td).css("background-color", "#7ED4E6");
+        },
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+      {
+        targets: 5,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+      {
+        targets: 6,
+        createdCell: function (td) {
+          $(td).css("background-color", "#FFB97B");
+        },
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+      {
+        targets: 7,
+        createdCell: function (td) {
+          $(td).css("background-color", "#FFB97B");
+        },
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+      {
+        targets: 8,
+        createdCell: function (td) {
+          $(td).css("background-color", "#93DFB8");
+        },
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+      {
+        targets: 9,
+        createdCell: function (td) {
+          $(td).css("background-color", "#93DFB8");
+        },
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+    ],
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+    },
+    // scrollY: "800px",
+    // scrollCollapse: true,
+
+    searching: true,
+    paging: false,
+    order: [[0, "asc"]],
+    destroy: true,
+  }); // final dttbl mdl informe gestiones por dias
+
+}
+
+// DTTBL MDL TODAS LAS GESTIONES DEL MES
+function datatables_todos_gestiones(mes_actual) {
+  let listado = $("#tbl_gestiones_mes").DataTable({
+    ajax: {
+      url:
+        "admin_home_mdl.php?accion=listar_gestiones_mes&mes_actual=" + mes_actual,
+      dataSrc: "",
+      data: "",
+    },
+
+    columns: [
+      { data: "venta_id" },
+      { data: "FECHA" },
+      { data: "DIA" },
+      { data: "HORA" },
+      { data: "venta_nombre_producto" },
+      { data: "venta_nombre_proveedor" },
+      { data: "venta_costo_producto" },
+      { data: "venta_valor_venta" },
+      { data: "user_nombre" },
+      { data: "venta_utilidad" },
+    ],
+    columnDefs: [
+      {
+        targets: 6,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+      {
+        targets: 7,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+      {
+        targets: 9,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+    ],
+    order: [[0, "asc"]],
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+    },
+    fixedHeader: {
+      header: true,
+      footer: true,
+    },
+    scrollY: "800px",
+    scrollCollapse: true,
+    paging: false,
+    searching: true,
+    destroy: true,
+  });
+} // fin funcion datatables todos las gestiones
+
+// DTTBL INFORME MES
+function datatables_informe_mes(mes_actual) {
+  // seccion de  exportacion
+  var buttonCommon = {
+    exportOptions: {
+      format: {
+        body: function (data, row, column, node) {
+          return column === 3 ? data.replace(/[$,.]/g, "") : data;
+        },
+      },
+    },
+  };
+
+  var listado = $("#tbl_gestiones_informe_mes").DataTable({
+    ajax: {
+      url: "admin_home_mdl.php?accion=informe_gestiones_mes&mes_actual=" + mes_actual,
+      dataSrc: "",
+      data: "",
+    },
+
+    dom: "Bfrtip",
+    buttons: [
+      $.extend(true, {}, buttonCommon, {
+        extend: "copyHtml5",
+      }),
+      $.extend(true, {}, buttonCommon, {
+        extend: "excelHtml5",
+        exportOptions: {
+          columns: [0, 2, 3],
+        },
+      }),
+      $.extend(true, {}, buttonCommon, {
+        extend: "pdfHtml5",
+      }),
+    ],
+
+    columns: [
+      { data: "user_nombre" },
+      { data: "acumulado_utilidad" },
+      { data: "cuenta_num_gestiones" },
+      { data: "valor_a_pagar" },
+    ],
+    columnDefs: [
+      {
+        targets: "_all",
+        sortable: false
+      },
+      {
+        targets: 1,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+      {
+        targets: 1,
+        createdCell: function (td) {
+          $(td).css("background-color", "#7ED4E6");
+        },
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+      {
+        targets: 3,
+        createdCell: function (td) {
+          $(td).css("background-color", "#7ED4E6");
+        },
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+    ],
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+    },
+    info: false,
+    searching: false,
+    paging: false,
+
+    order: [[1, "desc"]],
+    destroy: true,
+  });
+} // fin función datatables todos dias
+
+
+function datatables_informe_mes_turno(mes_actual) {
+  var listado = $("#tbl_informe_gestiones_mes_turno").DataTable({
+    ajax: {
+      url:
+        "admin_home_mdl.php?accion=informe_gestiones_mes_turno&mes_actual=" +
+        mes_actual,
+      dataSrc: "",
+      data: "",
+    },
+
+    columns: [
+      { data: "mes" },
+      { data: "suma_total_caja" },
+      { data: "suma_total_utilidad" },
+      { data: "suma_total_entrega" },
+      { data: "suma_total_faltante" },
+      { data: "suma_total_sobrante" },
+      { data: "suma_total_pago_vendedor" },
+    ],
+    columnDefs: [
+      {
+        targets: "_all",
+        sortable: false
+      },
+      {
+        targets: 1,
+        createdCell: function (td) {
+          $(td).css("background-color", "#7ED4E6");
+        },
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+      {
+        targets: 2,
+        createdCell: function (td) {
+          $(td).css("background-color", "#7ED4E6");
+        },
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+      {
+        targets: 3,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+      {
+        targets: 4,
+        createdCell: function (td) {
+          $(td).css("background-color", "#FFB97B");
+        },
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+      {
+        targets: 5,
+        createdCell: function (td) {
+          $(td).css("background-color", "#93DFB8");
+        },
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+      {
+        targets: 6,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+    ],
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+    },
+    info: false,
+    searching: false,
+    paging: false,
+    destroy: true,
+  });
+} // fin función datatables informe_mes_turno
+
+function datatables_ver_detalle_turno(turno_id) {
+  var listadoVentas = $("#tblVentas").DataTable({
+    ajax: {
+      url: "admin_home_mdl.php?accion=ver_detalle_turno&turno_id=" + turno_id,
+      dataSrc: "",
+      data: "",
+    },
+    columns: [
+      { data: "venta_id" },
+      { data: "venta_nombre_producto" },
+      { data: "venta_nombre_proveedor" },
+      { data: "venta_costo_producto" },
+      { data: "venta_valor_venta" },
+      { data: "user_nombre" }, //nombre vendedor
+      { data: "venta_utilidad" },
+    ],
+    columnDefs: [
+    ],
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+    },
+    fixedHeader: true,
+    scrollY: "400px",
+    scrollCollapse: true,
+    paging: false,
+    destroy: true,
+  });
+  // FIN DATATABLES
+
+  //boton Editar
+  $("#tblVentas tbody").on("click", "button.btnEdit", function () {
+    let registroEdit = listadoVentas.row($(this).parents("tr")).data();
+    recuperarRegistro(registroEdit.venta_id);
+  });
+
+  //boton borrar
+  $("#tblVentas tbody").on("click", "button.btnDel", function () {
+    //ACCIONA BOTON BORRAR REGISTRO DEL DATATABLES
+    if (confirm("¿Confirma la Eliminación?")) {
+      let registro = listadoVentas.row($(this).parents("tr")).data();
+      borrarRegistro(registro.venta_id);
+    }
+  });
+}
+
+// final dttbl gestiones general
 
 
 // SECCION DE DOMICILIOS
@@ -665,6 +695,7 @@ function dttbl_domicilios_turnos(mes_actual) {
       { data: "pago_domi_interno" },
       { data: "cuenta_domi_externo" },
       { data: "pago_domi_externo" },
+      { data: null, orderable: false },
     ],
     columnDefs: [
       {
@@ -679,20 +710,36 @@ function dttbl_domicilios_turnos(mes_actual) {
         targets: 10,
         render: $.fn.dataTable.render.number(".", ",", 0, "$"),
       },
-
+      {
+        targets: 11,
+        defaultContent:
+          "<button class='btn btn-primary btn-sm btn_detalle_turno_domicilios' id='btn_detalle_turno_domicilios'> Ver</button>",
+        data: null,
+      },
 
     ],
     order: [[1, "asc"]],
     language: {
       url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
     },
-    info: false,
-    searching: false,
+    info: true,
+    searching: true,
     paging: false,
     destroy: true,
   });
-}
 
+  $("#tbl_domicilios_turnos tbody").on("click", "button.btn_detalle_turno_domicilios", function () {
+    let registro = listado.row($(this).parents("tr")).data();
+    $("#mdl_detalle_turno").modal("show");
+    cargarDatosDetalleTurno(registro.turno_id);
+    datatablesDomiPorSalir(registro.turno_id);
+    datatablesDomiEnCurso(registro.turno_id);
+    datatablesDomiEntregados(registro.turno_id);
+    datatablesGestiones(registro.turno_id);
+  });
+
+
+}
 
 
 function dttbl_domicilios_dias(mes_actual) {
