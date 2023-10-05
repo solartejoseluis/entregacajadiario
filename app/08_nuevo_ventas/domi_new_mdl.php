@@ -18,6 +18,17 @@ switch ($_GET['accion']) {
         echo json_encode($result);
         break;
 
+case 'revisar_existencia_gestion_wait':
+  $sql="SELECT
+  venta_tipo
+  FROM VENTAS
+  WHERE venta_tipo= 'WAIT'
+  ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+break;
 
   case 'guardar_domicilio':
     $sql = "INSERT INTO DOMICILIOS(
@@ -86,6 +97,16 @@ switch ($_GET['accion']) {
     $response = $pdo->exec($sql);
     echo json_encode($response);
     break;    
+
+    case 'modificar_gestion_wait':
+      $sql="UPDATE VENTAS
+      SET venta_tipo ='DOMI'
+      WHERE venta_id = $_GET[venta_id]
+      ";
+    $response = $pdo->exec($sql);
+    echo json_encode($response);
+    break;
+
 
 
 };

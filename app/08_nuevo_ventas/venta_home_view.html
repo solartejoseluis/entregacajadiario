@@ -683,92 +683,104 @@
           <h1 class="modal-title fs-5">NUEVO DOMICILIO</h1>
         </div>
         <div class="modal-body">
-          <form id="frm_nuevo_domicilio">
-            <div class="selectBarrio col-md-9 input-group input-group-sm mb-2">
-              <span class="input-group-text" id="title_barrio">Barrio:</span>
-              <select class="form-select form-select-sm" id="slct_barrio"></select>
-              <input type="hidden" class="form-control" id="npt_barrio_id" />
-            </div>
+          <!-- <form id="frm_nuevo_domicilio"> -->
+          <div class="selectBarrio col-md-9 input-group input-group-sm mb-2">
+            <span class="input-group-text" id="title_barrio">Barrio:</span>
+            <select class="form-select form-select-sm" id="slct_barrio"></select>
+            <input type="hidden" class="form-control" id="npt_barrio_id" />
+          </div>
 
-            <div class="col-md-9 input-group input-group-sm mb-2">
-              <span class="input-group-text" id="title_comuna">Comuna:</span>
-              <input type="text" class="form-control" id="npt_barrio_comuna" disabled />
-            </div>
+          <div class="col-md-9 input-group input-group-sm mb-2">
+            <span class="input-group-text" id="title_comuna">Comuna:</span>
+            <input type="text" class="form-control" id="npt_barrio_comuna" disabled />
+          </div>
 
-            <!-- <div class="col-md-9 input-group input-group-sm mb-2">
+          <!-- <div class="col-md-9 input-group input-group-sm mb-2">
               <span class="input-group-text" id="title_recomendacion">Recomendación:</span>
               <input type="text" class="form-control" id="npt_barrio_recomendacion" disabled />
             </div> -->
 
-            <div class="col-md-9 input-group input-group-sm mb-2" id="bloque_factura">
-              <span class="input-group-text" id="inputGroup-sizing-sm"># Factura:</span>
-              <input type="text" class="form-control" id="npt_factura" placeholder="Número de Factura" />
-            </div>
+          <div class="col-md-9 input-group input-group-sm mb-2" id="bloque_factura">
+            <span class="input-group-text" id="inputGroup-sizing-sm"># Factura:</span>
+            <input type="text" class="form-control" id="npt_factura" placeholder="Número de Factura" />
+          </div>
 
-            <div class="col-md-9 input-group input-group-sm mb-2" id="bloque_valor_venta">
-              <span class="input-group-text" id="inputGroup-sizing-sm">Valor Venta Suri:</span>
-              <input type="text" class="form-control" id="npt_valor_producto" placeholder="valor de la venta" />
-              <input type="hidden" class="form-control" id="npt_valor_producto_base" />
-            </div>
+          <div class="col-md-9 input-group input-group-sm mb-2" id="bloque_valor_venta">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Valor Venta Suri:</span>
+            <input type="text" class="form-control" id="npt_valor_producto" placeholder="valor de la venta" />
+            <input type="hidden" class="form-control" id="npt_valor_producto_base" />
+          </div>
 
-            <div class="mb-2" id="bloque_agregar_gestion_si_no">
-              <p>¿Agregar Producto De Gestión?</p>
-              <button type="button" class="btn btn-outline-success btn-sm" id="btn_si_agregar_gestion">
-                si
-              </button>
-              <button type="button" class="btn btn-outline-danger btn-sm" id="btn_no_agregar_gestion">
-                no
-              </button>
-              <input type="hidden" class="form-control" id="npt_agregar_gestion" />
-            </div>
+          <div class="mb-2" id="bloque_agregar_gestion_si_no">
+            <p>¿Agregar Producto De Gestión?</p>
+            <button type="button" class="btn btn-outline-success btn-sm" id="btn_si_agregar_gestion">
+              si
+            </button>
+            <button type="button" class="btn btn-outline-danger btn-sm" id="btn_no_agregar_gestion">
+              no
+            </button>
+            <input type="hidden" class="form-control" id="npt_agregar_gestion" />
+          </div>
 
-            <div class="mb-2">
-              <input type="hidden" class="form-control" id="npt_confirm_btn" />
-              <button type="button" class="btn btn-primary btn-sm" id="btn_domi_interno">
-                Domi Interno
-              </button>
-              <input type="hidden" class="form-control" id="npt_btn_domi_interno" />
-              <button type="button" class="btn btn-primary btn-sm" id="btn_domi_externo">
-                Domi Externo
-              </button>
-              <input type="hidden" class="form-control" id="npt_btn_domi_externo" />
-            </div>
 
-            <!-- select bootstrap basico -->
-            <div class="selectAgregarGestionWait01 col-md-9 input-group input-group-sm mb-2"
-              id="bloque_agregar_gestion_wait_01">
-              <span class="input-group-text" id="inputGroup-sizing-sm"> + Gestión:</span>
-              <select class="form-select" id="slct_agregar_gestion_wait_01"></select>
-              <input type="hidden" class="form-control" id="npt_agregar_gestion_wait_01" />
-              <button type="submit" class="btn btn-outline-warning" id="btn_agregar_gestion_wait_01">
-                Agregar
-              </button>
-            </div>
-            <div class="selectAgregarGestionWait02 col-md-9 input-group input-group-sm mb-2"
-              id="bloque_agregar_gestion_wait_02">
-              <span class="input-group-text" id="inputGroup-sizing-sm"> + Gestión:</span>
-              <select class="form-select" id="slct_agregar_gestion_wait_01"></select>
-              <input type="hidden" class="form-control" id="npt_agregar_gestion_wait_02" />
-              <button type="submit" class="btn btn-outline-warning" id="btn_agregar_gestion_wait_02">
-                Agregar
-              </button>
-            </div>
-            <!-- codigo del select2 multiple -->
-            <!-- <label for="id_label_multiple">
+
+          <!-- select bootstrap basico -->
+          <div class="selectAgregarGestionWait01 col-md-9 input-group input-group-sm mb-2"
+            id="bloque_agregar_gestion_wait_01">
+            <span class="input-group-text" id="inputGroup-sizing-sm"> + Gestión:</span>
+            <select class="form-select" id="slct_agregar_gestion_wait_01"></select>
+            <input type="hidden" class="form-control" id="npt_agregar_gestion_wait_01" />
+            <button type="submit" class="btn btn-outline-warning" id="btn_agregar_gestion_wait_01">
+              Agregar
+            </button>
+          </div>
+          <div class="selectAgregarGestionWait02 col-md-9 input-group input-group-sm mb-2"
+            id="bloque_agregar_gestion_wait_02">
+            <span class="input-group-text" id="inputGroup-sizing-sm"> + Gestión:</span>
+            <select class="form-select" id="slct_agregar_gestion_wait_02"></select>
+            <input type="hidden" class="form-control" id="npt_agregar_gestion_wait_02" />
+            <button type="submit" class="btn btn-outline-warning" id="btn_agregar_gestion_wait_02">
+              Agregar
+            </button>
+          </div>
+
+          <div class="mb-2" id="bloque_agregar_gestion_si_no_02">
+            <p>¿Agregar Otro Producto De Gestión?</p>
+            <button type="button" class="btn btn-outline-success btn-sm" id="btn_si_agregar_gestion_02">
+              si
+            </button>
+            <button type="button" class="btn btn-outline-danger btn-sm" id="btn_no_agregar_gestion">
+              no
+            </button>
+            <input type="hidden" class="form-control" id="npt_agregar_gestion" />
+          </div>
+
+          <div class="mb-2">
+            <input type="hidden" class="form-control" id="npt_confirm_btn" />
+            <button type="button" class="btn btn-primary btn-sm" id="btn_domi_interno">
+              Domi Interno
+            </button>
+            <input type="hidden" class="form-control" id="npt_btn_domi_interno" />
+            <button type="button" class="btn btn-primary btn-sm" id="btn_domi_externo">
+              Domi Externo
+            </button>
+            <input type="hidden" class="form-control" id="npt_btn_domi_externo" />
+          </div>
+
+          <!-- codigo del select2 multiple -->
+          <!-- <label for="id_label_multiple">
   Click this to highlight the multiple select element
   <select class="js-example-basic-multiple js-states form-control" id="id_label_multiple" multiple="multiple"></select>
 </label> -->
 
-
-            <!-- <div class="selectBarrio col-md-9 input-group input-group-sm mb-2">
+          <!-- <div class="selectBarrio col-md-9 input-group input-group-sm mb-2">
               <span class="input-group-text" id="title_barrio">Barrio:</span>
               <select class="form-select form-select-sm" id="slct_barrio"></select>
               <input type="hidden" class="form-control" id="npt_barrio_id" />
             </div> -->
 
-
-            <!-- ensayo -->
-            <!-- <div class="selectAgregarGestionWait col-md-9 input-group input-group-sm mb-2" id="bloque_agregar_gestion_wait">
+          <!-- ensayo -->
+          <!-- <div class="selectAgregarGestionWait col-md-9 input-group input-group-sm mb-2" id="bloque_agregar_gestion_wait">
               <span class="input-group-text" id="titulo_agregar_gestion">clic para elegir gestiones en espera:</span>
               <select 
               class="form-select form-select-sm" 
@@ -778,42 +790,38 @@
               <input type="hidden" class="form-control" id="npt_agregar_gestion_wait" />
             </div> -->
 
+          <div class="selectDomiExterno col-md-9 input-group input-group-sm mb-2" id="bloque_domi_externo">
+            <span class="input-group-text" id="inputGroup-sizing-sm">transporte_externo:</span>
+            <select class="form-select" id="slct_domi_externo"></select>
+            <input type="hidden" class="form-control" id="npt_domi_externo_id" />
+          </div>
 
 
+          <div class="col-md-9 input-group input-group-sm mb-2" id="bloque_valor_domi_externo">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Valor Servicio:</span>
+            <input type="text" class="form-control" id="npt_valor_domi_externo" placeholder="valor domi externo" />
+            <input type="hidden" class="form-control" id="npt_valor_domi_externo_base" />
+          </div>
 
+          <div class="selectTransportador col-md-9 input-group input-group-sm mb-2" id="bloque_transportador">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Asignado a:</span>
+            <select class="form-select" id="slct_transportador"></select>
+            <input type="hidden" class="form-control" id="npt_transportador_id" />
+          </div>
 
-            <div class="selectDomiExterno col-md-9 input-group input-group-sm mb-2" id="bloque_domi_externo">
-              <span class="input-group-text" id="inputGroup-sizing-sm">transporte_externo:</span>
-              <select class="form-select" id="slct_domi_externo"></select>
-              <input type="hidden" class="form-control" id="npt_domi_externo_id" />
-            </div>
+          <div class="input-group input-group input-group-sm mb-2" id="bloque_hora_salida">
+            <button class="btn btn-primary" type="button" id="btn_hora_salida">
+              Hora De Salida
+            </button>
+            <input type="text" class="form-control" placeholder="hora de salida" id="npt_hora_salida" disabled />
+            <input type="hidden" class="form-control" placeholder="hora de llegada" id="npt_hora_llegada" disabled />
+          </div>
 
-
-            <div class="col-md-9 input-group input-group-sm mb-2" id="bloque_valor_domi_externo">
-              <span class="input-group-text" id="inputGroup-sizing-sm">Valor Servicio:</span>
-              <input type="text" class="form-control" id="npt_valor_domi_externo" placeholder="valor domi externo" />
-              <input type="hidden" class="form-control" id="npt_valor_domi_externo_base" />
-            </div>
-
-            <div class="selectTransportador col-md-9 input-group input-group-sm mb-2" id="bloque_transportador">
-              <span class="input-group-text" id="inputGroup-sizing-sm">Asignado a:</span>
-              <select class="form-select" id="slct_transportador"></select>
-              <input type="hidden" class="form-control" id="npt_transportador_id" />
-            </div>
-
-            <div class="input-group input-group input-group-sm mb-2" id="bloque_hora_salida">
-              <button class="btn btn-primary" type="button" id="btn_hora_salida">
-                Hora De Salida
-              </button>
-              <input type="text" class="form-control" placeholder="hora de salida" id="npt_hora_salida" disabled />
-              <input type="hidden" class="form-control" placeholder="hora de llegada" id="npt_hora_llegada" disabled />
-            </div>
-
-            <div class="col-md-9 input-group input-group-sm mb-2" id="bloque_observaciones">
-              <span class="input-group-text" id="inputGroup-sizing-sm">Observaciones:</span>
-              <input type="text" class="form-control" id="npt_observaciones" placeholder="observaciones" />
-            </div>
-          </form>
+          <div class="col-md-9 input-group input-group-sm mb-2" id="bloque_observaciones">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Observaciones:</span>
+            <input type="text" class="form-control" id="npt_observaciones" placeholder="observaciones" />
+          </div>
+          <!-- </form> -->
           <!-- finaliza formulario modal nuevo domicilio -->
         </div>
         <!-- footer modal nueva venta -->
