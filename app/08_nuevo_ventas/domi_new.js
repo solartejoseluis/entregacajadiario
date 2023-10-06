@@ -24,6 +24,7 @@ function limpiarModalDomicilios() {
   $("#bloque_agregar_gestion_si_no_02").hide();
   $("#bloque_agregar_gestion_wait_01").hide();
   $("#bloque_agregar_gestion_wait_02").hide();
+  $("#bloque_total_venta").hide();
   $("#bloque_inyectologia").hide();
   $("#bloque_transportador").hide();
   $("#bloque_domi_externo, #bloque_valor_domi_externo").hide();
@@ -65,7 +66,7 @@ function revisarExistenciaGestionWait() {
     success: function (datos) {
       // let registro = listado.row($(this).parents("tr")).data();
       let registro = (datos[0].venta_tipo);
-      alert(registro);
+      // alert(registro);
       if (registro == 'WAIT') {
         $("#bloque_agregar_gestion_si_no").show();
         $("#btn_domi_interno").hide();
@@ -88,9 +89,7 @@ function revisarExistenciaGestionWait02() {
     url: "domi_new_mdl.php?accion=revisar_existencia_gestion_wait",
     data: "",
     success: function (datos) {
-      // let registro = listado.row($(this).parents("tr")).data();
       let registro = (datos[0].venta_tipo);
-      alert(registro);
       if (registro == 'WAIT') {
         $("#bloque_agregar_gestion_si_no_02").show();
         let wait= 'SI';
@@ -143,6 +142,28 @@ $("#npt_valor_producto").on("change", function () {
     });
   }
 });
+
+$("#npt_total_venta").on("change", function () {
+  const value = this.value.replace(/\$|\./g, "");
+  if (value === "") {
+    // validacion para evitar que se muestre NaN en el input al quitar foco
+    return false;
+  } else {
+    $("#npt_total_venta").css("background-color", "#dbe5f0");
+    let valor_base = this.value;
+    $("#npt_total_venta_base").val(valor_base);
+
+    //conversion del valor al formato moneda con parseFloat
+    this.value = parseFloat(value).toLocaleString("es-CO", {
+      style: "currency",
+      currency: "COP",
+      maximumFractionDigits: 0,
+      minimumFractionDigits: 0,
+    });
+  }
+});
+
+
 
 $("#npt_valor_domi_externo").on("change", function () {
   const value = this.value.replace(/\$|\./g, "");
@@ -280,6 +301,7 @@ $("#btn_si_agregar_gestion").click(function () {
   $("#btn_domi_externo").hide();
   $("#bloque_agregar_gestion_wait_01").show();
   $("#bloque_agregar_gestion_si_no").hide();
+  $("#bloque_total_venta").show();
   // $("#bloque_domi_externo, #bloque_valor_domi_externo").hide();
   // $("#bloque_inyectologia").show();
   // $("#bloque_transportador").show();
@@ -611,6 +633,13 @@ $("#btn_agregar_gestion_wait_01").click(function () {
   $("#slct_agregar_gestion_wait_01").prop("disabled", true);
   $("#btn_agregar_gestion_wait_01").hide();
   $("#tbl_gestiones_en_espera").DataTable().ajax.reload();
+  // rellena el npt_valor_total_base sumando las cantidades al momento:
+  let valorProductoBase = $("#npt_valor_producto_base").val();
+  // let valorGestionWait01 = $("#npt_valor_gestion_wait_01").val(1);
+  let valorGestionWait01 = 1000;
+  let valor_total = parseFloat(valorProductoBase)+ parseFloat(valorGestionWait01);
+
+  $("#npt_total_venta").val(Number(valor_total));
   // revisa si quedan en existencia gestiones modo'WAIT' 
   let wait = revisarExistenciaGestionWait02();
   if (wait !== 'SI'){
@@ -627,9 +656,6 @@ function agregarGestionWait(venta_id) {
     type: "POST",
     url: "domi_new_mdl.php?accion=modificar_gestion_wait&venta_id=" + venta_id,
     success: function (msg) {
-      // $("#slct_agregar_gestion_wait_01").prop("disabled", true);
-      // $("#btn_agregar_gestion_wait_01").hide();
-      // $("#bloque_agregar_gestion_si_no").show();
     }
   });
 }
