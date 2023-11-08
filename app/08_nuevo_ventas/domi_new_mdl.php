@@ -4,31 +4,43 @@ header('Content-Type: application/json');
 require "../00_connect/pdo.php";
 
 switch ($_GET['accion']) {
-
-    case 'cargar_comuna':
-        $sql = "SELECT
+  case 'cargar_comuna':
+    $sql = "SELECT
             BARRIOS.barrio_comuna,
             BARRIOS.barrio_recomendacion
             FROM  BARRIOS
             WHERE barrio_id = $_GET[barrio_id];
             ";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($result);
-        break;
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($result);
+    break;
 
-case 'revisar_existencia_gestion_wait':
-  $sql="SELECT
-  venta_tipo
-  FROM VENTAS
-  WHERE venta_tipo= 'WAIT'
-  ";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($result);
-break;
+  case 'revisar_existencia_gestion_wait01':
+    $sql = "SELECT
+    venta_tipo
+    FROM VENTAS
+    WHERE venta_tipo= 'WAIT'
+    ";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($result);
+    break;
+
+      case 'revisar_existencia_gestion_wait02':
+    $sql = "SELECT
+    venta_tipo
+    FROM VENTAS
+    WHERE venta_tipo= 'WAIT'
+    ";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($result);
+    break;
+
 
   case 'guardar_domicilio':
     $sql = "INSERT INTO DOMICILIOS(
@@ -44,7 +56,9 @@ break;
       hora_llegada,
       inyectologia,
       observaciones,
-      turno_id
+      turno_id,
+      gestion_01,
+      gestion_02
       )VALUES (
       '$_POST[barrio_id]',
       '$_POST[numero_factura]',
@@ -58,7 +72,9 @@ break;
       '$_POST[hora_llegada]',
       '$_POST[inyectologia]',
       '$_POST[observaciones]',
-      '$_POST[turno_id]'
+      '$_POST[turno_id]',
+      '$_POST[gestion_01]',
+      '$_POST[gestion_02]'      
     )";
     $response = $pdo->exec($sql);
     echo json_encode($response);
@@ -78,7 +94,9 @@ break;
       hora_llegada,
       inyectologia,
       observaciones,
-      turno_id
+      turno_id,
+      gestion_01,
+      gestion_02
       )VALUES (
       '$_POST[barrio_id]',
       '$_POST[numero_factura]',
@@ -92,14 +110,16 @@ break;
       '$_POST[hora_llegada]',
       '$_POST[inyectologia]',
       '$_POST[observaciones]',
-      '$_POST[turno_id]'
+      '$_POST[turno_id]',
+      '$_POST[gestion_01]',
+      '$_POST[gestion_02]'
     )";
     $response = $pdo->exec($sql);
     echo json_encode($response);
-    break;    
+    break;
 
-    case 'modificar_gestion_wait':
-      $sql="UPDATE VENTAS
+  case 'modificar_gestion_wait':
+    $sql = "UPDATE VENTAS
       SET venta_tipo ='DOMI'
       WHERE venta_id = $_GET[venta_id]
       ";
@@ -107,6 +127,30 @@ break;
     echo json_encode($response);
     break;
 
+
+  case 'cargar_valor_venta_wait_01':
+    $sql = "SELECT
+    venta_valor_venta
+    FROM VENTAS 
+    WHERE venta_id = $_GET[venta_id]
+    ";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($result);
+    break;
+
+    case 'cargar_valor_venta_wait_02':
+    $sql = "SELECT
+    venta_valor_venta
+    FROM VENTAS 
+    WHERE venta_id = $_GET[venta_id]
+    ";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($result);
+    break;
 
 
 };

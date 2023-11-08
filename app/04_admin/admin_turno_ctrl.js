@@ -16,11 +16,21 @@ function datatablesDomiPorSalir(turno_id) {
       { data: "user_nombre" },
       { data: "domi_externo_nombre" },
       { data: "valor_venta" },
+      { data: "gestion_01" },
+      { data: "gestion_02" },
 
     ],
     columnDefs: [
       {
         targets: 4,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+            {
+        targets: 5,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+            {
+        targets: 6,
         render: $.fn.dataTable.render.number(".", ",", 0, "$"),
       },
 
@@ -52,6 +62,8 @@ function datatablesDomiPorSalir(turno_id) {
         { data: "domi_interno_nombre" },
         { data: "domi_externo_nombre" },
         { data: "valor_venta" },
+        { data: "gestion_01" },
+        { data: "gestion_02" },
         { data: "hora_salida" },
      ],
       columnDefs: [
@@ -59,9 +71,16 @@ function datatablesDomiPorSalir(turno_id) {
           targets: 3,
           render: $.fn.dataTable.render.number(".", ",", 0, "$"),
         },
-
+                {
+          targets: 4,
+          render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+        },
+        {
+          targets: 5,
+          render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+        },
       ],
-      order: [[4, "asc"]],
+      order: [[6, "asc"]],
       info: false,
       language: {
        url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",

@@ -72,7 +72,9 @@ switch ($_GET['accion']) {
             DOMICILIOS.valor_venta,
             DOMICILIOS.btn_domi_interno,
             DOMICILIOS.btn_domi_externo,
-            DOMICILIOS.inyectologia
+            DOMICILIOS.inyectologia,
+            DOMICILIOS.gestion_01,
+            DOMICILIOS.gestion_02
             FROM DOMICILIOS
             INNER JOIN USERS
             ON DOMICILIOS.trans_interno_id=USERS.user_id
@@ -99,7 +101,9 @@ switch ($_GET['accion']) {
             DOMICILIOS.valor_venta,
             DOMICILIOS.btn_domi_interno,
             DOMICILIOS.btn_domi_externo,
-            DOMICILIOS.hora_salida
+            DOMICILIOS.hora_salida,
+            DOMICILIOS.gestion_01,
+            DOMICILIOS.gestion_02
             FROM DOMICILIOS
             INNER JOIN USERS
             ON DOMICILIOS.trans_interno_id=USERS.user_id

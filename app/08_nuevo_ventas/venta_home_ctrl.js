@@ -73,8 +73,8 @@ function mesActual() {
 
 // CARGA EL MES ACTUAL
 function mesActual() {
-let mesActual = moment().format("MMMM-YYYY");
-$(".mesActual").html(mesActual);
+  let mesActual = moment().format("MMMM-YYYY");
+  $(".mesActual").html(mesActual);
 }
 
 
@@ -117,22 +117,32 @@ function datatablesDomiPorSalir() {
       { data: "user_nombre" },
       { data: "domi_externo_nombre" },
       { data: "valor_venta" },
+      { data: "gestion_01" },
+      { data: "gestion_02" },
       { data: null, orderable: false },
       { data: null, orderable: false },
     ],
     columnDefs: [
-            {
+      {
         targets: 4,
         render: $.fn.dataTable.render.number(".", ",", 0, "$"),
       },
       {
         targets: 5,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      }, {
+        targets: 6,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+
+      {
+        targets: 7,
         defaultContent:
           "<button class='btn btn-outline-primary btn-sm btnVerDomiPorSalir'><i class='fa-solid fa-pen'></i></button>",
         data: null,
       },
       {
-        targets: 6,
+        targets: 8,
         defaultContent:
           "<button class='btn btn-outline-primary btn-sm btnHoraSalida'>Sale</button>",
         data: null,
@@ -217,22 +227,32 @@ function datatablesDomiEnCurso() {
       { data: "domi_interno_nombre" },
       { data: "domi_externo_nombre" },
       { data: "valor_venta" },
+      { data: "gestion_01" },
+      { data: "gestion_02" },
       { data: "hora_salida" },
       { data: null, orderable: false },
     ],
     columnDefs: [
-            {
+      {
         targets: 3,
         render: $.fn.dataTable.render.number(".", ",", 0, "$"),
       },
       {
+        targets: 4,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+      {
         targets: 5,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+      {
+        targets: 7,
         defaultContent:
           "<button class='btn btn-outline-danger btn-sm btnHoraLlegada' id='btn_hora_llegada'>Llega</button>",
         data: null,
       },
     ],
-    order: [[4, "asc"]],
+    order: [[6, "asc"]],
     info: false,
     language: {
       url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
@@ -321,15 +341,15 @@ function datatablesGestionesEnEspera() {
       { data: null, orderable: false },
     ],
     columnDefs: [
-            {
+      {
         targets: 3,
         render: $.fn.dataTable.render.number(".", ",", 0, "$"),
       },
-            {
+      {
         targets: 4,
         render: $.fn.dataTable.render.number(".", ",", 0, "$"),
       },
-            {
+      {
         targets: 6,
         render: $.fn.dataTable.render.number(".", ",", 0, "$"),
       },
@@ -382,15 +402,15 @@ function datatablesGestiones() {
       { data: null, orderable: false },
     ],
     columnDefs: [
-            {
+      {
         targets: 3,
         render: $.fn.dataTable.render.number(".", ",", 0, "$"),
       },
-            {
+      {
         targets: 4,
         render: $.fn.dataTable.render.number(".", ",", 0, "$"),
       },
-            {
+      {
         targets: 6,
         render: $.fn.dataTable.render.number(".", ",", 0, "$"),
       },
@@ -419,6 +439,7 @@ function datatablesGestiones() {
   });
 }
 // fin datatables gestiones
+
 
 // DTTBL MDL GESTIONES MES VENDEDOR
 function dttbl_mes_vendedor(turno_id, user_id) {
@@ -666,7 +687,7 @@ function datatablesDomiEntregados() {
       { data: "turno_id" },
     ],
     columnDefs: [
-            {
+      {
         targets: 4,
         render: $.fn.dataTable.render.number(".", ",", 0, "$"),
       },

@@ -40,11 +40,13 @@ document.addEventListener("DOMContentLoaded", function () {
         { data: "domi_externo_nombre" },
         { data: "valor_venta" },
         { data: "inyectologia" },
+        { data: "gestion_01" },
+        { data: "gestion_o2" },
         { data: null, orderable: false },
       ],
       columnDefs: [
         {
-          targets: 7,
+          targets: 9,
           defaultContent:
             "<button class='btn btn-primary btn-sm btnVerDomiPorSalir' id='btn_ver_domi_por_salir'><i class='fa-solid fa-pen'></i></button>",
           data: null,
@@ -74,8 +76,6 @@ document.addEventListener("DOMContentLoaded", function () {
         recuperarRegistroDomiInternoPorSalir(registro.domicilio_id);
         // creo las variables de btn_ domi interno para este registro
         let btnDomiInternoPorsalir = registro.btn_domi_interno;
-        // let btnDomiExternoPorsalir = registro.btn_domi_Externo;
-        // alert("domi interno"+" "+btnDomiInternoPorsalir);
         if (btnDomiInternoPorsalir == 1) {
           $(
             "#bloque_edit_domi_externo, #bloque_edit_valor_domi_externo"
@@ -218,19 +218,21 @@ document.addEventListener("DOMContentLoaded", function () {
         { data: "user_nombre" },
         { data: "domi_externo_nombre" },
         { data: "valor_venta" },
+        { data: "gestion_01" },
+        { data: "gestion_02" },
         { data: "hora_salida" },
         { data: "inyectologia" },
         { data: null, orderable: false },
       ],
       columnDefs: [
         {
-          targets: 6,
+          targets: 8,
           defaultContent:
             "<button class='btn btn-primary btn-sm btnVerDomiInterno' id='btn_ver_domi_interno'><i class='fa-solid fa-pen'></i></button>",
           data: null,
         },
       ],
-      order: [[4, "asc"]],
+      order: [[6, "asc"]],
       info: false,
       language: {
         url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
