@@ -298,7 +298,6 @@ function dttblGestionesGeneral() {
 
 //  CARGA LOS DATOS BASICOS EN EL MODAL
 function cargarDatosDetalleTurno(turno_id) {
-  // aqui va el código ajax que hace la consulta y carga los dato en el modal.
   $.ajax({
     type: "GET",
     url: "admin_turno_mdl.php?accion=consultar_detalle_turno&turno_id=" + turno_id,
@@ -806,6 +805,8 @@ function dttbl_domicilios_mes(mes_actual) {
       { data: "valor_domi_externo" },
       { data: "valor_venta" },
       { data: "numero_factura" },
+      { data: "gestion_01" },
+      { data: "gestion_02" },
       { data: "observaciones" },
       { data: "turno_id" },
     ],
@@ -816,6 +817,14 @@ function dttbl_domicilios_mes(mes_actual) {
       },
       {
         targets: 8,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+      {
+        targets: 10,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+      {
+        targets: 11,
         render: $.fn.dataTable.render.number(".", ",", 0, "$"),
       }
     ],

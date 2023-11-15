@@ -26,16 +26,28 @@ function datatablesDomiEntregados() {
       { data: "hora_salida" },
       { data: "hora_llegada" },
       { data: "inyectologia" },
+      { data: "gestion_01" },
+      { data: "gestion_02" },
       { data: "observaciones" },
       { data: "turno_id" },
     ],
     columnDefs: [
-      // {
-      //   targets: 13,
-      //   defaultContent:
-      //     "<button class='btn btn-primary btn-sm btnVerDomiEntregado' id='btn_ver_domi_entregado'><i class='fa-solid fa-pen'></i></button>",
-      //   data: null,
-      // },
+      {
+        targets: 3,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+      {
+        targets: 4,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+      {
+        targets: 9,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+      {
+        targets: 10,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
     ],
     order: [[6, "asc"]],
     language: {

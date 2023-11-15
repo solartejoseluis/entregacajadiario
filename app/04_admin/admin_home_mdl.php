@@ -162,7 +162,7 @@ switch ($_GET['accion']) {
         break;
 
 
- 
+
         $sql = "SELECT
             SUM(venta_utilidad)  AS utilidad_turno,
             COUNT(venta_utilidad) AS ventas_turno
@@ -281,6 +281,8 @@ switch ($_GET['accion']) {
             DOMICILIOS.hora_salida,
             DOMICILIOS.hora_llegada,
             DOMICILIOS.inyectologia,
+            DOMICILIOS.gestion_01,
+            DOMICILIOS.gestion_02,
             DOMICILIOS.observaciones,
             DOMICILIOS.turno_id
             FROM DOMICILIOS 
@@ -338,7 +340,7 @@ switch ($_GET['accion']) {
         break;
 
 
-   case 'listar_domicilios_informe_ext':
+    case 'listar_domicilios_informe_ext':
         $sql = "SELECT
             DOMI_EXTERNOS.domi_externo_nombre AS nombres,
             COUNT(domi_externo_id) AS cuenta_domi,
@@ -376,5 +378,4 @@ switch ($_GET['accion']) {
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($result);
         break;
-
 };

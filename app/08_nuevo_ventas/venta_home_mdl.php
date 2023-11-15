@@ -437,6 +437,8 @@ switch ($_GET['accion']) {
             DOMICILIOS.numero_factura,
             DOMICILIOS.hora_salida,
             DOMICILIOS.hora_llegada,
+            DOMICILIOS.gestion_01,
+            DOMICILIOS.gestion_02,
             DOMICILIOS.observaciones,
             DOMICILIOS.turno_id
             FROM DOMICILIOS 

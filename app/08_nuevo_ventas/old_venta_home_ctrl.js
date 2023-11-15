@@ -91,15 +91,15 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     );
 
-      // boton guardar cambios domi por salir
-  $("#btn_guardar_edit_domicilio").on(
-    "click",
-    function () {
-    let domicilioId = $("#npt_edit_domicilio_id").val()
-    guardarEditDomicilio(domicilioId);
-      // alert("probando el boton de guardar cambios");
-    }
-  );
+    // boton guardar cambios domi por salir
+    $("#btn_guardar_edit_domicilio").on(
+      "click",
+      function () {
+        let domicilioId = $("#npt_edit_domicilio_id").val()
+        guardarEditDomicilio(domicilioId);
+        // alert("probando el boton de guardar cambios");
+      }
+    );
 
     function reestablecerModalDomiInternoPorSalir() {
       $("#bloque_edit_domi_externo, #bloque_edit_valor_domi_externo").show();
@@ -620,7 +620,7 @@ document.addEventListener("DOMContentLoaded", function () {
       url:
         "venta_home_mdl.php?accion=guardar_cierre_turno&turno_id=" + turno_id,
       data: registro,
-      success: function (msg) {},
+      success: function (msg) { },
       error: function () {
         alert("problema en: guardar Cierre turno");
       },
@@ -893,7 +893,7 @@ document.addEventListener("DOMContentLoaded", function () {
   $("#npt_valor_producto").on("blur", function () {
     $("#npt_valor_producto").css("background-color", "#dbe5f0");
     const value = this.value.replace(/\$|\./g, "");
-      // validacion para evitar que se muestre NaN en el input al quitar foco
+    // validacion para evitar que se muestre NaN en el input al quitar foco
     if (value === "") {
       return false;
     } else {
@@ -1176,6 +1176,8 @@ document.addEventListener("DOMContentLoaded", function () {
         { data: "hora_salida" },
         { data: "hora_llegada" },
         { data: "inyectologia" },
+        { data: "gestion_01" },
+        { data: "gestion_02" },
         { data: "observaciones" },
         { data: "turno_id" },
         { data: null, orderable: false },
