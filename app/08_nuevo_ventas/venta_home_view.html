@@ -272,7 +272,7 @@
         </div>
 
 
-        <h5 id="titulos_dttbl_gestiones_en_espera">GESTIONES EN ESPERA</h5>
+        <h5 id="titulos_dttbl_gestiones_en_espera">GESTION PARA COMBINAR CON PRODUCTO DROGUERIA</h5>
         <div class="row">
           <section class="table-responsive" id="tabla">
             <table class="table display compact cell-border" id="tbl_gestiones_en_espera">
@@ -306,7 +306,7 @@
           <h1 class="modal-title fs-5">NUEVA GESTION</h1>
         </div>
         <div class="modal-body">
-          <form id="frm_nueva_venta">
+          <form id="frm_nueva_gestion">
             <!-- NPT OCULTOS EN EL MODAL -->
             <div class="row">
               <input type="hidden" class="form-control" id="npt_turno_id_modal" />
@@ -356,13 +356,13 @@
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-outline-warning" id="btn_poner_en_espera">
-            Poner En Espera
+            Combinar con Prod Drogueria
           </button>
           <button type="submit" class="btn btn-success" id="btn_enviar_domi">
             Enviar Por Domicilio
           </button>
           <button type="submit" class="btn btn-outline-success" id="btn_save_punto_fisico">
-            Entrega en Punto Físico
+            Entregar en el Punto Físico
           </button>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
             X
@@ -730,7 +730,7 @@
             <span class="input-group-text" id="inputGroup-sizing-sm"> + Gestión01:</span>
             <select class="form-select" id="slct_agregar_gestion_wait_01"></select>
             <input type="hidden" class="form-control" id="npt_agregar_gestion_wait_01" />
-            <input type="text" class="form-control" id="npt_valor_gestion_wait_01" placeholder="gestion_wait01" />
+            <input type="hidden" class="form-control" id="npt_valor_gestion_wait_01" placeholder="gestion_wait01" />
             <button type="button" class="btn btn-outline-warning" id="btn_agregar_gestion_wait_01">
               Agregar01
             </button>
@@ -743,7 +743,7 @@
             <span class="input-group-text" id="inputGroup-sizing-sm"> + Gestión02:</span>
             <select class="form-select" id="slct_agregar_gestion_wait_02"></select>
             <input type="hidden" class="form-control" id="npt_agregar_gestion_wait_02" />
-            <input type="text" class="form-control" id="npt_valor_gestion_wait_02" placeholder="gestion_wait02" />
+            <input type="hidden" class="form-control" id="npt_valor_gestion_wait_02" placeholder="gestion_wait02" />
             <button type="button" class="btn btn-outline-warning" id="btn_agregar_gestion_wait_02">
               Agregar02
             </button>
@@ -882,6 +882,7 @@
               <input type="hidden" class="form-control" id="npt_edit_valor_producto_base" />
             </div>
 
+<!-- desactivado por no uso
             <div class="input-group input-group input-group-sm mb-2">
               <button class="btn btn-primary" type="button" id="btn_edit_hora_salida">
                 Hora De Salida
@@ -891,6 +892,8 @@
                 x
               </button>
             </div>
+-->
+
 
             <div class="col-md-9 input-group input-group-sm mb-2">
               <span class="input-group-text" id="inputGroup-sizing-sm">Observaciones:</span>

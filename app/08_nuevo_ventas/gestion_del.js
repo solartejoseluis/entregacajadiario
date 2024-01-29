@@ -1,8 +1,8 @@
   //----------------------
-  // CICLO BORRAR DOMI POR SALIR
+  // CICLO BORRAR GESTION
   //----------------------
 
-// boton eliminar domi por salir, abre el modal de confirmacion
+// boton eliminar gestion
   $("#btn_eliminar_gestion").on(
     "click",
     function () {
@@ -11,13 +11,14 @@
   );
 
 
-// boton confirma eliminar domi, elimina el registro
+// boton confirma eliminar gestion
   $("#btn_confirma_eliminar_gestion").on(
     "click",
     function () {
     let ventaId = $("#nptEdit_venta_id").val()
+    $("#mdl_confirma_eliminar_gestion").modal("hide");   
     delGestion(ventaId);
-        $("#mdl_confirma_eliminar_gestion").modal("hide");
+
     }
   );
 
@@ -30,7 +31,10 @@
         $("#tbl_gestiones").DataTable().ajax.reload();
         $("#mdl_confirma_eliminar_gestion").modal("hide");
         $("#mdl_edit_gestion").modal("hide");
-          actualizaPantallaPrincipal();
+        //actualizaPantallaPrincipal();
+          recargaElementosEntorno();
+          $("#tbl_gestiones_en_espera").DataTable().ajax.reload();
+          $("#tbl_gestiones").DataTable().ajax.reload();
       },
       error: function () {
         alert("Problema en borrar gestion");
@@ -50,7 +54,10 @@
       success: function (msg) {
         // listadoVentas.ajax.reload();
         $("#tblVentas").DataTable().ajax.reload();
-        cargaPantallaPrincipal();
+        //cargaPantallaPrincipal();
+        recargaElementosEntorno();
+        $("#tbl_gestiones_en_espera").DataTable().ajax.reload();
+        $("#tbl_gestiones").DataTable().ajax.reload();
       },
       error: function () {
         alert("Problema en borrarRegistro");

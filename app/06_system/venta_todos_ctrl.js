@@ -40,8 +40,6 @@ user_id = $("#npt_user_id_actual").val();
         //He tomado el valor del input
         turno_id = $("#npt_turno_id_actual").val();
         user_id = $("#npt_user_id_actual").val();
-        // alert('he cargado la variable turno id, este es el valor')
-        // alert(JSON.stringify(turno_id));
       },
       error: function () {
         alert("Problema en cargar acceso");

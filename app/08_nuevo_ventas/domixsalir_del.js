@@ -18,7 +18,8 @@ $("#btn_confirma_eliminar_domi").on(
     let domicilioId = $("#npt_edit_domicilio_id").val()
     DelDomiPorSalir(domicilioId);
     $("#mdl_confirma_eliminar").modal("hide");
-    actualizaPantallaPrincipal();
+    //actualizaPantallaPrincipal();
+    $("#tbl_domi_por_salir").DataTable().ajax.reload();
   }
 );
 

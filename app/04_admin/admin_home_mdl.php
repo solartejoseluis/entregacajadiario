@@ -225,7 +225,7 @@ switch ($_GET['accion']) {
            SUM(btn_domi_interno) + SUM(btn_domi_externo) AS total_domi_turno,
            SUM(valor_venta) AS suma_venta,
            SUM(btn_domi_interno) AS cuenta_domi_interno,
-           SUM(btn_domi_interno)*700 AS pago_domi_interno,    
+           SUM(btn_domi_interno)*500 AS pago_domi_interno,    
            SUM(btn_domi_externo) AS cuenta_domi_externo,
            SUM(valor_domi_externo) AS pago_domi_externo
         FROM
@@ -254,7 +254,7 @@ switch ($_GET['accion']) {
         COUNT(valor_venta) AS cuenta_total,
         SUM(valor_venta) AS venta_total,
         SUM(btn_domi_interno) AS cuenta_domi_interno,
-        SUM(btn_domi_interno)*700 AS pago_domi_interno,    
+        SUM(btn_domi_interno)*500 AS pago_domi_interno,    
         SUM(btn_domi_externo) AS cuenta_domi_externo,
         SUM(valor_domi_externo) AS pago_domi_externo
         FROM DOMICILIOS
@@ -307,7 +307,7 @@ switch ($_GET['accion']) {
         $sql = "SELECT
             CONCAT(USERS.user_nombre,' ',USERS.user_apellido) AS nombres,
             COUNT(trans_interno_id) AS cuenta_domi,
-            COUNT(trans_interno_id) * 700 AS a_pagar
+            COUNT(trans_interno_id) * 500 AS a_pagar
         FROM
             DOMICILIOS
         INNER JOIN USERS ON USERS.user_id = DOMICILIOS.trans_interno_id
@@ -326,7 +326,7 @@ switch ($_GET['accion']) {
     case 'calcula_total_domi_mes_int':
         $sql = "SELECT
             COUNT(trans_interno_id) AS total_domi,
-            COUNT(trans_interno_id) * 700 AS total_a_pagar
+            COUNT(trans_interno_id) * 500 AS total_a_pagar
         FROM
             DOMICILIOS
         WHERE

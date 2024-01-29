@@ -172,7 +172,8 @@ $("#btn_save_punto_fisico").click(function () {
     $("#mdl_new_gestion").modal("hide");
     let registro = recolectaDatosMdlNuevaGestion();
     guardarNuevaGestion(registro);
-    actualizaPantallaPrincipal();
+    //actualizaPantallaPrincipal();
+    recargaElementosEntorno();
   }
 });
 
@@ -213,7 +214,8 @@ $("#btn_poner_en_espera").click(function () {
     $("#mdl_new_gestion").modal("hide");
     let registro = recolectaDatosMdlNuevaGestion();
     guardarNuevaGestionEnEspera(registro);
-    actualizaPantallaPrincipal();
+    //actualizaPantallaPrincipal();
+    recargaElementosEntorno();
   }
 });
 
@@ -258,7 +260,8 @@ $("#btn_enviar_domi").click(function () {
     let registro = recolectaDatosMdlNuevaGestion();
     guardarNuevaGestion(registro);
     trasladaMdlNewDomi(registro);
-    actualizaPantallaPrincipal();
+    //actualizaPantallaPrincipal();
+    recargaElementosEntorno();
   }
 });
 

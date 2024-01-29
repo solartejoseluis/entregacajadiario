@@ -5,8 +5,11 @@ session_start();
 $nptUser = $_POST['npt_user'];
 $nptPassword = $_POST['npt_password'];
 
-// CONECTAR BASE DE DATOS
+// CONECTAR BASE DE DATOS LOCAL
 $conn = @mysqli_connect("localhost", "kiron", "123456","CONTROLCAJA");
+
+// CONECTAR BASE DE DATOS EN LA WEB
+//$conn = @mysqli_connect("localhost", "drogueriasuricen_suri", "etica2020_ECD!","drogueriasuricen_controlcaja_prueba");
 
 if (!$conn){
   echo "Fallo al conectar la bd";

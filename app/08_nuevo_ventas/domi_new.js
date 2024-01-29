@@ -25,6 +25,15 @@ function limpiarModalDomicilios() {
   $("#bloque_agregar_gestion_si_no_02").hide();
   $("#bloque_agregar_gestion_wait_01").hide();
   $("#bloque_agregar_gestion_wait_02").hide();
+  
+
+    $( "#slct_agregar_gestion_wait_01" ).prop("disabled",false);
+    $("#btn_agregar_gestion_wait_01").show();
+    $( "#slct_agregar_gestion_wait_02" ).prop("disabled",false);
+    $("#btn_agregar_gestion_wait_02").show();
+    $(".selectAgregarGestionWait01 select").css("background-color", "");
+    $(".selectAgregarGestionWait02 select").css("background-color", "");
+  
   // $("#bloque_total_venta").hide();
   $("#bloque_inyectologia").hide();
   $("#bloque_transportador").hide();
@@ -46,6 +55,7 @@ function limpiarModalDomicilios() {
   $("#npt_valor_domi_externo_base").val("0");
   $("#npt_btn_domi_externo").val("0");
   $("#slct_transportador").val("0"); //select
+    $("#slct_transportador").css("background-color", "");
   $("#npt_transportador_id").val("0");
   $("#npt_valor_producto").val("");
   $("#npt_valor_producto_base").val(0);
@@ -62,24 +72,30 @@ function limpiarModalDomicilios() {
   $("#npt_valor_producto").prop("disabled", null);
 }
 
+
+
+
+//ajuste de prueba para esta funcion:
 function revisarExistenciaGestionWait01() {
+
   $.ajax({
     type: "POST",
     url: "domi_new_mdl.php?accion=revisar_existencia_gestion_wait01",
     data: "",
     success: function (datos) {
-      let registro = (datos[0].venta_tipo);
-      if (registro == 'WAIT') {
-        $("#bloque_agregar_gestion_si_no").show();
-        $("#btn_domi_interno").hide();
-        $("#btn_domi_externo").hide();
-      } else {
+    if( typeof datos[0] == "undefined" ){
         $("#btn_domi_interno").show();
         $("#btn_domi_interno").removeClass("btn-secondary");
         $("#btn_domi_interno").addClass("btn-primary");
         $("#btn_domi_externo").show();
         $("#btn_domi_externo").removeClass("btn-secondary");
         $("#btn_domi_externo").addClass("btn-primary");
+      } else {
+        let registro = "blank";
+        registro = (datos[0].venta_tipo); 
+        $("#bloque_agregar_gestion_si_no").show();
+        $("#btn_domi_interno").hide();
+        $("#btn_domi_externo").hide();
       }
     },
     error: function () {
@@ -94,26 +110,26 @@ function revisarExistenciaGestionWait02() {
     url: "domi_new_mdl.php?accion=revisar_existencia_gestion_wait02",
     data: "",
     success: function (datos02) {
-      let registro = (datos02[0].venta_tipo);
-      if (registro == 'WAIT') {
+        if( typeof datos02[0] != "undefined"){
+        //let registro = "blank";
+        //registro = (datos02[0].venta_tipo);
         $("#bloque_agregar_gestion_si_no_02").show();
         $("#btn_domi_interno").hide();
         $("#btn_domi_externo").hide();
         $("#npt_existe_gestion_wait").val("1");
-      } else {
-        // $("#btn_domi_interno").show();
-        // $("#btn_domi_interno").removeClass("btn-secondary");
-        // $("#btn_domi_interno").addClass("btn-primary");
-        // $("#btn_domi_externo").show();
-        // $("#btn_domi_externo").removeClass("btn-secondary");
-        // $("#btn_domi_externo").addClass("btn-primary");
-      }
-    },
+        }else{
+            return;
+        }
+    },//sucess: function (datos02)
     error: function () {
       alert("problema en: revisar existencia gestion wait 02");
-    },
-  });
-}
+    },//error
+  });//ajax
+} //function revisarExistenciaGestionWait02()
+
+
+
+
 
 function revisarExistenciaGestionWaitEnNpt() {
   let dato = $("#npt_existe_gestion_wait").val();
@@ -601,7 +617,9 @@ function guardarDomicilio(registro) {
     data: registro,
 
     success: function (msg) {
-      location.reload();
+      //location.reload();
+//recargar solo el datatables
+$("#tbl_domi_por_salir").DataTable().ajax.reload();
     },
 
     error: function () {
@@ -617,7 +635,12 @@ function enviaYaDomicilio(registro) {
     data: registro,
 
     success: function (msg) {
-      location.reload();
+      //location.reload();
+      
+      // recargar solo el datatatables:
+      $("#tbl_domi_en_curso").DataTable().ajax.reload();      
+      
+      
     },
 
     error: function () {

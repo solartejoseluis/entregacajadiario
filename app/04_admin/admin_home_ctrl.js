@@ -47,26 +47,26 @@ function dttblDomiciliosGeneral() {
       {
         targets: 5,
         defaultContent:
-          "<button class='btn btn-outline-primary btn-sm btn_domicilios_turnos' id='btn_domicilios_turnos'>Turnos</button>",
+          "<button class='btn btn-outline-primary btn-sm btn_domicilios_turnos' id='btn_domicilios_turnos'>Domi-Turnos</button>",
         data: null,
       },
 
       {
         targets: 6,
         defaultContent:
-          "<button  class='btn btn-outline-primary btn-sm btn_domicilios_dias' id='btn_domicilios_dias'>Dias</button>",
+          "<button  class='btn btn-outline-primary btn-sm btn_domicilios_dias' id='btn_domicilios_dias'>Domi-Dias</button>",
         data: null,
       },
       {
         targets: 7,
         defaultContent:
-          "<button  class='btn btn-outline-primary btn-sm btn_domicilios_mes'>Entregados</button>",
+          "<button  class='btn btn-outline-primary btn-sm btn_domicilios_mes'>Domi-Entregados</button>",
         data: null,
       },
       {
         targets: 8,
         defaultContent:
-          "<button  class='btn btn-outline-primary btn-sm btn_domicilios_informe'>Informe</button>",
+          "<button  class='btn btn-outline-primary btn-sm btn_domicilios_informe'>Domi-Informe</button>",
         data: null,
       },
     ],
@@ -141,26 +141,26 @@ function dttblGestionesGeneral() {
       {
         targets: 5,
         defaultContent:
-          "<button class='btn btn-outline-success btn-sm btn_ver_gestiones_turnos' id='btn_ver_gestiones_turnos'>Turnos</button>",
+          "<button class='btn btn-outline-success btn-sm btn_ver_gestiones_turnos' id='btn_ver_gestiones_turnos'>Gest-Turnos</button>",
         data: null,
       },
 
       {
         targets: 6,
         defaultContent:
-          "<button  class='btn btn-outline-success btn-sm btn_ver_dias' id='btn_ver_dias'>Dias</button>",
+          "<button  class='btn btn-outline-success btn-sm btn_ver_dias' id='btn_ver_dias'>Gest-Dias</button>",
         data: null,
       },
       {
         targets: 7,
         defaultContent:
-          "<button  class='btn btn-outline-success btn-sm btn_ver_gestiones'>Ges</button>",
+          "<button  class='btn btn-outline-success btn-sm btn_ver_gestiones'>Gest-Todas</button>",
         data: null,
       },
       {
         targets: 8,
         defaultContent:
-          "<button  class='btn btn-outline-success btn-sm btn_informe_mes'>Informe</button>",
+          "<button  class='btn btn-outline-success btn-sm btn_informe_mes'>Gest-Informe</button>",
         data: null,
       },
     ],
@@ -272,8 +272,8 @@ function dttblGestionesGeneral() {
       language: {
         url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
       },
-      // scrollY: "800px",
-      // scrollCollapse: true,
+       scrollY: "800px",
+       scrollCollapse: true,
       paging: false,
       destroy: true,
     });
@@ -410,8 +410,8 @@ function datatables_todos_dias(mes_actual) {
     language: {
       url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
     },
-    // scrollY: "800px",
-    // scrollCollapse: true,
+     scrollY: "800px",
+     scrollCollapse: true,
 
     searching: true,
     paging: false,
@@ -721,6 +721,11 @@ function dttbl_domicilios_turnos(mes_actual) {
     language: {
       url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
     },
+    
+    
+    scrollY: "800px",
+    scrollCollapse: true,
+    
     info: true,
     searching: true,
     paging: false,
@@ -779,6 +784,10 @@ function dttbl_domicilios_dias(mes_actual) {
     language: {
       url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
     },
+    
+    scrollY: "800px",
+    scrollCollapse: true,
+    
     info: false,
     searching: false,
     paging: false,
@@ -833,6 +842,10 @@ function dttbl_domicilios_mes(mes_actual) {
     language: {
       url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
     },
+    
+    scrollY: "800px",
+    scrollCollapse: true,
+    
     info: true,
     searching: true,
     paging: false,

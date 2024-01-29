@@ -28,8 +28,9 @@ switch ($_GET['accion']) {
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($result);
     break;
-
-      case 'revisar_existencia_gestion_wait02':
+    
+    
+  case 'revisar_existencia_gestion_wait02':
     $sql = "SELECT
     venta_tipo
     FROM VENTAS
@@ -39,7 +40,7 @@ switch ($_GET['accion']) {
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($result);
-    break;
+    break;    
 
 
   case 'guardar_domicilio':

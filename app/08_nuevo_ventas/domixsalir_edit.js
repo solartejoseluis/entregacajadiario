@@ -56,20 +56,20 @@ $("#npt_edit_valor_producto").change(function () {
 });
 
 //BOTON INYECTOLOGIA
-$("#bloque_edit_inyectologia").on(
-  "click",
-  "#btn_edit_inyectologia",
-  function () {
-    $("#npt_edit_inyectologia").val("SI");
-  }
-);
-$("#bloque_edit_inyectologia").on(
-  "click",
-  "#btn_edit_inyectologia_cancel",
-  function () {
-    $("#npt_edit_inyectologia").val("");
-  }
-);
+//$("#bloque_edit_inyectologia").on(
+//  "click",
+//  "#btn_edit_inyectologia",
+//  function () {
+//    $("#npt_edit_inyectologia").val("SI");
+//  }
+//);
+//$("#bloque_edit_inyectologia").on(
+//  "click",
+//  "#btn_edit_inyectologia_cancel",
+//  function () {
+//    $("#npt_edit_inyectologia").val("");
+//  }
+//);
 
 $("#btn_modificar_domi").on("click", function () {
   $("#mdl_domi_por_salir").modal("hide");
@@ -77,17 +77,21 @@ $("#btn_modificar_domi").on("click", function () {
   modificarDomicilio(registro);
 });
 
-  // rellena hora salida
-  $("#btn_edit_hora_salida").on("click", function () {
-    let hora_actual = moment().format("HH:mm");
-    $("#npt_edit_hora_salida").val(hora_actual);
-  });
-  $("#btn_edit_hora_salida_cancel").on(
-  "click",
-  function () {
-    $("#npt_edit_hora_salida").val("0");
-  }
-);
+
+// rellena hora salida (desactivado por no uso)
+//  $("#btn_edit_hora_salida").on("click", function () {
+//    let hora_actual = moment().format("HH:mm");
+//    $("#npt_edit_hora_salida").val(hora_actual);
+//  });
+//  $("#btn_edit_hora_salida_cancel").on(
+//  "click",
+//  function () {
+//    $("#npt_edit_hora_salida").val("0");
+//  }
+// );
+
+
+
 
 function recolectarEditDomi() {
   let registro = {
@@ -115,7 +119,8 @@ function modificarDomicilio(registro) {
     dataSrc: "",
     data: registro,
     success: function (msg) {
-      location.reload();
+    //location.reload();
+    $("#tbl_domi_por_salir").DataTable().ajax.reload();
     },
     error: function () {
       alert("Problema modificando");

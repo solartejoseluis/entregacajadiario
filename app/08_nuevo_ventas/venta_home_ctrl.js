@@ -1,18 +1,31 @@
 document.addEventListener("DOMContentLoaded", function () {
-  actualizaPantallaPrincipal();
+var turno_id="";//se carga con CargarAcceso()
+var user_id="";//se carga con CargarAcceso()
+cargarAcceso()//se debe ejecutar solo al iniciar
+actualizaPantallaPrincipal(turno_id);
+
 });
 
 function actualizaPantallaPrincipal() {
-  cargarAcceso();
+  //cargarAcceso(); eliminada para solucion problemas recarga
   datatablesDomiPorSalir();
   datatablesDomiEnCurso();
   datatablesGestiones();
   datatablesGestionesEnEspera();
-  consultarDatosTurnoActual();
+  consultarDatosTurnoActual(turno_id);
   acumuladoMesUsuarioActual();
   acumuladoTurnoUsuarioActual();
   mesActual();
 }
+
+
+function recargaElementosEntorno(){
+  //cargarAcceso(); la he quitado para probar fallos en recarga
+  consultarDatosTurnoActual(turno_id);
+  acumuladoMesUsuarioActual();
+  acumuladoTurnoUsuarioActual();
+  }
+
 
 function cargarAcceso() {
   $.ajax({
@@ -33,14 +46,14 @@ function cargarAcceso() {
   });
 }
 
-function consultarDatosTurnoActual() {
+function consultarDatosTurnoActual(turno_id) {
   turno_id = $("#npt_turno_id_actual").val();
   user_id = $("#npt_user_id_actual").val();
   $.ajax({
     type: "GET",
     async: false, //necesario
-    url: "venta_home_mdl.php?accion=consultarDatosTurnoActual",
-    data: { turno_id: turno_id },
+    url: "venta_home_mdl.php?accion=consultarDatosTurnoActual&turno_id="+turno_id,
+    data: "",
     success: function (datos) {
       //$("#npt_turno_id_actual").val(datos[0].turno_id_actual);
       $("#npt_user_nombre").html(datos[0].user_nombre);
@@ -50,10 +63,11 @@ function consultarDatosTurnoActual() {
       $("#spn_jornada_nombre").html(datos[0].jornada_nombre);
     },
     error: function () {
-      alert("Problema en consultar datos turno actual");
+      alert("Problema en consultar datos turno actual en venta_home_ctrl.js");
     },
   });
 }
+
 
 // CARGA LA FECHA ACTUAL y CUADRO PRINCIPAL DE PAGINA
 function getTime() {
@@ -169,7 +183,7 @@ function datatablesDomiPorSalir() {
       if (btnDomiInternoPorsalir == 1) {
         $("#bloque_edit_domi_externo, #bloque_edit_valor_domi_externo").hide();
       } else {
-        $("#bloque_edit_inyectologia").hide();
+        //$("#bloque_edit_inyectologia").hide();
         $("#bloque_edit_transportador").hide();
         $("#bloque_edit_domi_externo, #bloque_edit_valor_domi_externo").show();
       }
@@ -179,7 +193,7 @@ function datatablesDomiPorSalir() {
 
   function reestablecerModalDomiPorSalir() {
     $("#bloque_edit_domi_externo, #bloque_edit_valor_domi_externo").show();
-    $("#grupo_edit_inyectologia").show();
+    //$("#grupo_edit_inyectologia").show();
     $("#bloque_edit_transportador").show();
   }
 
@@ -273,7 +287,7 @@ function datatablesDomiEnCurso() {
       if (btnDomiInternoPorsalir == 1) {
         $("#bloque_edit_domi_externo, #bloque_edit_valor_domi_externo").hide();
       } else {
-        $("#bloque_edit_inyectologia").hide();
+        //$("#bloque_edit_inyectologia").hide();
         $("#bloque_edit_transportador").hide();
         $("#bloque_edit_domi_externo, #bloque_edit_valor_domi_externo").show();
       }
@@ -283,7 +297,7 @@ function datatablesDomiEnCurso() {
 
   function reestablecerModalDomiEnCurso() {
     $("#bloque_edit_domi_externo, #bloque_edit_valor_domi_externo").show();
-    $("#grupo_edit_inyectologia").show();
+    //$("#grupo_edit_inyectologia").show();
     $("#bloque_edit_transportador").show();
   }
 
@@ -299,14 +313,14 @@ function datatablesDomiEnCurso() {
 
   function defineHoraLlegada(registro) {
     $.ajax({
-      type: "POST",
+      type: "GET",
       url:
         "domi_en_curso_mdl.php?accion=define_hora_llegada&domicilio_id=" +
         registro.domicilio_id,
       dataSrc: "",
       data: registro,
       success: function (msg) {
-        $("#tbl_domi_por_salir").DataTable().ajax.reload();
+        //$("#tbl_domi_por_salir").DataTable().ajax.reload();
         $("#tbl_domi_en_curso").DataTable().ajax.reload();
       },
       error: function () {
