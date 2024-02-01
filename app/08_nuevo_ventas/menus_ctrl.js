@@ -11,13 +11,14 @@
 
   function ejecutar_datatables_mes_vendedor() {
     // Datatables Mes/Vendedor
+  let user_id = $("#npt_user_id_actual").val();
     var listado_gestiones_mes_vendedor = $(
       "#tbl_gestiones_mes_vendedor"
     ).DataTable({
       ajax: {
         url: "venta_home_mdl.php?accion=listar_ventas_mes_vendedor",
         dataSrc: "",
-        data: { turno_id: turno_id, user_id: user_id },
+        data: {user_id: user_id },
       },
       columns: [
         { data: "venta_id" },
@@ -60,7 +61,7 @@
       ajax: {
         url: "venta_home_mdl.php?accion=listar_ventas_agrupadas_por_dia_vendedor",
         dataSrc: "",
-        data: { turno_id: turno_id, user_id: user_id },
+        data: {user_id: user_id },
       },
       columns: [
         { data: "FECHA" },

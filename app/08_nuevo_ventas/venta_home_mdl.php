@@ -368,8 +368,12 @@ switch ($_GET['accion']) {
         FROM VENTAS
         INNER JOIN USERS
         ON VENTAS.user_id=USERS.user_id
-        WHERE (MONTH(venta_fecha) = (MONTH(CURRENT_DATE())))
-        AND (VENTAS.user_id = $_GET[user_id])
+        WHERE 
+        (MONTH(venta_fecha) = (MONTH(CURRENT_DATE())))
+        AND
+        (YEAR(venta_fecha) = (YEAR(CURRENT_DATE())))
+        AND 
+        (VENTAS.user_id = $_GET[user_id])
         ";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
@@ -388,7 +392,10 @@ switch ($_GET['accion']) {
         INNER JOIN USERS
         ON VENTAS.user_id=USERS.user_id
         WHERE (MONTH(venta_fecha) = (MONTH(CURRENT_DATE())))
-        AND (VENTAS.user_id = $_GET[user_id])
+        AND
+        (YEAR(venta_fecha) = (YEAR(CURRENT_DATE())))
+        AND 
+        (VENTAS.user_id = $_GET[user_id])
         GROUP BY FECHA
 		ORDER BY FECHA ASC;
         ";

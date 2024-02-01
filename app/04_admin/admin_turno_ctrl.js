@@ -217,12 +217,12 @@ function datatablesDomiPorSalir(turno_id) {
   // fin datatables gestiones
 
   // DTTBL MDL GESTIONES MES VENDEDOR
-  function dttbl_mes_vendedor(turno_id, user_id) {
+  function dttbl_mes_vendedor(user_id) {
     var listado = $("#tbl_gestiones_mes_vendedor").DataTable({
       ajax: {
         url: "admin_turno_mdl.php?accion=listar_ventas_mes_vendedor",
         dataSrc: "",
-        data: { turno_id: turno_id, user_id: user_id },
+        data: { user_id: user_id },
       },
       columns: [
         { data: "venta_id" },
@@ -249,12 +249,12 @@ function datatablesDomiPorSalir(turno_id) {
   }
 
   // DTTBL MDL GESTIONES AGRUPADAS POR DIA
-  function dttbl_gestiones_agrupadas_por_dia(turno_id, user_id) {
+  function dttbl_gestiones_agrupadas_por_dia(user_id) {
     var listado = $("#tbl_gestiones_agrupadas_por_dia").DataTable({
       ajax: {
         url: "admin_turno_mdl.php?accion=listar_ventas_agrupadas_por_dia_vendedor",
         dataSrc: "",
-        data: { turno_id: turno_id, user_id: user_id },
+        data: {user_id: user_id },
       },
       columns: [
         { data: "FECHA" },

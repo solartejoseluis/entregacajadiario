@@ -109,28 +109,29 @@ function mesActual() {
 }
 
 // SIDEBAR
+// el sql va buscar  todas las gestiones del mes actual
 $("#lnk_gestiones_mes_vendedor").on("click", function () {
+    let user_id = $("#npt_user_id_actual").val();
   $("#mdl_gestiones_mes_vendedor").modal("show");
-  dttbl_mes_vendedor(turno_id, user_id);
+  dttbl_mes_vendedor(user_id);
 });
 
+
+// el sql va buscar las gestiones del mes actual agrupadas por dia
 $("#lnk_gestiones_agrupadas_por_dia").on("click", function () {
+    let user_id = $("#npt_user_id_actual").val();
   $("#mdl_gestiones_agrupadas_por_dia").modal("show");
-  dttbl_gestiones_agrupadas_por_dia(turno_id, user_id);
+  dttbl_gestiones_agrupadas_por_dia(user_id);
 });
 
+
+// no pasa variable porque el sql calcula periodo de tiempo 3 meses atrás
 $("#lnk_gestiones_mes_todos").on("click", function () {
   $("#mdl_gestiones_mes_todos").modal("show");
-  dttbl_mes_todos(turno_id, user_id);
+  dttbl_mes_todos();
 });
 
-$("#lnk_gestiones_mes_vendedor").on("click", function () {
-  $("#mdl_gestiones_mes_vendedor").modal("show");
-});
 
-$("#lnk_gestiones_mes_vendedor").on("click", function () {
-  $("#mdl_gestiones_mes_vendedor").modal("show");
-});
 
 // DTTBL DOMI POR SALIR
 function datatablesDomiPorSalir() {
@@ -471,12 +472,12 @@ function datatablesGestiones() {
 
 
 // DTTBL MDL GESTIONES MES VENDEDOR
-function dttbl_mes_vendedor(turno_id, user_id) {
+function dttbl_mes_vendedor(user_id) {
   var listado = $("#tbl_gestiones_mes_vendedor").DataTable({
     ajax: {
       url: "venta_home_mdl.php?accion=listar_ventas_mes_vendedor",
       dataSrc: "",
-      data: { turno_id: turno_id, user_id: user_id },
+      data: {user_id: user_id },
     },
     columns: [
       { data: "venta_id" },
@@ -503,12 +504,12 @@ function dttbl_mes_vendedor(turno_id, user_id) {
 }
 
 // DTTBL MDL GESTIONES AGRUPADAS POR DIA
-function dttbl_gestiones_agrupadas_por_dia(turno_id, user_id) {
+function dttbl_gestiones_agrupadas_por_dia(user_id) {
   var listado = $("#tbl_gestiones_agrupadas_por_dia").DataTable({
     ajax: {
       url: "venta_home_mdl.php?accion=listar_ventas_agrupadas_por_dia_vendedor",
       dataSrc: "",
-      data: { turno_id: turno_id, user_id: user_id },
+      data: {user_id: user_id },
     },
     columns: [
       { data: "FECHA" },
