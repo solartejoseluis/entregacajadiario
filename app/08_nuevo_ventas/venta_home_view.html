@@ -14,7 +14,7 @@
   <!-- fontawesome icons version 6 -->
   <script src="https://kit.fontawesome.com/382e1ebb20.js" crossorigin="anonymous"></script>
   <!-- estilos personalizados -->
-  <link rel="stylesheet" href="ventas.css" />
+  <link id="estilos" rel="stylesheet" href="" /> <!-- se carga estilo segun usuario-->
   <link rel="stylesheet" href="sidebar.css" />
   <!-- select2 -->
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -28,8 +28,8 @@
 
     <button class="btn_close">x</button>
     <main class="d-flex flex-nowrap">
-      <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px">
-        <ul class="nav nav-pills flex-column mb-auto">
+      <div  class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px">
+        <ul  class="nav nav-pills flex-column mb-auto">
           <p>GESTIONES</p>
 
           <!-- LINK GESTIONES MES VENDEDOR -->
@@ -133,11 +133,11 @@
             </ul>
           </div>
           <!--fin del navbar collapse-->
-          <span id="subtitulo_navbar">Jornada:&nbsp</span>
-          <span class="navbar-brand" id="spn_jornada_nombre"></span>
-          <span id="subtitulo_navbar">A Cargo De:&nbsp</span>
-          <span class="navbar-brand" id="spn_user_nombre"></span>
-          <span class="navbar-brand" id="spn_user_apellido"></span>
+          <!-- <span id="subtitulo_navbar">Jornada:&nbsp</span> -->
+          <!-- <span class="navbar-brand" id="spn_jornada_nombre"></span> -->
+          <!-- <span id="subtitulo_navbar">A Cargo De:&nbsp</span> -->
+          <!-- <span class="navbar-brand" id="spn_user_nombre"></span> -->
+          <!-- <span class="navbar-brand" id="spn_user_apellido"></span> -->
         </div>
         <!--finaliza el contenido del navbar-->
       </nav>
@@ -178,7 +178,12 @@
               <span class="acumulado_ganancia_turno" id="info_turno">&nbsp</span>
             </div>
             <div class="ms-4">
+              <span class="navbar-brand" id="spn_user_nombre"></span>
+              <span class="navbar-brand" id="spn_user_apellido"></span>
+              <span class="navbar-brand" id="spn_jornada_nombre"></span>
               <span class="navbar-text" id="hoy_moment"></span>
+
+
             </div>
           </div>
         </div>

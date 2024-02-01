@@ -310,7 +310,10 @@ switch ($_GET['accion']) {
             COUNT(venta_utilidad) AS cuenta_nmr_gestiones,
             ROUND(SUM(venta_utilidad)/2,0) AS acumulado_ganancia
             FROM VENTAS
-            WHERE (MONTH(venta_fecha) = (MONTH(CURRENT_DATE())))
+            WHERE
+            (MONTH(venta_fecha) = (MONTH(CURRENT_DATE())))
+            AND
+            (YEAR(venta_fecha) = (YEAR(CURRENT_DATE())))
             AND (user_id=$_GET[user_id])";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
@@ -424,7 +427,7 @@ switch ($_GET['accion']) {
         echo json_encode($result);
         break;
 
-
+// datos para el modal domi entregados en nuevo_ventas
     case 'listar_domi_entregados':
         $sql = "SELECT
 			DOMICILIOS.domicilio_id,

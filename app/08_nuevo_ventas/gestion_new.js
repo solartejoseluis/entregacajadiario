@@ -303,7 +303,6 @@ function trasladaMdlNewDomi(registro) {
   $("#bloque_domi_externo, #bloque_valor_domi_externo").hide();
   $("#bloque_hora_salida").hide();
   $("#bloque_observaciones").hide();
-  $("#mdl_domicilios").modal("show");
   //limpia los campos
   $(
     "#npt_factura,#npt_valor_domi_externo,#npt_valor_producto,#npt_hora_salida,#npt_observaciones"
@@ -327,7 +326,12 @@ function trasladaMdlNewDomi(registro) {
   $("#npt_inyectologia").val("");
   $("#npt_observaciones").val("");
   $("#npt_confirm_btn").val("0");
-  $("#npt_turno_id_actual").val("");
+  
+  //*! desactivado por que estaba dando error al borrar este input clave.
+  //$("#npt_turno_id_actual").val("");
+
+  //muestra el modal nuevo domicilio
+  $("#mdl_domicilios").modal("show");
 }
 
 function guardarNuevaGestion(registro) {

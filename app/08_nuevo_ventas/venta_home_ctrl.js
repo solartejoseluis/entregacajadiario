@@ -1,13 +1,20 @@
-document.addEventListener("DOMContentLoaded", function () {
-var turno_id="";//se carga con CargarAcceso()
-var user_id="";//se carga con CargarAcceso()
-cargarAcceso()//se debe ejecutar solo al iniciar
-actualizaPantallaPrincipal(turno_id);
 
+// carga pantalla de inicio 
+document.addEventListener("DOMContentLoaded", function () {
+//*! valores desactivados por que los estoy tomando desde los inputs
+//var turno_id="";//se carga con CargarAcceso()
+//var user_id="";//se carga con CargarAcceso()
+cargarAcceso()//TODO: 2024-01-30 se debe ejecutar solo al iniciar por variables de sesion.
+actualizaPantallaPrincipal();
 });
 
+
+
 function actualizaPantallaPrincipal() {
-  //cargarAcceso(); eliminada para solucion problemas recarga
+  let turno_id = $("#npt_turno_id_actual").val();
+  let user_id = $("#npt_user_id_actual").val();
+  // *! cargarAcceso(); eliminada para solucion problemas recarga
+  aplicaEstilosPorUsuario(user_id);
   datatablesDomiPorSalir();
   datatablesDomiEnCurso();
   datatablesGestiones();
@@ -16,14 +23,25 @@ function actualizaPantallaPrincipal() {
   acumuladoMesUsuarioActual();
   acumuladoTurnoUsuarioActual();
   mesActual();
+
 }
 
+// intercambia la hoja de estilos segun el perfil de usuario
+function aplicaEstilosPorUsuario(user_id){
+if (user_id == 1){
+  document.getElementById('estilos').href = 'ventas_1.css';
+}else{
+    document.getElementById('estilos').href = 'ventas_2.css';
+}
+};
 
+//esta funcion la uso en gestion_del.js y en gestion_new.js
 function recargaElementosEntorno(){
-  //cargarAcceso(); la he quitado para probar fallos en recarga
+  let turno_id = $("#npt_turno_id_actual").val();
+  // *! cargarAcceso(); la he quitado para probar fallos en recarga
   consultarDatosTurnoActual(turno_id);
-  acumuladoMesUsuarioActual();
-  acumuladoTurnoUsuarioActual();
+  acumuladoMesUsuarioActual(turno_id);
+  acumuladoTurnoUsuarioActual(turno_id);
   }
 
 
@@ -37,8 +55,10 @@ function cargarAcceso() {
       $("#npt_turno_id_actual").val(datos[0].turno_id);
       $("#npt_user_id_actual").val(datos[0].user_id);
       //He tomado el valor del input
-      turno_id = $("#npt_turno_id_actual").val();
-      user_id = $("#npt_user_id_actual").val();
+      //*! valores eliminados porque en las funciones tomo los datos desde los inputs
+      //turno_id = $("#npt_turno_id_actual").val();
+      //user_id = $("#npt_user_id_actual").val();
+    
     },
     error: function () {
       alert("Problema en cargar acceso");
@@ -46,9 +66,11 @@ function cargarAcceso() {
   });
 }
 
-function consultarDatosTurnoActual(turno_id) {
-  turno_id = $("#npt_turno_id_actual").val();
-  user_id = $("#npt_user_id_actual").val();
+
+
+
+function consultarDatosTurnoActual() {
+  let turno_id = $("#npt_turno_id_actual").val();
   $.ajax({
     type: "GET",
     async: false, //necesario
@@ -69,7 +91,7 @@ function consultarDatosTurnoActual(turno_id) {
 }
 
 
-// CARGA LA FECHA ACTUAL y CUADRO PRINCIPAL DE PAGINA
+// carga la fecha actual y cuadro principal de pagina
 function getTime() {
   var today = moment();
   date = today.format("LLLL");
@@ -80,18 +102,11 @@ setInterval(function () {
   getTime();
 }, 1000);
 
-function mesActual() {
-  let mes_actual = moment().format("MMMM-YYYY");
-  $("#mes_actual1").html(mes_actual);
-}
-
-// CARGA EL MES ACTUAL
+// carga el mes actual
 function mesActual() {
   let mesActual = moment().format("MMMM-YYYY");
   $(".mesActual").html(mesActual);
 }
-
-
 
 // SIDEBAR
 $("#lnk_gestiones_mes_vendedor").on("click", function () {
