@@ -1,19 +1,15 @@
 
 // carga pantalla de inicio 
 document.addEventListener("DOMContentLoaded", function () {
-//*! valores desactivados por que los estoy tomando desde los inputs
-//var turno_id="";//se carga con CargarAcceso()
-//var user_id="";//se carga con CargarAcceso()
-cargarAcceso()//TODO: 2024-01-30 se debe ejecutar solo al iniciar por variables de sesion.
-actualizaPantallaPrincipal();
+  //*! valores desactivados por que los estoy tomando desde los inputs
+  cargarAcceso()//TODO: 2024-01-30 se debe ejecutar solo al iniciar por variables de sesion.
+  actualizaPantallaPrincipal();
 });
-
 
 
 function actualizaPantallaPrincipal() {
   let turno_id = $("#npt_turno_id_actual").val();
   let user_id = $("#npt_user_id_actual").val();
-  // *! cargarAcceso(); eliminada para solucion problemas recarga
   aplicaEstilosPorUsuario(user_id);
   datatablesDomiPorSalir();
   datatablesDomiEnCurso();
@@ -27,22 +23,22 @@ function actualizaPantallaPrincipal() {
 }
 
 // intercambia la hoja de estilos segun el perfil de usuario
-function aplicaEstilosPorUsuario(user_id){
-if (user_id == 1){
-  document.getElementById('estilos').href = 'ventas_1.css';
-}else{
+function aplicaEstilosPorUsuario(user_id) {
+  if (user_id == 1) {
+    document.getElementById('estilos').href = 'ventas_1.css';
+  } else {
     document.getElementById('estilos').href = 'ventas_2.css';
-}
+  }
 };
 
 //esta funcion la uso en gestion_del.js y en gestion_new.js
-function recargaElementosEntorno(){
+function recargaElementosEntorno() {
   let turno_id = $("#npt_turno_id_actual").val();
   // *! cargarAcceso(); la he quitado para probar fallos en recarga
   consultarDatosTurnoActual(turno_id);
   acumuladoMesUsuarioActual(turno_id);
   acumuladoTurnoUsuarioActual(turno_id);
-  }
+}
 
 
 function cargarAcceso() {
@@ -54,11 +50,6 @@ function cargarAcceso() {
     success: function (datos) {
       $("#npt_turno_id_actual").val(datos[0].turno_id);
       $("#npt_user_id_actual").val(datos[0].user_id);
-      //He tomado el valor del input
-      //*! valores eliminados porque en las funciones tomo los datos desde los inputs
-      //turno_id = $("#npt_turno_id_actual").val();
-      //user_id = $("#npt_user_id_actual").val();
-    
     },
     error: function () {
       alert("Problema en cargar acceso");
@@ -67,14 +58,12 @@ function cargarAcceso() {
 }
 
 
-
-
 function consultarDatosTurnoActual() {
   let turno_id = $("#npt_turno_id_actual").val();
   $.ajax({
     type: "GET",
     async: false, //necesario
-    url: "venta_home_mdl.php?accion=consultarDatosTurnoActual&turno_id="+turno_id,
+    url: "venta_home_mdl.php?accion=consultarDatosTurnoActual&turno_id=" + turno_id,
     data: "",
     success: function (datos) {
       //$("#npt_turno_id_actual").val(datos[0].turno_id_actual);
@@ -111,7 +100,7 @@ function mesActual() {
 // SIDEBAR
 // el sql va buscar  todas las gestiones del mes actual
 $("#lnk_gestiones_mes_vendedor").on("click", function () {
-    let user_id = $("#npt_user_id_actual").val();
+  let user_id = $("#npt_user_id_actual").val();
   $("#mdl_gestiones_mes_vendedor").modal("show");
   dttbl_mes_vendedor(user_id);
 });
@@ -119,7 +108,7 @@ $("#lnk_gestiones_mes_vendedor").on("click", function () {
 
 // el sql va buscar las gestiones del mes actual agrupadas por dia
 $("#lnk_gestiones_agrupadas_por_dia").on("click", function () {
-    let user_id = $("#npt_user_id_actual").val();
+  let user_id = $("#npt_user_id_actual").val();
   $("#mdl_gestiones_agrupadas_por_dia").modal("show");
   dttbl_gestiones_agrupadas_por_dia(user_id);
 });
@@ -131,7 +120,17 @@ $("#lnk_gestiones_mes_todos").on("click", function () {
   dttbl_mes_todos();
 });
 
-
+// Muestra el modal del informe  
+$("#lnk_informe_domis_gestiones_del_turno").on("click", function () {
+  let user_id = $("#npt_user_id_actual").val();
+  $("#mdl_informe_domis_gestiones_del_turno").modal("show");
+  //dttbl_mes_vendedor(user_id); aqui las datatables del modal
+  // cargar los informes de la parte superior de la página.
+  dttbl_total_domi_externo_elegido_del_turno();
+  dttbl_listar_domi_externos_varios_del_turno();
+  dttbl_total_domi_externos_varios_del_turno();
+  dttbl_total_domi_internos_turno();
+});
 
 // DTTBL DOMI POR SALIR
 function datatablesDomiPorSalir() {
@@ -477,7 +476,7 @@ function dttbl_mes_vendedor(user_id) {
     ajax: {
       url: "venta_home_mdl.php?accion=listar_ventas_mes_vendedor",
       dataSrc: "",
-      data: {user_id: user_id },
+      data: { user_id: user_id },
     },
     columns: [
       { data: "venta_id" },
@@ -509,7 +508,7 @@ function dttbl_gestiones_agrupadas_por_dia(user_id) {
     ajax: {
       url: "venta_home_mdl.php?accion=listar_ventas_agrupadas_por_dia_vendedor",
       dataSrc: "",
-      data: {user_id: user_id },
+      data: { user_id: user_id },
     },
     columns: [
       { data: "FECHA" },
@@ -695,6 +694,8 @@ $("#btn_domi_entregados").on("click", function () {
   datatablesDomiEntregados();
 });
 
+
+
 function datatablesDomiEntregados() {
   turno_id = $("#npt_turno_id_actual").val();
   user_id = $("#npt_user_id_actual").val();
@@ -743,6 +744,131 @@ function datatablesDomiEntregados() {
     },
     info: true,
     searching: true,
+    paging: false,
+    destroy: true,
+  });
+}
+
+//  carga de datos para los informes de la parte superior de la pantalla.
+
+
+
+function dttbl_total_domi_externo_elegido_del_turno() {
+  turno_id = $("#npt_turno_id_actual").val();
+  user_id = $("#npt_user_id_actual").val();
+  let listado = $("#tbl_total_domi_externo_elegido_del_turno").DataTable({
+    ajax: {
+      url: "venta_home_mdl.php?accion=total_domi_externo_elegido_del_turno&turno_id=" + turno_id,
+      dataSrc: "",
+      data: "",
+    },
+    columns: [
+      { data: "domi_externo_nombre" },
+      { data: "cuenta_domis" },
+      { data: "valor_domis_externos_elegidos" },
+    ],
+    columnDefs: [
+      {
+        targets: 2,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+    ],
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+    },
+    info: false,
+    searching: false,
+    paging: false,
+    destroy: true,
+  });
+}
+
+
+function dttbl_listar_domi_externos_varios_del_turno() {
+  turno_id = $("#npt_turno_id_actual").val();
+  user_id = $("#npt_user_id_actual").val();
+  let listado = $("#tbl_listar_domi_externos_varios_del_turno").DataTable({
+    ajax: {
+      url: "venta_home_mdl.php?accion=listar_domi_externos_varios_del_turno&turno_id=" + turno_id,
+      dataSrc: "",
+      data: "",
+    },
+    columns: [
+      { data: "domi_externo_nombre" },
+      { data: "cuenta_domis" },
+      { data: "valor_domis_externos_varios" },
+    ],
+    columnDefs: [
+      {
+        targets: 2,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+    ],
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+    },
+    info: false,
+    searching: false,
+    paging: false,
+    destroy: true,
+  });
+}
+
+
+function dttbl_total_domi_externos_varios_del_turno() {
+  turno_id = $("#npt_turno_id_actual").val();
+  user_id = $("#npt_user_id_actual").val();
+  let listado = $("#tbl_total_domi_externos_varios_del_turno").DataTable({
+    ajax: {
+      url: "venta_home_mdl.php?accion=total_domi_externos_varios_del_turno&turno_id=" + turno_id,
+      dataSrc: "",
+      data: "",
+    },
+    columns: [
+      { data: "total_domis" },
+      { data: "total_domis_externos_varios" },
+    ],
+    columnDefs: [
+      {
+        targets: 1,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+    ],
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+    },
+    info: false,
+    searching: false,
+    paging: false,
+    destroy: true,
+  });
+}
+
+function dttbl_total_domi_internos_turno() {
+  turno_id = $("#npt_turno_id_actual").val();
+  user_id = $("#npt_user_id_actual").val();
+  let listado = $("#tbl_total_domi_internos_turno").DataTable({
+    ajax: {
+      url: "venta_home_mdl.php?accion=total_domi_internos_turno&turno_id=" + turno_id,
+      dataSrc: "",
+      data: "",
+    },
+    columns: [
+      { data: "domi_interno_nombre" },
+      { data: "total_domis" },
+      { data: "total_domis_internos" },
+    ],
+    columnDefs: [
+      {
+        targets: 2,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+    ],
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+    },
+    info: false,
+    searching: false,
     paging: false,
     destroy: true,
   });

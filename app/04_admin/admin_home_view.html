@@ -12,9 +12,11 @@
 
   <!-- CDN datatables css-->
   <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"> -->
+
   <link
     href="https://cdn.datatables.net/v/dt/dt-1.13.4/cr-1.6.2/date-1.4.0/fh-3.3.2/r-2.4.1/sc-2.1.1/sb-1.4.2/sp-2.1.2/sl-1.6.2/sr-1.2.2/datatables.min.css"
     rel="stylesheet" />
+
   <!-- estilo de los botones -->
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">
   <!-- Estilos Personalizados -->
@@ -93,6 +95,8 @@
     </section>
 
   </div>
+
+
   <!-- - - - - - - - - - -->
   <!-- SECCION DOMICILIOS -->
   <!-- - - - - - - - - - -->
@@ -131,9 +135,8 @@
         <!-- finaliza datatables del modal -->
       </div>
     </div>
-  </div>
-  </div>
-  <!-- fin mdl Domicilios turnos -->
+  </div> <!--final modal-content-->
+  </div> <!-- final mdl_domicilios_turnos -->
 
 
   <!-- MDL DOMICILIOS DIAS-->
@@ -433,7 +436,7 @@
         <div class="modal-body">
           <div class="container-fluid">
             <!-- inicia primer datatables del modal  -->
-            <div class="row">
+            <div class="row" id="seccion_informe_mes">
               <div class="col-md-12">
                 <table class=" table display compact" cellspacing="0" width="100%" id="tbl_gestiones_informe_mes">
                   <thead>
@@ -446,8 +449,7 @@
                   </thead>
                 </table>
               </div>
-            </div>
-            <!-- finaliza primer datatables del modal -->
+            </div> <!--final seccion_informe_mes-->
             <!-- inicia segundo datatables del modal  -->
             <div class="row">
               <div class="col-md-12">
@@ -469,17 +471,10 @@
             </div>
             <!-- finaliza segundo datatables del modal -->
           </div>
-        </div>
-        <!-- inicia el footer  -->
+        </div> <!--final modal-body-->
       </div>
     </div>
-  </div>
-  <!-- fin mdl gestiones mes -->
-
-  <!-- - - - - -->
-  <!-- MODALES -->
-  <!-- - - - - -->
-
+  </div> <!--final mdl_informe_mes-->
 
   <!-- ------------------------------------------------------------------- -->
   <!--  INICIA SUBMODAL DETALLE TURNO-->
@@ -488,73 +483,161 @@
     <div class="modal-dialog modal-fullscreen">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5">DETALLE DEL TURNO</h1>
-          <button type="button" class="btn btn-primary" id="btn_close_mdl_detalle_turno">
+          <h1 class="modal-title fs-5">MODAL DETALLES DEL TURNO</h1>
+          <button type="button" class="btn btn-danger" id="btn_close_mdl_detalle_turno">
             Volver a Listado Turnos
           </button>
         </div>
         <div class="modal-body">
-          <div class="row">
 
+
+          <div class="row" id="encabezado_del_modal">
             <div class="container col-md-4">
               <div class="ms-4 col-md-4">
                 <span class="navbar-text" id="hoy_moment"></span>
               </div>
-
-
               <!-- TURNO ID -->
               <div class="col-md-2 input-group input-group-sm mb-2">
                 <span class="input-group-text" id="inputGroup-sizing-sm"> turno Id</span>
                 <input type="text" class="form-control" id="npt_detalle_turno_id" />
               </div>
-
             </div>
-
-
-
             <div class="container col-md-4">
-
               <!-- FECHA CREADO -->
               <div class="col-md-2 input-group input-group-sm mb-2">
                 <span class="input-group-text" id="inputGroup-sizing-sm">Fecha</span>
                 <input type="text" class="form-control" id="npt_detalle_turno_fecha_creado" />
               </div>
-
               <!-- DIA SEMANA -->
               <div class="col-md-2 input-group input-group-sm mb-2">
                 <span class="input-group-text" id="inputGroup-sizing-sm">Dia</span>
                 <input type="text" class="form-control" id="npt_detalle_dia_semana" />
               </div>
-
             </div>
 
-
-
             <div class="container col-md-4">
-
-
-
               <!-- JORNADA NOMBRE -->
               <div class="col-md-4 input-group input-group-sm mb-2">
                 <span class="input-group-text" id="inputGroup-sizing-sm">jornada</span>
                 <input type="text" class="form-control" id="npt_detalle_jornada_nombre" />
               </div>
 
-
               <!-- RESPONSABLE DE TURNO -->
               <div class="col-md-4 input-group input-group-sm mb-2">
                 <span class="input-group-text" id="inputGroup-sizing-sm">Responsable</span>
                 <input type="text" class="form-control" id="npt_detalle_turno_nombres_responsable" />
               </div>
-
             </div>
+          </div> <!-- finaliza  encabezado_del_modal -->
 
 
-          </div>
+          <div class="row" id="seccion_encabezado_informes">
+            <section class="container col-md-4" id="seccion_informe_domicilios">
+              <h4>SECCION INFORME DOMICILIOS</h4>
+              <section class="table-responsive" id="informe_1">
+                <h5>DOMI EXTERNOS ELEGIDOS</h5>
+                <table class="table display compact cell-border" id="tbl_total_domi_externo_elegido_del_turno"
+                style = "width:100%"
+                >
+                  <thead>
+                    <tr>
+                      <td>Nombres</td>
+                      <td>Domi</td>
+                      <td>pagado</td>
+                    </tr>
+                  </thead>
+                </table>
+              </section> <!--final informe_1-->
+
+              <section class="table-responsive" id="informe_2">
+                <h5>DOMI EXTERNOS VARIOS</h5>
+                <table class="table display compact cell-border" id="tbl_listar_domi_externos_varios_del_turno"
+                style = "width:100%"                
+                >
+                  <thead>
+                    <tr>
+                      <td>Nombres</td>
+                      <td>Domi</td>
+                      <td>pagado</td>
+                    </tr>
+                  </thead>
+                </table>
+              </section> <!--final informe_2-->
+
+              <section class="table-responsive" id="informe_3">
+                <h5> TOTAL DOMI EXTERNOS VARIOS</h5>
+                <table class="table display compact cell-border" id="tbl_total_domi_externos_varios_del_turno"
+                style = "width:100%"                
+                >
+                  <thead>
+                    <tr>
+                      <td>Domi</td>
+                      <td>pagado</td>
+                    </tr>
+                  </thead>
+                </table>
+              </section> <!--final informe_3-->
+
+              <section class="table-responsive" id="informe_4">
+                <h5> TOTAL DOMI INTERNOS</h5>
+                <table class="table display compact cell-border" 
+                id="tbl_total_domi_internos_turno"
+                style = "width:100%"                
+                >
+                  <thead>
+                    <tr>
+                      <td>Nombres</td>
+                      <td>Domi</td>
+                      <td>pagado</td>
+                    </tr>
+                  </thead>
+                </table>
+              </section> <!--final informe_4-->
+            </section><!--final seccion_informe_domicilios-->
+
+            <section class="container col-md-4" id="seccion_informe_gestiones">
+              <h4>SECCION INFORME GESTIONES</h4>
+              <section class="table-responsive" id="informe_1">
+                <table class="table display compact cell-border" 
+                id="tbl_informe_domicilios"
+                style = "width:100%"                
+                >
+                  <thead>
+                    <tr>
+                      <td>titulo1</td>
+                      <td>titulo2</td>
+                      <td>titulo3</td>
+                      <td>titulo4</td>
+                    </tr>
+                  </thead>
+                </table>
+              </section>
+            </section><!--final seccion_informe_gestiones-->
+
+
+            <section class="container col-md-4" id="seccion_informe_cuadre_caja">
+              <h4>SECCION INFORME CUADRE DE CAJA</h4>
+              <section class="table-responsive" id="informe_3">
+                <table class="table display compact cell-border" 
+                id="tbl_informe_turno"
+                style = "width:100%"                
+                >
+                  <thead>
+                    <tr>
+                      <td>titulo1</td>
+                      <td>titulo2</td>
+                      <td>titulo3</td>
+                      <td>titulo4</td>
+                    </tr>
+                  </thead>
+                </table>
+              </section>
+            </section><!--final seccion_informe_cuadre_caja-->
+          </div> <!-- final seccion_encabezado_informes-->
 
           <div class="row">
             <!-- SECCION DOMICILIOS -->
-            <section class="container col-md-6">
+            <section class="container col-md-6" id="seccion_domicilios">
               <h3>DOMICILIOS</h3>
               <!-- <button type="button" class="btn btn-outline-primary" id="btn_actualiza_mdl_domicilios">
                 Actualizar
@@ -652,9 +735,7 @@
         <!-- final contenido pagina -->
       </div>
     </div>
-  </div>
-  <!-- </div> -->
-  <!-- fin mdl detalle turno -->
+  </div> <!--final mdl_detalle_turno-->
 
   <!-- SCRIPTS -->
   <div>

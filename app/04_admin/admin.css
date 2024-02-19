@@ -6,6 +6,9 @@ color:#0D6EFD; /* color de referencia para la paleta*/
 color:#CAFC26;
 color:#86B000;
 color:#06367D; /* fondo */
+/* otros colores que he utilizado https://www.w3schools.com/colors/colors_2021.asp */
+color:  #EFE1CE; /* Buttercream pantone PANTONE 11-0110 */
+color:  #939597; /* UltimateGray pantone PANTONE 17-5104 */
 }
 
 body{
@@ -60,11 +63,13 @@ body{
   color: #D92121;
 }
 
-
-
 .dataTables_scrollHeadInner{
   width:100% !important;
 }
 .dataTables_scrollHeadInner table{
   width:100% !important;
+}
+
+#seccion_informe_domicilios {
+  background-color: #EFE1CE;
 }

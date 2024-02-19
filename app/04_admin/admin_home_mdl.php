@@ -11,7 +11,7 @@ switch ($_GET['accion']) {
             YEAR(venta_fecha) AS año,
             SUM(venta_utilidad) AS acumulado_utilidad,
             COUNT(venta_utilidad) AS cuenta_num_gestiones
-            FROM VENTAS GROUP BY mes";
+            FROM VENTAS GROUP BY año, mes";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -37,7 +37,10 @@ switch ($_GET['accion']) {
         ON TURNOS.turno_responsable=USERS.user_id
         INNER JOIN JORNADAS
         ON TURNOS.turno_jornada=JORNADAS.jornada_id
-        WHERE MONTH(turno_creacion_timestamp) =$_GET[mes_actual]
+        WHERE 
+        MONTH(turno_creacion_timestamp) =$_GET[mes_actual]
+        AND
+        (YEAR(turno_fecha_creado) = (YEAR(CURRENT_DATE())))
         ";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
@@ -63,7 +66,10 @@ switch ($_GET['accion']) {
         
         SUM(SUM(turno_sobrante)) OVER (ORDER BY TURNOS.turno_fecha_creado ASC) AS acumulado_sobrante
         FROM TURNOS
-        WHERE MONTH(turno_fecha_creado) = $_GET[mes_actual]
+        WHERE 
+        MONTH(turno_fecha_creado) = $_GET[mes_actual]
+        AND
+        (YEAR(turno_fecha_creado) = (YEAR(CURRENT_DATE())))
         GROUP BY turno_fecha
         ORDER BY turno_fecha ASC;
         ";
@@ -110,6 +116,8 @@ switch ($_GET['accion']) {
           FROM VENTAS
           INNER JOIN USERS ON USERS.user_id = VENTAS.user_id
           WHERE MONTH(venta_fecha)=$_GET[mes_actual]
+          AND
+        (YEAR(venta_fecha) = (YEAR(CURRENT_DATE())))
           GROUP BY USERS.user_nombre;
         ";
         $stmt = $pdo->prepare($sql);
@@ -132,7 +140,10 @@ switch ($_GET['accion']) {
         
         SUM(turno_total_utilidad) DIV 2 AS suma_total_pago_vendedor
         FROM TURNOS
-        WHERE MONTH(turno_fecha_creado)=$_GET[mes_actual];
+        WHERE 
+        MONTH(turno_fecha_creado)=$_GET[mes_actual]
+        AND
+        (YEAR(turno_fecha_creado) = (YEAR(CURRENT_DATE())));
         ";
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
@@ -378,4 +389,93 @@ switch ($_GET['accion']) {
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($result);
         break;
+
+
+        //consultas que muestran el cuadro de resumen en la parte superior de pantalla:
+
+
+    case 'total_domi_externo_elegido_del_turno':
+        // totaliza domis y pago del domi externo elegido en el turno
+        // el trans_externo_id = 6 se refiere al usuario Leidy Saez 
+        $sql = "SELECT
+            DOMI_EXTERNOS.domi_externo_nombre,
+            COUNT(DOMICILIOS.domicilio_id) AS cuenta_domis,
+            SUM(DOMICILIOS.valor_domi_externo) AS valor_domis_externos_elegidos
+            FROM
+            DOMICILIOS
+            INNER JOIN DOMI_EXTERNOS
+            ON DOMICILIOS.trans_externo_id= DOMI_EXTERNOS.domi_externo_id
+            WHERE
+            DOMICILIOS.trans_externo_id = 6
+            AND
+            DOMICILIOS.turno_id = ($_GET[turno_id])";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
+
+
+    case 'listar_domi_externos_varios_del_turno':
+        // lista domis y pago del domi varios en el turno
+        // el trans_externo_id =  incluye todos los id menos el 6 que es Leidy saes
+        $sql = "SELECT
+            DOMI_EXTERNOS.domi_externo_nombre,
+            COUNT(DOMICILIOS.domicilio_id) AS cuenta_domis,
+            SUM(DOMICILIOS.valor_domi_externo) AS valor_domis_externos_varios 
+            FROM
+            DOMICILIOS
+            INNER JOIN DOMI_EXTERNOS
+            ON DOMICILIOS.trans_externo_id = DOMI_EXTERNOS.domi_externo_id
+            WHERE 
+            DOMICILIOS.trans_externo_id IN (1,2,3,4,5,7,8,9)
+            AND
+            DOMICILIOS.turno_id = ($_GET[turno_id])
+            GROUP BY DOMI_EXTERNOS.domi_externo_nombre;";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
+
+    case 'total_domi_externos_varios_del_turno':
+        // totaliza domis y pago del domi varios en el turno
+        // el trans_externo_id =  incluye todos los id menos el 6 que es Leidy saes
+        $sql = "SELECT
+            COUNT(DOMICILIOS.domicilio_id) AS total_domis,
+            SUM(DOMICILIOS.valor_domi_externo) AS total_domis_externos_varios  
+            FROM
+            DOMICILIOS
+            WHERE 
+            DOMICILIOS.trans_externo_id IN (1,2,3,4,5,7,8,9)
+            AND
+            DOMICILIOS.turno_id = ($_GET[turno_id])";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
+
+    case 'total_domi_internos_turno':
+        // totaliza los domis internos del turno
+        // el trans_interno_id =  incluye todos los id menos el 6 que es Leidy saes
+        $sql = "SELECT
+            USERS.user_nombre AS domi_interno_nombre,
+            COUNT(DOMICILIOS.domicilio_id)AS total_domis,
+            COUNT(DOMICILIOS.domicilio_id)*3000 AS total_domis_internos
+            FROM
+            DOMICILIOS
+            INNER JOIN USERS
+            ON DOMICILIOS.trans_interno_id = USERS.user_id
+            WHERE
+            DOMICILIOS.trans_interno_id = 4
+            AND
+            DOMICILIOS.turno_id = ($_GET[turno_id]);";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
+        break;
+
+
 };

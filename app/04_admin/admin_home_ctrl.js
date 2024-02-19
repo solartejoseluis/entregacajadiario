@@ -272,8 +272,8 @@ function dttblGestionesGeneral() {
       language: {
         url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
       },
-       scrollY: "800px",
-       scrollCollapse: true,
+      scrollY: "800px",
+      scrollCollapse: true,
       paging: false,
       destroy: true,
     });
@@ -287,11 +287,15 @@ function dttblGestionesGeneral() {
       datatablesDomiEnCurso(registro.turno_id);
       datatablesDomiEntregados(registro.turno_id);
       datatablesGestiones(registro.turno_id);
+      // cargar los informes de la parte superior de la página.
+      dttbl_total_domi_externo_elegido_del_turno(registro.turno_id);
+      dttbl_listar_domi_externos_varios_del_turno(registro.turno_id);
+      dttbl_total_domi_externos_varios_del_turno(registro.turno_id);
+      dttbl_total_domi_internos_turno(registro.turno_id);
     });
-  }
+  } // final function datatables_gestiones_todos_turnos(mes_actual)
 
-
-}
+} //final function dttblGestionesGeneral()
 
 
 
@@ -410,8 +414,8 @@ function datatables_todos_dias(mes_actual) {
     language: {
       url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
     },
-     scrollY: "800px",
-     scrollCollapse: true,
+    scrollY: "800px",
+    scrollCollapse: true,
 
     searching: true,
     paging: false,
@@ -721,11 +725,11 @@ function dttbl_domicilios_turnos(mes_actual) {
     language: {
       url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
     },
-    
-    
+
+
     scrollY: "800px",
     scrollCollapse: true,
-    
+
     info: true,
     searching: true,
     paging: false,
@@ -740,6 +744,11 @@ function dttbl_domicilios_turnos(mes_actual) {
     datatablesDomiEnCurso(registro.turno_id);
     datatablesDomiEntregados(registro.turno_id);
     datatablesGestiones(registro.turno_id);
+          // cargar los informes de la parte superior de la página.
+      dttbl_total_domi_externo_elegido_del_turno(registro.turno_id);
+      dttbl_listar_domi_externos_varios_del_turno(registro.turno_id);
+      dttbl_total_domi_externos_varios_del_turno(registro.turno_id);
+      dttbl_total_domi_internos_turno(registro.turno_id);
   });
 
 
@@ -784,10 +793,10 @@ function dttbl_domicilios_dias(mes_actual) {
     language: {
       url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
     },
-    
+
     scrollY: "800px",
     scrollCollapse: true,
-    
+
     info: false,
     searching: false,
     paging: false,
@@ -842,10 +851,10 @@ function dttbl_domicilios_mes(mes_actual) {
     language: {
       url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
     },
-    
+
     scrollY: "800px",
     scrollCollapse: true,
-    
+
     info: true,
     searching: true,
     paging: false,
@@ -981,96 +990,6 @@ function dttbl_total_domi_mes_externos(mes_actual) {
 }
 
 
-// - - - - - - - - - - - - - - - - - 
-// INICIA SUB MODAL VER TURNO DE HOY
-// - - - - - - - - - - - - - - - - - 
-
-// cargas en la pantalla principal SUBMODAL
-// function cargarDatosUtilidadVendedor1(turno_id) {
-//   $.ajax({
-//     type: "GET",
-//     url:
-//       "admin_home_mdl.php?accion=consultar_utilidad_vendedor1&turno_id=" +
-//       turno_id,
-//     data: "",
-//     success: function (datos) {
-//       $("#utilidadVendedor1").html(datos[0].utilidad_vendedor1);
-//       $("#ventasVendedor1").html(datos[0].ventas_vendedor1);
-//     },
-//     error: function () {
-//       alert("Problema en consultarUtilidadVendedor1");
-//     },
-//   });
-// }
-
-// function cargarDatosUtilidadVendedor2(turno_id) {
-//   $.ajax({
-//     type: "GET",
-//     url:
-//       "admin_home_mdl.php?accion=consultar_utilidad_vendedor2&turno_id=" +
-//       turno_id,
-//     data: "",
-//     success: function (datos) {
-//       $("#utilidadVendedor2").html(datos[0].utilidad_vendedor2);
-//       $("#ventasVendedor2").html(datos[0].ventas_vendedor2);
-//     },
-//     error: function () {
-//       alert("Problema en consultarUtilidadVendedor2");
-//     },
-//   });
-// }
-
-// function cargarDatosUtilidadVendedor3(turno_id) {
-//   $.ajax({
-//     type: "GET",
-//     url:
-//       "admin_home_mdl.php?accion=consultar_utilidad_vendedor3&turno_id=" +
-//       turno_id,
-//     data: "",
-//     success: function (datos) {
-//       $("#utilidadVendedor3").html(datos[0].utilidad_vendedor3);
-//       $("#ventasVendedor3").html(datos[0].ventas_vendedor3);
-//     },
-//     error: function () {
-//       alert("Problema en consultarUtilidadVendedor3");
-//     },
-//   });
-// }
-
-// function cargarDatosUtilidadVendedor4(turno_id) {
-//   $.ajax({
-//     type: "GET",
-//     url:
-//       "admin_home_mdl.php?accion=consultar_utilidad_vendedor4&turno_id=" +
-//       turno_id,
-//     data: "",
-//     success: function (datos) {
-//       $("#utilidadVendedor4").html(datos[0].utilidad_vendedor4);
-//       $("#ventasVendedor4").html(datos[0].ventas_vendedor4);
-//     },
-//     error: function () {
-//       alert("Problema en consultarUtilidadVendedor4");
-//     },
-//   });
-// }
-
-// function utilidadTurno(turno_id) {
-//   $.ajax({
-//     type: "GET",
-//     url:
-//       "admin_home_mdl.php?accion=consultar_utilidad_turno&turno_id=" +
-//       turno_id,
-//     data: "",
-//     success: function (datos) {
-//       $("#p_utilidad_turno").html(datos[0].utilidad_turno);
-//       $("#p_turno_numero_ventas").html(datos[0].ventas_turno);
-//     },
-//     error: function () {
-//       alert("Problema en cargar datos utilidad turno");
-//     },
-//   });
-// }
-
 function consultarDatosTurnoActual(turno_id) {
   $.ajax({
     type: "GET",
@@ -1092,5 +1011,121 @@ function consultarDatosTurnoActual(turno_id) {
     error: function () {
       alert("Problema en consultar datos turno actual");
     },
+  });
+}
+
+
+//  carga de datos para los informes de la parte superior de la pantalla.
+
+function dttbl_total_domi_externo_elegido_del_turno(turno_id) {
+  let listado = $("#tbl_total_domi_externo_elegido_del_turno").DataTable({
+    ajax: {
+      url: "admin_home_mdl.php?accion=total_domi_externo_elegido_del_turno&turno_id=" + turno_id,
+      dataSrc: "",
+      data: "",
+    },
+    columns: [
+      { data: "domi_externo_nombre" },
+      { data: "cuenta_domis" },
+      { data: "valor_domis_externos_elegidos" },
+    ],
+    columnDefs: [
+      {
+        targets: 2,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+    ],
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+    },
+    info: false,
+    searching: false,
+    paging: false,
+    destroy: true,
+  });
+}
+
+
+function dttbl_listar_domi_externos_varios_del_turno(turno_id) {
+  let listado = $("#tbl_listar_domi_externos_varios_del_turno").DataTable({
+    ajax: {
+      url: "admin_home_mdl.php?accion=listar_domi_externos_varios_del_turno&turno_id=" + turno_id,
+      dataSrc: "",
+      data: "",
+    },
+    columns: [
+      { data: "domi_externo_nombre" },
+      { data: "cuenta_domis" },
+      { data: "valor_domis_externos_varios" },
+    ],
+    columnDefs: [
+      {
+        targets: 2,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+    ],
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+    },
+    info: false,
+    searching: false,
+    paging: false,
+    destroy: true,
+  });
+}
+
+
+function dttbl_total_domi_externos_varios_del_turno(turno_id) {
+  let listado = $("#tbl_total_domi_externos_varios_del_turno").DataTable({
+    ajax: {
+      url: "admin_home_mdl.php?accion=total_domi_externos_varios_del_turno&turno_id=" + turno_id,
+      dataSrc: "",
+      data: "",
+    },
+    columns: [
+      { data: "total_domis" },
+      { data: "total_domis_externos_varios" },
+    ],
+    columnDefs: [
+      {
+        targets: 1,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+    ],
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+    },
+    info: false,
+    searching: false,
+    paging: false,
+    destroy: true,
+  });
+}
+
+function dttbl_total_domi_internos_turno(turno_id) {
+  let listado = $("#tbl_total_domi_internos_turno").DataTable({
+    ajax: {
+      url: "admin_home_mdl.php?accion=total_domi_internos_turno&turno_id=" + turno_id,
+      dataSrc: "",
+      data: "",
+    },
+    columns: [
+      { data: "domi_interno_nombre" },
+      { data: "total_domis" },
+      { data: "total_domis_internos" },
+    ],
+    columnDefs: [
+      {
+        targets: 2,
+        render: $.fn.dataTable.render.number(".", ",", 0, "$"),
+      },
+    ],
+    language: {
+      url: "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json",
+    },
+    info: false,
+    searching: false,
+    paging: false,
+    destroy: true,
   });
 }

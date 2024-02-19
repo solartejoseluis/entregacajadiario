@@ -27,8 +27,8 @@
 
     <button class="btn_close">x</button>
     <main class="d-flex flex-nowrap">
-      <div  class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px">
-        <ul  class="nav nav-pills flex-column mb-auto">
+      <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px">
+        <ul class="nav nav-pills flex-column mb-auto">
           <p>GESTIONES</p>
 
           <!-- LINK GESTIONES MES VENDEDOR -->
@@ -57,6 +57,15 @@
               Últimos 3 Meses TODOS.
             </a>
           </li>
+
+          <!-- LINK INFORME DOMIS GESTIONES DEL TURNO -->
+          <li class="nav-item">
+            <a href="#" class="nav-link text-white" id="lnk_informe_domis_gestiones_del_turno">
+              <i class="fa-solid fa-temperature-three-quarters" style="color: #ffffff">
+              </i>
+              Informe Domis
+            </a>
+          </li>
         </ul>
         <hr />
 
@@ -68,9 +77,6 @@
             <strong>Usuario</strong>
           </a>
           <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-            <!-- <li><a class="dropdown-item" href="#">Nuevo proyecto...</a></li> -->
-            <!-- <li><a class="dropdown-item" href="#">configuración</a></li> -->
-            <!-- <li><a class="dropdown-item" href="#">Perfil</a></li> -->
             <!-- <li>
                 <hr class="dropdown-divider" />
               </li> -->
@@ -82,10 +88,8 @@
 
       <div class="b-example-divider b-example-vr"></div>
     </main>
-  </div>
-  <!-- fin sidebar -->
+  </div> <!--final sidebar-->
 
-  <!-- CONTENIDO PAGINA -->
   <div class="container-fluid bg-light" id="contenido">
     <!-- NAVBAR -->
     <nav class="row">
@@ -93,10 +97,6 @@
         <div class="container-fluid" id="contenido_navbar">
           <button class="btn_open">☰</button>
           <a class="navbar-brand ms-2" href="#">HOJA DEL TURNO</a>
-
-          <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-            <span class="navbar-toggler-icon">boton</span>
-          </button> -->
 
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
@@ -130,18 +130,11 @@
                 </ul>
               </li>
             </ul>
-          </div>
-          <!--fin del navbar collapse-->
-          <!-- <span id="subtitulo_navbar">Jornada:&nbsp</span> -->
-          <!-- <span class="navbar-brand" id="spn_jornada_nombre"></span> -->
-          <!-- <span id="subtitulo_navbar">A Cargo De:&nbsp</span> -->
-          <!-- <span class="navbar-brand" id="spn_user_nombre"></span> -->
-          <!-- <span class="navbar-brand" id="spn_user_apellido"></span> -->
-        </div>
-        <!--finaliza el contenido del navbar-->
+          </div> <!--fin del navbar collapse-->
+        </div> <!--final contenido_navbar-->
       </nav>
-    </nav>
-    <!-- finaliza navbar -->
+    </nav> <!--fin row-->
+
 
     <!-- INICIO BARRA INFORMATIVA  -->
     <div class="row">
@@ -181,18 +174,17 @@
               <span class="navbar-brand" id="spn_user_apellido"></span>
               <span class="navbar-brand" id="spn_jornada_nombre"></span>
               <span class="navbar-text" id="hoy_moment"></span>
-
-
             </div>
           </div>
         </div>
-      </nav>
-    </div>
-    <!-- FINAL BARRA INFORMATIVA -->
+      </nav> <!-- final barra_informativa-->
+    </div> <!--final row-->
 
     <div class="ms-4">
       <span class="navbar-text" id="hoy_moment"></span>
     </div>
+
+
 
     <div class="row">
       <!-- SECCION DOMICILIOS -->
@@ -204,8 +196,6 @@
         <button type="button" class="btn btn-outline-primary" id="btn_domi_entregados">
           Entregados
         </button>
-
-        <!-- final del row -->
         <h5 id="titulos_dttbl_domicilios">DOMICILIOS PENDIENTES POR SALIR</h5>
         <section class="table-responsive" id="tabla">
           <table class="table display compact cell-border" id="tbl_domi_por_salir">
@@ -253,7 +243,6 @@
           Nueva Gestión
         </button>
 
-
         <h5 id="titulos_dttbl_gestiones">GESTIONES DEL TURNO</h5>
         <div class="row">
           <section class="table-responsive" id="tabla">
@@ -296,11 +285,9 @@
             </table>
           </section>
         </div>
-      </section>
-      <!-- finaliza seccion de gestiones -->
+      </section> <!-- finaliza seccion de gestiones -->
     </div>
-  </div>
-  <!-- final contenido pagina -->
+  </div> <!-- final contenido pagina -->
 
   <!-- MODAL NUEVA GESTIÓN-->
   <div class="modal fade" data-bs-backdrop="static" id="mdl_new_gestion">
@@ -578,8 +565,7 @@
         </div>
       </div>
     </div>
-  </div>
-  <!-- fin modal cerrar turno -->
+  </div><!--final mdl_cerrar_turno-->
 
   <!-- MODAL CONFIRMA CERRAR TURNO -->
   <div class="modal fade" data-bs-backdrop="static" style="overflow: hidden" id="mdl_confirma_cerrar_turno">
@@ -606,10 +592,7 @@
         </div>
       </div>
     </div>
-  </div>
-  <!-- fin modal confirma cerrar sesion -->
-
-
+  </div><!--cierra mdl_confirma_cerrar_turno-->
 
   <!-- MODAL CERRAR FINAL-->
   <div class="modal fade" data-bs-backdrop="static" id="mdl_cerrar_final">
@@ -800,13 +783,6 @@
             <input type="hidden" class="form-control" id="npt_transportador_id" />
           </div>
 
-          <!-- <div class="input-group input-group input-group-sm mb-2" id="bloque_hora_salida">
-            <button class="btn btn-primary" type="button" id="btn_hora_salida">
-              Hora De Salida
-            </button>
-            <input type="text" class="form-control" placeholder="hora de salida" id="npt_hora_salida" disabled />
-            <input type="hidden" class="form-control" placeholder="hora de llegada" id="npt_hora_llegada" disabled />
-          </div> -->
 
           <div class="col-md-9 input-group input-group-sm mb-2" id="bloque_observaciones">
             <span class="input-group-text" id="inputGroup-sizing-sm">Observaciones:</span>
@@ -885,19 +861,6 @@
               <input type="text" class="form-control" id="npt_edit_valor_producto" />
               <input type="hidden" class="form-control" id="npt_edit_valor_producto_base" />
             </div>
-
-<!-- desactivado por no uso
-            <div class="input-group input-group input-group-sm mb-2">
-              <button class="btn btn-primary" type="button" id="btn_edit_hora_salida">
-                Hora De Salida
-              </button>
-              <input type="text" class="form-control" placeholder="hora de salida" id="npt_edit_hora_salida" disabled />
-              <button class="btn btn-secondary" type="button" id="btn_edit_hora_salida_cancel">
-                x
-              </button>
-            </div>
--->
-
 
             <div class="col-md-9 input-group input-group-sm mb-2">
               <span class="input-group-text" id="inputGroup-sizing-sm">Observaciones:</span>
@@ -994,7 +957,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
             Cerrar
           </button>
         </div>
@@ -1009,6 +972,9 @@
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5">MIS GESTIONES DEL MES</h1>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+            Cerrar
+          </button>
         </div>
         <div class="modal-body">
           <div class="container-fluid">
@@ -1032,19 +998,11 @@
                 </table>
               </div>
             </div>
-            <!-- finaliza datatables del modal -->
           </div>
-        </div>
-        <!-- inicia footer modal -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-            Cerrar
-          </button>
-        </div>
-      </div>
+        </div> <!--final modal-body-->
+      </div> <!--final modal-content-->
     </div>
-  </div>
-  <!-- fin modal gestiones del mes por vendedor -->
+  </div> <!--final mdl_gestiones_mes_vendedor-->
 
   <!-- MODAL TODAS LAS GESTIONES AGRUPADAS POR DIA-->
   <div class="modal fade" id="mdl_gestiones_agrupadas_por_dia">
@@ -1052,10 +1010,12 @@
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5">GESTIONES AGRUPADAS POR DIA</h1>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+            Cerrar
+          </button>
         </div>
         <div class="modal-body">
           <div class="container-fluid">
-            <!-- inicia datatables del modal  -->
             <div class="row">
               <div class="col-md-12">
                 <table class="table" id="tbl_gestiones_agrupadas_por_dia">
@@ -1070,18 +1030,11 @@
                 </table>
               </div>
             </div>
-            <!-- finaliza datatables del modal -->
           </div>
-        </div>
-        <!-- inicia footer modal nueva venta -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-            Cerrar
-          </button>
-        </div>
+        </div><!--final modal body-->
       </div>
     </div>
-  </div>
+  </div> <!--final mdl_gestiones_agrupadas_por_dia-->
   <!-- fin modal todas las gestiones agrupadas por dia -->
 
   <!-- MODAL TODAS LAS GESTIONES DEL TRIMESTRE -->
@@ -1090,6 +1043,9 @@
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5">GESTIONES DEL TRIMESTRE</h1>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+            Cerrar
+          </button>
         </div>
         <div class="modal-body">
           <div class="container-fluid">
@@ -1119,16 +1075,98 @@
             <!-- finaliza datatables del modal -->
           </div>
         </div>
-        <!-- inicia el footer  -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+      </div>
+    </div>
+  </div> <!--mdl_gestiones_mes_todos-->
+
+  <!-- Modal informe domis y gestiones del turno-->
+  <div class="modal fade" id="mdl_informe_domis_gestiones_del_turno">
+    <div class="modal-dialog modal-xl modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5"> INFORME DE DOMIS Y GESTIONES DEL TURNO</h1>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
             Cerrar
           </button>
         </div>
-      </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-12">
+
+                <div class="row" id="seccion_informes">
+
+                  <section class="container col-md-8">
+                    <h4>SECCION INFORME DOMICILIOS</h4>
+
+                    <section class="table-responsive" id="informe_1">
+                      <h5>DOMI EXTERNOS ELEGIDOS</h5>
+                      <table class="table display compact cell-border" id="tbl_total_domi_externo_elegido_del_turno"
+                        style="width:100%">
+                        <thead>
+                          <tr>
+                            <td>Nombres</td>
+                            <td>Domi</td>
+                            <td>pagado</td>
+                          </tr>
+                        </thead>
+                      </table>
+                    </section>
+
+                    <section class="table-responsive" id="informe_2">
+                      <h5>DOMI EXTERNOS VARIOS</h5>
+                      <table class="table display compact cell-border" id="tbl_listar_domi_externos_varios_del_turno"
+                        style="width:100%">
+                        <thead>
+                          <tr>
+                            <td>Nombres</td>
+                            <td>Domi</td>
+                            <td>pagado</td>
+                          </tr>
+                        </thead>
+                      </table>
+                    </section>
+
+                    <section class="table-responsive" id="informe_3">
+                      <h5> TOTAL DOMI EXTERNOS VARIOS</h5>
+                      <table class="table display compact cell-border" id="tbl_total_domi_externos_varios_del_turno"
+                        style="width:100%">
+                        <thead>
+                          <tr>
+                            <td>Domi</td>
+                            <td>pagado</td>
+                          </tr>
+                        </thead>
+                      </table>
+                    </section>
+
+                    <section class="table-responsive" id="informe_4">
+                      <h5> TOTAL DOMI INTERNOS</h5>
+                      <table class="table display compact cell-border" id="tbl_total_domi_internos_turno"
+                        style="width:100%">
+                        <thead>
+                          <tr>
+                            <td>Nombres</td>
+                            <td>Domi</td>
+                            <td>pagado</td>
+                          </tr>
+                        </thead>
+                      </table>
+                    </section>
+
+                  </section>
+
+                </div> <!--final seccion_informes-->
+
+
+              </div>
+            </div><!--final row-->
+          </div> <!-- final container-fluid-->
+        </div> <!--final modal-body-->
+      </div> <!--final modal-content-->
     </div>
-  </div>
-  <!-- fin modal todas las gestiones del mes -->
+  </div> <!--final mdl_informe_domis_gestiones_del_turno-->
+
 
   <!-- MODAL VENTA ACUMULADA-->
   <div class="modal fade" id="mdl_venta_acumulada" data-bs-backdrop="static" style="overflow: hidden">
