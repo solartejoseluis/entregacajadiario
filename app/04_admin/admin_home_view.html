@@ -93,9 +93,7 @@
         </div>
       </div>
     </section>
-
   </div>
-
 
   <!-- - - - - - - - - - -->
   <!-- SECCION DOMICILIOS -->
@@ -225,7 +223,6 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-
         <!-- DTTBL DOMI INTERNOS  -->
         <div class="row">
           <H3 id="texto_domi_interno">INFORME DOMI INTERNOS</H3>
@@ -292,13 +289,11 @@
               </thead>
             </table>
           </div>
-        </div>
-        <!-- fin dttbl total domi externos -->
-      </div>
-    </div>
+        </div> <!--final row-->
+      </div><!--final modal header-->
+    </div><!--final modal-content-->
   </div>
-  </div>
-  <!-- fin mdl Domicilios informe -->
+  </div> <!--final mdl_domicilios_informe-->
 
   <!-- - - - - - - - - - -->
   <!-- SECCION GESTIONES -->
@@ -344,8 +339,7 @@
         </div>
       </div>
     </div>
-  </div>
-  <!-- fin mdl gestiones turnos -->
+  </div> <!--mdl_ver_gestiones_turnos-->
 
   <!-- MDL GESTIONES DIAS-->
   <div class="modal fade" tabindex="1" id="mdl_ver_dias">
@@ -383,8 +377,7 @@
         </div>
       </div>
     </div>
-  </div>
-  <!-- fin mdl gestiones dias -->
+  </div> <!--final mdl_ver_dias -->
 
   <!-- MDL TODAS LAS GESTIONES-->
   <div class="modal fade" tabindex="1" id="mdl_ver_gestiones">
@@ -419,13 +412,12 @@
             </div>
             <!-- finaliza datatables del modal -->
           </div>
-        </div>
+        </div> <!--final modal-body-->
       </div>
     </div>
-  </div>
-  <!-- fin mdl todas las gestiones -->
+  </div><!--final mdl_ver_gestiones-->
 
-  <!-- MDL INFORME GESTIONES MES-->
+  <!-- MODAL INFORME GESTIONES MES-->
   <div class="modal fade" tabindex="1" id="mdl_informe_mes">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
@@ -537,8 +529,7 @@
               <section class="table-responsive" id="informe_1">
                 <h5>DOMI EXTERNOS ELEGIDOS</h5>
                 <table class="table display compact cell-border" id="tbl_total_domi_externo_elegido_del_turno"
-                style = "width:100%"
-                >
+                  style="width:100%">
                   <thead>
                     <tr>
                       <td>Nombres</td>
@@ -552,8 +543,7 @@
               <section class="table-responsive" id="informe_2">
                 <h5>DOMI EXTERNOS VARIOS</h5>
                 <table class="table display compact cell-border" id="tbl_listar_domi_externos_varios_del_turno"
-                style = "width:100%"                
-                >
+                  style="width:100%">
                   <thead>
                     <tr>
                       <td>Nombres</td>
@@ -567,8 +557,7 @@
               <section class="table-responsive" id="informe_3">
                 <h5> TOTAL DOMI EXTERNOS VARIOS</h5>
                 <table class="table display compact cell-border" id="tbl_total_domi_externos_varios_del_turno"
-                style = "width:100%"                
-                >
+                  style="width:100%">
                   <thead>
                     <tr>
                       <td>Domi</td>
@@ -580,10 +569,7 @@
 
               <section class="table-responsive" id="informe_4">
                 <h5> TOTAL DOMI INTERNOS</h5>
-                <table class="table display compact cell-border" 
-                id="tbl_total_domi_internos_turno"
-                style = "width:100%"                
-                >
+                <table class="table display compact cell-border" id="tbl_total_domi_internos_turno" style="width:100%">
                   <thead>
                     <tr>
                       <td>Nombres</td>
@@ -597,20 +583,43 @@
 
             <section class="container col-md-4" id="seccion_informe_gestiones">
               <h4>SECCION INFORME GESTIONES</h4>
-              <section class="table-responsive" id="informe_1">
-                <table class="table display compact cell-border" 
-                id="tbl_informe_domicilios"
-                style = "width:100%"                
-                >
-                  <thead>
-                    <tr>
-                      <td>titulo1</td>
-                      <td>titulo2</td>
-                      <td>titulo3</td>
-                      <td>titulo4</td>
-                    </tr>
-                  </thead>
-                </table>
+              <section class="table-responsive">
+                <!-- inicia primer datatables del modal  -->
+                <div class="row" id="seccion_informe_mes">
+                  <div class="col-md-12">
+                    <table class=" table display compact" cellspacing="0" width="100%" id="tbl_gestiones_informe_mes">
+                      <thead>
+                        <tr>
+                          <td>Vendedor</td>
+                          <td>Util/Global</td>
+                          <td>#Gest</td>
+                          <td>A Pagar</td>
+                        </tr>
+                      </thead>
+                    </table>
+                  </div>
+                </div> <!--final seccion_informe_mes-->
+                <!-- inicia segundo datatables del modal  -->
+                <div class="row">
+                  <div class="col-md-12">
+                    <h5>TOTALES DEL MES</h5>
+                    <table class=" table display compact" cellspacing="0" width="100%"
+                      id="tbl_informe_gestiones_mes_turno">
+                      <thead>
+                        <tr>
+                          <td>Mes</td>
+                          <td>Caja</td>
+                          <td>Utilidad</td>
+                          <td>Entregado</td>
+                          <td>Faltante</td>
+                          <td>Sobrante</td>
+                          <td>PagoVendedor</td>
+                        </tr>
+                      </thead>
+                    </table>
+                  </div>
+                </div>
+                <!-- finaliza segundo datatables del modal -->
               </section>
             </section><!--final seccion_informe_gestiones-->
 
@@ -618,10 +627,7 @@
             <section class="container col-md-4" id="seccion_informe_cuadre_caja">
               <h4>SECCION INFORME CUADRE DE CAJA</h4>
               <section class="table-responsive" id="informe_3">
-                <table class="table display compact cell-border" 
-                id="tbl_informe_turno"
-                style = "width:100%"                
-                >
+                <table class="table display compact cell-border" id="tbl_informe_turno" style="width:100%">
                   <thead>
                     <tr>
                       <td>titulo1</td>
@@ -698,17 +704,12 @@
                   </thead>
                 </table>
               </section>
-
-
-            </section>
-            <!-- finaliza seccion de  domicilios -->
+            </section> <!-- final seccion_domicilios-->
 
             <!-- SECCION GESTIONES -->
             <section class="container col-md-6">
               <h3>GESTIONES</h3>
-              <!-- <button type="button" class="btn btn-success" id="btn_nueva_gestion">
-          Nueva Gestión
-        </button> -->
+
               <h5 id="titulos_dttbl_gestiones">GESTIONES DEL TURNO</h5>
               <div class="row">
                 <section class="table-responsive" id="tabla">

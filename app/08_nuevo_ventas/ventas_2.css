@@ -92,11 +92,16 @@
   background-color:#ff00ff;
 }
 
-#info_mes{
-  color: black;
-}
-#info_turno{
-  color: black;
+/* textos de la bara informativa */
+#info_mes,
+#info_turno,
+#spn_user_nombre,
+#spn_user_apellido,
+#spn_jornada_nombre,
+.navbar-brand,
+#hoy_moment
+{
+  color: white;
 }
 
 

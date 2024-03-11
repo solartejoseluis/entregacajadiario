@@ -91,7 +91,7 @@
 }
 
 #barra_informativa{
-  background-color:#00ff7f;
+  background-color: #FF1D00;
 }
 
 #info_mes{
@@ -102,7 +102,7 @@
 }
 
 #nav_principal{
-  background-color: #004c26;
+  background-color: #FFA800;
 }
 
 
@@ -116,7 +116,7 @@
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #004c26;
+  background-color: #FFA800;
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
@@ -146,7 +146,7 @@
 .openbtn {
   font-size: 20px;
   cursor: pointer;
-  background-color: #26199c;
+  background-color: #FF0037;
   color: white;
   padding: 10px 15px;
   border: none;

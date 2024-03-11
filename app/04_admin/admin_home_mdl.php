@@ -462,7 +462,7 @@ switch ($_GET['accion']) {
         $sql = "SELECT
             USERS.user_nombre AS domi_interno_nombre,
             COUNT(DOMICILIOS.domicilio_id)AS total_domis,
-            COUNT(DOMICILIOS.domicilio_id)*3000 AS total_domis_internos
+            COUNT(DOMICILIOS.domicilio_id)*500 AS total_domis_internos
             FROM
             DOMICILIOS
             INNER JOIN USERS
